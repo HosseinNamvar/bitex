@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import localFont from "next/font/local";
+const Outfit = localFont({ src: "../public/fonts/Outfit-VariableFont.ttf" });
 
 export const metadata: Metadata = {
   title: "BITEX",
@@ -16,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={Outfit.className}>{children}</body>
     </html>
   );
 }
