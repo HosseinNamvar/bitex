@@ -1,26 +1,26 @@
 import Image from "next/image";
-import styles from "./header.module.scss";
+import styles from "./navbar.module.scss";
 
-import HeaderProfile from "./headerProfile";
-import HeaderFav from "./headerFav";
-import HeaderShopping from "./headerShopping";
-import HeaderCategory from "./headerCategory";
+import NavBarProfile from "./navProfile";
+import NavBarFavorite from "./navFavorite";
+import NavBarShopping from "./navShopping";
+import NavBarCategory from "./navCategory";
 
-const StoreHeader = () => {
+const StoreNavBar = () => {
   return (
-    <header className={styles.Header}>
+    <nav className={styles.Header}>
       <section>
         <Image alt="Bitex Logo" src={"/images/logo.png"} fill />
         <div className={styles.search}>
           <input type="text" />
         </div>
-        <HeaderProfile />
-        <HeaderFav />
-        <HeaderShopping />
+        <NavBarProfile />
+        <NavBarFavorite />
+        <NavBarShopping />
       </section>
       <section className={styles.HH}>
         <div className="left">
-          <HeaderCategory />
+          <NavBarCategory />
           <ul>
             <li>PC</li>
             <li>Laptop</li>
@@ -34,8 +34,8 @@ const StoreHeader = () => {
         </div>
         <div className="right"></div>
       </section>
-    </header>
+    </nav>
   );
 };
 
-export default StoreHeader;
+export default StoreNavBar;

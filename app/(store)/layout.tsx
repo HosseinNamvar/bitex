@@ -1,10 +1,10 @@
-import StoreHeader from "./../../components/store/header/index";
+import StoreNavBar from "@/components/store/navbar";
 import StoreFooter from "./../../components/store/footer/index";
 
 const StoreLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
-      <StoreHeader />
+      <StoreNavBar />
       {children}
       <StoreFooter />
     </main>

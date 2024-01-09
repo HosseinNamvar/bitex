@@ -1,7 +1,7 @@
 import styles from "./headerFav.module.scss";
 
-const HeaderFav = () => {
+const NavBarFavorite = () => {
   return <div>Favorites</div>;
 };
 
-export default HeaderFav;
+export default NavBarFavorite;
