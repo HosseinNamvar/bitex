@@ -1,3 +1,18 @@
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+  /* background: white; //Background */
+}
+
+::-webkit-scrollbar-thumb {
+  /* background: nth($color-light, 5); */
+  -webkit-border-radius: 4px;
+}
+
+::-webkit-scrollbar-corner {
+  background: white;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -8,4 +23,12 @@ body {
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+}
+
+body {
+  font-size: 0.625rem;
+}
+
+ul, li {
+  list-style: none;
 }
