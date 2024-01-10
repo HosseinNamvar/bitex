@@ -1,4 +1,88 @@
-.HH {
-  color: red;
-  font-size: 2rem;
+@import "/public/css/variables.module.scss";
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid nth($color-light, 5);
+
+  section {
+    width: 100%;
+  }
+
+  > section:nth-child(1) {
+    padding: 36px 0;
+    border-bottom: 1px solid nth($color-light, 3);
+  }
+
+  .wrapper {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    justify-content: space-between;
+
+    .left {
+      display: flex;
+      height: 100%;
+      hr {
+        height: 16px;
+        margin-top: 16px;
+        border-left: 1px solid nth($color-light, 5);
+      }
+    }
+    .right {
+      .deal {
+        gap: 8px;
+        color: nth($color-red, 3);
+      }
+    }
+
+    .rightButtons {
+      display: flex;
+      font-size: 1.6rem;
+      color: nth($color-light, 7);
+    }
+  }
+
+  .search {
+    width: 100%;
+    height: 44px;
+    position: relative;
+    margin: 0 54px 0 74px;
+
+    .searchInput {
+      width: 100%;
+      height: 100%;
+      font-size: 1.6rem;
+      border-radius: 10px;
+      color: nth($color-light, 8);
+      border: 1px solid nth($color-light, 5);
+      padding-left: 50px;
+
+      &:focus {
+        border: 3px solid nth($color-blue, 4);
+      }
+    }
+
+    img {
+      position: absolute;
+      left: 20px;
+      top: 14px;
+    }
+  }
+
+  .ribbon {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    ul {
+      display: flex;
+      gap: 30px;
+    }
+    li {
+      display: flex;
+      color: nth($color-light, 8);
+    }
+  }
 }

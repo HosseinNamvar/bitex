@@ -5,34 +5,88 @@ import NavBarProfile from "./navProfile";
 import NavBarFavorite from "./navFavorite";
 import NavBarShopping from "./navShopping";
 import NavBarCategory from "./navCategory";
+import Link from "next/link";
 
 const StoreNavBar = () => {
   return (
-    <nav className={styles.Header}>
+    <nav className={styles.navbar}>
       <section>
-        <Image alt="Bitex Logo" src={"/images/logo.png"} fill />
-        <div className={styles.search}>
-          <input type="text" />
+        <div className={styles.wrapper}>
+          <Image
+            alt="Bitex Logo"
+            src={"/images/logo.png"}
+            width={125}
+            height={40}
+          />
+          <div className={styles.search}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search"
+            />
+            <Image
+              src={"/images/icons/searchIcon.svg"}
+              width={16}
+              height={16}
+              alt="Search"
+            />
+          </div>
+          <div className={styles.rightButtons}>
+            <NavBarProfile />
+            <NavBarFavorite />
+            <NavBarShopping />
+          </div>
         </div>
-        <NavBarProfile />
-        <NavBarFavorite />
-        <NavBarShopping />
       </section>
-      <section className={styles.HH}>
-        <div className="left">
-          <NavBarCategory />
-          <ul>
-            <li>PC</li>
-            <li>Laptop</li>
-            <li>Mobile</li>
-            <li>TV</li>
-            <li>Gaming</li>
-            <li>Camera</li>
-            <li>Tablet</li>
-            <li>Watch</li>
-          </ul>
+      <section>
+        <div className={`${styles.wrapper} ${styles.ribbon}`}>
+          <div className={styles.left}>
+            <NavBarCategory />
+            <hr />
+            <ul>
+              <li>
+                <Link href={""}>PC</Link>
+              </li>
+              <li>
+                <Link href={""}>Laptop</Link>
+              </li>
+              <li>
+                <Link href={""}>Mobile</Link>
+              </li>
+              <li>
+                <Link href={""}>TV</Link>
+              </li>
+              <li>
+                <Link href={""}>Gaming</Link>
+              </li>
+              <li>
+                <Link href={""}>Camera</Link>
+              </li>
+              <li>
+                <Link href={""}>Tablet</Link>
+              </li>
+              <li>
+                <Link href={""}>Watch</Link>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.right}>
+            <ul>
+              <li>
+                <Link href={""}>PC Configuration</Link>
+              </li>
+              <li className={styles.deal}>
+                <Image
+                  src={"/images/icons/discountIcon.svg"}
+                  alt="Top Deals"
+                  width={18}
+                  height={18}
+                />
+                <Link href={""}>Top Deals</Link>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="right"></div>
       </section>
     </nav>
   );

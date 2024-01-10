@@ -1,0 +1,17 @@
+.favorite {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 30px;
+  > span {
+    position: absolute;
+    top: -2px;
+    right: -12px;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 50%;
+  }
+}
