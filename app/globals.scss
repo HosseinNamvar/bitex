@@ -1,8 +1,10 @@
-@import "/public/css/variables.module.scss";
-
 @font-face {
   font-family: "Outfit";
   src: url("/public/fonts/Outfit-VariableFont.ttf");
+}
+
+:root {
+  font-size: 0.625rem;
 }
 
 ::-webkit-scrollbar {
@@ -22,7 +24,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 html,
@@ -33,10 +35,19 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  font-size: 0.625rem;
+ul,
+li {
+  list-style: none;
 }
 
-ul, li {
-  list-style: none;
+input {
+  outline: none;
+  transition: border-color 1s, box-shadow 0.5s;
+}
+
+a {
+  text-decoration: none;
+  &:visited {
+    color: inherit;
+  }
 }
