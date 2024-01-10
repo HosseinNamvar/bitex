@@ -1,11 +1,18 @@
+@import "/public/css/variables.module.scss";
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/public/fonts/Outfit-VariableFont.ttf");
+}
+
 ::-webkit-scrollbar {
   height: 6px;
   width: 6px;
-  /* background: white; //Background */
+  background: white;
 }
 
 ::-webkit-scrollbar-thumb {
-  /* background: nth($color-light, 5); */
+  background: #c4c4c4;
   -webkit-border-radius: 4px;
 }
 
@@ -15,6 +22,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
 }
 
 html,
