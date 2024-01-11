@@ -1,0 +1,6 @@
+@import "/public/css/variables.module.scss";
+
+.homePage {
+  width: 100%;
+  background-color: nth($color-light, 1);
+}
