@@ -1,17 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./navbar.module.scss";
 
 import NavBarProfile from "./navProfile";
 import NavBarFavorite from "./navFavorite";
 import NavBarShopping from "./navShopping";
 import NavBarCategory from "./navCategory";
-import Link from "next/link";
 
 const StoreNavBar = () => {
   return (
     <nav className={styles.navbar}>
       <section>
-        <div className={styles.wrapper}>
+        <div className={`${styles.top} storeContainer`}>
           <Image
             alt="Bitex Logo"
             src={"/images/logo.png"}
@@ -39,11 +39,11 @@ const StoreNavBar = () => {
         </div>
       </section>
       <section>
-        <div className={`${styles.wrapper} ${styles.ribbon}`}>
+        <div className={`storeContainer ${styles.ribbon}`}>
           <div className={styles.left}>
             <NavBarCategory />
             <hr />
-            <ul>
+            <ul className={styles.topCategories}>
               <li>
                 <Link href={""}>PC</Link>
               </li>
@@ -72,7 +72,7 @@ const StoreNavBar = () => {
           </div>
           <div className={styles.right}>
             <ul>
-              <li>
+              <li className={styles.pcConfig}>
                 <Link href={""}>PC Configuration</Link>
               </li>
               <li className={styles.deal}>

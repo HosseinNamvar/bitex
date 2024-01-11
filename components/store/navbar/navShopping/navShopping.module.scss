@@ -15,3 +15,21 @@
     border-radius: 50%;
   }
 }
+
+@media (max-width: 1024px) {
+  .shopping {
+    margin: 0 0 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .shopping {
+    margin: 0 0 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shopping {
+    margin: 0 0 0 36px;
+  }
+}

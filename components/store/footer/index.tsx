@@ -5,7 +5,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className={styles.storeFooter}>
-      <div className={styles.footerWrapper}>
+      <div className={`${styles.footerWrapper} storeContainer`}>
         <div className={styles.topSection}>
           <Image
             alt="Bitex Logo"
@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
         </div>
         <section className={styles.middle}>
-          <div className="col">
+          <div>
             <h3>Contact Us</h3>
             <span>Got Question? Call us 24/7</span>
             <h2>+49 30 575909881</h2>
@@ -98,7 +98,7 @@ const Footer = () => {
         </section>
       </div>
       <section className={styles.bottom}>
-        <div className={styles.footerWrapper}>
+        <div className={`${styles.footerWrapper} storeContainer`}>
           <span>© 2024 BITEX Store. All Rights Reserved.</span>
           <div className={styles.legal}>
             <ul>
