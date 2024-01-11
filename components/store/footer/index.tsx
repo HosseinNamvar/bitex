@@ -4,74 +4,155 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer>
-      <section>
-        <Image alt="Bitex Logo" src={"/images/logo.png"} fill />
-        <div className="search">
-          <input type="text" />
+    <footer className={styles.storeFooter}>
+      <div className={styles.footerWrapper}>
+        <div className={styles.topSection}>
+          <Image
+            alt="Bitex Logo"
+            src={"/images/logo.png"}
+            width={125}
+            height={40}
+          />
+          <div className={styles.search}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search"
+            />
+            <Image
+              src={"/images/icons/searchIcon.svg"}
+              width={16}
+              height={16}
+              alt="Search"
+            />
+          </div>
         </div>
-      </section>
-      <section className="middle">
-        <div className="col">
-          <h3>Contact Us</h3>
-          <span>Got Question? Call us 24/7</span>
-          <h2>+49 30 575909881</h2>
-          <span>685 Market Street, San Francisco, CA 94105, US</span>
-          <span>nonamecompany@justportfolio.com</span>
-        </div>
-        <div className="col">
-          <h3>Categories</h3>
-          <li>Computer & Laptop</li>
-          <li>Tablets & iPad</li>
-          <li>Printer & Cameras</li>
-          <li>Smart Phones</li>
-          <li>OLED Smart TVs</li>
-          <li>Keyboard & Mouse</li>
-          <li>Video Games</li>
-          <li>Sports & Outdoors</li>
-          <li>Smart Watches</li>
-        </div>
-        <div className="col">
-          <h3>Customer Service</h3>
-          <ul>
-            <li>Privacy Policy</li>
-            <li>Refund Policy</li>
-            <li>Shipping & Return</li>
-            <li>Term & Conditions</li>
-            <li>Advanced Search</li>
-            <li>Store Locations</li>
-          </ul>
-        </div>
-        <div className="col">
-          <h3>Sign Up to Newsletter</h3>
-          <input type="text" placeholder="email address" />
-          <button>Subscribe</button>
-        </div>
-      </section>
-      <section className="bottom">
-        <span>© 2024 BITEX Store. All Rights Reserved.</span>
-        <div className="legal">
-          <ul>
-            <li>Conditions of Use & Sale</li>
-            <li>Privacy Notice</li>
-            <li>Imprint</li>
-            <li>Cookies Notice</li>
-            <li>Interest-Based Ads Notice</li>
-          </ul>
-        </div>
-        <div className="social">
-          <Link href={"https://www.linkedIn.com"}>
-            <Image alt="" fill src={"/images/icons/linkedInLogo.svg"} />
-          </Link>
-          <Link href={"https://www.twitter.com"}>
-            <Image alt="" fill src={"/images/icons/xLogo.svg"} />
-          </Link>
-          <Link href={"https://www.instagram.com"}>
-            <Image alt="" fill src={"/images/icons/instagramLogo.svg"} />
-          </Link>
-          <Link href={"https://www.facebook.com"}>
-            <Image alt="" fill src={"/images/icons/facebookLogo.svg"} />
-          </Link>
+        <section className={styles.middle}>
+          <div className="col">
+            <h3>Contact Us</h3>
+            <span>Got Question? Call us 24/7</span>
+            <h2>+49 30 575909881</h2>
+            <span>685 Market Street, San Francisco, CA 94105, US</span>
+            <span>nonamecompany@justportfolio.com</span>
+          </div>
+          <div>
+            <h3>Categories</h3>
+            <ul>
+              <li>
+                <Link href={""}>Computer & Laptop</Link>
+              </li>
+              <li>
+                <Link href={""}>Tablets & iPad</Link>
+              </li>
+              <li>
+                <Link href={""}>Printer & Cameras</Link>
+              </li>
+              <li>
+                <Link href={""}>Smart Phones</Link>
+              </li>
+              <li>
+                <Link href={""}>OLED Smart TVs</Link>
+              </li>
+              <li>
+                <Link href={""}>Keyboard & Mouse</Link>
+              </li>
+              <li>
+                <Link href={""}>Video Games</Link>
+              </li>
+              <li>
+                <Link href={""}>Sports & Outdoors</Link>
+              </li>
+              <li>
+                <Link href={""}>Smart Watches</Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Customer Service</h3>
+            <ul>
+              <li>
+                <Link href={""}>Privacy Policy</Link>
+              </li>
+              <li>
+                <Link href={""}>Refund Policy</Link>
+              </li>
+              <li>
+                <Link href={""}>Shipping & Return</Link>
+              </li>
+              <li>
+                <Link href={""}>Term & Conditions</Link>
+              </li>
+              <li>
+                <Link href={""}>Advanced Search</Link>
+              </li>
+              <li>
+                <Link href={""}>Store Locations</Link>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.contact}>
+            <h3>Sign Up to Newsletter</h3>
+            <input type="text" placeholder="email address" />
+            <button>Subscribe</button>
+          </div>
+        </section>
+      </div>
+      <section className={styles.bottom}>
+        <div className={styles.footerWrapper}>
+          <span>© 2024 BITEX Store. All Rights Reserved.</span>
+          <div className={styles.legal}>
+            <ul>
+              <li>
+                <Link href={""}>Conditions of Use & Sale</Link>
+              </li>
+              <li>
+                <Link href={""}>Privacy Notice</Link>
+              </li>
+              <li>
+                <Link href={""}>Imprint</Link>
+              </li>
+              <li>
+                <Link href={""}>Cookies Notice</Link>
+              </li>
+              <li>
+                <Link href={""}>Interest-Based Ads Notice</Link>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.social}>
+            <Link href={"https://www.linkedIn.com"}>
+              <Image
+                alt=""
+                src={"/images/icons/linkedInLogo.svg"}
+                width={20}
+                height={20}
+              />
+            </Link>
+            <Link href={"https://www.twitter.com"}>
+              <Image
+                alt=""
+                src={"/images/icons/xLogo.svg"}
+                width={20}
+                height={20}
+              />
+            </Link>
+            <Link href={"https://www.instagram.com"}>
+              <Image
+                alt=""
+                src={"/images/icons/instagramLogo.svg"}
+                width={20}
+                height={20}
+              />
+            </Link>
+            <Link href={"https://www.facebook.com"}>
+              <Image
+                alt=""
+                src={"/images/icons/facebookLogo.svg"}
+                width={20}
+                height={20}
+              />
+            </Link>
+          </div>
         </div>
       </section>
     </footer>
