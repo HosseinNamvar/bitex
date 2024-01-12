@@ -1,0 +1,63 @@
+@import "/public/css/variables.module.scss";
+
+.wideAd {
+  position: relative;
+  height: 200px;
+  flex-grow: 1;
+  font-size: 1.6rem;
+  padding-left: 30px;
+
+  span,
+  h3,
+  a {
+    position: relative;
+    z-index: 5;
+  }
+
+  span {
+    margin-top: 40px;
+    display: block;
+    line-height: 0;
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 70px;
+  }
+
+  img {
+    z-index: 1;
+    position: absolute;
+    border-radius: 12px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.darkText {
+  span,
+  h3,
+  a {
+    font-weight: 600;
+    color: nth($color-light, 10);
+  }
+}
+
+.lightText {
+  span,
+  h3,
+  a {
+    color: nth($color-light, 1);
+  }
+}
+
+@media (max-width: 768px) {
+  .wideAd {
+    h3 {
+      margin-bottom: 70px;
+    }
+  }
+}

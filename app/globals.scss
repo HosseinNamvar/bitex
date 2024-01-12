@@ -61,6 +61,10 @@ a {
   padding: 0 48px;
 }
 
+.flexCol {
+  flex-direction: column;
+}
+
 @media (min-width: 1440px) {
   .storeContainer {
     max-width: 1440px;

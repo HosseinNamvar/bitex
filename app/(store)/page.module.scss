@@ -9,4 +9,18 @@
     width: 100%;
     margin: 32px 0;
   }
+
+  .wideAdContainer {
+    width: 100%;
+    margin: 8px 0;
+    display: flex;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wideAdContainer {
+    height: auto;
+    flex-direction: column;
+  }
 }
