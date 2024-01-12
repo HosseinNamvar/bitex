@@ -3,4 +3,10 @@
 .homePage {
   width: 100%;
   background-color: nth($color-light, 1);
+
+  .heroContainer {
+    display: flex;
+    width: 100%;
+    margin: 32px 0;
+  }
 }
