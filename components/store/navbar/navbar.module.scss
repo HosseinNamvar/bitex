@@ -74,6 +74,8 @@
     font-size: 1.4rem;
     ul {
       display: flex;
+      align-items: center;
+      margin-left: 16px;
       gap: 30px;
     }
     li {
