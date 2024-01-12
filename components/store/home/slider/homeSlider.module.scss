@@ -48,3 +48,21 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .homeSlider {
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .homeSlider {
+    height: 300px;
+    .btnContainer {
+      button {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}
