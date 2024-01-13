@@ -1,0 +1,19 @@
+@import "/public/css/variables.module.scss";
+
+.categoryItem {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid nth($color-light, 3);
+  cursor: pointer;
+  span {
+    &:hover {
+      color: nth($color-blue, 3);
+    }
+  }
+  img {
+    width: 28px;
+  }
+}

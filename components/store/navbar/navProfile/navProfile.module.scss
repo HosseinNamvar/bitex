@@ -1,0 +1,16 @@
+@import "/public/css/variables.module.scss";
+
+.profile {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .profile {
+    span {
+      display: none;
+    }
+  }
+}

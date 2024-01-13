@@ -1,0 +1,95 @@
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./navbar.module.scss";
+
+import NavBarProfile from "./navProfile";
+import NavBarFavorite from "./navFavorite";
+import NavBarShopping from "./navShopping";
+import NavBarCategory from "./navCategory";
+
+const StoreNavBar = () => {
+  return (
+    <nav className={styles.navbar}>
+      <section>
+        <div className={`${styles.top} storeContainer`}>
+          <Image
+            alt="Bitex Logo"
+            src={"/images/logo.png"}
+            width={125}
+            height={40}
+          />
+          <div className={styles.search}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search"
+            />
+            <Image
+              src={"/images/icons/searchIcon.svg"}
+              width={16}
+              height={16}
+              alt="Search"
+            />
+          </div>
+          <div className={styles.rightButtons}>
+            <NavBarProfile />
+            <NavBarFavorite />
+            <NavBarShopping />
+          </div>
+        </div>
+      </section>
+      <section>
+        <div className={`storeContainer ${styles.ribbon}`}>
+          <div className={styles.left}>
+            <NavBarCategory />
+            <hr />
+            <ul className={styles.topCategories}>
+              <li>
+                <Link href={""}>PC</Link>
+              </li>
+              <li>
+                <Link href={""}>Laptop</Link>
+              </li>
+              <li>
+                <Link href={""}>Mobile</Link>
+              </li>
+              <li>
+                <Link href={""}>TV</Link>
+              </li>
+              <li>
+                <Link href={""}>Gaming</Link>
+              </li>
+              <li>
+                <Link href={""}>Camera</Link>
+              </li>
+              <li>
+                <Link href={""}>Tablet</Link>
+              </li>
+              <li>
+                <Link href={""}>Watch</Link>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.right}>
+            <ul>
+              <li className={styles.pcConfig}>
+                <Link href={""}>PC Configuration</Link>
+              </li>
+              <li className={styles.deal}>
+                <Image
+                  src={"/images/icons/discountIcon.svg"}
+                  alt="Top Deals"
+                  width={18}
+                  height={18}
+                />
+                <Link href={""}>Top Deals</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </nav>
+  );
+};
+
+export default StoreNavBar;

@@ -1,0 +1,9 @@
+.category {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 32px;
+  > span {
+    margin-left: 16px;
+  }
+}

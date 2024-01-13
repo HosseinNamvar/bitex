@@ -1,0 +1,35 @@
+.shopping {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0 20px 0 36px;
+  > span {
+    position: absolute;
+    top: -2px;
+    right: -12px;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .shopping {
+    margin: 0 0 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .shopping {
+    margin: 0 0 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shopping {
+    margin: 0 0 0 36px;
+  }
+}
