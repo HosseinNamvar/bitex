@@ -16,11 +16,56 @@
     display: flex;
     gap: 16px;
   }
+
+  .todayDeals {
+    width: 100%;
+    margin: 60px 0 80px;
+  }
+
+  .cardsWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .sectionHeader {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    a {
+      font-size: 1.6em;
+      font-weight: 600;
+      color: nth($color-light, 8);
+      padding-right: 24px;
+      background-image: url("/images/icons/arrowIcon02.svg");
+      background-repeat: no-repeat;
+      background-position: right center;
+      transition: all 0.2s ease-out;
+      &:hover {
+        padding-right: 22px;
+      }
+      &:active {
+        color: nth($color-light, 10);
+      }
+    }
+    h2 {
+      font-weight: 700;
+      color: nth($color-light, 10);
+      font-size: 2.4rem;
+    }
+  }
 }
 
 @media (max-width: 768px) {
   .wideAdContainer {
     height: auto;
     flex-direction: column;
+  }
+  .cardsWrapper {
+    flex-wrap: wrap;
+    :last-child {
+      display: none;
+    }
   }
 }

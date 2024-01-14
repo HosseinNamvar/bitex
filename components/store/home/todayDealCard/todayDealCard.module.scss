@@ -1,0 +1,142 @@
+@import "/public/css/variables.module.scss";
+
+.dealCard {
+  width: 256px;
+  height: 400px;
+  position: relative;
+  padding: 8px;
+  background-color: white;
+  border-radius: 12px;
+
+  .save {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 6px;
+    padding: 6px 12px;
+    background-color: nth($color-red, 5);
+    span {
+      line-height: 0;
+      font-size: 1.4rem;
+      color: white;
+    }
+    :last-child {
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+  }
+  .imgWrapper {
+    width: 100%;
+    height: 220px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid nth($color-light, 3);
+    border-radius: 8px;
+    img {
+      object-fit: cover;
+    }
+  }
+
+  h3 {
+    font-size: 1.6rem;
+    margin: 14px 0 12px 8px;
+    font-weight: 400;
+    color: nth($color-light, 10);
+  }
+
+  .specWrapper {
+    height: 54px;
+    width: 100%;
+    margin-left: 8px;
+    > span {
+      line-height: 1rem;
+      display: block;
+      height: 14px;
+      margin-bottom: 4px;
+      font-size: 1.4rem;
+      color: nth($color-light, 7);
+    }
+  }
+
+  .bottomWrapper {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 8px;
+    .priceWrapper {
+      margin-top: 6px;
+      span {
+        display: block;
+        &:first-child {
+          color: nth($color-light, 5);
+          font-size: 1.4rem;
+          margin-bottom: 4px;
+        }
+        &:last-child {
+          font-size: 2.4rem;
+          font-weight: 700;
+          color: nth($color-light, 9);
+        }
+      }
+    }
+    .timeWrapper {
+      text-align: center;
+      img {
+        margin: 10px auto 8px;
+        display: block;
+      }
+
+      span {
+        width: 80px;
+        height: 22px;
+        display: block;
+        border-radius: 6px;
+        border: 1px solid red;
+        line-height: 2rem;
+        text-align: center;
+        border-radius: 6px;
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .dealCard {
+    width: 19.5%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .dealCard {
+    width: 19%;
+    .priceWrapper {
+      background-color: red;
+      span {
+        :last-child {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .dealCard {
+    width: 19%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dealCard {
+    width: 48%;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dealCard {
+    width: 100%;
+  }
+}
