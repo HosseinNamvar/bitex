@@ -69,12 +69,12 @@
       span {
         display: block;
         &:first-child {
-          color: nth($color-light, 5);
+          color: nth($color-light, 7);
           font-size: 1.4rem;
           margin-bottom: 4px;
         }
         &:last-child {
-          font-size: 2.4rem;
+          font-size: 1.8rem;
           font-weight: 700;
           color: nth($color-light, 9);
         }
@@ -103,50 +103,3 @@
     }
   }
 }
-
-// @media (max-width: 1440px) {
-//   .dealCard {
-//     width: 19.5%;
-//   }
-// }
-
-// @media (max-width: 1280px) {
-//   .dealCard {
-//     width: 19%;
-//     h3 {
-//       height: 36px;
-//     }
-//     .imgWrapper {
-//       height: 160px;
-//     }
-//     .bottomWrapper {
-//       fle
-//       .priceWrapper {
-//         span {
-//           &:last-child {
-//             font-size: 2.2rem;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
-// @media (max-width: 1024px) {
-//   .dealCard {
-//     width: 19%;
-//   }
-// }
-
-// @media (max-width: 768px) {
-//   .dealCard {
-//     width: 48%;
-//     margin-bottom: 16px;
-//   }
-// }
-
-// @media (max-width: 480px) {
-//   .dealCard {
-//     width: 100%;
-//   }
-// }
