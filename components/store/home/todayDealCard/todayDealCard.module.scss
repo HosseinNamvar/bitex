@@ -1,7 +1,7 @@
 @import "/public/css/variables.module.scss";
 
 .dealCard {
-  width: 256px;
+  min-width: 256px;
   height: 400px;
   position: relative;
   padding: 8px;
@@ -82,6 +82,7 @@
     }
     .timeWrapper {
       text-align: center;
+      color: nth($color-red, 6);
       img {
         margin: 10px auto 8px;
         display: block;
@@ -97,46 +98,55 @@
         text-align: center;
         border-radius: 6px;
         font-size: 1.4rem;
+        font-weight: 500;
       }
     }
   }
 }
 
-@media (max-width: 1440px) {
-  .dealCard {
-    width: 19.5%;
-  }
-}
+// @media (max-width: 1440px) {
+//   .dealCard {
+//     width: 19.5%;
+//   }
+// }
 
-@media (max-width: 1280px) {
-  .dealCard {
-    width: 19%;
-    .priceWrapper {
-      background-color: red;
-      span {
-        :last-child {
-          font-size: 1.8rem;
-        }
-      }
-    }
-  }
-}
+// @media (max-width: 1280px) {
+//   .dealCard {
+//     width: 19%;
+//     h3 {
+//       height: 36px;
+//     }
+//     .imgWrapper {
+//       height: 160px;
+//     }
+//     .bottomWrapper {
+//       fle
+//       .priceWrapper {
+//         span {
+//           &:last-child {
+//             font-size: 2.2rem;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
-@media (max-width: 1024px) {
-  .dealCard {
-    width: 19%;
-  }
-}
+// @media (max-width: 1024px) {
+//   .dealCard {
+//     width: 19%;
+//   }
+// }
 
-@media (max-width: 768px) {
-  .dealCard {
-    width: 48%;
-    margin-bottom: 16px;
-  }
-}
+// @media (max-width: 768px) {
+//   .dealCard {
+//     width: 48%;
+//     margin-bottom: 16px;
+//   }
+// }
 
-@media (max-width: 480px) {
-  .dealCard {
-    width: 100%;
-  }
-}
+// @media (max-width: 480px) {
+//   .dealCard {
+//     width: 100%;
+//   }
+// }

@@ -25,6 +25,7 @@
   .cardsWrapper {
     display: flex;
     justify-content: space-between;
+    gap: 14px;
   }
 
   .sectionHeader {
@@ -57,15 +58,16 @@
   }
 }
 
+@media (max-width: 1440px) {
+  .cardsWrapper {
+    padding-bottom: 30px;
+    overflow-x: scroll;
+  }
+}
+
 @media (max-width: 768px) {
   .wideAdContainer {
     height: auto;
     flex-direction: column;
-  }
-  .cardsWrapper {
-    flex-wrap: wrap;
-    :last-child {
-      display: none;
-    }
   }
 }
