@@ -89,6 +89,20 @@ export default function Home() {
             />
           </div>
         </div>
+        <div className={styles.wideAdContainer}>
+          <WideAd
+            imgUrl="/images/images/lensAd.jpg"
+            smallTitle="Smart Watches"
+            title="Save Up to 99€"
+            url="#"
+          />
+          <WideAd
+            imgUrl="/images/images/djiAd.jpg"
+            smallTitle="Laptops"
+            title="Save Up to 99€"
+            url="#"
+          />
+        </div>
       </div>
     </main>
   );
