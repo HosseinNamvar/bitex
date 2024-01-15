@@ -6,7 +6,8 @@ import HomeCategoryList from "@/components/store/home/categories";
 import HomeSlider from "@/components/store/home/slider";
 import TodayDealCard from "@/components/store/home/todayDealCard";
 import WideAd from "@/components/store/home/wideAd";
-import { DealsEndTime } from "@/data/homepage";
+import { CollectionsData, DealsEndTime } from "@/data/homepageData";
+import CollectionCard from "@/components/store/home/collectionCard";
 
 export default function Home() {
   return (
@@ -102,6 +103,16 @@ export default function Home() {
             title="Save Up to 99€"
             url="#"
           />
+        </div>
+        <div className={styles.collections}>
+          <div className={styles.sectionHeader}>
+            <h2>Collections</h2>
+          </div>
+          <div className={styles.cardsWrapper}>
+            {CollectionsData.map((collection, index) => (
+              <CollectionCard collection={collection} key={index} />
+            ))}
+          </div>
         </div>
       </div>
     </main>
