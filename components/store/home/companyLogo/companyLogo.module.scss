@@ -1,0 +1,11 @@
+.companyLogo {
+  background-image: url("/images/icons/companiesIcons.png");
+  height: 60px;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 1;
+  }
+}

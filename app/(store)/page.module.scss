@@ -32,6 +32,24 @@
     gap: 24px;
   }
 
+  .companiesSection {
+    width: 100%;
+    margin: 90px 0 120px;
+    display: flex;
+    flex-direction: column;
+    > h2 {
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: nth($color-light, 10);
+    }
+    > div {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
   .sectionHeader {
     display: flex;
     width: 100%;
@@ -62,10 +80,23 @@
   }
 }
 
+@media (min-width: 1440px) {
+  .companiesSection {
+    > h2 {
+      margin-bottom: 60px;
+    }
+  }
+}
+
 @media (max-width: 1440px) {
   .cardsWrapper {
     padding-bottom: 30px;
     overflow-x: scroll;
+  }
+  .companiesSection {
+    > h2 {
+      margin-bottom: 60px;
+    }
   }
 }
 
@@ -76,5 +107,15 @@
   }
   .blogCardContainer {
     flex-direction: column;
+  }
+  .companiesSection {
+    > h2 {
+      margin-bottom: 30px;
+    }
+    > div {
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
   }
 }

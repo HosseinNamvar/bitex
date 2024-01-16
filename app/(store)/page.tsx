@@ -15,6 +15,7 @@ import {
 import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
 import HomeBlogCard from "@/components/store/home/blogCard";
+import HCompanyLogo from "@/components/store/home/companyLogo";
 
 export default function Home() {
   return (
@@ -121,6 +122,31 @@ export default function Home() {
                 url={blog.url}
               />
             ))}
+          </div>
+        </div>
+        <div className={styles.companiesSection}>
+          <h2>Selected Brands</h2>
+          <div>
+            <HCompanyLogo width={104} bgPositionX={0} url="/companies/epson" />
+            <HCompanyLogo width={50} bgPositionX={-105} url="/companies/hp" />
+            <HCompanyLogo width={50} bgPositionX={-156} url="/companies/dell" />
+            <HCompanyLogo
+              width={44}
+              bgPositionX={-207}
+              url="/companies/apple"
+            />
+            <HCompanyLogo
+              width={47}
+              bgPositionX={-252}
+              url="/companies/xiaomi"
+            />
+            <HCompanyLogo
+              width={54}
+              bgPositionX={-300}
+              url="/companies/logitech"
+            />
+            <HCompanyLogo width={55} bgPositionX={-355} url="/companies/jbl" />
+            <HCompanyLogo width={98} bgPositionX={-411} url="/companies/asus" />
           </div>
         </div>
       </div>
