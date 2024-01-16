@@ -114,13 +114,18 @@
 }
 
 @media (max-width: 480px) {
-  .search {
-    display: none;
-  }
-  .ribbon {
-    .right {
-      .pcConfig {
-        display: none;
+  .navbar {
+    > section:nth-child(1) {
+      padding: 18px 0;
+    }
+    .search {
+      display: none;
+    }
+    .ribbon {
+      .right {
+        .pcConfig {
+          display: none;
+        }
       }
     }
   }
