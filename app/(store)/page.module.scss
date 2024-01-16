@@ -27,6 +27,10 @@
     justify-content: space-between;
     gap: 14px;
   }
+  .blogCardContainer {
+    display: flex;
+    gap: 24px;
+  }
 
   .sectionHeader {
     display: flex;
@@ -68,6 +72,9 @@
 @media (max-width: 768px) {
   .wideAdContainer {
     height: auto;
+    flex-direction: column;
+  }
+  .blogCardContainer {
     flex-direction: column;
   }
 }

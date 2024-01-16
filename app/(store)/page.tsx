@@ -6,9 +6,15 @@ import HomeCategoryList from "@/components/store/home/categories";
 import HomeSlider from "@/components/store/home/slider";
 import TodayDealCard from "@/components/store/home/todayDealCard";
 import WideAd from "@/components/store/home/wideAd";
-import { CollectionsData, TodayDeals, TopProducts } from "@/data/homepageData";
+import {
+  BlogCardData,
+  CollectionsData,
+  TodayDeals,
+  TopProducts,
+} from "@/data/homepageData";
 import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
+import HomeBlogCard from "@/components/store/home/blogCard";
 
 export default function Home() {
   return (
@@ -97,6 +103,22 @@ export default function Home() {
                 url={product.url}
                 dealPrice={product.dealPrice}
                 key={index}
+              />
+            ))}
+          </div>
+        </div>
+        <div className={styles.homeSection}>
+          <div className={styles.sectionHeader}>
+            <h2>Latest Posts</h2>
+          </div>
+          <div className={styles.blogCardContainer}>
+            {BlogCardData.map((blog, index) => (
+              <HomeBlogCard
+                key={index}
+                imgUrl={blog.imgUrl}
+                title={blog.title}
+                shortText={blog.shortText}
+                url={blog.url}
               />
             ))}
           </div>

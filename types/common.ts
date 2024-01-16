@@ -16,3 +16,10 @@ export type TSlide = {
   imgUrl: string;
   url: string;
 };
+
+export type TBlogCard = {
+  title: string;
+  imgUrl: string;
+  url: string;
+  shortText: string;
+};

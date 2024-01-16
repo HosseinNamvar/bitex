@@ -1,5 +1,5 @@
 import { TCollectionCard } from "@/types/collections";
-import { TDealCard, TProductCard, TSlide } from "@/types/common";
+import { TDealCard, TProductCard, TSlide, TBlogCard } from "@/types/common";
 
 export const CollectionsData: TCollectionCard[] = [
   {
@@ -208,5 +208,35 @@ export const SlidesData: TSlide[] = [
   {
     imgUrl: "/images/images/asusAd.jpg",
     url: "#",
+  },
+];
+
+export const BlogCardData: TBlogCard[] = [
+  {
+    title: "Merry & Bright: How Building Meaningful Careers",
+    imgUrl: "/images/blog/post1.png",
+    url: "/blog/1",
+    shortText: `The holiday season is well underway — lights are a-twinkling, bells are jingling,
+    and excited faces are beaming. Shelves are stocked with merry-making goodies and all the essentials,
+    and gifts arrive seamlessly as lists are checked off one by one. The secret behind all of
+    that oh-so-festive fun? Our incredible team.`,
+  },
+  {
+    title: "The Great GifTogether Ties a Bow on a Year of Care in Action",
+    imgUrl: "/images/blog/post2.png",
+    url: "/blog/2",
+    shortText: `A wrapped gift, picked just for you, waiting to be opened —
+    it doesn’t take much to bring comfort and joy to someone’s holidays.
+    Now imagine that magic multiplied across the country, touching thousands of communities,
+    and you’ll get a sense of the true impact of Target’s annual Great GifTogether holiday giving event.`,
+  },
+  {
+    title:
+      "Talking Shop with Brett Craig, Target’s New Chief Information Officer",
+    imgUrl: "/images/blog/post3.jpg",
+    url: "/blog/3",
+    shortText: `Over the past 14 years, Brett Craig has led teams across Target, including in technology,
+    digital and merchandising. Originally a self-taught programmer,
+    his natural curiosity drives him to explore how technology connects to and shapes the future of retail commerce.`,
   },
 ];
