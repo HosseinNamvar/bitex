@@ -6,9 +6,16 @@ import HomeCategoryList from "@/components/store/home/categories";
 import HomeSlider from "@/components/store/home/slider";
 import TodayDealCard from "@/components/store/home/todayDealCard";
 import WideAd from "@/components/store/home/wideAd";
-import { CollectionsData, TodayDeals, TopProducts } from "@/data/homepageData";
+import {
+  BlogCardData,
+  CollectionsData,
+  TodayDeals,
+  TopProducts,
+} from "@/data/homepageData";
 import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
+import HomeBlogCard from "@/components/store/home/blogCard";
+import HCompanyLogo from "@/components/store/home/companyLogo";
 
 export default function Home() {
   return (
@@ -38,7 +45,7 @@ export default function Home() {
             url="#"
           />
         </div>
-        <div className={styles.todayDeals}>
+        <div className={styles.homeSection}>
           <div className={styles.sectionHeader}>
             <h2>Today’s Deals</h2>
             <Link href={""}>view all</Link>
@@ -72,7 +79,7 @@ export default function Home() {
             url="#"
           />
         </div>
-        <div className={styles.collections}>
+        <div className={styles.homeSection}>
           <div className={styles.sectionHeader}>
             <h2>Collections</h2>
           </div>
@@ -82,7 +89,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className={styles.topProducts}>
+        <div className={styles.homeSection}>
           <div className={styles.sectionHeader}>
             <h2>Top Selling Products</h2>
             <Link href={"/topProducts"}>view all</Link>
@@ -99,6 +106,47 @@ export default function Home() {
                 key={index}
               />
             ))}
+          </div>
+        </div>
+        <div className={styles.homeSection}>
+          <div className={styles.sectionHeader}>
+            <h2>Latest Posts</h2>
+          </div>
+          <div className={styles.blogCardContainer}>
+            {BlogCardData.map((blog, index) => (
+              <HomeBlogCard
+                key={index}
+                imgUrl={blog.imgUrl}
+                title={blog.title}
+                shortText={blog.shortText}
+                url={blog.url}
+              />
+            ))}
+          </div>
+        </div>
+        <div className={styles.companiesSection}>
+          <h2>Selected Brands</h2>
+          <div>
+            <HCompanyLogo width={104} bgPositionX={0} url="/companies/epson" />
+            <HCompanyLogo width={50} bgPositionX={-105} url="/companies/hp" />
+            <HCompanyLogo width={50} bgPositionX={-156} url="/companies/dell" />
+            <HCompanyLogo
+              width={44}
+              bgPositionX={-207}
+              url="/companies/apple"
+            />
+            <HCompanyLogo
+              width={47}
+              bgPositionX={-252}
+              url="/companies/xiaomi"
+            />
+            <HCompanyLogo
+              width={54}
+              bgPositionX={-300}
+              url="/companies/logitech"
+            />
+            <HCompanyLogo width={55} bgPositionX={-355} url="/companies/jbl" />
+            <HCompanyLogo width={98} bgPositionX={-411} url="/companies/asus" />
           </div>
         </div>
       </div>

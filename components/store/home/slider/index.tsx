@@ -7,24 +7,10 @@ const HomeSlider = () => {
   return (
     <div className={styles.homeSlider}>
       <div className={`${styles.btnContainer} ${styles.prevSlide}`}>
-        <button>
-          <Image
-            src={"/images/icons/arrowIcon01.svg"}
-            alt=""
-            width={20}
-            height={20}
-          />
-        </button>
+        <button></button>
       </div>
       <div className={`${styles.btnContainer} ${styles.nextSlide}`}>
-        <button>
-          <Image
-            src={"/images/icons/arrowIcon01.svg"}
-            alt=""
-            width={20}
-            height={20}
-          />
-        </button>
+        <button></button>
       </div>
       <div className={styles.slide}>
         {SlidesData.map((slide, index) => (

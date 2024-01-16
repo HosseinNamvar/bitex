@@ -1,0 +1,40 @@
+@import "/public/css/variables.module.scss";
+
+.blogCard {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+  &:hover {
+    box-shadow: 0 2px 4px rgba(#000000, 0.2);
+    > a {
+      > h2 {
+        color: nth($color-light, 10);
+      }
+    }
+  }
+  .imgWrapper {
+    width: 100%;
+    height: 250px;
+    display: block;
+    position: relative;
+    img {
+      object-fit: cover;
+    }
+  }
+  > a {
+    > h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: nth($color-light, 8);
+      margin: 24px 30px;
+      border-bottom: 1px solid white;
+    }
+  }
+  > span {
+    font-size: 1.4rem;
+    display: block;
+    line-height: 2.4rem;
+    margin: 0 30px 30px;
+    color: nth($color-light, 9);
+  }
+}
