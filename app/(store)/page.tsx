@@ -38,7 +38,7 @@ export default function Home() {
             url="#"
           />
         </div>
-        <div className={styles.todayDeals}>
+        <div className={styles.homeSection}>
           <div className={styles.sectionHeader}>
             <h2>Today’s Deals</h2>
             <Link href={""}>view all</Link>
@@ -72,7 +72,7 @@ export default function Home() {
             url="#"
           />
         </div>
-        <div className={styles.collections}>
+        <div className={styles.homeSection}>
           <div className={styles.sectionHeader}>
             <h2>Collections</h2>
           </div>
@@ -82,7 +82,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className={styles.topProducts}>
+        <div className={styles.homeSection}>
           <div className={styles.sectionHeader}>
             <h2>Top Selling Products</h2>
             <Link href={"/topProducts"}>view all</Link>
