@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./productCard.module.scss";
-import { ProductCard } from "@/types/common";
+import { TProductCard } from "@/types/common";
 
 const ProductCard = ({
   name,
@@ -10,7 +10,7 @@ const ProductCard = ({
   dealPrice = undefined,
   specs,
   url,
-}: ProductCard) => {
+}: TProductCard) => {
   return (
     <div className={styles.productCard}>
       <Link href={url} className={styles.imageWrapper}>

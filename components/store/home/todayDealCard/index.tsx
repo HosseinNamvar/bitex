@@ -5,7 +5,7 @@ import styles from "./todayDealCard.module.scss";
 import Link from "next/link";
 import { useState } from "react";
 
-interface Props {
+interface IProps {
   productName: string;
   newPrice: number;
   oldPrice: number;
@@ -23,7 +23,7 @@ const TodayDealCard = ({
   dealEndTime,
   spec = [],
   url,
-}: Props) => {
+}: IProps) => {
   const saveAmount = oldPrice - newPrice;
   const [remainedTime, setRemainedTime] = useState(dealEndTime);
 

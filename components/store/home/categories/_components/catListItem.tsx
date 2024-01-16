@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./catListItem.module.scss";
 
-interface Props {
+interface IProps {
   name: string;
   image: string;
   dimension: [number, number];
@@ -15,7 +15,7 @@ const CategoryListItem = ({
   dimension,
   isLast = false,
   hasSub = false,
-}: Props) => {
+}: IProps) => {
   return (
     <li className={styles.categoryItem}>
       <div>

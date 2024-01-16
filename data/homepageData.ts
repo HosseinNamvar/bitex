@@ -1,5 +1,5 @@
 import { TCollectionCard } from "@/types/collections";
-import { DealCard, ProductCard } from "@/types/common";
+import { TDealCard, TProductCard, TSlide } from "@/types/common";
 
 export const CollectionsData: TCollectionCard[] = [
   {
@@ -104,7 +104,7 @@ export const CollectionsData: TCollectionCard[] = [
   },
 ];
 
-export const TodayDeals: DealCard[] = [
+export const TodayDeals: TDealCard[] = [
   {
     name: "Apple Airpods MAX",
     imgUrl: "/images/products/airpodsMax1.jpg",
@@ -152,7 +152,7 @@ export const TodayDeals: DealCard[] = [
   },
 ];
 
-export const TopProducts: ProductCard[] = [
+export const TopProducts: TProductCard[] = [
   {
     name: "Apple Airpods Pro",
     imgUrl: "/images/products/airpods1.jpg",
@@ -189,5 +189,24 @@ export const TopProducts: ProductCard[] = [
     specs: ["Full Frame", "Body", "40MP"],
     dealPrice: 3699,
     url: "",
+  },
+];
+
+export const SlidesData: TSlide[] = [
+  {
+    imgUrl: "/images/images/sonyHeadphoneAd.jpg",
+    url: "#",
+  },
+  {
+    imgUrl: "/images/images/jblAd.jpg",
+    url: "#",
+  },
+  {
+    imgUrl: "/images/images/rogAd.jpg",
+    url: "#",
+  },
+  {
+    imgUrl: "/images/images/asusAd.jpg",
+    url: "#",
   },
 ];

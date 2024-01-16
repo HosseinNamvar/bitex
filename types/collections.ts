@@ -1,11 +1,11 @@
 export type TCollectionCard = {
   name: string;
   imgUrl: string;
-  collections: singleCollection[];
+  collections: TSingleCollection[];
   url: string;
 };
 
-type singleCollection = {
+type TSingleCollection = {
   label: string;
   url: string;
 };
