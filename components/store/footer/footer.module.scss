@@ -51,17 +51,17 @@
     justify-content: space-between;
 
     h2 {
-      font-size: 2rem;
+      font-size: 1.6rem;
       color: nth($color-blue, 3);
       font-weight: 500;
-      margin-top: 8px;
+      margin: 8px 0;
     }
 
     h3 {
       font-size: 1.8rem;
       color: nth($color-light, 9);
       font-weight: 600;
-      margin-top: 36px;
+      margin: 36px 0 18px;
     }
 
     span {
@@ -73,6 +73,7 @@
 
     ul {
       padding: 0;
+      margin-bottom: 16px;
     }
 
     li {

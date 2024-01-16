@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import styles from "./wideAd.module.scss";
 
-interface Props {
+interface IProps {
   imgUrl: string;
   linkText?: string;
   url: string;
@@ -19,7 +19,7 @@ const WideAd = ({
   title,
   url,
   isLightBG = false,
-}: Props) => {
+}: IProps) => {
   return (
     <div
       className={`${styles.wideAd} ${

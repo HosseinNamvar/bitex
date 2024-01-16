@@ -3,9 +3,9 @@
 import Image from "next/image";
 import styles from "./todayDealCard.module.scss";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-interface Props {
+interface IProps {
   productName: string;
   newPrice: number;
   oldPrice: number;
@@ -15,12 +15,6 @@ interface Props {
   url: string;
 }
 
-const calculateRemainedTime = (dealEndTime: Date) => {
-  const timeNow = new Date();
-  const remained = dealEndTime.getTime() - timeNow.getTime();
-  return remained;
-};
-
 const TodayDealCard = ({
   productName,
   newPrice,
@@ -29,7 +23,7 @@ const TodayDealCard = ({
   dealEndTime,
   spec = [],
   url,
-}: Props) => {
+}: IProps) => {
   const saveAmount = oldPrice - newPrice;
   const [remainedTime, setRemainedTime] = useState(dealEndTime);
 
@@ -44,7 +38,9 @@ const TodayDealCard = ({
       </Link>
       <div className={styles.save}>
         <span>Save </span>
-        <span>{saveAmount} €</span>
+        <span>
+          {saveAmount.toLocaleString("en-us", { minimumFractionDigits: 2 })} €
+        </span>
       </div>
       <Link href={url}>
         <h3>{productName}</h3>
