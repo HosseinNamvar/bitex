@@ -1,13 +1,12 @@
 @import "/public/css/variables.module.scss";
 
 .productCard {
-  min-width: 256px;
   background-color: white;
   border-radius: 12px;
   padding: 8px;
   transition: all 0.5s;
   &:hover {
-    box-shadow: 0 2px 4px rgba(#000000, 0.2);
+    box-shadow: 0 1px 4px rgba(#000000, 0.2);
   }
 
   .imageWrapper {
@@ -19,6 +18,9 @@
     border: 1px solid nth($color-light, 2);
     overflow: hidden;
     transition: all 0.5s;
+    img {
+      object-fit: cover;
+    }
     &:hover {
       border-color: nth($color-light, 3);
     }
@@ -117,6 +119,24 @@
         background-color: rgba(white, 0);
         background-image: url("/images/icons/basketIcon.svg");
         background-size: 22px 19px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .productCard {
+    .imageWrapper {
+      height: 140px;
+    }
+    .bottomSection {
+      .priceWrapper {
+        .oldPrice {
+          width: auto;
+          :last-child {
+            display: none;
+          }
+        }
       }
     }
   }

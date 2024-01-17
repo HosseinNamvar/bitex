@@ -14,7 +14,7 @@ const CategoryPage = () => {
           <Link href={"#"}>Mobile</Link>
         </div>
       </div>
-      <div className="storeContainer">
+      <div className="storeContainer flexCol">
         <div className={styles.mobileFilter}>
           <button>Filter</button>
           <select name="Sort" id="">
