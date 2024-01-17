@@ -16,7 +16,7 @@ const CategoryPage = () => {
       </div>
       <div className="storeContainer flexCol">
         <div className={styles.mobileFilter}>
-          <button>Filter</button>
+          <button>FILTER</button>
           <select name="Sort" id="">
             <option value="Most Viewed">Most Viewed</option>
             <option value="Top Seller">Top Seller</option>

@@ -49,6 +49,26 @@
   .mobileFilter {
     display: none;
     width: 100%;
+    margin-top: 12px;
+    padding: 0 12px;
+    justify-content: space-between;
+    > button {
+      border: none;
+      border-radius: 6px;
+      padding: 8px 20px 8px 32px;
+      background-color: white;
+      color: nth($color-light, 9);
+      font-weight: 500;
+      background-image: url("/images/icons/filterIcon.svg");
+      background-repeat: no-repeat;
+      background-position: 10px center;
+    }
+    > select {
+      padding: 4px 12px;
+      border-radius: 6px;
+      color: nth($color-light, 7);
+      border: 1px solid nth($color-light, 5);
+    }
   }
   .main {
     width: 100%;
@@ -332,6 +352,7 @@
 @media (max-width: 768px) {
   .categoryPage {
     .main {
+      padding-top: 12px;
       .rightCol {
         .listContainer {
           grid-template-columns: repeat(2, 1fr);

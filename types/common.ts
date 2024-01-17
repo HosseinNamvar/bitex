@@ -5,6 +5,7 @@ export type TProductCard = {
   dealPrice?: number;
   imgUrl: string;
   url: string;
+  staticWidth?: boolean;
 };
 
 export type TDealCard = TProductCard & {

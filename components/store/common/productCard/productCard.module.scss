@@ -1,5 +1,9 @@
 @import "/public/css/variables.module.scss";
 
+.staticWidth {
+  min-width: 256px;
+}
+
 .productCard {
   background-color: white;
   border-radius: 12px;
@@ -19,7 +23,7 @@
     overflow: hidden;
     transition: all 0.5s;
     img {
-      object-fit: cover;
+      object-fit: contain;
     }
     &:hover {
       border-color: nth($color-light, 3);
