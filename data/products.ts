@@ -1,4 +1,5 @@
 import { TProductCard } from "@/types/common";
+import { TProduct } from "@/types/product";
 
 export const ProductsData: TProductCard[] = [
   {
@@ -53,3 +54,111 @@ export const ProductsData: TProductCard[] = [
     url: "",
   },
 ];
+
+export const OneProduct: TProduct = {
+  path: [
+    { label: "Home", url: "/" },
+    { label: "Products", url: "/category/" },
+    { label: "Mobile", url: "/category/1" },
+  ],
+  board: {
+    name: "Sony - PlayStation 5 - DualSense Wireless Controller - White",
+    shortDesc: "Apple iPhone 12 Pro Max A2412 Dual SIM 256GB Mobile Phone",
+    price: 215.99,
+    dealDate: new Date("1970-01-01T12:40:00"),
+    dealPrice: 185.95,
+    options: [
+      {
+        optionName: "Storage Capacity:",
+        options: ["64GB", "128GB", "256GB"],
+        optionSelectedId: 0,
+        type: "text",
+      },
+      {
+        optionName: "",
+        options: ["#484848", "#388EDD", "#7AC38F", "#ED4A4A", "#DD9D24"],
+        optionSelectedId: 1,
+        type: "color",
+      },
+    ],
+  },
+  specification: [
+    {
+      groupName: "Overall",
+      specs: [
+        {
+          label: "Dimension",
+          data: ["160.8 x 78.1 x 7.4 mm"],
+        },
+        {
+          label: "SimCard",
+          data: ["Nano Sim Cards (8.8 × 12.3 mm)"],
+        },
+        {
+          label: "Weight",
+          data: ["228 gram"],
+        },
+        {
+          label: "Body Spec",
+          data: [
+            "Metal and Glass",
+            "IP68 Standard",
+            "Gorilla Glass",
+            "Cover for display",
+          ],
+        },
+        {
+          label: "Special Features",
+          data: [
+            "Great for: Gaming, Photography, Selfie, Waterproof, Resistance Body, Face detection sensor",
+          ],
+        },
+      ],
+    },
+    {
+      groupName: "Display",
+      specs: [
+        {
+          label: "Colored display",
+          data: ["Yes"],
+        },
+        {
+          label: "Touchscreen",
+          data: ["Yes"],
+        },
+      ],
+    },
+    {
+      groupName: "Camera",
+      specs: [
+        {
+          label: "Front Camera",
+          data: ["18MP", "CMOS Sensor"],
+        },
+        {
+          label: "Back Camera",
+          data: ["48MP"],
+        },
+      ],
+    },
+  ],
+  gallery: [
+    "ps5Controller1.jpg",
+    "ps5Controller2.jpg",
+    "ps5Controller3.jpg",
+    "ps5Controller4.jpg",
+  ],
+  reviews: [
+    {
+      userName: "T. Mihai",
+      userImage: "/images/icons/profileIcon.svg",
+      date: new Date("1970-08-25"),
+      likeNumber: 0,
+      dislikeNumber: 0,
+      isVerified: true,
+      text: `It took awhile to find the right pillow. All of the ones I have tried were not "true" memory foam. Memory foam is dense and not light weight. So all of the other pillows were too soft and did not support my head correctly. I have slept so well on this pillow that am waking up in more pain because my apine is re-adjusting to its proper position`,
+      advantages: ["Good Camera", "High quality", "OLED display"],
+      disAdvantages: ["Have not a charger", "Bad quality Battery"],
+    },
+  ],
+};
