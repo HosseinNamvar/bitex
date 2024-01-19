@@ -69,15 +69,21 @@ export const OneProduct: TProduct = {
     dealPrice: 185.95,
     options: [
       {
-        optionName: "Storage Capacity:",
-        options: ["64GB", "128GB", "256GB"],
-        optionSelectedId: 0,
+        optionName: "Storage Capacity",
+        options: [{ value: "64GB" }, { value: "128GB" }, { value: "256GB" }],
+        optionSelectedId: 1,
         type: "text",
       },
       {
-        optionName: "",
-        options: ["#484848", "#388EDD", "#7AC38F", "#ED4A4A", "#DD9D24"],
-        optionSelectedId: 1,
+        optionName: "Color",
+        options: [
+          { value: "#484848", label: "Grey" },
+          { value: "#388EDD", label: "Blue" },
+          { value: "#7AC38F", label: "Green" },
+          { value: "#ED4A4A", label: "Red" },
+          { value: "#DD9D24", label: "Yellow" },
+        ],
+        optionSelectedId: 3,
         type: "color",
       },
     ],

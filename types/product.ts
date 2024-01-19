@@ -20,7 +20,7 @@ export type TProductSpec = {
 
 export type TProductOption = {
   optionName: string;
-  options: string[];
+  options: { value: string; label?: string }[];
   optionSelectedId: number;
   type: "text" | "color";
 };

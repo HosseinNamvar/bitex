@@ -1,4 +1,304 @@
 @import "/public/css/variables.module.scss";
 
 .productPage {
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+
+  // -------------------- UPPER SECTION --------------------
+  .upperSection {
+    width: 100%;
+    display: flex;
+    gap: 50px;
+    .leftSection {
+      flex-grow: 1;
+      .path {
+        display: block;
+        width: 100%;
+        margin-bottom: 40px;
+        > a {
+          font-size: 1.4rem;
+          color: nth($color-light, 9);
+          margin-right: 4px;
+          &:hover {
+            font-weight: 500;
+          }
+          &:after {
+            margin-left: 4px;
+            content: "/";
+          }
+          &:last-child {
+            &:after {
+              content: "";
+            }
+          }
+        }
+      }
+      .gallery {
+        display: flex;
+        .imageList {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          margin-right: 16px;
+          > img {
+            cursor: pointer;
+            border-radius: 6px;
+            border: 1px solid nth($color-light, 3);
+            transition: border-color 0.3s;
+            &:hover {
+              border-color: nth($color-light, 6);
+            }
+          }
+          .active {
+            cursor: default;
+            border: 2px solid nth($color-light, 6);
+            &:hover {
+              border-color: nth($color-light, 6);
+            }
+          }
+        }
+        .imageWrapper {
+          position: relative;
+          width: 100%;
+          height: 540px;
+          > img {
+            cursor: zoom-in;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid white;
+            transition: border-color 0.3s;
+            &:hover {
+              border-color: nth($color-light, 3);
+            }
+          }
+        }
+      }
+    }
+    .rightSection {
+      width: 512px;
+    }
+  }
+
+  // -------------------- LOWER SECTION --------------------
+  .lowerSection {
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 50px;
+    margin-top: 40px;
+
+    // ---------------- LEFT COLUMN ----------------
+    .leftSection {
+      min-width: 940px;
+      display: flex;
+      flex-direction: column;
+
+      // ---------------- SPECIFICATION ----------------
+      .specification {
+        width: 100%;
+        margin-bottom: 100px;
+        > h2 {
+          font-weight: 300;
+          display: block;
+          font-size: 2.4rem;
+          color: nth($color-light, 9);
+          padding: 20px 0;
+          border-bottom: 1px solid nth($color-light, 3);
+        }
+
+        .specGroup {
+          width: 100%;
+          padding: 20px 0;
+          border-bottom: 1px solid nth($color-light, 3);
+          .specGroupHead {
+            display: block;
+            width: 100%;
+
+            > button {
+              width: 30px;
+              height: 30px;
+              display: inline-block;
+              border: none;
+              background-color: white;
+              &:hover {
+                background-color: nth($color-light, 3);
+              }
+            }
+            > h3 {
+              margin-left: 12px;
+              display: inline-block;
+              font-size: 1.6rem;
+              font-weight: 400;
+              color: nth($color-light, 7);
+            }
+          }
+          .row {
+            width: 100%;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            font-size: 1.4rem;
+            border-radius: 8px;
+
+            &:hover {
+              background-color: nth($color-light, 1);
+            }
+            .leftCol {
+              width: 160px;
+              margin-left: 42px;
+              color: nth($color-light, 7);
+            }
+            .rightCol {
+              font-weight: 500;
+              color: nth($color-light, 10);
+            }
+          }
+        }
+      }
+
+      // ---------------- USER REVIEW ----------------
+      .userReviews {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+
+        .header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 16px;
+          border-bottom: 1px solid nth($color-light, 3);
+          > h2 {
+            font-weight: 300;
+            display: block;
+            font-size: 2.4rem;
+            color: nth($color-light, 9);
+          }
+          > button {
+            font-size: 1.4rem;
+            color: nth($color-light, 9);
+            padding: 6px 24px;
+            border-radius: 6px;
+            background-color: nth($color-light, 1);
+            border: 1px solid nth($color-light, 7);
+            &:hover {
+              background-color: nth($color-light, 2);
+            }
+            &:active {
+              background-color: nth($color-light, 3);
+            }
+          }
+        }
+
+        .reviewWrapper {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          // ----------- HEAD -----------
+          .head {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1.4rem;
+            .user {
+              display: flex;
+              height: 32px;
+              align-items: center;
+              color: nth($color-light, 8);
+              font-weight: 500;
+              > img {
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 12px;
+              }
+            }
+            .isVerified {
+              color: #f97a1f;
+              margin-left: 30px;
+              font-weight: 500;
+            }
+            .date {
+              margin-left: 30px;
+              padding-left: 24px;
+              background-image: url("/images/icons/dateIcon.svg");
+              background-repeat: no-repeat;
+              background-position: left center;
+            }
+            .likeInteraction {
+              margin-left: 40px;
+              display: block;
+              > button {
+                height: 30px;
+                margin-right: 12px;
+                font-size: 1.6rem;
+                font-weight: 500;
+                background-color: white;
+                color: nth($color-light, 9);
+                > img {
+                  margin-right: 8px;
+                }
+                &:hover {
+                  background-color: nth($color-light, 2);
+                }
+                &:active {
+                  background-color: nth($color-light, 3);
+                }
+              }
+              .dislike {
+                > img {
+                  display: inline-block;
+                  transform: scaleX(-1) rotate(180deg);
+                }
+              }
+            }
+          }
+
+          // ----------- BODY -----------
+          .body {
+            margin: 16px 0 16px 46px;
+            font-size: 1.4rem;
+            line-height: 2rem;
+
+            color: nth($color-light, 9);
+          }
+        }
+      }
+    }
+
+    // ---------------- RIGHT COLUMN ----------------
+    .rightSection {
+    }
+  }
+
+  // ---------------- SIMILAR PRODUCT ----------------
+  .similarProductSection {
+    width: 100%;
+    margin: 100px 0;
+    > h2 {
+      font-weight: 300;
+      display: block;
+      font-size: 2.4rem;
+      color: nth($color-light, 9);
+    }
+    .cardsContainer {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      width: 100%;
+      overflow-x: scroll;
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .cardsContainer {
+    padding-bottom: 30px;
+    overflow-x: scroll;
+  }
 }

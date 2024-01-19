@@ -9,64 +9,150 @@ const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
   const { name, options, price, shortDesc, dealDate, dealPrice } = boardData;
   return (
     <div className={styles.productBoard}>
+      <button className={styles.favorite}>
+        <Image
+          src={"/images/icons/heartIcon.svg"}
+          alt="Add to Favorites"
+          width={22}
+          height={20}
+        />
+      </button>
       <section>
         <div className={styles.stars}>
-          <Image src={""} alt="" width={15} height={15} />
-          <Image src={""} alt="" width={15} height={15} />
-          <Image src={""} alt="" width={15} height={15} />
-          <Image src={""} alt="" width={15} height={15} />
-          <Image src={""} alt="" width={15} height={15} />
+          <Image
+            src={"/images/icons/starIcon.svg"}
+            alt=""
+            width={15}
+            height={15}
+          />
+          <Image
+            src={"/images/icons/starIcon.svg"}
+            alt=""
+            width={15}
+            height={15}
+          />
+          <Image
+            src={"/images/icons/starIcon.svg"}
+            alt=""
+            width={15}
+            height={15}
+          />
+          <Image
+            src={"/images/icons/starIcon.svg"}
+            alt=""
+            width={15}
+            height={15}
+          />
+          <Image
+            src={"/images/icons/starIcon.svg"}
+            alt=""
+            width={15}
+            height={15}
+          />
           <Link href={"#"}>880 User Reviews</Link>
         </div>
-        <button className={styles.favorite} />
       </section>
       <h1>{name}</h1>
-      <span>{shortDesc}</span>
-      <section>
+      <span className={styles.shortDesc}>{shortDesc}</span>
+      <section className={styles.dealTime}>
         <span>Remained Time:</span>
-        <span>{dealDate?.getDate()}</span>
+        <span>{`${dealDate?.getHours()} : ${dealDate?.getMinutes()} : ${dealDate
+          ?.getSeconds()
+          .toLocaleString("en-us", { minimumIntegerDigits: 2 })}`}</span>
       </section>
-      <h2>{dealPrice ? dealPrice : price} €</h2>
+      <h2 className={styles.price}>{dealPrice ? dealPrice : price} €</h2>
       {dealPrice && (
-        <>
-          <span className={styles.dealAmount}>Save 100€</span>
+        <div className={styles.dealPrice}>
+          <span className={styles.dealAmount}>
+            {`
+            Save
+            ${(price - dealPrice).toLocaleString("en-us", {
+              minimumIntegerDigits: 2,
+              minimumFractionDigits: 2,
+            })} €
+            `}
+          </span>
           <span className={styles.oldPrice}>Was {price} €</span>
-        </>
+        </div>
       )}
-      <section className={styles.optionWrapper}>
-        <div className={styles.optionName}>
-          <span>Storage Capacity:</span>
-          <span>128GB</span>
-        </div>
-        <div className={styles.optionList_Text}>
-          <button>64GB</button>
-          <button>128GB</button>
-          <button>256GB</button>
-        </div>
-      </section>
-      <section className={styles.optionWrapper}>
-        <div className={styles.optionName}>
-          <span>Color:</span>
-          <span>Blue</span>
-        </div>
-        <div className={styles.optionList_Text}>
-          <button style={{ backgroundColor: "#484848" }} />
-          <button
-            style={{ backgroundColor: "#388EDD" }}
-            className={styles.active}
-          />
-          <button style={{ backgroundColor: "#7AC38F" }} />
-          <button style={{ backgroundColor: "#ED4A4A" }} />
-          <button style={{ backgroundColor: "#DD9D24" }} />
-        </div>
-      </section>
-      <section>
+      <hr />
+      {/* ----------------- OPTIONS SECTION ----------------- */}
+      {options.map((option, index) => (
+        <section key={index} className={styles.optionWrapper}>
+          <div className={styles.optionName}>
+            <span>{option.optionName}:</span>
+            <span>
+              {option.options[option.optionSelectedId].label ||
+                option.options[option.optionSelectedId].value}
+            </span>
+          </div>
+          <div
+            className={`${styles.optionList} ${
+              option.type === "color"
+                ? styles.optionType_Color
+                : styles.optionType_Text
+            }`}
+          >
+            {option.type === "color"
+              ? option.options.map((item, index) => (
+                  <button
+                    key={index}
+                    className={
+                      index === option.optionSelectedId ? styles.active : ""
+                    }
+                    style={
+                      index === option.optionSelectedId
+                        ? { borderColor: item.value }
+                        : {}
+                    }
+                  >
+                    <span style={{ backgroundColor: item.value }} />
+                  </button>
+                ))
+              : option.options.map((item, index) => (
+                  <button
+                    key={index}
+                    className={
+                      index === option.optionSelectedId ? styles.active : ""
+                    }
+                  >
+                    {item.value}
+                  </button>
+                ))}
+          </div>
+        </section>
+      ))}
+
+      {/* ----------------- ADD TO CART SECTION ----------------- */}
+      <section className={styles.addToCartSection}>
         <div className={styles.quantity}>
-          <button>-</button>
+          <button>
+            <Image
+              src={"/images/icons/minusIcon.svg"}
+              alt="minus button"
+              width={12}
+              height={2}
+            />
+          </button>
           <span>8</span>
-          <button>+</button>
+          <button>
+            <Image
+              src={"/images/icons/plusIcon.svg"}
+              alt="minus button"
+              width={12}
+              height={12}
+            />
+          </button>
         </div>
-        <button>Add to Cart</button>
+        <button className={styles.addToCart}>
+          <Image
+            src={"/images/icons/shoppingIcon2.svg"}
+            alt="add to cart"
+            width={16}
+            height={16}
+          />
+          Add to Cart
+        </button>
       </section>
     </div>
   );
