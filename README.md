@@ -1,1 +1,1 @@
-This is a BITEX, A shop for Electronic Gadgets!
+This is BITEX, A shop for Electronic Gadgets!

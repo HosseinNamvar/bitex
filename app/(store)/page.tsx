@@ -104,6 +104,7 @@ export default function Home() {
                 url={product.url}
                 dealPrice={product.dealPrice}
                 key={index}
+                staticWidth
               />
             ))}
           </div>

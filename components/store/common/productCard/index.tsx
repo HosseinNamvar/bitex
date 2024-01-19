@@ -10,9 +10,12 @@ const ProductCard = ({
   dealPrice = undefined,
   specs,
   url,
+  staticWidth = false,
 }: TProductCard) => {
   return (
-    <div className={styles.productCard}>
+    <div
+      className={`${styles.productCard} ${staticWidth && styles.staticWidth}`}
+    >
       <Link href={url} className={styles.imageWrapper}>
         <Image src={imgUrl} alt={name} fill />
       </Link>
