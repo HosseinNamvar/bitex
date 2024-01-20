@@ -49,6 +49,7 @@ const ProductPage = () => {
         </div>
         <div className={styles.lowerSection}>
           <div className={styles.leftSection}>
+            {/* ----------------- SPECIFICATION SECTION ----------------- */}
             <div className={styles.specification}>
               <h2>Specification</h2>
               {product.specification.map((spec, index) => (
@@ -62,16 +63,18 @@ const ProductPage = () => {
                       <div className={styles.leftCol}>
                         <span>{row.label}</span>
                       </div>
-                      {row.data.map((d, index) => (
-                        <div key={index} className={styles.rightCol}>
-                          <span>{d}</span>
-                        </div>
-                      ))}
+                      <div className={styles.rightCol}>
+                        {row.data.map((d, index) => (
+                          <span key={index}>{d}</span>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </section>
               ))}
             </div>
+
+            {/* ----------------- USER REVIEWS ----------------- */}
             <div className={styles.userReviews}>
               <div className={styles.header}>
                 <h2>User Reviews</h2>
@@ -89,26 +92,28 @@ const ProductPage = () => {
                     <span>T. Mihai</span>
                   </div>
                   <span className={styles.isVerified}>Verified Purchase</span>
-                  <div className={styles.date}>30 November 2023</div>
-                  <div className={styles.likeInteraction}>
-                    <button className={styles.like}>
-                      <Image
-                        src={"/images/icons/likeIcon.svg"}
-                        alt="Like"
-                        width={16}
-                        height={16}
-                      />
-                      0
-                    </button>
-                    <button className={styles.dislike}>
-                      <Image
-                        src={"/images/icons/likeIcon.svg"}
-                        alt="Like"
-                        width={16}
-                        height={16}
-                      />
-                      0
-                    </button>
+                  <div className={styles.dateAndLikeSection}>
+                    <div className={styles.date}>30 November 2023</div>
+                    <div className={styles.likeInteraction}>
+                      <button className={styles.like}>
+                        <Image
+                          src={"/images/icons/likeIcon.svg"}
+                          alt="Like"
+                          width={16}
+                          height={16}
+                        />
+                        0
+                      </button>
+                      <button className={styles.dislike}>
+                        <Image
+                          src={"/images/icons/likeIcon.svg"}
+                          alt="Like"
+                          width={16}
+                          height={16}
+                        />
+                        0
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div className={styles.body}>
@@ -123,9 +128,6 @@ const ProductPage = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className={styles.rightSection}>
-            <ProductBoard boardData={product.board} />
           </div>
         </div>
         <div className={styles.similarProductSection}>
