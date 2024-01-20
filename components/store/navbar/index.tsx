@@ -12,12 +12,14 @@ const StoreNavBar = () => {
     <nav className={styles.navbar}>
       <section>
         <div className={`${styles.top} storeContainer`}>
-          <Image
-            alt="Bitex Logo"
-            src={"/images/logo.png"}
-            width={125}
-            height={40}
-          />
+          <Link href={"/"}>
+            <Image
+              alt="Bitex Logo"
+              src={"/images/logo.png"}
+              width={125}
+              height={40}
+            />
+          </Link>
           <div className={styles.search}>
             <input
               type="text"

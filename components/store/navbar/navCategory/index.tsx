@@ -1,15 +1,10 @@
-import Image from "next/image";
 import styles from "./navCategory.module.scss";
+import { ListIcon } from "@/components/icons/svgIcons";
 
 const NavBarCategory = () => {
   return (
     <div className={styles.category}>
-      <Image
-        src={"/images/icons/listIcon.svg"}
-        width={12}
-        height={12}
-        alt="categories"
-      />
+      <ListIcon width={12} />
       <span>All Categories</span>
     </div>
   );

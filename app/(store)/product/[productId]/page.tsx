@@ -7,6 +7,7 @@ import styles from "./productPage.module.scss";
 
 import { OneProduct as product } from "@/data/products";
 import ProductBoard from "@/components/store/productPage/productBoard";
+import { LikeIcon } from "@/components/icons/svgIcons";
 
 const ProductPage = () => {
   return (
@@ -96,22 +97,10 @@ const ProductPage = () => {
                     <div className={styles.date}>30 November 2023</div>
                     <div className={styles.likeInteraction}>
                       <button className={styles.like}>
-                        <Image
-                          src={"/images/icons/likeIcon.svg"}
-                          alt="Like"
-                          width={16}
-                          height={16}
-                        />
-                        0
+                        <LikeIcon width={16} />0
                       </button>
                       <button className={styles.dislike}>
-                        <Image
-                          src={"/images/icons/likeIcon.svg"}
-                          alt="Like"
-                          width={16}
-                          height={16}
-                        />
-                        0
+                        <LikeIcon width={16} /> 0
                       </button>
                     </div>
                   </div>

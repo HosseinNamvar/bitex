@@ -1,54 +1,30 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { TProductBoard } from "@/types/product";
 
 import styles from "./productBoard.module.scss";
+import {
+  ShoppingIconFill,
+  MinusIcon,
+  PlusIcon,
+  StarIcon,
+  HeartIcon,
+} from "@/components/icons/svgIcons";
 
 const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
   const { name, options, price, shortDesc, dealDate, dealPrice } = boardData;
   return (
     <div className={styles.productBoard}>
       <button className={styles.favorite}>
-        <Image
-          src={"/images/icons/heartIcon.svg"}
-          alt="Add to Favorites"
-          width={22}
-          height={20}
-        />
+        <HeartIcon width={22} />
       </button>
       <section>
         <div className={styles.stars}>
-          <Image
-            src={"/images/icons/starIcon.svg"}
-            alt=""
-            width={15}
-            height={15}
-          />
-          <Image
-            src={"/images/icons/starIcon.svg"}
-            alt=""
-            width={15}
-            height={15}
-          />
-          <Image
-            src={"/images/icons/starIcon.svg"}
-            alt=""
-            width={15}
-            height={15}
-          />
-          <Image
-            src={"/images/icons/starIcon.svg"}
-            alt=""
-            width={15}
-            height={15}
-          />
-          <Image
-            src={"/images/icons/starIcon.svg"}
-            alt=""
-            width={15}
-            height={15}
-          />
+          <StarIcon width={15} stroke="#856B0F" fill="#FFD643" />
+          <StarIcon width={15} stroke="#856B0F" fill="#FFD643" />
+          <StarIcon width={15} stroke="#856B0F" fill="#FFD643" />
+          <StarIcon width={15} stroke="#856B0F" fill="#FFD643" />
+          <StarIcon width={15} stroke="#856B0F" fill="#FFD643" />
           <Link href={"#"}>880 User Reviews</Link>
         </div>
       </section>
@@ -127,30 +103,15 @@ const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
       <section className={styles.addToCartSection}>
         <div className={styles.quantity}>
           <button>
-            <Image
-              src={"/images/icons/minusIcon.svg"}
-              alt="minus button"
-              width={12}
-              height={2}
-            />
+            <MinusIcon width={12} />
           </button>
           <span>8</span>
           <button>
-            <Image
-              src={"/images/icons/plusIcon.svg"}
-              alt="minus button"
-              width={12}
-              height={12}
-            />
+            <PlusIcon width={12} />
           </button>
         </div>
         <button className={styles.addToCart}>
-          <Image
-            src={"/images/icons/shoppingIcon2.svg"}
-            alt="add to cart"
-            width={16}
-            height={16}
-          />
+          <ShoppingIconFill width={16} />
           Add to Cart
         </button>
       </section>

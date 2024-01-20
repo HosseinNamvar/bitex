@@ -1,30 +1,34 @@
 import Image from "next/image";
 import styles from "./footer.module.scss";
 import Link from "next/link";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  SearchIcon,
+  XIcon,
+} from "@/components/icons/svgIcons";
 
 const Footer = () => {
   return (
     <footer className={styles.storeFooter}>
       <div className={`${styles.footerWrapper} storeContainer`}>
         <div className={styles.topSection}>
-          <Image
-            alt="Bitex Logo"
-            src={"/images/logo.png"}
-            width={125}
-            height={40}
-          />
+          <Link href={"/"}>
+            <Image
+              alt="Bitex Logo"
+              src={"/images/logo.png"}
+              width={125}
+              height={40}
+            />
+          </Link>
           <div className={styles.search}>
             <input
               type="text"
               className={styles.searchInput}
               placeholder="Search"
             />
-            <Image
-              src={"/images/icons/searchIcon.svg"}
-              width={16}
-              height={16}
-              alt="Search"
-            />
+            <SearchIcon width={16} />
           </div>
         </div>
         <section className={styles.middle}>
@@ -121,36 +125,16 @@ const Footer = () => {
           </div>
           <div className={styles.social}>
             <Link href={"https://www.linkedIn.com"}>
-              <Image
-                alt=""
-                src={"/images/icons/linkedInLogo.svg"}
-                width={20}
-                height={20}
-              />
+              <LinkedinIcon width={20} strokeWidth={0} />
             </Link>
             <Link href={"https://www.twitter.com"}>
-              <Image
-                alt=""
-                src={"/images/icons/xLogo.svg"}
-                width={20}
-                height={20}
-              />
+              <XIcon width={20} />
             </Link>
             <Link href={"https://www.instagram.com"}>
-              <Image
-                alt=""
-                src={"/images/icons/instagramLogo.svg"}
-                width={20}
-                height={20}
-              />
+              <InstagramIcon width={20} strokeWidth={0} />
             </Link>
             <Link href={"https://www.facebook.com"}>
-              <Image
-                alt=""
-                src={"/images/icons/facebookLogo.svg"}
-                width={20}
-                height={20}
-              />
+              <FacebookIcon width={20} strokeWidth={0} />
             </Link>
           </div>
         </div>

@@ -59,7 +59,6 @@ const ProductCard = ({
         </div>
         <div className={styles.basketWrapper}>
           <button className={styles.addFavorite} />
-          <button className={styles.addShopping} />
         </div>
       </div>
     </div>

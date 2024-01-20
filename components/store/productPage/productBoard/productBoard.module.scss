@@ -12,7 +12,7 @@
   .stars {
     display: flex;
     align-items: center;
-    > img {
+    > svg {
       margin-right: 2px;
     }
     > a {
@@ -27,15 +27,24 @@
     right: 0;
     top: 0;
     border: none;
-    fill: red;
-    stroke: aqua;
+    padding: 4px;
     background-color: white;
-    > img {
-      fill: red;
-      stroke: aqua;
-      &:hover {
-        fill: red;
+    &:hover {
+      > svg {
+        fill: nth($color-light, 2);
       }
+    }
+    &:active {
+      > svg {
+        fill: nth($color-light, 3);
+      }
+    }
+    > svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      stroke: nth($color-light, 7);
+      transition: all 0.3s;
     }
   }
 
@@ -195,6 +204,10 @@
         border: none;
         background-color: nth($color-light, 1);
         transition: all 0.3s;
+
+        > svg {
+          stroke: nth($color-light, 10);
+        }
         &:hover {
           background-color: nth($color-light, 2);
         }
@@ -224,7 +237,7 @@
       border: 2px solid nth($color-red, 3);
       color: nth($color-red, 3);
       transition: all 0.3s;
-      > img {
+      > svg {
         fill: nth($color-red, 3);
       }
       &:hover {

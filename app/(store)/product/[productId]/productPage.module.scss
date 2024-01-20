@@ -249,22 +249,49 @@
                   margin-right: 12px;
                   font-size: 1.6rem;
                   font-weight: 500;
+                  padding: 0 12px;
                   background-color: white;
+                  border: 1px solid white;
+                  border-radius: 6px;
                   color: nth($color-light, 9);
-                  > img {
+                  > svg {
+                    fill: white;
+                    stroke: nth($color-light, 10);
                     margin-right: 8px;
                   }
+                }
+                .like {
                   &:hover {
-                    background-color: nth($color-light, 2);
+                    border-color: nth($color-green, 6);
+                    background-color: nth($color-green, 8);
+                    > svg {
+                      fill: nth($color-green, 7);
+                    }
                   }
                   &:active {
-                    background-color: nth($color-light, 3);
+                    border-color: nth($color-green, 5);
+                    > svg {
+                      fill: nth($color-green, 6);
+                    }
                   }
                 }
                 .dislike {
-                  > img {
+                  &:hover {
+                    border-color: nth($color-red, 7);
+                    background-color: rgba(nth($color-red, 9), 0.4);
+                    > svg {
+                      fill: nth($color-red, 8);
+                    }
+                  }
+                  &:active {
+                    border-color: nth($color-red, 5);
+                    > svg {
+                      fill: nth($color-red, 7);
+                    }
+                  }
+                  > svg {
                     display: inline-block;
-                    transform: scaleX(-1) rotate(180deg);
+                    transform: scaleX(-1) rotate(180deg) translateY(-3px);
                   }
                 }
               }

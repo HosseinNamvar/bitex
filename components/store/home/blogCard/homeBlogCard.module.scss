@@ -4,6 +4,7 @@
   border-radius: 12px;
   overflow: hidden;
   background-color: white;
+  transition: box-shadow 0.3s;
   &:hover {
     box-shadow: 0 2px 4px rgba(#000000, 0.2);
     > a {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./todayDealCard.module.scss";
 import Link from "next/link";
 import { useState } from "react";
+import { ClockIcon } from "@/components/icons/svgIcons";
 
 interface IProps {
   productName: string;
@@ -68,12 +69,7 @@ const TodayDealCard = ({
           </span>
         </div>
         <div className={styles.timeWrapper}>
-          <Image
-            src={"/images/icons/clockIcon.svg"}
-            alt=""
-            width={14}
-            height={14}
-          />
+          <ClockIcon width={14} />
           <span>
             {`${remainedTime
               .getHours()
