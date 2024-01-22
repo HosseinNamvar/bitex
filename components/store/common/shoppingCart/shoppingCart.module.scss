@@ -1,0 +1,64 @@
+@import "/public/css/variables.module.scss";
+
+.shoppingCart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  cursor: default;
+
+  .background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(#000000, 0.6);
+    cursor: pointer;
+  }
+  .cartWindow {
+    position: absolute;
+    right: 0;
+    top: 24px;
+    bottom: 24px;
+    width: 400px;
+    border-radius: 12px 0 0 12px;
+    background-color: white;
+
+    .header {
+      width: auto;
+      padding: 12px 0;
+      margin: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid nth($color-light, 4);
+      > h2 {
+        color: nth($color-light, 10);
+        font-size: 2rem;
+        font-weight: 300;
+      }
+      > button {
+        svg {
+          width: auto;
+          border-radius: 8px;
+          padding: 12px;
+          cursor: pointer;
+          border: 1px solid white;
+          transition: all 0.3s;
+          &:hover {
+            border-color: nth($color-light, 3);
+          }
+          &:active {
+            background-color: nth($color-light, 1);
+            border-color: nth($color-light, 5);
+          }
+        }
+      }
+    }
+  }
+}
+
+.shoppingHide {
+  display: none;
+}

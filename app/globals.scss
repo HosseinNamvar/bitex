@@ -64,6 +64,8 @@ a {
 button {
   border: none;
   cursor: pointer;
+  padding: 0;
+  background: none;
 }
 
 .storeContainer {
@@ -75,6 +77,10 @@ button {
 
 .flexCol {
   flex-direction: column;
+}
+
+.noScroll {
+  overflow: hidden;
 }
 
 @media (min-width: 1440px) {

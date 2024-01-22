@@ -6,26 +6,36 @@
   position: relative;
   margin: 0 20px 0 36px;
   cursor: pointer;
-  > span {
-    position: absolute;
-    top: -2px;
-    right: -12px;
-    width: 24px;
-    height: 24px;
-    line-height: 22px;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 50%;
-  }
-  > svg {
-    fill: white;
-    stroke: nth($color-light, 6);
-    transition: all 0.3s;
-  }
-  &:hover {
-    border-color: nth($color-light, 3);
+  > button {
+    > span {
+      position: absolute;
+      top: -2px;
+      right: -12px;
+      width: 24px;
+      height: 24px;
+      line-height: 22px;
+      text-align: center;
+      font-size: 14px;
+      user-select: none;
+      border-radius: 50%;
+    }
+    .emptyCart {
+      color: nth($color-light, 8);
+      background-color: nth($color-light, 3);
+    }
+    .filledCart {
+      color: white;
+      background-color: nth($color-red, 6);
+    }
     > svg {
-      stroke: nth($color-light, 8);
+      fill: none;
+      stroke: nth($color-light, 6);
+      transition: all 0.3s;
+    }
+    &:hover {
+      > svg {
+        stroke: nth($color-light, 8);
+      }
     }
   }
 }

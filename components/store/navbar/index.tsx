@@ -7,7 +7,11 @@ import NavBarFavorite from "./navFavorite";
 import NavBarShopping from "./navShopping";
 import NavBarCategory from "./navCategory";
 
-const StoreNavBar = () => {
+interface IProps {
+  handleShoppingCart: () => void;
+}
+
+const StoreNavBar = ({ handleShoppingCart }: IProps) => {
   return (
     <nav className={styles.navbar}>
       <section>
@@ -36,7 +40,7 @@ const StoreNavBar = () => {
           <div className={styles.rightButtons}>
             <NavBarProfile />
             <NavBarFavorite />
-            <NavBarShopping />
+            <NavBarShopping handleOnClick={handleShoppingCart} quantity={0} />
           </div>
         </div>
       </section>
