@@ -8,6 +8,9 @@
   bottom: 0;
   z-index: 20;
   cursor: default;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s;
 
   .background {
     position: absolute;
@@ -16,14 +19,16 @@
     background-color: rgba(#000000, 0.6);
     cursor: pointer;
   }
+
   .cartWindow {
     position: absolute;
-    right: 0;
+    right: -400px;
     top: 24px;
     bottom: 24px;
     width: 400px;
     border-radius: 12px 0 0 12px;
     background-color: white;
+    transition: all 0.8s $anim-easeOut;
 
     .header {
       width: auto;
@@ -57,8 +62,12 @@
       }
     }
   }
+  .showWindow {
+    right: 0;
+  }
 }
 
 .shoppingHide {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
