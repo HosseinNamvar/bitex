@@ -7,10 +7,9 @@ import { ShoppingIconOutline } from "@/components/icons/svgIcons";
 
 interface IProps {
   quantity: number;
-  handleOnClick: () => void;
 }
 
-const NavBarShopping = ({ handleOnClick, quantity }: IProps) => {
+const NavBarShopping = ({ quantity }: IProps) => {
   const [cartVisibility, setCartVisibility] = useState(false);
 
   const handleCartVisibility = (visibility: boolean) => {
@@ -21,7 +20,7 @@ const NavBarShopping = ({ handleOnClick, quantity }: IProps) => {
   };
 
   return (
-    <div className={styles.shopping} onClick={handleOnClick}>
+    <div className={styles.shopping}>
       <button onClick={() => handleCartVisibility(true)}>
         <ShoppingIconOutline width={24} />
         <span

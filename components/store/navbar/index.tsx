@@ -9,11 +9,7 @@ import NavBarShopping from "./navShopping";
 import NavBarCategory from "./navCategory";
 import { useEffect, useState } from "react";
 
-interface IProps {
-  handleShoppingCart: () => void;
-}
-
-const StoreNavBar = ({ handleShoppingCart }: IProps) => {
+const StoreNavBar = () => {
   const [hideNavbar, setHideNavbar] = useState(false);
   let prevPositionY = window.scrollY;
 
@@ -61,7 +57,7 @@ const StoreNavBar = ({ handleShoppingCart }: IProps) => {
           <div className={styles.rightButtons}>
             <NavBarProfile />
             <NavBarFavorite />
-            <NavBarShopping handleOnClick={handleShoppingCart} quantity={0} />
+            <NavBarShopping quantity={0} />
           </div>
         </div>
       </section>
