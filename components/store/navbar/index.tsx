@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./navbar.module.scss";
@@ -6,14 +7,34 @@ import NavBarProfile from "./navProfile";
 import NavBarFavorite from "./navFavorite";
 import NavBarShopping from "./navShopping";
 import NavBarCategory from "./navCategory";
+import { useEffect, useState } from "react";
 
 interface IProps {
   handleShoppingCart: () => void;
 }
 
 const StoreNavBar = ({ handleShoppingCart }: IProps) => {
+  const [hideNavbar, setHideNavbar] = useState(false);
+  let prevPositionY = window.scrollY;
+
+  const handleScroll = () => {
+    //---handle auto hiding navbar
+    prevPositionY < window.scrollY && window.scrollY > 100
+      ? setHideNavbar(true)
+      : setHideNavbar(false);
+    prevPositionY = window.scrollY;
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${hideNavbar && styles.hideNavbar}`}>
       <section>
         <div className={`${styles.top} storeContainer`}>
           <Link href={"/"}>
