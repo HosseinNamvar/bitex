@@ -2,9 +2,33 @@
 
 .profile {
   display: flex;
+  cursor: pointer;
   height: 44px;
+  padding: 0 16px;
   align-items: center;
+  border: 1px solid white;
+  border-radius: 8px;
   gap: 16px;
+  transition: all 0.3s;
+  > span {
+    user-select: none;
+  }
+  > svg {
+    fill: white;
+    transition: all 0.3s;
+    stroke: nth($color-light, 8);
+    stroke-width: 2;
+  }
+  &:hover {
+    border-color: nth($color-light, 3);
+  }
+  &:active {
+    > svg {
+      fill: nth($color-light, 2);
+    }
+    border-color: nth($color-light, 5);
+    background-color: nth($color-light, 2);
+  }
 }
 
 @media (max-width: 1024px) {

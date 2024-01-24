@@ -3,7 +3,7 @@
 .productPage {
   width: 100%;
   height: auto;
-  margin-top: 40px;
+  margin-top: 160px;
   display: flex;
   flex-direction: column;
 
@@ -92,7 +92,7 @@
 
     // ---------------- LEFT COLUMN ----------------
     .leftSection {
-      min-width: 940px;
+      width: 100%;
       display: flex;
       flex-direction: column;
 
@@ -137,9 +137,9 @@
           }
           .row {
             width: 100%;
-            min-height: 40px;
+            padding-top: 12px;
             display: flex;
-            align-items: center;
+            align-items: stretch;
             background-color: white;
             font-size: 1.4rem;
             border-radius: 8px;
@@ -148,13 +148,21 @@
               background-color: nth($color-light, 1);
             }
             .leftCol {
-              width: 160px;
+              min-width: 160px;
+
+              display: flex;
+              align-items: start;
               margin-left: 42px;
               color: nth($color-light, 7);
             }
             .rightCol {
               font-weight: 500;
               color: nth($color-light, 10);
+              > span {
+                display: block;
+                line-height: 2rem;
+                height: 30px;
+              }
             }
           }
         }
@@ -203,6 +211,7 @@
           .head {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
             width: 100%;
             margin-top: 20px;
             font-size: 1.4rem;
@@ -223,37 +232,67 @@
               margin-left: 30px;
               font-weight: 500;
             }
-            .date {
-              margin-left: 30px;
-              padding-left: 24px;
-              background-image: url("/images/icons/dateIcon.svg");
-              background-repeat: no-repeat;
-              background-position: left center;
-            }
-            .likeInteraction {
-              margin-left: 40px;
-              display: block;
-              > button {
-                height: 30px;
-                margin-right: 12px;
-                font-size: 1.6rem;
-                font-weight: 500;
-                background-color: white;
-                color: nth($color-light, 9);
-                > img {
-                  margin-right: 8px;
-                }
-                &:hover {
-                  background-color: nth($color-light, 2);
-                }
-                &:active {
-                  background-color: nth($color-light, 3);
-                }
+            .dateAndLikeSection {
+              .date {
+                display: inline-block;
+                margin-left: 30px;
+                padding-left: 24px;
+                background-image: url("/images/icons/dateIcon.svg");
+                background-repeat: no-repeat;
+                background-position: left center;
               }
-              .dislike {
-                > img {
-                  display: inline-block;
-                  transform: scaleX(-1) rotate(180deg);
+              .likeInteraction {
+                margin-left: 40px;
+                display: inline-block;
+                > button {
+                  height: 30px;
+                  margin-right: 12px;
+                  font-size: 1.6rem;
+                  font-weight: 500;
+                  padding: 0 12px;
+                  background-color: white;
+                  border: 1px solid white;
+                  border-radius: 6px;
+                  color: nth($color-light, 9);
+                  > svg {
+                    fill: white;
+                    stroke: nth($color-light, 10);
+                    margin-right: 8px;
+                  }
+                }
+                .like {
+                  &:hover {
+                    border-color: nth($color-green, 6);
+                    background-color: nth($color-green, 8);
+                    > svg {
+                      fill: nth($color-green, 7);
+                    }
+                  }
+                  &:active {
+                    border-color: nth($color-green, 5);
+                    > svg {
+                      fill: nth($color-green, 6);
+                    }
+                  }
+                }
+                .dislike {
+                  &:hover {
+                    border-color: nth($color-red, 7);
+                    background-color: rgba(nth($color-red, 9), 0.4);
+                    > svg {
+                      fill: nth($color-red, 8);
+                    }
+                  }
+                  &:active {
+                    border-color: nth($color-red, 5);
+                    > svg {
+                      fill: nth($color-red, 7);
+                    }
+                  }
+                  > svg {
+                    display: inline-block;
+                    transform: scaleX(-1) rotate(180deg) translateY(-3px);
+                  }
                 }
               }
             }
@@ -269,10 +308,6 @@
           }
         }
       }
-    }
-
-    // ---------------- RIGHT COLUMN ----------------
-    .rightSection {
     }
   }
 
@@ -300,5 +335,32 @@
   .cardsContainer {
     padding-bottom: 30px;
     overflow-x: scroll;
+  }
+}
+
+@media (max-width: 1024px) {
+  .productPage {
+    .upperSection {
+      flex-direction: column;
+      .leftSection {
+        .gallery {
+          flex-direction: column-reverse;
+          .imageList {
+            margin-top: 20px;
+            flex-direction: row;
+          }
+        }
+      }
+      .rightSection {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .dateAndLikeSection {
+    display: block;
+    margin: 12px 0 0 12px;
   }
 }

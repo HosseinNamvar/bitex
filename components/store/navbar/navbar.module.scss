@@ -2,8 +2,14 @@
 
 .navbar {
   display: flex;
+  position: fixed;
+  top: 0;
+  background-color: white;
   flex-direction: column;
   border-bottom: 1px solid nth($color-light, 5);
+  z-index: 9;
+  width: 100%;
+  transition: all 0.6s;
   .top {
     justify-content: space-between;
   }
@@ -13,7 +19,7 @@
   }
 
   > section:nth-child(1) {
-    padding: 36px 0;
+    padding: 20px 0;
     border-bottom: 1px solid nth($color-light, 3);
   }
 
@@ -83,6 +89,10 @@
       color: nth($color-light, 8);
     }
   }
+}
+
+.hideNavbar {
+  top: -180px;
 }
 
 @media (max-width: 1024px) {

@@ -1,14 +1,9 @@
-import Image from "next/image";
 import styles from "./navProfile.module.scss";
+import { ProfileIcon } from "@/components/icons/svgIcons";
 const NavBarProfile = () => {
   return (
     <div className={styles.profile}>
-      <Image
-        src={"/images/icons/profileIcon.svg"}
-        width={16}
-        height={18}
-        alt="profile"
-      />
+      <ProfileIcon width={16} />
       <span>Account</span>
     </div>
   );

@@ -83,7 +83,8 @@
     .timeWrapper {
       text-align: center;
       color: nth($color-red, 6);
-      img {
+      svg {
+        fill: nth($color-red, 6);
         margin: 10px auto 8px;
         display: block;
       }

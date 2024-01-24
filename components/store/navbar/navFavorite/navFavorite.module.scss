@@ -1,8 +1,11 @@
+@import "/public/css/variables.module.scss";
+
 .favorite {
   display: flex;
   align-items: center;
   position: relative;
   margin-left: 30px;
+  cursor: pointer;
   > span {
     position: absolute;
     top: -2px;
@@ -13,6 +16,17 @@
     text-align: center;
     font-size: 14px;
     border-radius: 50%;
+  }
+  > svg {
+    fill: white;
+    stroke-width: 1.5;
+    stroke: nth($color-light, 5);
+    transition: all 0.3s;
+  }
+  &:hover {
+    > svg {
+      stroke: nth($color-light, 8);
+    }
   }
 }
 

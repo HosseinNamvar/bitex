@@ -37,10 +37,12 @@
         }
       }
 
-      img {
+      svg {
         position: absolute;
         left: 20px;
         top: 14px;
+        fill: white;
+        stroke: nth($color-light, 7);
       }
     }
   }
@@ -140,6 +142,19 @@
   .social {
     display: flex;
     gap: 16px;
+    > a {
+      > svg {
+        stroke: nth($color-light, 6);
+        fill: nth($color-light, 6);
+        transition: all 0.3s;
+      }
+      &:hover {
+        > svg {
+          stroke: nth($color-light, 8);
+          fill: nth($color-light, 8);
+        }
+      }
+    }
   }
   li {
     display: inline;
