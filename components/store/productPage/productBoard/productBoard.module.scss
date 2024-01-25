@@ -252,8 +252,54 @@
 
 @media (max-width: 480px) {
   .productBoard {
-    .favorite {
-      bottom: 0;
+    > h1 {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
+    .price {
+      font-size: 2.6rem;
+    }
+    .addToCartSection {
+      .quantity {
+        > span {
+          font-size: 2rem;
+        }
+      }
+      .addToCart {
+        width: 100%;
+        gap: 10px;
+        font-size: 1.4rem;
+        padding: 12px 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .productBoard {
+    > h1 {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+    }
+    .price {
+      font-size: 2.6rem;
+    }
+    .addToCartSection {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 10px;
+      .quantity {
+        > span {
+          font-size: 2rem;
+        }
+      }
+      .addToCart {
+        width: 100%;
+        gap: 10px;
+        font-size: 1.4rem;
+        margin: 24px 0;
+        padding: 12px 20px;
+      }
     }
   }
 }

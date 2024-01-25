@@ -28,6 +28,10 @@ const StoreNavBar = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", handleScroll, { passive: true });
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     }
   }, []);
 

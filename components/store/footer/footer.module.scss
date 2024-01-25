@@ -208,3 +208,36 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .storeFooter {
+    .topSection {
+      height: auto;
+      padding: 24px 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .search {
+        margin: 20px 0 0;
+      }
+    }
+    .middle {
+      .contact {
+        > input {
+          display: block;
+        }
+        > button {
+          margin: 12px 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .storeFooter {
+    .footerWrapper {
+      padding: 0 12px;
+    }
+  }
+}
