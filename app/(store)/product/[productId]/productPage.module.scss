@@ -114,17 +114,26 @@
           padding: 20px 0;
           border-bottom: 1px solid nth($color-light, 3);
           .specGroupHead {
-            display: block;
+            display: flex;
+            align-items: center;
             width: 100%;
 
             > button {
               width: 30px;
               height: 30px;
               display: inline-block;
+              position: relative;
               border: none;
               background-color: white;
+              border-radius: 4px;
+              > svg {
+                position: absolute;
+                top: 14px;
+                left: 10px;
+                stroke: nth($color-light, 7);
+              }
               &:hover {
-                background-color: nth($color-light, 3);
+                background-color: nth($color-light, 2);
               }
             }
             > h3 {

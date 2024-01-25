@@ -7,7 +7,7 @@ import styles from "./productPage.module.scss";
 
 import { OneProduct as product } from "@/data/products";
 import ProductBoard from "@/components/store/productPage/productBoard";
-import { LikeIcon } from "@/components/icons/svgIcons";
+import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
 
 const ProductPage = () => {
   return (
@@ -57,7 +57,10 @@ const ProductPage = () => {
               {product.specification.map((spec, index) => (
                 <section key={index} className={styles.specGroup}>
                   <div className={styles.specGroupHead}>
-                    <button>-</button>
+                    <button>
+                      <MinusIcon width={12} />
+                      <MinusIcon width={12} />
+                    </button>
                     <h3>{spec.groupName}</h3>
                   </div>
                   {spec.specs.map((row, index) => (
