@@ -19,12 +19,14 @@ const CategoryListItem = ({
   return (
     <li className={styles.categoryItem}>
       <div>
-        <Image
-          src={"images/icons/" + image + ".svg"}
-          alt={name}
-          width={dimension[0]}
-          height={dimension[1]}
-        />
+        <div className={styles.iconWrapper}>
+          <Image
+            src={"images/icons/" + image + ".svg"}
+            alt={name}
+            width={dimension[0]}
+            height={dimension[1]}
+          />
+        </div>
         <span>{name}</span>
       </div>
       <div>

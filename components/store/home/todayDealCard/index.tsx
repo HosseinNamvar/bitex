@@ -35,7 +35,7 @@ const TodayDealCard = ({
   return (
     <div className={styles.dealCard}>
       <Link href={url} className={styles.imgWrapper}>
-        <Image alt="" src={image} fill />
+        <Image alt="" src={image} fill sizes="(max-width:240px)" />
       </Link>
       <div className={styles.save}>
         <span>Save </span>

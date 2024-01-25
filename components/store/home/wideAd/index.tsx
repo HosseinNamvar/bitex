@@ -29,7 +29,7 @@ const WideAd = ({
       <span>{smallTitle}</span>
       <h3>{title}</h3>
       <Link href={url}>{linkText}</Link>
-      <Image src={imgUrl} fill alt={title} />
+      <Image src={imgUrl} fill alt={title} sizes="(max-width:440px)" />
     </div>
   );
 };

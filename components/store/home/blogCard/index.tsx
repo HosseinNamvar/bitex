@@ -8,7 +8,7 @@ const HomeBlogCard = ({ title, imgUrl, shortText, url }: TBlogCard) => {
   return (
     <div className={styles.blogCard}>
       <Link href={url} className={styles.imgWrapper}>
-        <Image src={imgUrl} fill alt={title} />
+        <Image src={imgUrl} fill alt={title} sizes="(max-width:430px)" />
       </Link>
       <Link href={url}>
         <h2>{title}</h2>
