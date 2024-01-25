@@ -40,6 +40,7 @@ const ProductPage = () => {
                   src={"/images/products/" + product.gallery[0]}
                   alt=""
                   fill
+                  sizes="(max-width:700px)"
                 />
               </div>
             </div>

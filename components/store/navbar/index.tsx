@@ -11,22 +11,24 @@ import { useEffect, useState } from "react";
 
 const StoreNavBar = () => {
   const [hideNavbar, setHideNavbar] = useState(false);
-  let prevPositionY = window.scrollY;
+  let prevPositionY = 0;
+  if (typeof window !== "undefined") prevPositionY = window.scrollY;
 
   const handleScroll = () => {
     //---handle auto hiding navbar
-    prevPositionY < window.scrollY && window.scrollY > 100
-      ? setHideNavbar(true)
-      : setHideNavbar(false);
-    prevPositionY = window.scrollY;
+    if (typeof window !== "undefined") {
+      prevPositionY < window.scrollY && window.scrollY > 100
+        ? setHideNavbar(true)
+        : setHideNavbar(false);
+      prevPositionY = window.scrollY;
+    }
   };
+  console.log("prevPositionY:", prevPositionY);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }
   }, []);
 
   return (

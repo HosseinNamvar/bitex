@@ -20,7 +20,12 @@ const CollectionCard = ({ collection }: IProps) => {
       </div>
 
       <div className={styles.imageWrapper}>
-        <Image src={collection.imgUrl} alt={collection.name} fill />
+        <Image
+          src={collection.imgUrl}
+          alt={collection.name}
+          fill
+          sizes="(max-width:140px)"
+        />
       </div>
       <Link href={collection.url}>{`All ${collection.name}`}</Link>
     </div>

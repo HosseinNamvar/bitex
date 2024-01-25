@@ -13,7 +13,8 @@
       color: nth($color-blue, 3);
     }
   }
-  img {
+  .iconWrapper {
     width: 28px;
+    display: inline-block;
   }
 }
