@@ -39,3 +39,20 @@
     color: nth($color-light, 9);
   }
 }
+
+@media (max-width: 320px) {
+  .blogCard {
+    border-radius: 8px;
+    .imgWrapper {
+      height: 140px;
+    }
+    > a {
+      > h2 {
+        margin: 16px;
+      }
+    }
+    > span {
+      margin: 16px;
+    }
+  }
+}

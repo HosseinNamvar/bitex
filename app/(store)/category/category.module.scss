@@ -381,3 +381,15 @@
     }
   }
 }
+
+@media (max-width: 320px) {
+  .categoryPage {
+    .main {
+      .rightCol {
+        .listContainer {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}

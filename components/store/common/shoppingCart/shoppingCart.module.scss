@@ -23,10 +23,9 @@
   .cartWindow {
     position: absolute;
     right: -400px;
-    top: 24px;
-    bottom: 24px;
+    top: 0px;
+    bottom: 0px;
     width: 400px;
-    border-radius: 12px 0 0 12px;
     background-color: white;
     transition: all 0.5s $anim-easeOut;
 
@@ -70,4 +69,30 @@
 .shoppingHide {
   visibility: hidden;
   opacity: 0;
+}
+
+@media (max-width: 480px) {
+  .shoppingCart {
+    .background {
+      background-color: rgba(#000000, 0.3);
+    }
+    .cartWindow {
+      background-color: rgba(#fff, 0.96);
+      backdrop-filter: blur(8px);
+      width: 90vw;
+
+      .header {
+        padding: 8px 0;
+        > h2 {
+          font-size: 1.6rem;
+        }
+        > button {
+          > svg {
+            width: 30px;
+            padding: 8px;
+          }
+        }
+      }
+    }
+  }
 }
