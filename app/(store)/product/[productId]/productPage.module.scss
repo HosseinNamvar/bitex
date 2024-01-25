@@ -161,7 +161,8 @@
               > span {
                 display: block;
                 line-height: 2rem;
-                height: 30px;
+                min-height: 30px;
+                height: auto;
               }
             }
           }
@@ -327,6 +328,7 @@
       gap: 14px;
       width: 100%;
       overflow-x: scroll;
+      padding-bottom: 8px;
     }
   }
 }
@@ -359,13 +361,6 @@
 }
 
 @media (max-width: 480px) {
-  .dateAndLikeSection {
-    display: block;
-    margin: 12px 0 0 12px;
-  }
-}
-
-@media (max-width: 320px) {
   .productPage {
     .upperSection {
       .leftSection {
@@ -391,9 +386,7 @@
     }
 
     .lowerSection {
-      // ---------------- LEFT COLUMN ----------------
       .leftSection {
-        // ---------------- SPECIFICATION ----------------
         .specification {
           > h2 {
             font-size: 2rem;
@@ -414,12 +407,13 @@
             .row {
               height: auto;
               flex-direction: column;
-              padding: 12px 8px 0;
+              padding: 12px 8px;
               .leftCol {
                 margin-left: 0;
               }
               .rightCol {
                 width: 100%;
+                margin-top: 8px;
               }
             }
           }
@@ -428,6 +422,21 @@
           .header {
             > h2 {
               font-size: 1.8rem;
+            }
+          }
+          .reviewWrapper {
+            .head {
+              .dateAndLikeSection {
+                display: flex;
+                flex-direction: column;
+                margin: 12px 0 0 24px;
+                .date {
+                  margin-left: 20px;
+                }
+                .likeInteraction {
+                  margin: 10px 10px 0;
+                }
+              }
             }
           }
         }
