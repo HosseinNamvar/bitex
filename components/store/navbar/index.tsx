@@ -23,7 +23,6 @@ const StoreNavBar = () => {
       prevPositionY = window.scrollY;
     }
   };
-  console.log("prevPositionY:", prevPositionY);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
