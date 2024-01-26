@@ -1,0 +1,41 @@
+@import "/public/css/variables.module.scss";
+
+.addToCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  margin-left: 40px;
+  font-size: 1.8rem;
+  padding: 12px 50px;
+  background-color: rgba(nth($color-red, 9), 0.15);
+  border-radius: 8px;
+  border: 2px solid nth($color-red, 3);
+  color: nth($color-red, 3);
+  transition: all 0.3s;
+  > svg {
+    fill: nth($color-red, 3);
+  }
+  &:hover {
+    background-color: rgba(nth($color-red, 9), 0.3);
+  }
+  &:active {
+    background-color: rgba(nth($color-red, 9), 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  .addToCart {
+    width: 100%;
+    gap: 10px;
+    font-size: 1.4rem;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .addToCart {
+    margin: 24px 0;
+  }
+}

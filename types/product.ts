@@ -26,12 +26,15 @@ export type TProductOption = {
 };
 
 export type TProductBoard = {
+  id: number;
   name: string;
   shortDesc: string;
   price: number;
   dealDate?: Date;
   dealPrice?: number;
   options: TProductOption[];
+  imageUrl: string;
+  defaultQuantity: number;
 };
 
 type TProductPath = {

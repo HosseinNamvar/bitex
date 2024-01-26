@@ -62,7 +62,7 @@ const StoreNavBar = () => {
           <div className={styles.rightButtons}>
             <NavBarProfile />
             <NavBarFavorite />
-            <NavBarShopping quantity={0} />
+            <NavBarShopping />
           </div>
         </div>
       </section>

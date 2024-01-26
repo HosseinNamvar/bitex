@@ -19,7 +19,7 @@ import HCompanyLogo from "@/components/store/home/companyLogo";
 
 export default function Home() {
   return (
-    <main className={styles.homePage}>
+    <div className={styles.homePage}>
       <div className="storeContainer flexCol">
         <div className={styles.heroContainer}>
           <HomeCategoryList />
@@ -151,6 +151,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

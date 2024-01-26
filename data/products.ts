@@ -63,10 +63,13 @@ export const OneProduct: TProduct = {
   ],
   board: {
     name: "Sony - PlayStation 5 - DualSense Wireless Controller - White",
+    id: 1,
     shortDesc: "Apple iPhone 12 Pro Max A2412 Dual SIM 256GB Mobile Phone",
     price: 215.99,
     dealDate: new Date("1970-01-01T12:40:00"),
     dealPrice: 185.95,
+    defaultQuantity: 1,
+    imageUrl: "/images/products/ps5Controller1.jpg",
     options: [
       {
         optionName: "Storage Capacity",

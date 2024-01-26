@@ -1,19 +1,20 @@
-"use client";
-
-import { useState } from "react";
 import styles from "./navShopping.module.scss";
 import ShoppingCart from "../../common/shoppingCart";
 import { ShoppingIconOutline } from "@/components/icons/svgIcons";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/shoppingCart";
+import { toggleCart } from "@/store/shoppingCart";
 
-interface IProps {
-  quantity: number;
-}
+const NavBarShopping = () => {
+  const dispatch = useDispatch();
+  let cartItemQuantity = 0;
 
-const NavBarShopping = ({ quantity }: IProps) => {
-  const [cartVisibility, setCartVisibility] = useState(false);
+  useSelector((state: RootState) => state.cart).items.map(
+    (item) => (cartItemQuantity += item.quantity)
+  );
 
   const handleCartVisibility = (visibility: boolean) => {
-    setCartVisibility(visibility);
+    dispatch(toggleCart(visibility));
     visibility
       ? document.documentElement.classList.add("noScroll")
       : document.documentElement.classList.remove("noScroll");
@@ -24,13 +25,15 @@ const NavBarShopping = ({ quantity }: IProps) => {
       <button onClick={() => handleCartVisibility(true)}>
         <ShoppingIconOutline width={24} />
         <span
-          className={`${quantity === 0 ? styles.emptyCart : styles.filledCart}`}
+          className={`${
+            cartItemQuantity === 0 ? styles.emptyCart : styles.filledCart
+          }`}
         >
-          {quantity}
+          {cartItemQuantity}
         </span>
       </button>
       <ShoppingCart
-        isVisible={cartVisibility}
+        isVisible={useSelector((state: RootState) => state.cart.isVisible)}
         handleOnClose={() => handleCartVisibility(false)}
       />
     </div>
