@@ -60,6 +60,82 @@
         }
       }
     }
+
+    .itemsContainer {
+      .emptyContainer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        > .icon {
+          margin: 80px 0;
+          border-radius: 50%;
+          padding: 24px 24px 22px 22px;
+          background-color: nth($color-light, 2);
+          > svg {
+            fill: nth($color-light, 7);
+          }
+        }
+        > span {
+          text-align: center;
+          color: nth($color-light, 7);
+          > a {
+            margin: 0 4px;
+            font-weight: 500;
+            text-decoration: underline;
+            &:hover {
+              color: nth($color-light, 10);
+            }
+          }
+        }
+      }
+    }
+
+    .lowerSection {
+      height: 140px;
+      margin: 0 24px;
+      border-top: 1px solid nth($color-light, 4);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+
+      > button {
+        width: 80%;
+        padding: 10px 0;
+        border-radius: 8px;
+        border: 1px solid nth($color-light, 4);
+        background-color: nth($color-light, 1);
+        transition: all 0.3s;
+        &:hover {
+          border-color: nth($color-light, 5);
+          background-color: nth($color-light, 2);
+        }
+        &:active {
+          border-color: nth($color-light, 6);
+          background-color: nth($color-light, 3);
+        }
+      }
+      > .checkout {
+        color: nth($color-green, 1);
+        font-weight: 600;
+        border-color: nth($color-green, 6);
+        background-color: nth($color-green, 9);
+        &:hover {
+          border-color: nth($color-green, 4);
+          background-color: nth($color-green, 8);
+        }
+        &:active {
+          border-color: nth($color-green, 3);
+          background-color: nth($color-green, 7);
+        }
+      }
+    }
   }
   .showWindow {
     right: 0;
@@ -92,6 +168,9 @@
             padding: 8px;
           }
         }
+      }
+      .itemsContainer {
+        margin: 0 10px;
       }
     }
   }

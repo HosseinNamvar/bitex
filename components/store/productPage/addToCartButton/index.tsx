@@ -11,11 +11,14 @@ interface IProps {
 
 const AddToCartButton = ({ cartItemData }: IProps) => {
   const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(add({ ...cartItemData }));
+    document.documentElement.classList.add("noScroll");
+  };
+
   return (
-    <button
-      className={styles.addToCart}
-      onClick={() => dispatch(add({ ...cartItemData }))}
-    >
+    <button className={styles.addToCart} onClick={() => handleAddToCart()}>
       <ShoppingIconFill width={16} />
       Add to Cart
     </button>
