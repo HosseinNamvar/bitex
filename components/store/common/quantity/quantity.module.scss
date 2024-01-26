@@ -1,0 +1,50 @@
+@import "/public/css/variables.module.scss";
+
+.quantity {
+  display: flex;
+  align-items: center;
+  > button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+
+    > svg {
+      stroke: nth($color-light, 10);
+    }
+    &:hover {
+      background-color: nth($color-light, 2);
+    }
+    &:active {
+      background-color: nth($color-light, 3);
+    }
+
+    &:disabled {
+      cursor: default;
+      &:hover {
+        background-color: nth($color-light, 1);
+      }
+    }
+  }
+
+  > span {
+    user-select: none;
+    width: 20px;
+    text-align: center;
+    margin: 0 24px;
+    color: nth($color-light, 8);
+  }
+}
+
+@media (max-width: 480px) {
+  .quantity {
+    > span {
+      font-size: 2rem;
+    }
+  }
+}

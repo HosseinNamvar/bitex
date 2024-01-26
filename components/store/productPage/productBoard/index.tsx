@@ -1,18 +1,53 @@
+"use client";
 import Link from "next/link";
 
 import { TProductBoard } from "@/types/product";
 
+import AddToCartButton from "../addToCartButton";
 import styles from "./productBoard.module.scss";
 import {
-  ShoppingIconFill,
   MinusIcon,
   PlusIcon,
   StarIcon,
   HeartIcon,
 } from "@/components/icons/svgIcons";
+import { TCartItem } from "@/types/shoppingCart";
+import Quantity from "../../common/quantity";
+import { useState } from "react";
 
 const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
-  const { name, options, price, shortDesc, dealDate, dealPrice } = boardData;
+  const {
+    name,
+    id,
+    options,
+    price,
+    shortDesc,
+    dealDate,
+    dealPrice,
+    imageUrl,
+    defaultQuantity,
+  } = boardData;
+  const [quantity, setQuantity] = useState(
+    defaultQuantity > 1 ? defaultQuantity : 1
+  );
+
+  const handleQuantityChange = (isReducing: boolean) => {
+    isReducing
+      ? quantity === 1
+        ? quantity
+        : setQuantity(quantity - 1)
+      : setQuantity(quantity + 1);
+  };
+
+  const cartItemData: TCartItem = {
+    productName: name,
+    imgUrl: imageUrl,
+    price: dealPrice ? dealPrice : price,
+    dealPrice: dealPrice ? dealPrice : 0,
+    productId: 1,
+    quantity: quantity,
+    url: "",
+  };
   return (
     <div className={styles.productBoard}>
       <button className={styles.favorite}>
@@ -101,19 +136,8 @@ const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
 
       {/* ----------------- ADD TO CART SECTION ----------------- */}
       <section className={styles.addToCartSection}>
-        <div className={styles.quantity}>
-          <button>
-            <MinusIcon width={12} />
-          </button>
-          <span>8</span>
-          <button>
-            <PlusIcon width={12} />
-          </button>
-        </div>
-        <button className={styles.addToCart}>
-          <ShoppingIconFill width={16} />
-          Add to Cart
-        </button>
+        <Quantity onChange={handleQuantityChange} quantity={quantity} />
+        <AddToCartButton cartItemData={cartItemData} />
       </section>
     </div>
   );

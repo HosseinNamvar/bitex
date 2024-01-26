@@ -2,6 +2,9 @@
 
 import { CloseIcon } from "@/components/icons/svgIcons";
 import styles from "./shoppingCart.module.scss";
+import CartItem from "./_components/cartItem";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/shoppingCart";
 
 interface IProps {
   isVisible: boolean;
@@ -10,6 +13,7 @@ interface IProps {
 }
 
 const ShoppingCart = ({ isVisible, quantity = 0, handleOnClose }: IProps) => {
+  const cartItems = useSelector((state: RootState) => state.cart);
   return (
     <div
       className={`${styles.shoppingCart} ${!isVisible && styles.shoppingHide}`}
@@ -22,6 +26,17 @@ const ShoppingCart = ({ isVisible, quantity = 0, handleOnClose }: IProps) => {
             <CloseIcon width={18} />
           </button>
         </div>
+        {cartItems.items.map((item) => (
+          <CartItem
+            imgUrl={item.imgUrl}
+            price={item.price}
+            productId={item.productId}
+            productName={item.productName}
+            quantity={item.quantity}
+            key={item.productId}
+            url={item.url}
+          />
+        ))}
       </div>
     </div>
   );

@@ -191,62 +191,6 @@
   .addToCartSection {
     display: flex;
     align-items: center;
-    .quantity {
-      display: flex;
-      > button {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        cursor: pointer;
-        border: none;
-        background-color: nth($color-light, 1);
-        transition: all 0.3s;
-
-        > svg {
-          stroke: nth($color-light, 10);
-        }
-        &:hover {
-          background-color: nth($color-light, 2);
-        }
-        &:active {
-          background-color: nth($color-light, 3);
-        }
-      }
-
-      > span {
-        font-size: 2.4rem;
-        margin: 0 24px;
-        color: nth($color-light, 8);
-      }
-    }
-
-    .addToCart {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      cursor: pointer;
-      margin-left: 40px;
-      font-size: 1.8rem;
-      padding: 12px 50px;
-      background-color: rgba(nth($color-red, 9), 0.15);
-      border-radius: 8px;
-      border: 2px solid nth($color-red, 3);
-      color: nth($color-red, 3);
-      transition: all 0.3s;
-      > svg {
-        fill: nth($color-red, 3);
-      }
-      &:hover {
-        background-color: rgba(nth($color-red, 9), 0.3);
-      }
-      &:active {
-        background-color: rgba(nth($color-red, 9), 0.5);
-      }
-    }
   }
 }
 
@@ -258,19 +202,6 @@
     }
     .price {
       font-size: 2.6rem;
-    }
-    .addToCartSection {
-      .quantity {
-        > span {
-          font-size: 2rem;
-        }
-      }
-      .addToCart {
-        width: 100%;
-        gap: 10px;
-        font-size: 1.4rem;
-        padding: 12px 20px;
-      }
     }
   }
 }
@@ -288,18 +219,6 @@
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 10px;
-      .quantity {
-        > span {
-          font-size: 2rem;
-        }
-      }
-      .addToCart {
-        width: 100%;
-        gap: 10px;
-        font-size: 1.4rem;
-        margin: 24px 0;
-        padding: 12px 20px;
-      }
     }
   }
 }

@@ -66,6 +66,9 @@ button {
   cursor: pointer;
   padding: 0;
   background: none;
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 .storeContainer {
