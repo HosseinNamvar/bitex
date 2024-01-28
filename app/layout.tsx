@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.scss";
+
+const outfitFont = localFont({
+  src: "../public/fonts/Outfit-VariableFont.ttf",
+  fallback: ["sans-serif", "system-ui", "arial"],
+});
 
 export const metadata: Metadata = {
   title: "BITEX",
@@ -13,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={outfitFont.className}>{children}</body>
     </html>
   );
 }
