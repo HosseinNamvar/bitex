@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/shoppingCart";
+import { ICartState, RootState } from "@/store/shoppingCart";
 
 import styles from "./shoppingCart.module.scss";
 import CartItem from "./_components/cartItem";
 import { CloseIcon, ShoppingIconEmpty } from "@/components/icons/svgIcons";
+import { useEffect, useState } from "react";
 
 interface IProps {
   isVisible: boolean;
@@ -15,7 +16,13 @@ interface IProps {
 }
 
 const ShoppingCart = ({ isVisible, quantity = 0, handleOnClose }: IProps) => {
-  const cartItems = useSelector((state: RootState) => state.cart);
+  const [cartItems, setCartItems] = useState<ICartState>();
+  const localCartItems = useSelector((state: RootState) => state.cart);
+
+  useEffect(() => {
+    localCartItems && setCartItems(localCartItems);
+  }, [localCartItems]);
+
   return (
     <div
       className={`${styles.shoppingCart} ${!isVisible && styles.shoppingHide}`}
@@ -29,7 +36,7 @@ const ShoppingCart = ({ isVisible, quantity = 0, handleOnClose }: IProps) => {
           </button>
         </div>
         <div className={styles.itemsContainer}>
-          {cartItems.items.length > 0 ? (
+          {cartItems && cartItems.items.length > 0 ? (
             cartItems.items.map((item) => (
               <CartItem
                 imgUrl={item.imgUrl}
@@ -54,7 +61,7 @@ const ShoppingCart = ({ isVisible, quantity = 0, handleOnClose }: IProps) => {
             </div>
           )}
           <div className={styles.lowerSection}>
-            {cartItems.items.length > 0 && (
+            {cartItems && cartItems.items.length > 0 && (
               <button className={styles.checkout}>CHECKOUT</button>
             )}
             <button onClick={handleOnClose}>Back to Shop</button>

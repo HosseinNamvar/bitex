@@ -1,17 +1,27 @@
+"use-client";
 import styles from "./navShopping.module.scss";
 import ShoppingCart from "../../common/shoppingCart";
 import { ShoppingIconOutline } from "@/components/icons/svgIcons";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/shoppingCart";
+import { ICartState, RootState } from "@/store/shoppingCart";
 import { toggleCart } from "@/store/shoppingCart";
+import { useEffect, useState } from "react";
 
 const NavBarShopping = () => {
   const dispatch = useDispatch();
+  const [cartData, setCartData] = useState<ICartState>();
+  const localCartData = useSelector((state: RootState) => state.cart);
   let cartItemQuantity = 0;
 
-  useSelector((state: RootState) => state.cart).items.map(
-    (item) => (cartItemQuantity += item.quantity)
-  );
+  useEffect(() => {
+    if (localCartData) {
+      setCartData(localCartData);
+    }
+  }, [localCartData]);
+
+  if (cartData && cartData.items.length > 0) {
+    cartData.items.map((item) => (cartItemQuantity += item.quantity));
+  }
 
   const handleCartVisibility = (visibility: boolean) => {
     dispatch(toggleCart(visibility));
@@ -33,7 +43,7 @@ const NavBarShopping = () => {
         </span>
       </button>
       <ShoppingCart
-        isVisible={useSelector((state: RootState) => state.cart.isVisible)}
+        isVisible={cartData ? cartData.isVisible : false}
         handleOnClose={() => handleCartVisibility(false)}
       />
     </div>
