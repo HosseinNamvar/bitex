@@ -9,6 +9,11 @@ import { useState } from "react";
 
 const HomeSlider = () => {
   const [activeSlideNum, setActiveSlideNum] = useState(0);
+  const touchPos = {
+    start: 0,
+    end: 0,
+  };
+  let isDragging = false;
 
   const handleSliding = (slideNum: number) => {
     if (slideNum > activeSlideNum) {
@@ -21,6 +26,38 @@ const HomeSlider = () => {
         : setActiveSlideNum(slideNum);
     }
   };
+
+  function touchStart(event: React.TouchEvent) {
+    isDragging = true;
+    touchPos.start = event.touches[0].clientX;
+  }
+  function touchMove(event: React.TouchEvent) {
+    if (isDragging) {
+      touchPos.end = event.touches[0].clientX;
+    }
+  }
+
+  const handleTouchEnd = () => {
+    isDragging = false;
+    if (touchPos.start !== touchPos.end && touchPos.end !== 0) {
+      if (touchPos.start < touchPos.end) {
+        handleSliding(activeSlideNum + 1);
+      } else {
+        handleSliding(activeSlideNum - 1);
+      }
+    }
+  };
+
+  function mouseStart(event: React.MouseEvent) {
+    isDragging = true;
+    touchPos.start = event.pageX;
+  }
+  function mouseMouse(event: React.MouseEvent) {
+    if (isDragging) {
+      touchPos.end = event.pageX;
+    }
+  }
+
   return (
     <div className={styles.homeSlider}>
       <div className={`${styles.btnContainer} ${styles.prevSlide}`}>
@@ -36,6 +73,12 @@ const HomeSlider = () => {
       <div className={styles.slide}>
         {SlidesData.map((slide, index) => (
           <div
+            onTouchStart={touchStart}
+            onTouchMove={touchMove}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={mouseStart}
+            onMouseMove={mouseMouse}
+            onMouseUp={handleTouchEnd}
             key={index}
             className={index === activeSlideNum ? styles.active : ""}
           >
@@ -45,6 +88,7 @@ const HomeSlider = () => {
               fill
               sizes="(max-width:1080px)"
               priority
+              draggable={false}
             />
             {slide.msg && (
               <div
