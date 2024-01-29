@@ -59,27 +59,6 @@ const HomeSlider = () => {
             )}
           </div>
         ))}
-        {/* <Link href={SlidesData[activeSlideNum].url}>
-          <Image
-            src={SlidesData[activeSlideNum].imgUrl}
-            alt=""
-            fill
-            sizes="(max-width:1080px)"
-            priority
-          />
-        </Link>
-        <Link
-          href={SlidesData[activeSlideNum + 1].url}
-          className={styles.prevSlide}
-        >
-          <Image
-            src={SlidesData[activeSlideNum + 1].imgUrl}
-            alt=""
-            fill
-            sizes="(max-width:1080px)"
-            priority
-          />
-        </Link> */}
       </div>
       <div className={styles.slideBtnWrapper}>
         {SlidesData.map((slide, index) => (
