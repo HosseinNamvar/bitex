@@ -16,6 +16,12 @@ export type TDealCard = TProductCard & {
 export type TSlide = {
   imgUrl: string;
   url: string;
+  alt: string;
+  msg?: {
+    title: string;
+    desc?: string;
+    buttonText?: string;
+  };
 };
 
 export type TBlogCard = {
