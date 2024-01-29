@@ -105,6 +105,8 @@
       visibility: hidden;
       animation: oldSlide;
       animation-duration: 1s;
+      overflow: hidden;
+      border-radius: 12px;
       img {
         object-fit: cover;
       }
