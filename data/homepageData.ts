@@ -194,20 +194,43 @@ export const TopProducts: TProductCard[] = [
 
 export const SlidesData: TSlide[] = [
   {
-    imgUrl: "/images/images/sonyHeadphoneAd.jpg",
+    imgUrl: "/images/images/PS5.webp",
     url: "#",
+    alt: "/playstation5",
+    msg: {
+      title: "PLAY STATION 5",
+      buttonText: "Shop now!",
+    },
   },
   {
-    imgUrl: "/images/images/jblAd.jpg",
-    url: "#",
+    imgUrl: "/images/images/wacom.jpg",
+    url: "/wacom",
+    alt: "WACOM CINITIQ PRO",
+    msg: {
+      title: "WACOM CINITIQ PRO",
+      buttonText: "Shop Now",
+      desc: "Best for designers",
+    },
   },
   {
-    imgUrl: "/images/images/rogAd.jpg",
-    url: "#",
+    imgUrl: "/images/images/appleWatch.jpg",
+    url: "/apple-watch",
+    alt: "APPLE WATCH",
+    msg: {
+      title: "APPLE WATCH",
+      buttonText: "Show All",
+      desc: "",
+    },
   },
   {
-    imgUrl: "/images/images/asusAd.jpg",
-    url: "#",
+    imgUrl: "/images/images/appleAirpods.jpg",
+    url: "/apple-airpods",
+    alt: "",
+    msg: {
+      title: "AIRPODS PRO",
+      buttonText: "Shop now!",
+      desc: "Just for today!",
+    },
   },
 ];
 

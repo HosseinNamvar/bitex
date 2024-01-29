@@ -42,11 +42,7 @@ export const Advantages = ({ width, fill }: IProps) => {
   });
 };
 
-export const ArrowIcon = ({
-  width,
-  stroke = "#000000",
-  strokeWidth = 1.2,
-}: IProps) => {
+export const ArrowIcon = ({ width, stroke, strokeWidth = 1.2 }: IProps) => {
   return createIcon({
     width,
     viewBox: "0 0 6 10",
