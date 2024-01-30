@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from "./homeSlider.module.scss";
 import { SlidesData } from "@/data/homepageData";
 import { ArrowIcon } from "@/components/icons/svgIcons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HomeSlider = () => {
   const [activeSlideNum, setActiveSlideNum] = useState(0);
@@ -14,6 +14,16 @@ const HomeSlider = () => {
     end: 0,
   };
   let isDragging = false;
+
+  useEffect(() => {
+    const autoSliding = setTimeout(() => {
+      handleSliding(activeSlideNum + 1);
+    }, 5000);
+
+    return () => {
+      clearInterval(autoSliding);
+    };
+  });
 
   const handleSliding = (slideNum: number) => {
     if (slideNum > activeSlideNum) {
@@ -101,6 +111,7 @@ const HomeSlider = () => {
                 <Link href={slide.url}>{slide.msg.buttonText}</Link>
               </div>
             )}
+            <span className={styles.timeBar} />
           </div>
         ))}
       </div>
