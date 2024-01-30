@@ -30,3 +30,20 @@ export type TBlogCard = {
   url: string;
   shortText: string;
 };
+
+type TSubCategory = {
+  name: string;
+  url: string;
+  subCategories?: {
+    name: string;
+    url: string;
+  }[];
+};
+
+export type TCategory = {
+  name: string;
+  iconUrl: string;
+  iconSize: [number, number];
+  url: string;
+  subCategories?: TSubCategory[];
+};
