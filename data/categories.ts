@@ -4,8 +4,8 @@ export const CategoriesData: TCategory[] = [
   {
     name: "Computer & Laptops",
     url: "/category/computer-laptops",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [17, 15],
+    iconUrl: "computerIcon",
     subCategories: [
       {
         name: "Computers",
@@ -64,8 +64,8 @@ export const CategoriesData: TCategory[] = [
   {
     name: "Tablets",
     url: "/category/tablets",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [18, 14],
+    iconUrl: "tabletIcon",
     subCategories: [
       {
         name: "iPad",
@@ -80,8 +80,8 @@ export const CategoriesData: TCategory[] = [
   {
     name: "Printer & Cameras",
     url: "/category/printer-cameras",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [15, 14],
+    iconUrl: "printerIcon",
     subCategories: [
       {
         name: "Printers",
@@ -128,8 +128,8 @@ export const CategoriesData: TCategory[] = [
   {
     name: "Smartphones",
     url: "/category/smartphones",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [12, 18],
+    iconUrl: "phoneIcon",
     subCategories: [
       {
         name: "Apple",
@@ -152,8 +152,8 @@ export const CategoriesData: TCategory[] = [
   {
     name: "OLED Smart TVs",
     url: "/category/tvs",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [17, 13],
+    iconUrl: "tvIcon",
     subCategories: [
       {
         name: "Sony",
@@ -176,8 +176,8 @@ export const CategoriesData: TCategory[] = [
   {
     name: "Keyboard & Mouse",
     url: "/category/keyboard-mouse",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [12, 17],
+    iconUrl: "mouseIcon",
     subCategories: [
       {
         name: "Keyboards",
@@ -228,8 +228,8 @@ export const CategoriesData: TCategory[] = [
   {
     name: "Video Games",
     url: "/category/video-games",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [18, 11],
+    iconUrl: "gameIcon",
     subCategories: [
       {
         name: "Consoles",
@@ -276,19 +276,19 @@ export const CategoriesData: TCategory[] = [
   {
     name: "Sports & Outdoors",
     url: "/category/sports-outdoors",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [13, 11],
+    iconUrl: "healthIcon",
   },
   {
     name: "Smart Watches",
     url: "/category/smart-watches",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [10, 16],
+    iconUrl: "watchIcon",
   },
   {
     name: "Film & Music",
     url: "/category/smart-watches",
-    iconSize: [17, 17],
-    iconUrl: "",
+    iconSize: [14, 14],
+    iconUrl: "musicIcon",
   },
 ];

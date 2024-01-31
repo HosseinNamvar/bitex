@@ -33,6 +33,7 @@
 
 .homeSlider {
   width: 100%;
+  margin-left: 272px;
   height: 500px;
   border-radius: 12px;
   overflow: hidden;
@@ -250,6 +251,7 @@
 @media (max-width: 1024px) {
   .homeSlider {
     height: 440px;
+    margin-left: 0;
     .slide {
       > div {
         .slideData {
