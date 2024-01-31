@@ -9,7 +9,6 @@ const NavBarCategory = () => {
   const [menuVisible, setMenuVisible] = useState(false);
 
   const handleRemoveFocus = (event: React.FocusEvent<HTMLButtonElement>) => {
-    console.log(event.currentTarget, event.target);
     if (event.currentTarget === event.target) {
       setMenuVisible(false);
     }
