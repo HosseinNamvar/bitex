@@ -11,6 +11,14 @@
   transition: all 0.5s;
   &:hover {
     box-shadow: 0 1px 4px rgba(#000000, 0.2);
+    > .imageWrapper {
+      > img {
+        &:last-child {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+      }
+    }
   }
 
   .imageWrapper {
@@ -22,8 +30,13 @@
     border: 1px solid nth($color-light, 2);
     overflow: hidden;
     transition: all 0.5s;
-    img {
+    > img {
       object-fit: contain;
+      transition: all 0.4s ease-out;
+      &:last-child {
+        opacity: 0;
+        transform: scale(0.9);
+      }
     }
     &:hover {
       border-color: nth($color-light, 3);

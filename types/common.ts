@@ -3,7 +3,7 @@ export type TProductCard = {
   specs: string[];
   price: number;
   dealPrice?: number;
-  imgUrl: string;
+  imgUrl: [string, string];
   url: string;
   staticWidth?: boolean;
 };
