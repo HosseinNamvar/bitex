@@ -76,3 +76,13 @@
     opacity: 1;
   }
 }
+
+@media (max-width: 480px) {
+  .category {
+    > button {
+      > svg {
+        display: none;
+      }
+    }
+  }
+}

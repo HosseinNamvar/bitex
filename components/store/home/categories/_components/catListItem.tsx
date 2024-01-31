@@ -1,36 +1,25 @@
 import Image from "next/image";
 import styles from "./catListItem.module.scss";
+import { TCategory } from "@/types/common";
+import Link from "next/link";
 
-interface IProps {
-  name: string;
-  image: string;
-  dimension: [number, number];
-  isLast?: boolean;
-  hasSub?: boolean;
-}
-
-const CategoryListItem = ({
-  name,
-  image,
-  dimension,
-  isLast = false,
-  hasSub = false,
-}: IProps) => {
+const CategoryListItem = ({ categoryData }: { categoryData: TCategory }) => {
+  const { name, iconUrl, iconSize, url, subCategories } = { ...categoryData };
   return (
     <li className={styles.categoryItem}>
-      <div>
+      <Link href={url}>
         <div className={styles.iconWrapper}>
           <Image
-            src={"images/icons/" + image + ".svg"}
+            src={"images/icons/" + iconUrl + ".svg"}
             alt={name}
-            width={dimension[0]}
-            height={dimension[1]}
+            width={iconSize[0]}
+            height={iconSize[1]}
           />
         </div>
-        <span>{name}</span>
-      </div>
+        {name}
+      </Link>
       <div>
-        {hasSub && (
+        {subCategories && (
           <Image
             className={styles.arrow}
             src={"images/icons/arrowIcon01.svg"}
@@ -39,16 +28,28 @@ const CategoryListItem = ({
             alt=""
           />
         )}
-        {isLast && (
-          <Image
-            className={styles.plus}
-            src={"images/icons/plusIcon.svg"}
-            width={10}
-            height={12}
-            alt=""
-          />
-        )}
       </div>
+      {subCategories && (
+        <div className={styles.subCat}>
+          {subCategories.map((item, index) => (
+            <div className={styles.catGroup} key={index}>
+              <Link href={item.url}>{item.name}</Link>
+
+              {item.subCategories && item.subCategories?.length > 0 ? (
+                <div className={styles.children}>
+                  {item.subCategories.map((link, index) => (
+                    <Link key={index} href={link.url}>
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </li>
   );
 };

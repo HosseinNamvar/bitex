@@ -33,6 +33,7 @@
 
 .homeSlider {
   width: 100%;
+  margin-left: 272px;
   height: 500px;
   border-radius: 12px;
   overflow: hidden;
@@ -48,6 +49,14 @@
 
     > .nextSlide {
       right: 24px;
+    }
+
+    > .slide {
+      > div {
+        > img {
+          transform: scale(1.05);
+        }
+      }
     }
   }
 
@@ -117,6 +126,8 @@
       overflow: hidden;
       border-radius: 12px;
       img {
+        transform: scale(1);
+        transition: all 0.4s ease-out;
         object-fit: cover;
       }
       > .slideData {
@@ -204,7 +215,6 @@
     gap: 8px;
     justify-content: center;
     align-items: center;
-    z-index: 10;
     > div {
       width: 30px;
       height: 30px;
@@ -251,6 +261,7 @@
 @media (max-width: 1024px) {
   .homeSlider {
     height: 440px;
+    margin-left: 0;
     .slide {
       > div {
         .slideData {

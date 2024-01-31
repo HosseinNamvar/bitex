@@ -1,33 +1,88 @@
 @import "/public/css/variables.module.scss";
 
 .profile {
-  display: flex;
-  cursor: pointer;
-  height: 44px;
-  padding: 0 16px;
-  align-items: center;
-  border: 1px solid white;
-  border-radius: 8px;
-  gap: 16px;
-  transition: all 0.3s;
-  > span {
-    user-select: none;
-  }
-  > svg {
-    fill: white;
+  position: relative;
+  > button {
+    display: flex;
+    cursor: pointer;
+    height: 44px;
+    padding: 0 16px;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 8px;
+    gap: 16px;
     transition: all 0.3s;
-    stroke: nth($color-light, 8);
-    stroke-width: 2;
-  }
-  &:hover {
-    border-color: nth($color-light, 3);
-  }
-  &:active {
-    > svg {
-      fill: nth($color-light, 2);
+    > span {
+      user-select: none;
     }
-    border-color: nth($color-light, 5);
-    background-color: nth($color-light, 2);
+    > svg {
+      fill: white;
+      transition: all 0.3s;
+      stroke: nth($color-light, 8);
+      stroke-width: 2;
+    }
+    &:hover {
+      border-color: nth($color-light, 3);
+    }
+    &:active {
+      > svg {
+        fill: nth($color-light, 2);
+      }
+      border-color: nth($color-light, 5);
+      background-color: nth($color-light, 2);
+    }
+  }
+  .isActive {
+    color: nth($color-light, 1);
+    border-color: nth($color-blue, 3);
+    background-color: nth($color-blue, 3);
+    > svg {
+      fill: nth($color-blue, 3);
+      stroke: nth($color-light, 1);
+    }
+    &:hover {
+      border-color: nth($color-blue, 3);
+      background-color: nth($color-blue, 3);
+    }
+  }
+
+  > .menu {
+    width: 140px;
+    position: absolute;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 46px;
+    left: calc(50% - 70px);
+    border: 1px solid nth($color-light, 4);
+    background-color: white;
+    box-shadow: 0 0 10px rgba(black, 0.06);
+    transform: scale(1.03);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+    padding: 4px;
+    > button {
+      width: 100%;
+      padding: 12px 16px;
+      transition: all 0.3s;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: nth($color-light, 9);
+      border-radius: 6px;
+      &:hover {
+        background-color: nth($color-light, 2);
+      }
+    }
+  }
+
+  .showMenu {
+    transform: scale(1);
+    visibility: visible;
+    top: 42px;
+    opacity: 1;
   }
 }
 
