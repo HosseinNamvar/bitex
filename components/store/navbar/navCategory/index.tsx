@@ -1,10 +1,11 @@
-"use client";
-import React, { useRef } from "react";
+"use-client";
 import styles from "./navCategory.module.scss";
-import { ListIcon } from "@/components/icons/svgIcons";
-import { CategoriesData } from "@/data/categories";
+
+import { useRef } from "react";
 import Link from "next/link";
 import { useToggleMenu } from "@/hooks/useToggleMenu";
+import { ListIcon } from "@/components/icons/svgIcons";
+import { CategoriesData } from "@/data/categories";
 
 const NavBarCategory = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
