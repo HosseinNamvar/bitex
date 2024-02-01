@@ -16,6 +16,7 @@
       font-size: 1.6rem;
       color: nth($color-light, 10);
       margin: 28px 0 12px;
+      font-weight: 500;
     }
     a {
       display: block;
@@ -55,7 +56,7 @@
     background-repeat: no-repeat;
     background-position: right center;
     &:hover {
-      font-weight: 600;
+      font-weight: 500;
       color: nth($color-light, 10);
     }
   }

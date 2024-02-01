@@ -41,7 +41,7 @@
       width: 100%;
       text-align: center;
       font-size: 2rem;
-      font-weight: 700;
+      font-weight: 500;
       color: nth($color-light, 10);
     }
     > div {
@@ -57,7 +57,7 @@
     align-items: center;
     margin-bottom: 30px;
     a {
-      font-weight: 600;
+      font-weight: 500;
       color: nth($color-light, 8);
       padding-right: 24px;
       background-image: url("/images/icons/arrowIcon02.svg");
@@ -72,7 +72,7 @@
       }
     }
     h2 {
-      font-weight: 700;
+      font-weight: 500;
       color: nth($color-light, 10);
     }
   }

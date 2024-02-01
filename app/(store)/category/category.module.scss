@@ -38,7 +38,7 @@
           color: nth($color-light, 9);
         }
         &:last-child {
-          font-weight: 600;
+          font-weight: 500;
           color: nth($color-light, 9);
           &:after {
             display: none;
@@ -245,7 +245,7 @@
           margin-right: 12px;
         }
         > span {
-          font-weight: 600;
+          font-weight: 500;
           margin-right: 12px;
           color: nth($color-light, 9);
         }
