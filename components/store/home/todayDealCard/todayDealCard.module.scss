@@ -33,7 +33,7 @@
     }
     :last-child {
       letter-spacing: 1px;
-      font-weight: 700;
+      font-weight: 500;
     }
   }
   .imgWrapper {
@@ -91,7 +91,7 @@
         }
         &:last-child {
           font-size: 1.8rem;
-          font-weight: 700;
+          font-weight: 500;
           color: nth($color-light, 9);
         }
       }
