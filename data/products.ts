@@ -67,8 +67,8 @@ export const ProductsData: TProductCard[] = [
 export const OneProduct: TProduct = {
   path: [
     { label: "Home", url: "/" },
-    { label: "Products", url: "/category/" },
-    { label: "Mobile", url: "/category/1" },
+    { label: "Products", url: "/list/" },
+    { label: "Mobile", url: "/list/1" },
   ],
   board: {
     name: "Sony - PlayStation 5 - DualSense Wireless Controller - White",

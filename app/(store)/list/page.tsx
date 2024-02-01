@@ -1,12 +1,12 @@
 import Link from "next/link";
-import styles from "./category.module.scss";
+import styles from "./list.module.scss";
 import Image from "next/image";
 import ProductCard from "@/components/store/common/productCard";
 import { ProductsData } from "@/data/products";
 
-const CategoryPage = () => {
+const ListPage = () => {
   return (
-    <div className={styles.categoryPage}>
+    <div className={styles.listPage}>
       <div className={styles.header}>
         <h1>Mobile</h1>
         <div className={styles.links}>
@@ -181,4 +181,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default ListPage;

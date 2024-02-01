@@ -1,6 +1,6 @@
 @import "/public/css/variables.module.scss";
 
-.categoryPage {
+.listPage {
   margin-bottom: 60px;
   margin-top: 136px;
   > .header {
@@ -318,7 +318,7 @@
 }
 
 @media (max-width: 1280px) {
-  .categoryPage {
+  .listPage {
     .main {
       .rightCol {
         margin: 0 0 0 12px;
@@ -331,7 +331,7 @@
 }
 
 @media (max-width: 1024px) {
-  .categoryPage {
+  .listPage {
     .mobileFilter {
       display: flex;
     }
@@ -351,7 +351,7 @@
 }
 
 @media (max-width: 768px) {
-  .categoryPage {
+  .listPage {
     .main {
       padding-top: 12px;
       .rightCol {
@@ -364,7 +364,7 @@
 }
 
 @media (max-width: 480px) {
-  .categoryPage {
+  .listPage {
     margin-top: 124px;
     .main {
       .filtersContainer {
@@ -383,7 +383,7 @@
 }
 
 @media (max-width: 320px) {
-  .categoryPage {
+  .listPage {
     .main {
       .rightCol {
         .listContainer {
