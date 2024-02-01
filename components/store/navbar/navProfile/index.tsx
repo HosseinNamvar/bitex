@@ -1,29 +1,32 @@
 "use-client";
 import styles from "./navProfile.module.scss";
 
-import { useState } from "react";
+import { useRef } from "react";
 import { ProfileIcon } from "@/components/icons/svgIcons";
+import { useToggleMenu } from "@/hooks/useToggleMenu";
 
 const NavBarProfile = () => {
-  const [menuVisible, setMenuVisible] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [isActive, setIsActive] = useToggleMenu(false, menuRef);
 
-  const handleRemoveFocus = (event: React.FocusEvent<HTMLButtonElement>) => {
-    if (event.currentTarget === event.target) {
-      setMenuVisible(false);
-    }
+  const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setIsActive(!isActive);
   };
 
   return (
     <div className={styles.profile}>
       <button
-        onClick={() => setMenuVisible(!menuVisible)}
-        onBlur={handleRemoveFocus}
-        className={`${menuVisible ? styles.isActive : ""}`}
+        onClick={toggleMenu}
+        className={`${isActive ? styles.isActive : ""}`}
       >
         <ProfileIcon width={16} />
         <span>Account</span>
       </button>
-      <div className={`${styles.menu} ${menuVisible && styles.showMenu}`}>
+      <div
+        ref={menuRef}
+        className={`${styles.menu} ${isActive && styles.showMenu}`}
+      >
         <button>Sign In</button>
         <button>Sign Up</button>
       </div>
