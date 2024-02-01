@@ -7,7 +7,11 @@ import { useToggleMenu } from "@/hooks/useToggleMenu";
 import { ListIcon } from "@/components/icons/svgIcons";
 import { CategoriesData } from "@/data/categories";
 
-const NavBarCategory = () => {
+interface IProps {
+  isNavbarVisible: boolean;
+}
+
+const NavBarCategory = ({ isNavbarVisible: isNavbarHide }: IProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useToggleMenu(false, dropdownRef);
 
@@ -15,6 +19,8 @@ const NavBarCategory = () => {
     event.stopPropagation();
     setIsActive(!isActive);
   };
+
+  if (!isNavbarHide && isActive) setIsActive(false);
 
   return (
     <div className={styles.category}>
