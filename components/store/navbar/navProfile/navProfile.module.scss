@@ -65,6 +65,8 @@
     opacity: 0;
     transition: all 0.3s;
     padding: 4px;
+    z-index: 10;
+
     transform-origin: right top;
     > button {
       width: 100%;
