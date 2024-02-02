@@ -3,59 +3,59 @@ import { TCategory } from "@/types/common";
 export const CategoriesData: TCategory[] = [
   {
     name: "Computer & Laptops",
-    url: "/category/computer-laptops",
+    url: "/list/computer-laptops",
     iconSize: [17, 15],
     iconUrl: "computerIcon",
     subCategories: [
       {
         name: "Computers",
-        url: "/category/computers",
+        url: "/list/computers",
         subCategories: [
           {
             name: "CPU",
-            url: "/category/cpu",
+            url: "/list/cpu",
           },
           {
             name: "Graphic Cards",
-            url: "/category/graphics",
+            url: "/list/graphics",
           },
           {
             name: "Motherboards",
-            url: "/category/motherboards",
+            url: "/list/motherboards",
           },
           {
             name: "RAMs",
-            url: "/category/rams",
+            url: "/list/rams",
           },
           {
             name: "Monitors",
-            url: "/category/monitors",
+            url: "/list/monitors",
           },
           {
             name: "SSD",
-            url: "/category/ssd",
+            url: "/list/ssd",
           },
         ],
       },
       {
         name: "Laptops",
-        url: "/category/laptops",
+        url: "/list/laptops",
         subCategories: [
           {
             name: "Apple",
-            url: "/category/laptops/apple",
+            url: "/list/laptops/apple",
           },
           {
             name: "Asus",
-            url: "/category/laptops/asus",
+            url: "/list/laptops/asus",
           },
           {
             name: "Dell",
-            url: "/category/laptops/dell",
+            url: "/list/laptops/dell",
           },
           {
             name: "HP",
-            url: "/category/laptops/hp",
+            url: "/list/laptops/hp",
           },
         ],
       },
@@ -63,63 +63,63 @@ export const CategoriesData: TCategory[] = [
   },
   {
     name: "Tablets",
-    url: "/category/tablets",
+    url: "/list/tablets",
     iconSize: [18, 14],
     iconUrl: "tabletIcon",
     subCategories: [
       {
         name: "iPad",
-        url: "/category/tablets/ipad",
+        url: "/list/tablets/ipad",
       },
       {
         name: "Galaxy Tab",
-        url: "/category/tablets/galaxy",
+        url: "/list/tablets/galaxy",
       },
     ],
   },
   {
     name: "Printer & Cameras",
-    url: "/category/printer-cameras",
+    url: "/list/printer-cameras",
     iconSize: [15, 14],
     iconUrl: "printerIcon",
     subCategories: [
       {
         name: "Printers",
-        url: "/category/printers",
+        url: "/list/printers",
         subCategories: [
           {
             name: "HP",
-            url: "/category/printers/hp",
+            url: "/list/printers/hp",
           },
           {
             name: "Epson",
-            url: "/category/printers/epson",
+            url: "/list/printers/epson",
           },
           {
             name: "Canon",
-            url: "/category/printers/canon",
+            url: "/list/printers/canon",
           },
         ],
       },
       {
         name: "Cameras",
-        url: "/category/cameras",
+        url: "/list/cameras",
         subCategories: [
           {
             name: "Sony",
-            url: "/category/cameras/sony",
+            url: "/list/cameras/sony",
           },
           {
             name: "Canon",
-            url: "/category/cameras/Canon",
+            url: "/list/cameras/Canon",
           },
           {
             name: "Panasonic",
-            url: "/category/cameras/panasonic",
+            url: "/list/cameras/panasonic",
           },
           {
             name: "Fuji",
-            url: "/category/cameras/fuji",
+            url: "/list/cameras/fuji",
           },
         ],
       },
@@ -127,99 +127,99 @@ export const CategoriesData: TCategory[] = [
   },
   {
     name: "Smartphones",
-    url: "/category/smartphones",
+    url: "/list/smartphones",
     iconSize: [12, 18],
     iconUrl: "phoneIcon",
     subCategories: [
       {
         name: "Apple",
-        url: "/category/smartphones/apple",
+        url: "/list/smartphones/apple",
       },
       {
         name: "Samsung",
-        url: "/category/smartphones/samsung",
+        url: "/list/smartphones/samsung",
       },
       {
         name: "Sony",
-        url: "/category/smartphones/sony",
+        url: "/list/smartphones/sony",
       },
       {
         name: "Xiaomi",
-        url: "/category/smartphones/xiaomi",
+        url: "/list/smartphones/xiaomi",
       },
     ],
   },
   {
     name: "OLED Smart TVs",
-    url: "/category/tvs",
+    url: "/list/tvs",
     iconSize: [17, 13],
     iconUrl: "tvIcon",
     subCategories: [
       {
         name: "Sony",
-        url: "/category/tvs/sony",
+        url: "/list/tvs/sony",
       },
       {
         name: "Samsung",
-        url: "/category/tvs/samsung",
+        url: "/list/tvs/samsung",
       },
       {
         name: "Panasonic",
-        url: "/category/tvs/panasonic",
+        url: "/list/tvs/panasonic",
       },
       {
         name: "LG",
-        url: "/category/tvs/lg",
+        url: "/list/tvs/lg",
       },
     ],
   },
   {
     name: "Keyboard & Mouse",
-    url: "/category/keyboard-mouse",
+    url: "/list/keyboard-mouse",
     iconSize: [12, 17],
     iconUrl: "mouseIcon",
     subCategories: [
       {
         name: "Keyboards",
-        url: "/category/keyboards",
+        url: "/list/keyboards",
         subCategories: [
           {
             name: "Apple",
-            url: "/category/keyboards/apple",
+            url: "/list/keyboards/apple",
           },
           {
             name: "Logitech",
-            url: "/category/keyboards/logitech",
+            url: "/list/keyboards/logitech",
           },
           {
             name: "ISY",
-            url: "/category/keyboards/isy",
+            url: "/list/keyboards/isy",
           },
           {
             name: "Razer",
-            url: "/category/keyboards/razer",
+            url: "/list/keyboards/razer",
           },
         ],
       },
       {
         name: "Mouses",
-        url: "/category/mouses",
+        url: "/list/mouses",
         subCategories: [
           {
             name: "Apple",
-            url: "/category/mouse/apple",
+            url: "/list/mouse/apple",
           },
           {
             name: "Logitech",
-            url: "/category/mouse/logitech",
+            url: "/list/mouse/logitech",
           },
           {
             name: "ISY",
-            url: "/category/mouse/isy",
+            url: "/list/mouse/isy",
           },
           {
             name: "Razer",
-            url: "/category/mouse/razer",
+            url: "/list/mouse/razer",
           },
         ],
       },
@@ -227,47 +227,47 @@ export const CategoriesData: TCategory[] = [
   },
   {
     name: "Video Games",
-    url: "/category/video-games",
+    url: "/list/video-games",
     iconSize: [18, 11],
     iconUrl: "gameIcon",
     subCategories: [
       {
         name: "Consoles",
-        url: "/category/consoles",
+        url: "/list/consoles",
         subCategories: [
           {
             name: "Playstation",
-            url: "/category/consoles/playstation",
+            url: "/list/consoles/playstation",
           },
           {
             name: "XBox",
-            url: "/category/consoles/xbox",
+            url: "/list/consoles/xbox",
           },
           {
             name: "Nintendo",
-            url: "/category/consoles/nintendo",
+            url: "/list/consoles/nintendo",
           },
         ],
       },
       {
         name: "Games",
-        url: "/category/games",
+        url: "/list/games",
         subCategories: [
           {
             name: "Playstation 4 Games",
-            url: "/category/games/playstation4",
+            url: "/list/games/playstation4",
           },
           {
             name: "Playstation 5 Games",
-            url: "/category/games/playstation5",
+            url: "/list/games/playstation5",
           },
           {
             name: "XBox Games",
-            url: "/category/games/xbox",
+            url: "/list/games/xbox",
           },
           {
             name: "Nintendo Games",
-            url: "/category/games/nintendo",
+            url: "/list/games/nintendo",
           },
         ],
       },
@@ -275,19 +275,19 @@ export const CategoriesData: TCategory[] = [
   },
   {
     name: "Sports & Outdoors",
-    url: "/category/sports-outdoors",
+    url: "/list/sports-outdoors",
     iconSize: [13, 11],
     iconUrl: "healthIcon",
   },
   {
     name: "Smart Watches",
-    url: "/category/smart-watches",
+    url: "/list/smart-watches",
     iconSize: [10, 16],
     iconUrl: "watchIcon",
   },
   {
     name: "Film & Music",
-    url: "/category/smart-watches",
+    url: "/list/smart-watches",
     iconSize: [14, 14],
     iconUrl: "musicIcon",
   },
