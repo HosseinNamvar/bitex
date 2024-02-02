@@ -27,7 +27,7 @@ const ListPage = () => {
       </div>
       <div className="storeContainer flexCol">
         <div className={styles.mobileFilter}>
-          <button className={styles.filterBtn}>FILTER</button>
+          <button className={styles.filterBtn}>FILTERS</button>
           <DropDownList
             data={sortDropdonwData}
             width="170px"

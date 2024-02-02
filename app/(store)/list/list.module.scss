@@ -53,22 +53,28 @@
     margin-top: 12px;
     padding: 0 12px;
     justify-content: space-between;
+
     > .filterBtn {
-      border: none;
+      border: 1px solid nth($color-light, 2);
       border-radius: 6px;
+      cursor: pointer;
       padding: 8px 20px 8px 32px;
       background-color: white;
-      color: nth($color-light, 9);
-      font-weight: 500;
+      color: nth($color-light, 7);
+      font-size: 1.4rem;
+      letter-spacing: 1px;
       background-image: url("/images/icons/filterIcon.svg");
       background-repeat: no-repeat;
       background-position: 10px center;
-    }
-    > select {
-      padding: 4px 12px;
-      border-radius: 6px;
-      color: nth($color-light, 7);
-      border: 1px solid nth($color-light, 5);
+      transition: all 0.3s;
+      &:hover {
+        background-color: nth($color-light, 1);
+        border-color: nth($color-light, 3);
+      }
+      &:active {
+        background-color: nth($color-light, 2);
+        border-color: nth($color-light, 4);
+      }
     }
   }
   .main {
