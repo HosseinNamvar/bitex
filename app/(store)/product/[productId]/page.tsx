@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -8,8 +9,12 @@ import styles from "./productPage.module.scss";
 import { OneProduct as product } from "@/data/products";
 import ProductBoard from "@/components/store/productPage/productBoard";
 import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
+import { redirect, useParams } from "next/navigation";
 
 const ProductPage = () => {
+  const { productId } = useParams<{ productId: string[] }>();
+  if (!productId || productId.length !== 1) redirect("/");
+
   return (
     <div className="storeContainer">
       <div className={styles.productPage}>

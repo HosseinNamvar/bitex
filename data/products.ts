@@ -7,7 +7,7 @@ export const ProductsData: TProductCard[] = [
     imgUrl: ["/images/products/airpods1.jpg", "/images/products/airpods2.jpg"],
     price: 129.99,
     specs: ["Built-In Microphone", "3rd generation", "Water Resistant"],
-    url: "",
+    url: "/product/1",
   },
   {
     name: "Apple Watch Ultra 2",
@@ -17,7 +17,7 @@ export const ProductsData: TProductCard[] = [
     ],
     price: 799.0,
     specs: ["GPS + Cellular", "Titanium", "49mm"],
-    url: "",
+    url: "/product/2",
   },
   {
     name: "ASUS ROG Laptop",
@@ -25,7 +25,7 @@ export const ProductsData: TProductCard[] = [
     price: 2499.99,
     dealPrice: 2149.99,
     specs: ["32GB RAM", "17inch display", "OLED Display"],
-    url: "",
+    url: "/product/3",
   },
   {
     name: "PS5 Controller",
@@ -35,7 +35,7 @@ export const ProductsData: TProductCard[] = [
     ],
     price: 69,
     specs: ["Bluetooth", "Version 2"],
-    url: "",
+    url: "/product/4",
   },
   {
     name: "Sony Alpha 7RV",
@@ -46,21 +46,21 @@ export const ProductsData: TProductCard[] = [
     price: 4499,
     specs: ["Full Frame", "Body", "40MP"],
     dealPrice: 3699,
-    url: "",
+    url: "/product/5",
   },
   {
     name: "ASUS ROG Laptop",
     imgUrl: ["/images/products/asusRog1.jpg", "/images/products/asusRog2.jpg"],
     price: 2499.99,
     specs: ["32GB RAM", "17inch display", "OLED Display"],
-    url: "",
+    url: "/product/6",
   },
   {
     name: "Apple Airpods Pro",
     imgUrl: ["/images/products/airpods1.jpg", "/images/products/airpods2.jpg"],
     price: 129.99,
     specs: ["Built-In Microphone", "3rd generation", "Water Resistant"],
-    url: "",
+    url: "/product/7",
   },
 ];
 
