@@ -7,100 +7,100 @@ export const CollectionsData: TCollectionCard[] = [
     collections: [
       {
         label: "iPad",
-        url: "#",
+        url: "/list/tablets/ipad",
       },
       {
         label: "Microsoft Surface",
-        url: "#",
+        url: "/list/tablets/surface",
       },
       {
         label: "Samsung Galaxy",
-        url: "#",
+        url: "/list/tablets/galaxy",
       },
       {
         label: "Amazon Fire",
-        url: "#",
+        url: "/list/tablets/amazon",
       },
       {
         label: "E-Readers",
-        url: "#",
+        url: "/list/tablets/ereader",
       },
     ],
     imgUrl: "/images/images/collectionTablet.jpg",
-    url: "/collection/tablet",
+    url: "/list/tablets",
   },
   {
     name: "Smartphones",
     collections: [
       {
         label: "iPhone",
-        url: "#",
+        url: "/list/smartphones/iphone",
       },
       {
         label: "Samsung Galaxy",
-        url: "#",
+        url: "/list/smartphones/galaxy",
       },
       {
         label: "Google",
-        url: "#",
+        url: "/list/smartphones/google",
       },
     ],
     imgUrl: "/images/images/collectionSmartphone.jpg",
-    url: "/collection/Smartphones",
+    url: "/list/smartphones",
   },
   {
     name: "Smartwatches",
     collections: [
       {
         label: "Apple Watch",
-        url: "#",
+        url: "/list/watches/apple",
       },
       {
         label: "Samsung Galaxy",
-        url: "#",
+        url: "/list/watches/galaxy",
       },
       {
         label: "Android Smartwatches",
-        url: "#",
+        url: "/list/watches/android",
       },
       {
         label: "Fitness Smartwatches",
-        url: "#",
+        url: "/list/watches/fitness",
       },
       {
         label: "Smartwatches Accessories",
-        url: "#",
+        url: "/list/watches/accessories",
       },
     ],
     imgUrl: "/images/images/collectionWatch.jpg",
-    url: "/collection/Smartwatches",
+    url: "/list/watches",
   },
   {
     name: "Accessories",
     collections: [
       {
         label: "Chargers",
-        url: "#",
+        url: "/list/accessories/charger",
       },
       {
         label: "Power Banks",
-        url: "#",
+        url: "/list/accessories/power-bank",
       },
       {
         label: "Cables",
-        url: "#",
+        url: "/list/accessories/cable",
       },
       {
         label: "PC Fans",
-        url: "#",
+        url: "/list/accessories/pc-fan",
       },
       {
         label: "Mobile Covers",
-        url: "#",
+        url: "/list/accessories/mobile-cover",
       },
     ],
     imgUrl: "/images/images/collectionAccessories.jpg",
-    url: "/collection/accessories",
+    url: "/list/accessories",
   },
 ];
 
@@ -114,7 +114,7 @@ export const TodayDeals: TDealCard[] = [
     price: 579.0,
     dealPrice: 519.0,
     specs: ["Wireless", "Noise Cancelling", "Built-In Microphone"],
-    url: "",
+    url: "/product/1",
     dealDate: new Date("1970-01-01T18:00:00"),
   },
   {
@@ -126,7 +126,7 @@ export const TodayDeals: TDealCard[] = [
     price: 79.99,
     dealPrice: 55.49,
     specs: ["Bluetooth", "White"],
-    url: "",
+    url: "/product/1",
     dealDate: new Date("1970-01-01T09:30:00"),
   },
   {
@@ -135,7 +135,7 @@ export const TodayDeals: TDealCard[] = [
     price: 1299.0,
     dealPrice: 1119.0,
     specs: ["8GB Memory", "256GB", "M3 chip"],
-    url: "",
+    url: "/product/1",
     dealDate: new Date("1970-01-01T23:10:00"),
   },
   {
@@ -144,7 +144,7 @@ export const TodayDeals: TDealCard[] = [
     price: 1149.0,
     dealPrice: 1099.0,
     specs: ["Wi-Fi", "256GB", "12.9-Inch"],
-    url: "",
+    url: "/product/1",
     dealDate: new Date("1970-01-01T06:30:00"),
   },
   {
@@ -153,7 +153,7 @@ export const TodayDeals: TDealCard[] = [
     price: 1199.99,
     specs: ["256GB", "Blue Titanium"],
     dealPrice: 1059.99,
-    url: "",
+    url: "/product/1",
     dealDate: new Date("1970-01-01T10:50:00"),
   },
 ];
@@ -164,7 +164,7 @@ export const TopProducts: TProductCard[] = [
     imgUrl: ["/images/products/airpods1.jpg", "/images/products/airpods2.jpg"],
     price: 129.99,
     specs: ["Built-In Microphone", "3rd generation", "Water Resistant"],
-    url: "",
+    url: "/product/1",
   },
   {
     name: "Apple Watch Ultra 2",
@@ -174,7 +174,7 @@ export const TopProducts: TProductCard[] = [
     ],
     price: 799.0,
     specs: ["GPS + Cellular", "Titanium", "49mm"],
-    url: "",
+    url: "/product/1",
   },
   {
     name: "ASUS ROG Laptop",
@@ -182,7 +182,7 @@ export const TopProducts: TProductCard[] = [
     price: 2499.99,
     dealPrice: 2149.99,
     specs: ["32GB RAM", "17inch display", "OLED Display"],
-    url: "",
+    url: "/product/1",
   },
   {
     name: "PS5 Controller",
@@ -192,7 +192,7 @@ export const TopProducts: TProductCard[] = [
     ],
     price: 69,
     specs: ["Bluetooth", "Version 2"],
-    url: "",
+    url: "/product/1",
   },
   {
     name: "Sony Alpha 7RV",
@@ -203,7 +203,7 @@ export const TopProducts: TProductCard[] = [
     price: 4499,
     specs: ["Full Frame", "Body", "40MP"],
     dealPrice: 3699,
-    url: "",
+    url: "/product/1",
   },
 ];
 

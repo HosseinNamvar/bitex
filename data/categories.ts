@@ -287,7 +287,7 @@ export const CategoriesData: TCategory[] = [
   },
   {
     name: "Film & Music",
-    url: "/list/smart-watches",
+    url: "/list/film-music",
     iconSize: [14, 14],
     iconUrl: "musicIcon",
   },
