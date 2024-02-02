@@ -1,10 +1,21 @@
-import Link from "next/link";
+"use client";
 import styles from "./list.module.scss";
+
+import Link from "next/link";
 import Image from "next/image";
+
 import ProductCard from "@/components/store/common/productCard";
+import DropDownList from "@/components/store/UI/dropDown";
+
 import { ProductsData } from "@/data/products";
+import { sortDropdonwData } from "@/data/uiElementsData";
+import { useState } from "react";
 
 const ListPage = () => {
+  const [sortIndex, setSortIndex] = useState(sortDropdonwData.selectedIndex);
+  const handleSortChange = (newIndex: number) => {
+    setSortIndex(newIndex);
+  };
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
@@ -16,15 +27,13 @@ const ListPage = () => {
       </div>
       <div className="storeContainer flexCol">
         <div className={styles.mobileFilter}>
-          <button>FILTER</button>
-          <select name="Sort" id="">
-            <option value="Most Viewed">Most Viewed</option>
-            <option value="Top Seller">Top Seller</option>
-            <option value="Most Expensive">Most Expensive</option>
-            <option value="Cheapest">Cheapest</option>
-            <option value="Newest">Newest</option>
-            <option value="Most Popular">Most Popular</option>
-          </select>
+          <button className={styles.filterBtn}>FILTER</button>
+          <DropDownList
+            data={sortDropdonwData}
+            width="170px"
+            selectedIndex={sortIndex}
+            onChange={handleSortChange}
+          />
         </div>
         <div className={styles.main}>
           <div className={styles.filtersContainer}>
