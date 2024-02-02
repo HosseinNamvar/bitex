@@ -82,155 +82,165 @@
     display: flex;
     padding-top: 36px;
 
-    .filtersContainer {
-      min-width: 220px;
-      max-width: 260px;
-      padding: 0 20px 0 20px;
-      border-right: 1px solid nth($color-light, 3);
-
-      .eachFilter {
-        width: 100%;
-        margin-bottom: 24px;
-        border-bottom: 1px solid nth($color-light, 3);
-
-        &:last-child {
-          border-bottom: none;
+    > .filtersContainer {
+      > .background {
+        display: none;
+      }
+      > .filtersWindow {
+        > .header {
+          display: none;
         }
+        min-width: 220px;
+        max-width: 260px;
+        background-color: white;
+        padding: 0 20px 0 20px;
+        border-right: 1px solid nth($color-light, 3);
+        overflow-y: scroll;
 
-        .header {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 24px;
-          > h3 {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: nth($color-light, 9);
-          }
-          > button {
-            width: 20px;
-            height: 20px;
-            border: none;
-          }
-        }
-
-        .body {
+        .eachFilter {
           width: 100%;
-          display: flex;
-          padding: 0 10px;
-          margin-bottom: 24px;
-          flex-direction: column;
-          > div {
+          margin-bottom: 16px;
+          border-bottom: 1px solid nth($color-light, 3);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .header {
             display: flex;
-            align-items: center;
-            height: 30px;
-            > label {
+            justify-content: space-between;
+            margin-bottom: 14px;
+            > h3 {
               font-size: 1.4rem;
-              margin-left: 4px;
-              color: nth($color-light, 7);
+              font-weight: 500;
+              color: nth($color-light, 9);
             }
-            > input {
+            > button {
               width: 20px;
               height: 20px;
-              border: 1px solid nth($color-light, 4);
+              border: none;
             }
           }
 
-          .priceRange {
-            > input {
-              width: 100%;
-            }
-          }
-          .priceInputs {
-            display: flex;
-            height: auto;
-            gap: 12px;
-            margin-top: 10px;
-
-            > hr {
-              height: 20px;
-              margin-top: 30px;
-              opacity: 0.5;
-            }
-            > div {
-              > label {
-                display: block;
-                width: 100%;
-                font-size: 1.4rem;
-                color: nth($color-light, 7);
-                margin-bottom: 8px;
-              }
-              > input {
-                width: 100%;
-                height: 30px;
-                border-radius: 6px;
-                padding: 12px;
-                border: 1px solid nth($color-light, 5);
-                &:hover {
-                  border-color: nth($color-light, 9);
-                }
-              }
-            }
-          }
-
-          .searchInput {
-            display: block;
-            margin-bottom: 16px;
-            > input {
-              width: 100%;
-              height: 32px;
-              padding-left: 40px;
-              border-radius: 8px;
-              border: 1px solid nth($color-light, 4);
-              background-image: url("/images/icons/searchIcon.svg");
-              background-repeat: no-repeat;
-              background-position: 10px center;
-              &:focus {
-                border-color: nth($color-light, 8);
-              }
-            }
-          }
-          .optionsList {
+          .body {
             width: 100%;
-            height: auto;
             display: flex;
+            padding: 0 10px;
+            margin-bottom: 24px;
             flex-direction: column;
             > div {
-              width: 100%;
-              height: 30px;
-              position: relative;
               display: flex;
-              align-content: center;
+              align-items: center;
+              height: 30px;
+              > label {
+                font-size: 1.4rem;
+                margin-left: 4px;
+                color: nth($color-light, 7);
+              }
               > input {
                 width: 20px;
                 height: 20px;
-                border: 1px solid nth($color-light, 6);
+                border: 1px solid nth($color-light, 4);
               }
-              > label {
-                display: inline-block;
-                line-height: 2.6rem;
-                margin-left: 10px;
-                font-size: 1.4rem;
-                color: nth($color-light, 7);
+            }
+
+            .priceRange {
+              > input {
+                width: 100%;
               }
-              .colorBox {
-                width: 16px;
-                height: 16px;
-                border-radius: 4px;
-                right: 0;
-                top: 4px;
-                position: absolute;
+            }
+            .priceInputs {
+              display: flex;
+              height: auto;
+              gap: 12px;
+              margin-top: 10px;
+
+              > hr {
+                height: 20px;
+                margin-top: 30px;
+                opacity: 0.5;
               }
-              .black {
-                background-color: #484848;
+              > div {
+                > label {
+                  display: block;
+                  width: 100%;
+                  font-size: 1.4rem;
+                  color: nth($color-light, 7);
+                  margin-bottom: 8px;
+                }
+                > input {
+                  width: 100%;
+                  height: 30px;
+                  border-radius: 6px;
+                  padding: 12px;
+                  border: 1px solid nth($color-light, 5);
+                  &:hover {
+                    border-color: nth($color-light, 9);
+                  }
+                }
               }
-              .blue {
-                background-color: #628ae6;
+            }
+
+            .searchInput {
+              display: block;
+              margin-bottom: 16px;
+              > input {
+                width: 100%;
+                height: 32px;
+                padding-left: 40px;
+                border-radius: 6px;
+                border: 1px solid nth($color-light, 4);
+                background-image: url("/images/icons/searchIcon.svg");
+                background-repeat: no-repeat;
+                background-position: 10px center;
+                &:focus {
+                  border-color: nth($color-light, 8);
+                }
               }
-              .red {
-                background-color: #ed4a4a;
-              }
-              .green {
-                background-color: #7ac38f;
+            }
+            .optionsList {
+              width: 100%;
+              height: auto;
+              display: flex;
+              flex-direction: column;
+              > div {
+                width: 100%;
+                height: 30px;
+                position: relative;
+                display: flex;
+                align-content: center;
+                > input {
+                  width: 20px;
+                  height: 20px;
+                  border: 1px solid nth($color-light, 6);
+                }
+                > label {
+                  display: inline-block;
+                  line-height: 2.6rem;
+                  margin-left: 10px;
+                  font-size: 1.4rem;
+                  color: nth($color-light, 7);
+                }
+                .colorBox {
+                  width: 16px;
+                  height: 16px;
+                  border-radius: 4px;
+                  right: 0;
+                  top: 4px;
+                  position: absolute;
+                }
+                .black {
+                  background-color: #484848;
+                }
+                .blue {
+                  background-color: #628ae6;
+                }
+                .red {
+                  background-color: #ed4a4a;
+                }
+                .green {
+                  background-color: #7ac38f;
+                }
               }
             }
           }
@@ -343,9 +353,80 @@
     }
     .main {
       padding-top: 8px;
-      .filtersContainer {
-        display: none;
+      > .filtersContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s;
+        z-index: 20;
+
+        > .background {
+          display: block;
+          width: 100vw;
+          height: 100vh;
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          background-color: rgba(#000000, 0.6);
+          cursor: pointer;
+          backdrop-filter: blur(5px);
+          transition: opacity 0.3s;
+        }
+
+        > .filtersWindow {
+          position: absolute;
+          width: 310px;
+          left: -310px;
+          top: 0px;
+          bottom: 0px;
+          transition: left 0.5s $anim-easeOut;
+          z-index: 22;
+          > .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid nth($color-light, 4);
+
+            > h2 {
+              color: nth($color-light, 8);
+              font-weight: 300;
+              font-size: 1.6rem;
+            }
+            > button {
+              width: 34px;
+              height: 34px;
+              border-radius: 4px;
+              cursor: pointer;
+              border: 1px solid white;
+              transition: all 0.3s;
+              &:hover {
+                border-color: nth($color-light, 2);
+                background-color: nth($color-light, 1);
+              }
+            }
+          }
+        }
       }
+      > .showMobileFilters {
+        visibility: visible;
+        opacity: 1;
+
+        > .background {
+          visibility: visible;
+          opacity: 1;
+        }
+        > .filtersWindow {
+          left: 0;
+        }
+      }
+
       .rightCol {
         width: 100%;
         margin: 0;
@@ -373,19 +454,6 @@
 @media (max-width: 480px) {
   .listPage {
     margin-top: 124px;
-    .main {
-      .filtersContainer {
-        display: none;
-      }
-      .rightCol {
-        .sortContainer {
-          display: none;
-        }
-      }
-      .mobileFilter {
-        display: flex;
-      }
-    }
   }
 }
 

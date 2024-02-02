@@ -10,12 +10,23 @@ import DropDownList from "@/components/store/UI/dropDown";
 import { ProductsData } from "@/data/products";
 import { sortDropdonwData } from "@/data/uiElementsData";
 import { useState } from "react";
+import { CloseIcon } from "@/components/icons/svgIcons";
 
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(sortDropdonwData.selectedIndex);
+  const [showFilters, setShowFilters] = useState(false);
+
   const handleSortChange = (newIndex: number) => {
     setSortIndex(newIndex);
   };
+
+  const toggleFiltersWindow = (visibility: boolean) => {
+    setShowFilters(visibility);
+    visibility
+      ? document.documentElement.classList.add("noScroll")
+      : document.documentElement.classList.remove("noScroll");
+  };
+
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
@@ -27,7 +38,12 @@ const ListPage = () => {
       </div>
       <div className="storeContainer flexCol">
         <div className={styles.mobileFilter}>
-          <button className={styles.filterBtn}>FILTERS</button>
+          <button
+            className={styles.filterBtn}
+            onClick={() => toggleFiltersWindow(true)}
+          >
+            FILTERS
+          </button>
           <DropDownList
             data={sortDropdonwData}
             width="170px"
@@ -36,103 +52,118 @@ const ListPage = () => {
           />
         </div>
         <div className={styles.main}>
-          <div className={styles.filtersContainer}>
-            <div className={styles.eachFilter}>
+          <div
+            className={`${styles.filtersContainer} 
+              ${showFilters ? styles.showMobileFilters : ""}`}
+          >
+            <div
+              className={styles.background}
+              onClick={() => toggleFiltersWindow(false)}
+            />
+            <div className={styles.filtersWindow}>
               <div className={styles.header}>
-                <h3>Availability</h3>
-                <button />
+                <h2>Filters</h2>
+                <button onClick={() => toggleFiltersWindow(false)}>
+                  <CloseIcon width={12} />
+                </button>
               </div>
-              <div className={styles.body}>
-                <div>
-                  <input type="checkbox" id="inStock" />
-                  <label htmlFor="inStock">In stock</label>
+              <div className={styles.eachFilter}>
+                <div className={styles.header}>
+                  <h3>Availability</h3>
+                  <button />
                 </div>
-                <div>
-                  <input type="checkbox" id="outOfStock" />
-                  <label htmlFor="outOfStock">Out of stock</label>
-                </div>
-              </div>
-            </div>
-            <div className={styles.eachFilter}>
-              <div className={styles.header}>
-                <h3>Price</h3>
-                <button />
-              </div>
-              <div className={styles.body}>
-                <div className={styles.priceRange}>
-                  <input type="range" />
-                </div>
-                <div className={styles.priceInputs}>
+                <div className={styles.body}>
                   <div>
-                    <label>From</label>
-                    <input type="number" />
+                    <input type="checkbox" id="inStock" />
+                    <label htmlFor="inStock">In stock</label>
                   </div>
-                  <hr />
                   <div>
-                    <label>To</label>
-                    <input type="number" />
+                    <input type="checkbox" id="outOfStock" />
+                    <label htmlFor="outOfStock">Out of stock</label>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.eachFilter}>
-              <div className={styles.header}>
-                <h3>Colors</h3>
-                <button />
-              </div>
-              <div className={styles.body}>
-                <div className={styles.searchInput}>
-                  <input type="text" placeholder="Search Color" />
+              <div className={styles.eachFilter}>
+                <div className={styles.header}>
+                  <h3>Price</h3>
+                  <button />
                 </div>
-                <div className={styles.optionsList}>
-                  <div>
-                    <input type="checkbox" id="colorBlack" />
-                    <label htmlFor="colorBlack">Black</label>
-                    <div className={`${styles.colorBox} ${styles.black}`} />
+                <div className={styles.body}>
+                  <div className={styles.priceRange}>
+                    <input type="range" />
                   </div>
-                  <div>
-                    <input type="checkbox" id="colorBlue" />
-                    <label htmlFor="colorBlue">Blue</label>
-                    <div className={`${styles.colorBox} ${styles.blue}`} />
-                  </div>
-                  <div>
-                    <input type="checkbox" id="colorRed" />
-                    <label htmlFor="colorRed">Red</label>
-                    <div className={`${styles.colorBox} ${styles.red}`} />
-                  </div>
-                  <div>
-                    <input type="checkbox" id="colorGreen" />
-                    <label htmlFor="colorGreen">Green</label>
-                    <div className={`${styles.colorBox} ${styles.green}`} />
+                  <div className={styles.priceInputs}>
+                    <div>
+                      <label>From</label>
+                      <input type="number" />
+                    </div>
+                    <hr />
+                    <div>
+                      <label>To</label>
+                      <input type="number" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.eachFilter}>
-              <div className={styles.header}>
-                <h3>Options</h3>
-                <button />
-              </div>
-              <div className={styles.body}>
-                <div className={styles.searchInput}>
-                  <input type="text" placeholder="Search Option" />
+              <div className={styles.eachFilter}>
+                <div className={styles.header}>
+                  <h3>Colors</h3>
+                  <button />
                 </div>
-                <div className={styles.optionsList}>
-                  <div>
-                    <input type="checkbox" id="option1" />
-                    <label htmlFor="option1">Option 1</label>
+                <div className={styles.body}>
+                  <div className={styles.searchInput}>
+                    <input type="text" placeholder="Search Color" />
                   </div>
-                  <div>
-                    <input type="checkbox" id="option2" />
-                    <label htmlFor="option2">Option 2</label>
+                  <div className={styles.optionsList}>
+                    <div>
+                      <input type="checkbox" id="colorBlack" />
+                      <label htmlFor="colorBlack">Black</label>
+                      <div className={`${styles.colorBox} ${styles.black}`} />
+                    </div>
+                    <div>
+                      <input type="checkbox" id="colorBlue" />
+                      <label htmlFor="colorBlue">Blue</label>
+                      <div className={`${styles.colorBox} ${styles.blue}`} />
+                    </div>
+                    <div>
+                      <input type="checkbox" id="colorRed" />
+                      <label htmlFor="colorRed">Red</label>
+                      <div className={`${styles.colorBox} ${styles.red}`} />
+                    </div>
+                    <div>
+                      <input type="checkbox" id="colorGreen" />
+                      <label htmlFor="colorGreen">Green</label>
+                      <div className={`${styles.colorBox} ${styles.green}`} />
+                    </div>
                   </div>
-                  <div>
-                    <input type="checkbox" id="option3" />
-                    <label htmlFor="option3">Option 3</label>
+                </div>
+              </div>
+              <div className={styles.eachFilter}>
+                <div className={styles.header}>
+                  <h3>Options</h3>
+                  <button />
+                </div>
+                <div className={styles.body}>
+                  <div className={styles.searchInput}>
+                    <input type="text" placeholder="Search Option" />
                   </div>
-                  <div>
-                    <input type="checkbox" id="option4" />
-                    <label htmlFor="option4">Option 4</label>
+                  <div className={styles.optionsList}>
+                    <div>
+                      <input type="checkbox" id="option1" />
+                      <label htmlFor="option1">Option 1</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="option2" />
+                      <label htmlFor="option2">Option 2</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="option3" />
+                      <label htmlFor="option3">Option 3</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="option4" />
+                      <label htmlFor="option4">Option 4</label>
+                    </div>
                   </div>
                 </div>
               </div>
