@@ -11,10 +11,14 @@ import { ProductsData } from "@/data/products";
 import { sortDropdonwData } from "@/data/uiElementsData";
 import { useState } from "react";
 import { CloseIcon } from "@/components/icons/svgIcons";
+import { redirect, useParams } from "next/navigation";
 
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(sortDropdonwData.selectedIndex);
   const [showFilters, setShowFilters] = useState(false);
+  const { params } = useParams<{ params: string[] }>();
+
+  if (!params || params.length <= 0) redirect("/");
 
   const handleSortChange = (newIndex: number) => {
     setSortIndex(newIndex);
@@ -27,13 +31,34 @@ const ListPage = () => {
       : document.documentElement.classList.remove("noScroll");
   };
 
+  const getPageHeader = () => {
+    const pageName = params[params.length - 1].split("-");
+    pageName.forEach((word, index) => {
+      pageName[index] = word[0].toUpperCase() + word.slice(1);
+    });
+
+    return pageName.join(" ");
+  };
+
+  const getLink = (array: string[], index: number) => {
+    let link = "/list";
+    for (let i = 0; i <= index; i++) {
+      link += "/" + array[i];
+    }
+    return link;
+  };
+
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
-        <h1>Mobile</h1>
+        <h1>{getPageHeader()}</h1>
         <div className={styles.links}>
-          <Link href={"#"}>Home</Link>
-          <Link href={"#"}>Mobile</Link>
+          <Link href={"/"}>Home</Link>
+          {params.map((item, index) => (
+            <Link key={index} href={getLink(params, index)}>
+              {item[0].toUpperCase() + item.slice(1)}
+            </Link>
+          ))}
         </div>
       </div>
       <div className="storeContainer flexCol">

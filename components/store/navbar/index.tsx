@@ -73,28 +73,28 @@ const StoreNavBar = () => {
             <hr />
             <ul className={styles.topCategories}>
               <li>
-                <Link href={""}>PC</Link>
+                <Link href={"/list/computers"}>PC</Link>
               </li>
               <li>
-                <Link href={""}>Laptop</Link>
+                <Link href={"/list/laptops"}>Laptop</Link>
               </li>
               <li>
-                <Link href={""}>Mobile</Link>
+                <Link href={"/list/smartphones"}>Mobile</Link>
               </li>
               <li>
-                <Link href={""}>TV</Link>
+                <Link href={"/list/tvs"}>TV</Link>
               </li>
               <li>
-                <Link href={""}>Gaming</Link>
+                <Link href={"/list/games"}>Gaming</Link>
               </li>
               <li>
-                <Link href={""}>Camera</Link>
+                <Link href={"/list/cameras"}>Camera</Link>
               </li>
               <li>
-                <Link href={""}>Tablet</Link>
+                <Link href={"/list/tablets"}>Tablet</Link>
               </li>
               <li>
-                <Link href={""}>Watch</Link>
+                <Link href={"/list/watches"}>Watch</Link>
               </li>
             </ul>
           </div>
@@ -104,13 +104,15 @@ const StoreNavBar = () => {
                 <Link href={""}>PC Configuration</Link>
               </li>
               <li className={styles.deal}>
-                <Image
-                  src={"/images/icons/discountIcon.svg"}
-                  alt="Top Deals"
-                  width={18}
-                  height={18}
-                />
-                <Link href={""}>Top Deals</Link>
+                <Link href={""}>
+                  <Image
+                    src={"/images/icons/discountIcon.svg"}
+                    alt="Top Deals"
+                    width={18}
+                    height={18}
+                  />
+                  Top Deals
+                </Link>
               </li>
             </ul>
           </div>

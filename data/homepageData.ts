@@ -7,100 +7,100 @@ export const CollectionsData: TCollectionCard[] = [
     collections: [
       {
         label: "iPad",
-        url: "#",
+        url: "/list/tablets/ipad",
       },
       {
         label: "Microsoft Surface",
-        url: "#",
+        url: "/list/tablets/surface",
       },
       {
         label: "Samsung Galaxy",
-        url: "#",
+        url: "/list/tablets/galaxy",
       },
       {
         label: "Amazon Fire",
-        url: "#",
+        url: "/list/tablets/amazon",
       },
       {
         label: "E-Readers",
-        url: "#",
+        url: "/list/tablets/ereader",
       },
     ],
     imgUrl: "/images/images/collectionTablet.jpg",
-    url: "/collection/tablet",
+    url: "/list/tablets",
   },
   {
     name: "Smartphones",
     collections: [
       {
         label: "iPhone",
-        url: "#",
+        url: "/list/smartphones/iphone",
       },
       {
         label: "Samsung Galaxy",
-        url: "#",
+        url: "/list/smartphones/galaxy",
       },
       {
         label: "Google",
-        url: "#",
+        url: "/list/smartphones/google",
       },
     ],
     imgUrl: "/images/images/collectionSmartphone.jpg",
-    url: "/collection/Smartphones",
+    url: "/list/smartphones",
   },
   {
     name: "Smartwatches",
     collections: [
       {
         label: "Apple Watch",
-        url: "#",
+        url: "/list/watches/apple",
       },
       {
         label: "Samsung Galaxy",
-        url: "#",
+        url: "/list/watches/galaxy",
       },
       {
         label: "Android Smartwatches",
-        url: "#",
+        url: "/list/watches/android",
       },
       {
         label: "Fitness Smartwatches",
-        url: "#",
+        url: "/list/watches/fitness",
       },
       {
         label: "Smartwatches Accessories",
-        url: "#",
+        url: "/list/watches/accessories",
       },
     ],
     imgUrl: "/images/images/collectionWatch.jpg",
-    url: "/collection/Smartwatches",
+    url: "/list/watches",
   },
   {
     name: "Accessories",
     collections: [
       {
         label: "Chargers",
-        url: "#",
+        url: "/list/accessories/charger",
       },
       {
         label: "Power Banks",
-        url: "#",
+        url: "/list/accessories/power-bank",
       },
       {
         label: "Cables",
-        url: "#",
+        url: "/list/accessories/cable",
       },
       {
         label: "PC Fans",
-        url: "#",
+        url: "/list/accessories/pc-fan",
       },
       {
         label: "Mobile Covers",
-        url: "#",
+        url: "/list/accessories/mobile-cover",
       },
     ],
     imgUrl: "/images/images/collectionAccessories.jpg",
-    url: "/collection/accessories",
+    url: "/list/accessories",
   },
 ];
 
