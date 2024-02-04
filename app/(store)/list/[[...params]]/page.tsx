@@ -5,14 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 import ProductCard from "@/components/store/common/productCard";
-import DropDownList from "@/components/store/UI/dropDown";
+import DropDownList from "@/components/UI/dropDown";
+import LineList from "@/components/UI/lineList";
 
 import { ProductsData } from "@/data/products";
 import { sortDropdonwData } from "@/data/uiElementsData";
 import { useState } from "react";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import { redirect, useParams } from "next/navigation";
-import LineList from "@/components/store/UI/lineList";
 
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(sortDropdonwData.selectedIndex);
