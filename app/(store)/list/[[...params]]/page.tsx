@@ -12,6 +12,7 @@ import { sortDropdonwData } from "@/data/uiElementsData";
 import { useState } from "react";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import { redirect, useParams } from "next/navigation";
+import LineList from "@/components/store/UI/lineList";
 
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(sortDropdonwData.selectedIndex);
@@ -203,14 +204,11 @@ const ListPage = () => {
                 height={12}
               />
               <span>Sort By:</span>
-              <div className={styles.switchSort}>
-                <span>Most Viewed</span>
-                <span className={styles.active}>Top Seller</span>
-                <span>Most Expensive</span>
-                <span>Cheapest</span>
-                <span>Newest</span>
-                <span>Most Popular</span>
-              </div>
+              <LineList
+                data={sortDropdonwData}
+                selectedId={sortIndex}
+                onChange={handleSortChange}
+              />
             </div>
             <div className={styles.listContainer}>
               {ProductsData.map((product, index) => (

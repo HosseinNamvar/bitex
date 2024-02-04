@@ -254,40 +254,18 @@
 
       .sortContainer {
         width: 100%;
-        display: block;
+        display: flex;
+        align-items: center;
         font-size: 1.4rem;
         margin: 0 0 20px 12px;
         > img {
           margin-right: 12px;
         }
         > span {
+          min-width: 50px;
           font-weight: 500;
           margin-right: 12px;
           color: nth($color-light, 9);
-        }
-        .switchSort {
-          display: inline-block;
-          > span {
-            cursor: pointer;
-            color: nth($color-light, 7);
-            margin-right: 12px;
-            &:hover {
-              font-weight: 500;
-              color: nth($color-light, 9);
-            }
-          }
-          .active {
-            color: white;
-            cursor: default;
-            padding: 4px 16px;
-            border-radius: 12px;
-            font-weight: 500;
-            background-color: nth($color-light, 9);
-            &:hover {
-              font-weight: 500;
-              color: white;
-            }
-          }
         }
       }
 
