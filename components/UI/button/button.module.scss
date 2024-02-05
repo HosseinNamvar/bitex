@@ -1,0 +1,18 @@
+@import "/public/css/variables.module.scss";
+
+.button {
+  line-height: 0.9;
+  height: 30px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid nth($color-light, 3);
+  color: nth($color-light, 8);
+  font-size: 1.4rem;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: nth($color-light, 2);
+  }
+  &:active {
+    background-color: nth($color-light, 3);
+  }
+}
