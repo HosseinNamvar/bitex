@@ -6,6 +6,24 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model Category {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  iconUrl       String?
+  iconSize      Int[]
+  url           String
+  subCategories SubCategory[]
+}
+
+model SubCategory {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  url           String
+  subCategories Json?
+  Category      Category @relation(fields: [categoryId], references: [id])
+  categoryId    String   @db.ObjectId
 }

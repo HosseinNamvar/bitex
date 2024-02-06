@@ -4,13 +4,14 @@ import styles from "./adminCategories.module.scss";
 import Button from "@/components/UI/button";
 import { CategoriesData } from "@/data/categories";
 import CatRow from "./_components/row";
+import { addCategory } from "@/actions/category/add";
 
 const AdminCategories = () => {
   return (
     <div className={styles.categoryList}>
       <div className={styles.head}>
         <h3>Add new category:</h3>
-        <Button text="Add" onClick={() => console.log("Add Cat")} />
+        <Button text="Add" onClick={() => addCategory()} />
       </div>
       <div className={styles.dataTable}>
         {CategoriesData.map((item, index) => (
