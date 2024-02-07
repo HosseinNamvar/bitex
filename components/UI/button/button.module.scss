@@ -15,4 +15,8 @@
   &:active {
     background-color: nth($color-light, 3);
   }
+  &:disabled {
+    cursor: default;
+    background-color: nth($color-light, 3);
+  }
 }

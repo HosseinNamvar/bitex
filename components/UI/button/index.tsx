@@ -3,12 +3,24 @@ import styles from "./button.module.scss";
 
 interface IProps {
   text: string;
-  onClick: () => void;
+  type?: "button" | "reset" | "submit";
+  disabled?: boolean;
+  onClick?: () => void;
 }
 
-const Button = ({ text, onClick }: IProps) => {
+const Button = ({
+  text,
+  onClick,
+  type = "button",
+  disabled = false,
+}: IProps) => {
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button
+      disabled={disabled}
+      type={type}
+      className={styles.button}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

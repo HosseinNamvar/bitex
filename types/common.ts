@@ -47,3 +47,18 @@ export type TCategory = {
   url: string;
   subCategories?: TSubCategory[];
 };
+
+type TCategoryOption = {
+  type: "color" | "text";
+  name: string;
+  color?: string;
+};
+
+export type TCategoryGroup = {
+  name: string;
+  iconUrl: string;
+  iconSize: [number, number];
+  url: string;
+  categories?: TSubCategory[];
+  options?: TCategoryOption[];
+};

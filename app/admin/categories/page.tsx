@@ -1,18 +1,22 @@
-"use client";
 import styles from "./adminCategories.module.scss";
 
 import Button from "@/components/UI/button";
 import { CategoriesData } from "@/data/categories";
 import CatRow from "./_components/row";
-import { addCategory } from "@/actions/category/add";
+import { getAllGroups } from "@/actions/category/getAll";
+import AddCategory from "@/components/admin/category/addCategory";
 
-const AdminCategories = () => {
+const AdminCategories = async () => {
+  const allGroups = await getAllGroups();
+
   return (
     <div className={styles.categoryList}>
       <div className={styles.head}>
-        <h3>Add new category:</h3>
-        <Button text="Add" onClick={() => addCategory()} />
+        <h3>Add:</h3>
+        <AddCategory />
       </div>
+      {typeof allGroups !== "string" &&
+        allGroups.map((group) => <span key={group.id}>{group.name}</span>)}
       <div className={styles.dataTable}>
         {CategoriesData.map((item, index) => (
           <div className={styles.catLevel1} key={index}>
