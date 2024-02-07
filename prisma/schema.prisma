@@ -11,19 +11,27 @@ datasource db {
 }
 
 model Category {
-  id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  iconUrl       String?
-  iconSize      Int[]
-  url           String
-  subCategories SubCategory[]
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  name            String        @unique
+  url             String
+  subCategories   SubCategory[]
+  CategoryGroup   CategoryGroup @relation(fields: [categoryGroupId], references: [id])
+  categoryGroupId String        @db.ObjectId
 }
 
 model SubCategory {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  url           String
-  subCategories Json?
-  Category      Category @relation(fields: [categoryId], references: [id])
-  categoryId    String   @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String   @unique
+  url        String
+  Category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String   @db.ObjectId
+}
+
+model CategoryGroup {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  name       String     @unique
+  url        String
+  iconUrl    String?
+  iconSize   Int[]
+  categories Category[]
 }
