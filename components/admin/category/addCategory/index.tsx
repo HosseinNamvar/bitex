@@ -20,14 +20,16 @@ const AddCategory = ({ onReset }: IProps) => {
     showWindow: false,
     windowTypeID: 0,
   });
-  const [errorMsg, setErrorMsg] = useState("");
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [groupCategoryData, setGroupCategory] = useState<TCategoryGroup>({
+  const defaultGroupData: TCategoryGroup = {
     name: "",
     url: "",
     iconSize: [10, 10],
     iconUrl: "",
-  });
+  };
+  const [errorMsg, setErrorMsg] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [groupCategoryData, setGroupCategory] =
+    useState<TCategoryGroup>(defaultGroupData);
 
   const windowContent: React.ReactNode[] = [
     <GroupCategory
@@ -67,12 +69,7 @@ const AddCategory = ({ onReset }: IProps) => {
     setButtonDisabled(true);
     const res = await addGroup(groupCategoryData);
     if (res) {
-      setGroupCategory({
-        name: "",
-        url: "",
-        iconSize: [10, 10],
-        iconUrl: "",
-      });
+      setGroupCategory(defaultGroupData);
       setButtonDisabled(false);
       setErrorMsg("");
       setShowWindow({ showWindow: false, windowTypeID: 0 });

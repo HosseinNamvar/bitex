@@ -13,7 +13,9 @@ interface IProps {
 const CatRow = ({ name, type, catId }: IProps) => {
   const [showOptions, setShowOptions] = useState(false);
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    console.log(catId);
+  };
   const handleDelete = () => {};
   return (
     <div className={styles.catRow}>
