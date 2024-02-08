@@ -5,17 +5,19 @@ import Button from "@/components/UI/button";
 import CategoryOptions from "../categoryOptions";
 
 interface IProps {
-  text: string;
+  name: string;
+  catId: string;
+  type: "group" | "category" | "subCategory";
 }
 
-const CatRow = ({ text }: IProps) => {
+const CatRow = ({ name, type, catId }: IProps) => {
   const [showOptions, setShowOptions] = useState(false);
 
   const handleEdit = () => {};
   const handleDelete = () => {};
   return (
     <div className={styles.catRow}>
-      <span>{text}</span>
+      <span>{name}</span>
       <div>
         <Button
           text="Options / Specifications"

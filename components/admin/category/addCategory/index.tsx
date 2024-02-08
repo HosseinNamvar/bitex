@@ -3,31 +3,50 @@ import { ElementRef, useRef, useState } from "react";
 import styles from "./addCategory.module.scss";
 import Button from "@/components/UI/button";
 import { addGroup, TCategoryGroup } from "@/actions/category/addCategory";
+import Popup from "@/components/UI/popup";
+import GroupCategory from "../../forms/groupCategory";
 
 type ShowMenu = {
   showWindow: boolean;
-  windowType: "group" | "category" | "subCategory";
+  windowTypeID: number;
 };
 
-const AddCategory = () => {
+interface IProps {
+  onReset: () => void;
+}
+
+const AddCategory = ({ onReset }: IProps) => {
   const [showWindow, setShowWindow] = useState<ShowMenu>({
     showWindow: false,
-    windowType: "group",
+    windowTypeID: 0,
   });
   const [errorMsg, setErrorMsg] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [groupCategoryData, setGroupCategory] = useState<TCategoryGroup>({
+    name: "",
+    url: "",
+    iconSize: [10, 10],
+    iconUrl: "",
+  });
+
+  const windowContent: React.ReactNode[] = [
+    <GroupCategory
+      errorMsg={errorMsg}
+      data={groupCategoryData}
+      onChange={setGroupCategory}
+    />,
+    <div className={styles.addCategory}>
+      <div className={styles.header}>Add new category</div>
+    </div>,
+    <div className={styles.addSubCategory}>
+      <div className={styles.header}>Add new sub category</div>
+    </div>,
+  ];
 
   const groupNameRef = useRef<ElementRef<"form">>(null);
 
-  const handleAddGroup = async (formData: FormData) => {
-    const name = formData.get("name")?.toString() || "";
-    const iconSize: [number, number] = [
-      parseInt(formData.get("iconSize1")?.toString() || "") || 0,
-      parseInt(formData.get("iconSize2")?.toString() || "") || 0,
-    ];
-    const iconUrl = formData.get("iconUrl")?.toString() || "";
-    const url = formData.get("url")?.toString() || "";
-
+  const handleAddGroup = async () => {
+    const { name, url, iconUrl, iconSize } = groupCategoryData;
     if (name === "") {
       setErrorMsg("Name is empty!");
       return;
@@ -45,118 +64,48 @@ const AddCategory = () => {
       return;
     }
 
-    const data: TCategoryGroup = {
-      name,
-      iconSize,
-      iconUrl,
-      url,
-    };
     setButtonDisabled(true);
-    const res = await addGroup(data);
+    const res = await addGroup(groupCategoryData);
     if (res) {
-      setShowWindow({ showWindow: false, windowType: "group" });
+      setGroupCategory({
+        name: "",
+        url: "",
+        iconSize: [10, 10],
+        iconUrl: "",
+      });
+      setButtonDisabled(false);
+      setErrorMsg("");
+      setShowWindow({ showWindow: false, windowTypeID: 0 });
+      onReset();
     } else {
-      setErrorMsg("There is a problem!");
+      setButtonDisabled(false);
+      setErrorMsg("Can't Insert it to Database!");
     }
   };
 
   return (
     <div className={styles.addCategory}>
       <Button
-        onClick={() => setShowWindow({ showWindow: true, windowType: "group" })}
+        onClick={() => setShowWindow({ showWindow: true, windowTypeID: 0 })}
         text="Add Group"
       />
       <Button
-        onClick={() =>
-          setShowWindow({ showWindow: true, windowType: "category" })
-        }
+        onClick={() => setShowWindow({ showWindow: true, windowTypeID: 1 })}
         text="Add Category"
       />
       <Button
-        onClick={() =>
-          setShowWindow({ showWindow: true, windowType: "subCategory" })
-        }
+        onClick={() => setShowWindow({ showWindow: true, windowTypeID: 2 })}
         text="Add Sub Category"
       />
       {showWindow.showWindow && (
-        <div className={styles.popup}>
-          <div
-            className={styles.background}
-            onClick={() =>
-              setShowWindow({ showWindow: false, windowType: "category" })
-            }
-          />
-          <div className={styles.window}>
-            {/* ------------- ADD GROUP SECTION ------------- */}
-            {showWindow.windowType === "group" && (
-              <div>
-                <div className={styles.header}>Add new category group</div>
-                <form
-                  action={handleAddGroup}
-                  className={styles.addGroup}
-                  ref={groupNameRef}
-                >
-                  <div className={styles.row}>
-                    <span className={styles.col1}>Category Group Name:</span>
-                    <input name="name" type="text" placeholder="name..." />
-                  </div>
-                  <div className={styles.row}>
-                    <span className={styles.col1}>URL:</span>
-                    <input name="url" type="text" placeholder="URL..." />
-                  </div>
-                  <div className={styles.row}>
-                    <span className={styles.col1}>ICON URL:</span>
-                    <input
-                      name="iconUrl"
-                      type="text"
-                      placeholder="ICON URL..."
-                    />
-                  </div>
-                  <div className={styles.row}>
-                    <span className={styles.col1}>ICON Size:</span>
-                    <input name="iconSize1" type="number" placeholder="0" />
-                    <input name="iconSize2" type="number" placeholder="0" />
-                  </div>
-                  {errorMsg !== "" && (
-                    <div className={styles.row}>
-                      <span className={styles.error}>{errorMsg}</span>
-                    </div>
-                  )}
-                  <div className={styles.windowControl}>
-                    <Button
-                      text="cancel"
-                      onClick={() =>
-                        setShowWindow({
-                          showWindow: false,
-                          windowType: "group",
-                        })
-                      }
-                    />
-                    <Button
-                      type="submit"
-                      text="Add Group"
-                      disabled={buttonDisabled}
-                    />
-                  </div>
-                </form>
-              </div>
-            )}
-
-            {/* ------------- ADD CATEGORY SECTION ------------- */}
-            {showWindow.windowType === "category" && (
-              <div>
-                <div className={styles.header}>Add new category</div>
-              </div>
-            )}
-
-            {/* ------------- ADD SUBCATEGORY SECTION ------------- */}
-            {showWindow.windowType === "subCategory" && (
-              <div>
-                <div className={styles.header}>Add new sub category</div>
-              </div>
-            )}
-          </div>
-        </div>
+        <Popup
+          content={windowContent[showWindow.windowTypeID]}
+          isLoading={buttonDisabled}
+          onCancel={() => setShowWindow({ showWindow: false, windowTypeID: 0 })}
+          onClose={() => setShowWindow({ showWindow: false, windowTypeID: 0 })}
+          onSubmit={() => handleAddGroup()}
+          title="Add Category Group"
+        />
       )}
     </div>
   );
