@@ -3,7 +3,7 @@ import styles from "./adminCategories.module.scss";
 
 import { CategoriesData } from "@/data/categories";
 import CatRow from "./_components/row";
-import { getAllGroups } from "@/actions/category/getCategories";
+import { getAllGroups } from "@/actions/category/categoryGroupServices";
 import AddCategory from "@/components/admin/category/addCategory";
 import { useEffect, useState } from "react";
 import { TCategoryGroup } from "@/types/common";

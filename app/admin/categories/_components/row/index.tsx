@@ -7,7 +7,7 @@ import Popup from "@/components/UI/popup";
 import GroupCategory from "@/components/admin/forms/groupCategory";
 
 import { TCategoryGroup } from "@/types/common";
-import { getOneGroup } from "@/actions/category/getCategories";
+import { getOneGroup } from "@/actions/category/categoryGroupServices";
 
 interface IProps {
   name: string;
