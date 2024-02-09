@@ -55,7 +55,7 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
               onChange={(e) =>
                 onChange({
                   ...data,
-                  iconSize: [parseInt(e.currentTarget.value), iconSize[1]],
+                  iconSize: [parseInt(e.currentTarget.value) | 0, iconSize[1]],
                 })
               }
               placeholder="0"
@@ -68,7 +68,7 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
               onChange={(e) =>
                 onChange({
                   ...data,
-                  iconSize: [iconSize[0], parseInt(e.currentTarget.value)],
+                  iconSize: [iconSize[0], parseInt(e.currentTarget.value) | 0],
                 })
               }
               value={data.iconSize[1]}
