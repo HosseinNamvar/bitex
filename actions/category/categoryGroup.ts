@@ -30,6 +30,9 @@ export const getAllGroups = async () => {
         id: true,
         name: true,
       },
+      orderBy: {
+        id: "desc",
+      },
     });
 
     if (!allGroups) return { error: "Can't read categories" };
