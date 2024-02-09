@@ -2,7 +2,7 @@ import styles from "./adminCategories.module.scss";
 
 import { CategoriesData } from "@/data/categories";
 import CatRow from "./_components/row";
-import { getAllGroups } from "@/actions/category/getAll";
+import { getAllGroups } from "@/actions/category/getCategories";
 import AddCategory from "@/components/admin/category/addCategory";
 
 const AdminCategories = async () => {
@@ -14,8 +14,8 @@ const AdminCategories = async () => {
         <AddCategory onReset={getAllGroups} />
       </div>
       <div className={styles.dataTable}>
-        {typeof allGroups !== "string" &&
-          allGroups.map((group) => (
+        {!allGroups.error &&
+          allGroups.res?.map((group) => (
             <div className={styles.catLevel1} key={group.id}>
               <CatRow name={group.name} type="group" catId={group.id} />
             </div>

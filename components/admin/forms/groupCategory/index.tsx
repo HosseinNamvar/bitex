@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 import styles from "./groupCategory.module.scss";
-import { TCategoryGroup } from "@/actions/category/addCategory";
+import { TCategoryGroup } from "@/types/common";
 
 interface IProps {
   errorMsg: string;
   data: {
+    id: string;
     name: string;
     url: string;
     iconUrl: string;

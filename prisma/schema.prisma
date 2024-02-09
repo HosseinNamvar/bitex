@@ -14,7 +14,7 @@ model CategoryGroup {
   id         String           @id @default(auto()) @map("_id") @db.ObjectId
   name       String           @unique
   url        String
-  iconUrl    String?
+  iconUrl    String
   iconSize   Int[]
   categories Category[]
   options    CategoryOption[]

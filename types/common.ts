@@ -55,6 +55,7 @@ type TCategoryOption = {
 };
 
 export type TCategoryGroup = {
+  id: string;
   name: string;
   iconUrl: string;
   iconSize: [number, number];

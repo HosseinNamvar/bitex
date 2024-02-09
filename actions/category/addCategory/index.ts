@@ -2,17 +2,17 @@
 import { db } from "@/lib/db";
 import { z } from "zod";
 
-const CategoryGroup = z.object({
+const AddCategoryGroup = z.object({
   name: z.string().min(3),
   url: z.string().min(3),
   iconSize: z.tuple([z.number().min(3).int(), z.number().min(3).int()]),
   iconUrl: z.string().min(3),
 });
 
-export type TCategoryGroup = z.infer<typeof CategoryGroup>;
+type TAddCategoryGroup = z.infer<typeof AddCategoryGroup>;
 
-export const addGroup = async (data: TCategoryGroup) => {
-  if (!CategoryGroup.safeParse(data).success) return false;
+export const addGroup = async (data: TAddCategoryGroup) => {
+  if (!AddCategoryGroup.safeParse(data).success) return false;
   try {
     const newCategory = await db.categoryGroup.create({
       data: {
@@ -22,10 +22,9 @@ export const addGroup = async (data: TCategoryGroup) => {
         iconUrl: data.iconUrl,
       },
     });
-    if (newCategory) return true;
-    console.log("cant add to database");
+    if (!newCategory) return "cant add to database";
+    return true;
   } catch (error) {
-    console.log(error);
     return false;
   }
 };
