@@ -2,7 +2,7 @@
 import { ElementRef, useRef, useState } from "react";
 import styles from "./addCategory.module.scss";
 import Button from "@/components/UI/button";
-import { addGroup } from "@/actions/category/addCategory";
+import { addGroup } from "@/actions/category/categoryGroup";
 import Popup from "@/components/UI/popup";
 import GroupCategory from "../../forms/groupCategory";
 import { TCategoryGroup } from "@/types/common";
