@@ -111,10 +111,19 @@ export const updateGroup = async (data: TCategoryGroup) => {
   }
 };
 
-export const deleteGroup = async (data: TCategoryGroup) => {
-  if (!AddCategoryGroup.safeParse(data).success)
-    return { error: "Data is no valid" };
+export const deleteGroup = async (id: string) => {
+  if (!id) return { error: "Can't delete it!" };
 
   try {
-  } catch (error) {}
+    const deleteItem = await db.categoryGroup.delete({
+      where: {
+        id,
+      },
+    });
+
+    if (!deleteItem) return { error: "Can't delete it!" };
+    return { res: JSON.stringify(deleteItem) };
+  } catch (error) {
+    return { error: "Can't delete it!" };
+  }
 };

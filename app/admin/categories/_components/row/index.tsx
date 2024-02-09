@@ -6,7 +6,11 @@ import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
 import { TCategoryGroup } from "@/types/common";
 
-import { getOneGroup, updateGroup } from "@/actions/category/categoryGroup";
+import {
+  deleteGroup,
+  getOneGroup,
+  updateGroup,
+} from "@/actions/category/categoryGroup";
 
 import CategoryOptions from "../categoryOptions";
 import GroupCategory from "@/components/admin/forms/groupCategory";
@@ -23,6 +27,7 @@ let initialGroup: TCategoryGroup;
 const CatRow = ({ name, type, catId, onReset }: IProps) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [groupCategoryData, setGroupCategory] =
     useState<TCategoryGroup>(initialGroup);
@@ -65,7 +70,14 @@ const CatRow = ({ name, type, catId, onReset }: IProps) => {
     }
   };
 
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    const deleteItem = await deleteGroup(catId);
+    if (deleteItem.res) {
+      setShowDelete(false);
+      onReset();
+    }
+  };
+
   return (
     <div className={styles.catRow}>
       <span>{name}</span>
@@ -77,7 +89,7 @@ const CatRow = ({ name, type, catId, onReset }: IProps) => {
       </div>
       <div>
         <Button text="Edit" onClick={handleEditButton} />
-        <Button text="Delete" onClick={handleDelete} />
+        <Button text="Delete" onClick={() => setShowDelete(true)} />
       </div>
       {showOptions ? (
         <CategoryOptions onClose={() => setShowOptions(false)} />
@@ -98,6 +110,16 @@ const CatRow = ({ name, type, catId, onReset }: IProps) => {
           onClose={() => setShowEdit(false)}
           onSubmit={() => handleUpdate()}
           title="Edit the Category Group"
+        />
+      )}
+      {showDelete && (
+        <Popup
+          content={<div className={styles.deleteText}>Are you sure?</div>}
+          isLoading={false}
+          width="400px"
+          onCancel={() => setShowDelete(false)}
+          onClose={() => setShowDelete(false)}
+          onSubmit={() => handleDelete()}
         />
       )}
     </div>
