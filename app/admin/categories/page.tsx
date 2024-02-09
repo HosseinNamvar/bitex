@@ -11,24 +11,20 @@ import { TCategoryGroup } from "@/types/common";
 const AdminCategories = () => {
   const [allGroups, setAllGroup] = useState<TCategoryGroup[]>([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getAllGroups();
-      if (data.res) setAllGroup(data.res);
-    };
-    getData();
-  }, []);
-
-  const handleRefresh = async () => {
+  const getData = async () => {
     const data = await getAllGroups();
     if (data.res) setAllGroup(data.res);
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className={styles.categoryList}>
       <div className={styles.head}>
         <h3>Add:</h3>
-        <AddCategory onReset={handleRefresh} />
+        <AddCategory onReset={getData} />
       </div>
       <div className={styles.dataTable}>
         {allGroups.length > 0 &&
