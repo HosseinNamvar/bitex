@@ -58,7 +58,7 @@ export type TCategoryGroup = {
   id: string;
   name: string;
   iconUrl: string;
-  iconSize: [number, number];
+  iconSize: number[];
   url: string;
   categories?: TSubCategory[];
   options?: TCategoryOption[];

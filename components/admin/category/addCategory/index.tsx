@@ -2,9 +2,10 @@
 import { ElementRef, useRef, useState } from "react";
 import styles from "./addCategory.module.scss";
 import Button from "@/components/UI/button";
-import { addGroup, TCategoryGroup } from "@/actions/category/addCategory";
+import { addGroup } from "@/actions/category/addCategory";
 import Popup from "@/components/UI/popup";
 import GroupCategory from "../../forms/groupCategory";
+import { TCategoryGroup } from "@/types/common";
 
 type ShowMenu = {
   showWindow: boolean;
@@ -21,6 +22,7 @@ const AddCategory = ({ onReset }: IProps) => {
     windowTypeID: 0,
   });
   const defaultGroupData: TCategoryGroup = {
+    id: "",
     name: "",
     url: "",
     iconSize: [10, 10],
@@ -36,11 +38,12 @@ const AddCategory = ({ onReset }: IProps) => {
       errorMsg={errorMsg}
       data={groupCategoryData}
       onChange={setGroupCategory}
+      key={1}
     />,
-    <div className={styles.addCategory}>
+    <div className={styles.addCategory} key={2}>
       <div className={styles.header}>Add new category</div>
     </div>,
-    <div className={styles.addSubCategory}>
+    <div className={styles.addSubCategory} key={3}>
       <div className={styles.header}>Add new sub category</div>
     </div>,
   ];

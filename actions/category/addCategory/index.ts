@@ -1,6 +1,7 @@
 "use server";
-import { db } from "@/lib/db";
 import { z } from "zod";
+import { db } from "@/lib/db";
+import { TCategoryGroup } from "@/types/common";
 
 const AddCategoryGroup = z.object({
   name: z.string().min(3),
@@ -9,9 +10,7 @@ const AddCategoryGroup = z.object({
   iconUrl: z.string().min(3),
 });
 
-type TAddCategoryGroup = z.infer<typeof AddCategoryGroup>;
-
-export const addGroup = async (data: TAddCategoryGroup) => {
+export const addGroup = async (data: TCategoryGroup) => {
   if (!AddCategoryGroup.safeParse(data).success) return false;
   try {
     const newCategory = await db.categoryGroup.create({

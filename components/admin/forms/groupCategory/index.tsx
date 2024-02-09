@@ -5,13 +5,7 @@ import { TCategoryGroup } from "@/types/common";
 
 interface IProps {
   errorMsg: string;
-  data: {
-    id: string;
-    name: string;
-    url: string;
-    iconUrl: string;
-    iconSize: [number, number];
-  };
+  data: TCategoryGroup;
   onChange: (data: TCategoryGroup) => void;
 }
 

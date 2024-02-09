@@ -1,21 +1,38 @@
+"use client";
 import styles from "./adminCategories.module.scss";
 
 import { CategoriesData } from "@/data/categories";
 import CatRow from "./_components/row";
 import { getAllGroups } from "@/actions/category/getCategories";
 import AddCategory from "@/components/admin/category/addCategory";
+import { useEffect, useState } from "react";
+import { TCategoryGroup } from "@/types/common";
 
-const AdminCategories = async () => {
-  const allGroups = await getAllGroups();
+const AdminCategories = () => {
+  const [allGroups, setAllGroup] = useState<TCategoryGroup[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getAllGroups();
+      if (data.res) setAllGroup(data.res);
+    };
+    getData();
+  }, []);
+
+  const handleRefresh = async () => {
+    const data = await getAllGroups();
+    if (data.res) setAllGroup(data.res);
+  };
+
   return (
     <div className={styles.categoryList}>
       <div className={styles.head}>
         <h3>Add:</h3>
-        <AddCategory onReset={getAllGroups} />
+        <AddCategory onReset={handleRefresh} />
       </div>
       <div className={styles.dataTable}>
-        {!allGroups.error &&
-          allGroups.res?.map((group) => (
+        {allGroups.length > 0 &&
+          allGroups.map((group) => (
             <div className={styles.catLevel1} key={group.id}>
               <CatRow name={group.name} type="group" catId={group.id} />
             </div>

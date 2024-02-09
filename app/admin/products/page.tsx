@@ -44,7 +44,7 @@ const AdminProducts = () => {
           </div>
         </div>
         <div className={styles.row}>
-          <span className={styles.name}>Dell 27" IPS</span>
+          <span className={styles.name}>Dell 27 inch IPS</span>
           <span className={styles.category}>Monitor</span>
           <div>
             <Button text="edit" onClick={() => console.log("edit product")} />

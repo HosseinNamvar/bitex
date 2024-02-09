@@ -4,10 +4,12 @@ import { TCategoryGroup } from "@/types/common";
 
 export const getAllGroups = async () => {
   try {
-    const allGroups = await db.categoryGroup.findMany();
+    const allGroups: TCategoryGroup[] = await db.categoryGroup.findMany();
+
+    if (!allGroups) return { error: "Can't read categories" };
+
     return { res: allGroups };
   } catch (error) {
-    console.log(error);
     return { error: "Cant read Category Groups" };
   }
 };
