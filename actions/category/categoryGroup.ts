@@ -9,10 +9,28 @@ const AddCategoryGroup = z.object({
   iconSize: z.tuple([z.number().min(3).int(), z.number().min(3).int()]),
   iconUrl: z.string().min(3),
 });
+const UpdateCategoryGroup = z.object({
+  name: z.string().min(3).optional(),
+  url: z.string().min(3).optional(),
+  iconSize: z
+    .tuple([z.number().min(3).int(), z.number().min(3).int()])
+    .optional(),
+  iconUrl: z.string().min(3).optional(),
+});
+
+export type TReadGroup = {
+  id: string;
+  name: string;
+};
 
 export const getAllGroups = async () => {
   try {
-    const allGroups: TCategoryGroup[] = await db.categoryGroup.findMany();
+    const allGroups: TReadGroup[] = await db.categoryGroup.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
 
     if (!allGroups) return { error: "Can't read categories" };
 
@@ -42,28 +60,52 @@ export const getOneGroup = async (id: string) => {
 
 export const addGroup = async (data: TCategoryGroup) => {
   if (!AddCategoryGroup.safeParse(data).success) return false;
+
   try {
-    const newCategory = await db.categoryGroup.create({
-      data: {
-        name: data.name,
-        url: data.url,
-        iconSize: data.iconSize,
-        iconUrl: data.iconUrl,
-      },
-    });
-    if (!newCategory) return "cant add to database";
-    return true;
+    if (data.name && data.url && data.iconSize && data.iconUrl) {
+      const newCategory = await db.categoryGroup.create({
+        data: {
+          name: data.name,
+          url: data.url,
+          iconSize: data.iconSize,
+          iconUrl: data.iconUrl,
+        },
+      });
+      if (!newCategory) return "cant add to database";
+      return true;
+    }
+    return false;
   } catch (error) {
     return false;
   }
 };
 
 export const updateGroup = async (data: TCategoryGroup) => {
-  if (!AddCategoryGroup.safeParse(data).success)
+  if (!UpdateCategoryGroup.safeParse(data).success)
     return { error: "Data is no valid" };
+  console.log("values");
+
+  const { id, ...values } = data;
 
   try {
-  } catch (error) {}
+    let updated = await db.categoryGroup.update({
+      where: {
+        id,
+      },
+      data: {
+        name: values.name,
+        iconUrl: values.iconUrl,
+        url: values.url,
+        iconSize: values.iconSize,
+      },
+    });
+    if (updated) return { res: JSON.stringify(updated) };
+    return { error: "Can't update it" };
+  } catch (error) {
+    return {
+      error: error,
+    };
+  }
 };
 
 export const deleteGroup = async (data: TCategoryGroup) => {

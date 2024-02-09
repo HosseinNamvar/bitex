@@ -2,7 +2,7 @@
 import { ElementRef, useRef, useState } from "react";
 import styles from "./addCategory.module.scss";
 import Button from "@/components/UI/button";
-import { addGroup } from "@/actions/category/categoryGroupServices";
+import { addGroup } from "@/actions/category/categoryGroup";
 import Popup from "@/components/UI/popup";
 import GroupCategory from "../../forms/groupCategory";
 import { TCategoryGroup } from "@/types/common";
@@ -52,6 +52,7 @@ const AddCategory = ({ onReset }: IProps) => {
 
   const handleAddGroup = async () => {
     const { name, url, iconUrl, iconSize } = groupCategoryData;
+    if (!name || !url || !iconUrl || !iconSize) return;
     if (name === "") {
       setErrorMsg("Name is empty!");
       return;

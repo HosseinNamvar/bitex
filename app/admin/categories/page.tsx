@@ -3,13 +3,12 @@ import styles from "./adminCategories.module.scss";
 
 import { CategoriesData } from "@/data/categories";
 import CatRow from "./_components/row";
-import { getAllGroups } from "@/actions/category/categoryGroupServices";
+import { TReadGroup, getAllGroups } from "@/actions/category/categoryGroup";
 import AddCategory from "@/components/admin/category/addCategory";
 import { useEffect, useState } from "react";
-import { TCategoryGroup } from "@/types/common";
 
 const AdminCategories = () => {
-  const [allGroups, setAllGroup] = useState<TCategoryGroup[]>([]);
+  const [allGroups, setAllGroup] = useState<TReadGroup[]>([]);
 
   const getData = async () => {
     const data = await getAllGroups();
@@ -30,7 +29,12 @@ const AdminCategories = () => {
         {allGroups.length > 0 &&
           allGroups.map((group) => (
             <div className={styles.catLevel1} key={group.id}>
-              <CatRow name={group.name} type="group" catId={group.id} />
+              <CatRow
+                onReset={getData}
+                name={group.name}
+                type="group"
+                catId={group.id}
+              />
             </div>
           ))}
         {CategoriesData.map((item, index) => (

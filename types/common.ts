@@ -56,10 +56,10 @@ type TCategoryOption = {
 
 export type TCategoryGroup = {
   id: string;
-  name: string;
-  iconUrl: string;
-  iconSize: number[];
-  url: string;
+  name?: string;
+  iconUrl?: string;
+  iconSize?: number[];
+  url?: string;
   categories?: TSubCategory[];
   options?: TCategoryOption[];
 };

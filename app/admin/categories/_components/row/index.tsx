@@ -1,41 +1,65 @@
 "use client";
-import { useState } from "react";
 import styles from "./catRow.module.scss";
-import Button from "@/components/UI/button";
-import CategoryOptions from "../categoryOptions";
-import Popup from "@/components/UI/popup";
-import GroupCategory from "@/components/admin/forms/groupCategory";
 
+import { useState } from "react";
+import Button from "@/components/UI/button";
+import Popup from "@/components/UI/popup";
 import { TCategoryGroup } from "@/types/common";
-import { getOneGroup } from "@/actions/category/categoryGroupServices";
+
+import { getOneGroup, updateGroup } from "@/actions/category/categoryGroup";
+
+import CategoryOptions from "../categoryOptions";
+import GroupCategory from "@/components/admin/forms/groupCategory";
 
 interface IProps {
   name: string;
   catId: string;
+  onReset: () => void;
   type: "group" | "category" | "subCategory";
 }
 
-const initialGroup: TCategoryGroup = {
-  id: "",
-  name: "",
-  url: "",
-  iconSize: [10, 10],
-  iconUrl: "",
-};
+let initialGroup: TCategoryGroup;
 
-const CatRow = ({ name, type, catId }: IProps) => {
+const CatRow = ({ name, type, catId, onReset }: IProps) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [groupCategoryData, setGroupCategory] =
     useState<TCategoryGroup>(initialGroup);
 
-  const handleUpdate = () => {};
+  const handleUpdate = async () => {
+    let updatedData: TCategoryGroup = { id: catId };
+
+    const keys = ["name", "url", "iconUrl"] as const;
+    for (let i = 0; i < keys.length; i++) {
+      if (groupCategoryData[keys[i]] !== initialGroup[keys[i]]) {
+        updatedData[keys[i]] = groupCategoryData[keys[i]];
+      }
+    }
+
+    if (groupCategoryData.iconSize && initialGroup.iconSize) {
+      if (
+        groupCategoryData.iconSize.toString() !==
+        initialGroup.iconSize.toString()
+      )
+        updatedData.iconSize = [...groupCategoryData.iconSize];
+    }
+
+    const response = await updateGroup(updatedData);
+    if (!response.error) {
+      setShowEdit(false);
+      onReset();
+    } else {
+      setErrorMsg(JSON.stringify(response.error));
+    }
+  };
 
   const handleEditButton = async () => {
     const foundGroup = await getOneGroup(catId);
 
     if (foundGroup.res) {
+      const { ...values } = foundGroup.res;
+      initialGroup = values;
       setGroupCategory(foundGroup.res);
       setShowEdit(true);
     }

@@ -10,8 +10,7 @@ interface IProps {
 }
 
 const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
-  const [nameValue, setNameValue] = useState("");
-
+  const iconSize: number[] = data.iconSize ? [...data.iconSize] : [];
   return (
     <div className={styles.groupCategoryForm}>
       <div className={styles.row}>
@@ -48,30 +47,34 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
       </div>
       <div className={styles.row}>
         <span className={styles.col1}>ICON Size:</span>
-        <input
-          name="iconSize1"
-          type="number"
-          onChange={(e) =>
-            onChange({
-              ...data,
-              iconSize: [parseInt(e.currentTarget.value), data.iconSize[1]],
-            })
-          }
-          placeholder="0"
-          value={data.iconSize[0]}
-        />
-        <input
-          name="iconSize2"
-          type="number"
-          placeholder="0"
-          onChange={(e) =>
-            onChange({
-              ...data,
-              iconSize: [data.iconSize[0], parseInt(e.currentTarget.value)],
-            })
-          }
-          value={data.iconSize[1]}
-        />
+        {data.iconSize && (
+          <>
+            <input
+              name="iconSize1"
+              type="number"
+              onChange={(e) =>
+                onChange({
+                  ...data,
+                  iconSize: [parseInt(e.currentTarget.value), iconSize[1]],
+                })
+              }
+              placeholder="0"
+              value={data.iconSize[0]}
+            />
+            <input
+              name="iconSize2"
+              type="number"
+              placeholder="0"
+              onChange={(e) =>
+                onChange({
+                  ...data,
+                  iconSize: [iconSize[0], parseInt(e.currentTarget.value)],
+                })
+              }
+              value={data.iconSize[1]}
+            />
+          </>
+        )}
       </div>
       {errorMsg !== "" && (
         <div className={styles.row}>
