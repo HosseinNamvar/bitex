@@ -1,5 +1,5 @@
 "use client";
-import styles from "./catRow.module.scss";
+import styles from "./catGroupRow.module.scss";
 
 import { useState } from "react";
 import Button from "@/components/UI/button";
@@ -19,15 +19,15 @@ interface IProps {
   name: string;
   catId: string;
   onReset: () => void;
-  type: "group" | "category" | "subCategory";
 }
 
 let initialGroup: TCategoryGroup;
 
-const CatRow = ({ name, type, catId, onReset }: IProps) => {
+const CatGroupRow = ({ name, catId, onReset }: IProps) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [showAddCategory, setShowAddCategory] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [groupCategoryData, setGroupCategory] =
     useState<TCategoryGroup>(initialGroup);
@@ -79,13 +79,14 @@ const CatRow = ({ name, type, catId, onReset }: IProps) => {
   };
 
   return (
-    <div className={styles.catRow}>
+    <div className={styles.catGroupRow}>
       <span>{name}</span>
       <div>
         <Button
           text="Options / Specifications"
           onClick={() => setShowOptions(true)}
         />
+        <Button text="Add Category" onClick={() => setShowAddCategory(true)} />
       </div>
       <div>
         <Button text="Edit" onClick={handleEditButton} />
@@ -95,6 +96,16 @@ const CatRow = ({ name, type, catId, onReset }: IProps) => {
         <CategoryOptions onClose={() => setShowOptions(false)} />
       ) : (
         ""
+      )}
+      {showAddCategory && (
+        <Popup
+          content={<div />}
+          isLoading={false}
+          onCancel={() => setShowAddCategory(false)}
+          onClose={() => setShowAddCategory(false)}
+          onSubmit={() => console.log("")}
+          title="Add Category"
+        />
       )}
       {showEdit && (
         <Popup
@@ -126,4 +137,4 @@ const CatRow = ({ name, type, catId, onReset }: IProps) => {
   );
 };
 
-export default CatRow;
+export default CatGroupRow;

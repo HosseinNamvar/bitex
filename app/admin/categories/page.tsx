@@ -2,9 +2,9 @@
 import styles from "./adminCategories.module.scss";
 
 import { CategoriesData } from "@/data/categories";
-import CatRow from "./_components/row";
+import CatGroupRow from "./_components/rowGroup";
 import { TReadGroup, getAllGroups } from "@/actions/category/categoryGroup";
-import AddCategory from "@/components/admin/category/addCategory";
+import AddCategoryGroup from "@/components/admin/category/addCategoryGroup";
 import { useEffect, useState } from "react";
 
 const AdminCategories = () => {
@@ -23,16 +23,15 @@ const AdminCategories = () => {
     <div className={styles.categoryList}>
       <div className={styles.head}>
         <h3>Add:</h3>
-        <AddCategory onReset={getData} />
+        <AddCategoryGroup onReset={getData} />
       </div>
       <div className={styles.dataTable}>
         {allGroups.length > 0 &&
           allGroups.map((group) => (
             <div className={styles.catLevel1} key={group.id}>
-              <CatRow
+              <CatGroupRow
                 onReset={getData}
                 name={group.name}
-                type="group"
                 catId={group.id}
               />
             </div>

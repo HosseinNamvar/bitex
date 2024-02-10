@@ -16,7 +16,7 @@ interface IProps {
   onReset: () => void;
 }
 
-const AddCategory = ({ onReset }: IProps) => {
+const AddCategoryGroup = ({ onReset }: IProps) => {
   const [showWindow, setShowWindow] = useState<ShowMenu>({
     showWindow: false,
     windowTypeID: 0,
@@ -85,7 +85,7 @@ const AddCategory = ({ onReset }: IProps) => {
   };
 
   return (
-    <div className={styles.addCategory}>
+    <div className={styles.addCategoryGroup}>
       <Button
         onClick={() => setShowWindow({ showWindow: true, windowTypeID: 0 })}
         text="Add Group"
@@ -112,4 +112,4 @@ const AddCategory = ({ onReset }: IProps) => {
   );
 };
 
-export default AddCategory;
+export default AddCategoryGroup;
