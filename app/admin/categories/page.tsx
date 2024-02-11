@@ -1,7 +1,6 @@
 "use client";
 import styles from "./adminCategories.module.scss";
 
-import { CategoriesData } from "@/data/categories";
 import CatGroupRow from "./_components/rowGroup";
 import { TReadGroup, getAllGroups } from "@/actions/category/categoryGroup";
 import AddCategoryGroup from "@/components/admin/category/addCategoryGroup";
@@ -18,7 +17,6 @@ const AdminCategories = () => {
   useEffect(() => {
     getData();
   }, []);
-
   return (
     <div className={styles.categoryList}>
       <div className={styles.head}>
@@ -29,11 +27,7 @@ const AdminCategories = () => {
         {allGroups.length > 0 &&
           allGroups.map((group) => (
             <div className={styles.catLevel1} key={group.id}>
-              <CatGroupRow
-                onReset={getData}
-                name={group.name}
-                catId={group.id}
-              />
+              <CatGroupRow onReset={getData} data={group} />
             </div>
           ))}
         {/* {CategoriesData.map((item, index) => (

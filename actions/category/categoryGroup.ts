@@ -21,6 +21,7 @@ const UpdateCategoryGroup = z.object({
 export type TReadGroup = {
   id: string;
   name: string;
+  categories: { id: string; name: string }[];
 };
 
 export const getAllGroups = async () => {
@@ -29,14 +30,19 @@ export const getAllGroups = async () => {
       select: {
         id: true,
         name: true,
+        categories: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
       },
       orderBy: {
-        id: "desc",
+        id: "asc",
       },
     });
 
     if (!allGroups) return { error: "Can't read categories" };
-
     return { res: allGroups };
   } catch (error) {
     return { error: "Cant read Category Groups" };

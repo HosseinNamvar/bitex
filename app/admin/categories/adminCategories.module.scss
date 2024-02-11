@@ -30,9 +30,9 @@
   }
 
   .catLevel1 {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid nth($color-light, 3);
+    margin-bottom: 30px;
+    border-radius: 8px;
+    border: 1px solid nth($color-light, 2);
   }
   .catLevel2 {
     margin-left: 24px;

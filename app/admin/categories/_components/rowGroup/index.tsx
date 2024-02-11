@@ -7,6 +7,7 @@ import Popup from "@/components/UI/popup";
 import { TAddCategory, TCategoryGroup } from "@/types/common";
 
 import {
+  TReadGroup,
   deleteGroup,
   getOneGroup,
   updateGroup,
@@ -16,10 +17,10 @@ import CategoryOptions from "../categoryOptions";
 import GroupCategory from "@/components/admin/forms/groupCategory";
 import AddCategory from "@/components/admin/category/addCategory";
 import { TAddCategoryAction, addCategory } from "@/actions/category/category";
+import CategoryRow from "@/components/admin/category/categoryRow";
 
 interface IProps {
-  name: string;
-  catId: string;
+  data: TReadGroup;
   onReset: () => void;
 }
 
@@ -30,7 +31,8 @@ let initialCategory: TAddCategory = {
   url: "",
 };
 
-const CatGroupRow = ({ name, catId, onReset }: IProps) => {
+const CatGroupRow = ({ data, onReset }: IProps) => {
+  const { id: groupId, name, categories } = data;
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -45,7 +47,7 @@ const CatGroupRow = ({ name, catId, onReset }: IProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleUpdate = async () => {
-    let updatedData: TCategoryGroup = { id: catId };
+    let updatedData: TCategoryGroup = { id: groupId };
 
     const keys = ["name", "url", "iconUrl"] as const;
     for (let i = 0; i < keys.length; i++) {
@@ -72,7 +74,7 @@ const CatGroupRow = ({ name, catId, onReset }: IProps) => {
   };
 
   const handleEditButton = async () => {
-    const foundGroup = await getOneGroup(catId);
+    const foundGroup = await getOneGroup(groupId);
 
     if (foundGroup.res) {
       const { ...values } = foundGroup.res;
@@ -83,7 +85,7 @@ const CatGroupRow = ({ name, catId, onReset }: IProps) => {
   };
 
   const handleDelete = async () => {
-    const deleteItem = await deleteGroup(catId);
+    const deleteItem = await deleteGroup(groupId);
     if (deleteItem.res) {
       setShowDelete(false);
       onReset();
@@ -96,7 +98,7 @@ const CatGroupRow = ({ name, catId, onReset }: IProps) => {
     if (addCategoryData.url === "") setErrorMsg("URL should not be empty");
 
     const data: TAddCategoryAction = {
-      groupId: catId,
+      groupId: groupId,
       ...addCategoryData,
     };
     setIsLoading(true);
@@ -135,6 +137,18 @@ const CatGroupRow = ({ name, catId, onReset }: IProps) => {
         <Button text="Edit" onClick={handleEditButton} />
         <Button text="Delete" onClick={() => setShowDelete(true)} />
       </div>
+      {categories.length > 0 && (
+        <div className={styles.categories}>
+          {categories.map((cat) => (
+            <CategoryRow
+              name={cat.name}
+              catId={cat.id}
+              key={cat.id}
+              onReset={onReset}
+            />
+          ))}
+        </div>
+      )}
       {showOptions ? (
         <CategoryOptions onClose={() => setShowOptions(false)} />
       ) : (
