@@ -74,3 +74,20 @@ export const updateCategory = async (data: TUpdateCategoryAction) => {
     return { error: JSON.stringify(err) };
   }
 };
+
+export const deleteCategory = async (id: string) => {
+  if (!id) return { error: "Can't delete it!" };
+
+  try {
+    const result = await db.category.delete({
+      where: {
+        id,
+      },
+    });
+
+    if (!result) return { error: "Can't delete it!" };
+    return { res: JSON.stringify(result) };
+  } catch (error) {
+    return { error: "Can't delete it!" };
+  }
+};

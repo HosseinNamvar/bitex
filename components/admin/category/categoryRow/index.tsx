@@ -9,6 +9,7 @@ import AddCategory from "../addCategory";
 import { TAddCategory } from "@/types/common";
 import {
   TUpdateCategoryAction,
+  deleteCategory,
   updateCategory,
 } from "@/actions/category/category";
 
@@ -76,6 +77,16 @@ const CategoryRow = ({ catId, name, url, onReset }: IProps) => {
     }
   };
 
+  const handleDeleteCat = async () => {
+    setIsLoading(true);
+    const response = await deleteCategory(catId);
+    if (response.res) {
+      setShowDelete(false);
+      onReset();
+    }
+    setIsLoading(false);
+  };
+
   const handleAddSub = async () => {};
   return (
     <div className={styles.categoryRow}>
@@ -125,6 +136,17 @@ const CategoryRow = ({ catId, name, url, onReset }: IProps) => {
           onSubmit={() => handleAddSub()}
           confirmBtnText="ADD"
           title="Add Sub Category"
+        />
+      )}
+
+      {showDelete && (
+        <Popup
+          width="300px"
+          content={<div className={styles.deleteText}>Are you sure?</div>}
+          isLoading={isLoading}
+          onCancel={() => setShowDelete(false)}
+          onClose={() => setShowDelete(false)}
+          onSubmit={() => handleDeleteCat()}
         />
       )}
     </div>
