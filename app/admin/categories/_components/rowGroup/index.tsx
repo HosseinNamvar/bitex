@@ -63,10 +63,12 @@ const CatGroupRow = ({ data, onReset }: IProps) => {
       )
         updatedData.iconSize = [...groupCategoryData.iconSize];
     }
-
+    setIsLoading(true);
     const response = await updateGroup(updatedData);
     if (!response.error) {
       setShowEdit(false);
+      setIsLoading(false);
+      setErrorMsg("");
       onReset();
     } else {
       setErrorMsg(JSON.stringify(response.error));
@@ -143,6 +145,7 @@ const CatGroupRow = ({ data, onReset }: IProps) => {
             <CategoryRow
               name={cat.name}
               catId={cat.id}
+              url={cat.url}
               key={cat.id}
               onReset={onReset}
             />

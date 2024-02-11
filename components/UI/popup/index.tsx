@@ -40,9 +40,9 @@ const Popup = ({
         )}
         {content}
         <div className={styles.windowControl}>
-          <Button text={confirmBtnText || "Cancel"} onClick={onCancel} />
+          <Button text={cancelBtnText || "Cancel"} onClick={onCancel} />
           <Button
-            text={cancelBtnText || "OK"}
+            text={confirmBtnText || "OK"}
             disabled={isLoading}
             onClick={onSubmit}
           />

@@ -8,7 +8,14 @@ const AddCategory = z.object({
   url: z.string().min(3),
 });
 
+const UpdateCategory = z.object({
+  catId: z.string(),
+  name: z.string().min(3).optional(),
+  url: z.string().min(3).optional(),
+});
+
 export type TAddCategoryAction = z.infer<typeof AddCategory>;
+export type TUpdateCategoryAction = z.infer<typeof UpdateCategory>;
 
 export const addCategory = async (data: TAddCategoryAction) => {
   if (!AddCategory.safeParse(data).success)
@@ -43,5 +50,27 @@ export const addCategory = async (data: TAddCategoryAction) => {
     return { res: JSON.stringify(result) };
   } catch (error) {
     return { error: JSON.stringify(error) };
+  }
+};
+
+export const updateCategory = async (data: TUpdateCategoryAction) => {
+  if (!UpdateCategory.safeParse(data).success)
+    return { error: "Data is not valid!" };
+
+  try {
+    const { catId, ...values } = data;
+    const result = await db.category.update({
+      where: {
+        id: data.catId,
+      },
+      data: {
+        ...values,
+      },
+    });
+
+    if (!result) return { error: "Cant' update!" };
+    return { res: JSON.stringify(result) };
+  } catch (err) {
+    return { error: JSON.stringify(err) };
   }
 };
