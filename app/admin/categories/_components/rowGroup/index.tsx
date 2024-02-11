@@ -4,7 +4,7 @@ import styles from "./catGroupRow.module.scss";
 import { useState } from "react";
 import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
-import { TCategoryGroup } from "@/types/common";
+import { TAddCategory, TCategoryGroup } from "@/types/common";
 
 import {
   deleteGroup,
@@ -14,6 +14,8 @@ import {
 
 import CategoryOptions from "../categoryOptions";
 import GroupCategory from "@/components/admin/forms/groupCategory";
+import AddCategory from "@/components/admin/category/addCategory";
+import { TAddCategoryAction, addCategory } from "@/actions/category/category";
 
 interface IProps {
   name: string;
@@ -23,6 +25,11 @@ interface IProps {
 
 let initialGroup: TCategoryGroup;
 
+let initialCategory: TAddCategory = {
+  name: "",
+  url: "",
+};
+
 const CatGroupRow = ({ name, catId, onReset }: IProps) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -31,6 +38,11 @@ const CatGroupRow = ({ name, catId, onReset }: IProps) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [groupCategoryData, setGroupCategory] =
     useState<TCategoryGroup>(initialGroup);
+
+  const [addCategoryData, setAddCategoryData] =
+    useState<TAddCategory>(initialCategory);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleUpdate = async () => {
     let updatedData: TCategoryGroup = { id: catId };
@@ -78,6 +90,37 @@ const CatGroupRow = ({ name, catId, onReset }: IProps) => {
     }
   };
 
+  const handleAddCategory = async () => {
+    if (addCategoryData.name === "")
+      setErrorMsg("Category Name should not be empty");
+    if (addCategoryData.url === "") setErrorMsg("URL should not be empty");
+
+    const data: TAddCategoryAction = {
+      groupId: catId,
+      ...addCategoryData,
+    };
+    setIsLoading(true);
+
+    const add = await addCategory(data);
+
+    if (add.error) setErrorMsg(add.error);
+    if (add.res === "{}") {
+      setErrorMsg("nothing added!");
+      setIsLoading(false);
+      return;
+    }
+    if (add.res) {
+      setAddCategoryData({
+        name: "",
+        url: "",
+      });
+      setErrorMsg("");
+      setIsLoading(false);
+      setShowAddCategory(false);
+      onReset();
+    }
+  };
+
   return (
     <div className={styles.catGroupRow}>
       <span>{name}</span>
@@ -99,11 +142,18 @@ const CatGroupRow = ({ name, catId, onReset }: IProps) => {
       )}
       {showAddCategory && (
         <Popup
-          content={<div />}
-          isLoading={false}
+          content={
+            <AddCategory
+              data={addCategoryData}
+              errorMsg={errorMsg}
+              onChange={setAddCategoryData}
+            />
+          }
+          width="360px"
+          isLoading={isLoading}
           onCancel={() => setShowAddCategory(false)}
           onClose={() => setShowAddCategory(false)}
-          onSubmit={() => console.log("")}
+          onSubmit={() => handleAddCategory()}
           title="Add Category"
         />
       )}

@@ -63,3 +63,8 @@ export type TCategoryGroup = {
   categories?: TSubCategory[];
   options?: TCategoryOption[];
 };
+
+export type TAddCategory = {
+  name: string;
+  url: string;
+};
