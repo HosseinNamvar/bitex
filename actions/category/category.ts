@@ -30,7 +30,11 @@ export const addCategory = async (data: TAddCategoryAction) => {
       data: {
         name: data.name,
         url: data.url,
-        categoryGroupId: data.groupId,
+        CategoryGroup: {
+          connect: {
+            id: data.groupId,
+          },
+        },
       },
     });
 
