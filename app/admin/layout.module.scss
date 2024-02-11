@@ -1,0 +1,21 @@
+@import "/public/css/variables.module.scss";
+
+.adminLayout {
+  display: flex;
+  min-height: 100vh;
+
+  > .rightCol {
+    width: 100%;
+    padding: 24px;
+    > h1 {
+      width: 100%;
+      display: block;
+      color: nth($color-light, 7);
+      font-size: 2.4rem;
+      font-weight: 200;
+      padding-bottom: 20px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid nth($color-light, 3);
+    }
+  }
+}

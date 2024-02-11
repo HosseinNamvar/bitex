@@ -1,0 +1,32 @@
+@import "/public/css/variables.module.scss";
+
+.lineList {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 30px;
+
+  > button {
+    color: nth($color-light, 7);
+    margin-right: 6px;
+    display: inline-block;
+    font-size: 1.4rem;
+    transition: background-color 0.3s;
+    padding: 4px 16px;
+    border-radius: 12px;
+
+    &:hover {
+      background-color: nth($color-light, 2);
+    }
+  }
+
+  .active {
+    color: white;
+    cursor: default;
+    font-weight: 500;
+    background-color: nth($color-light, 9);
+    &:hover {
+      background-color: nth($color-light, 9);
+    }
+  }
+}

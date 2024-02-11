@@ -1,0 +1,149 @@
+@import "/public/css/variables.module.scss";
+
+.adminProducts {
+  display: flex;
+  flex-direction: column;
+  > .header {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    margin-bottom: 30px;
+  }
+  > .dataTable {
+    display: flex;
+    flex-direction: column;
+    > .row {
+      width: 100%;
+      height: 50px;
+      padding: 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.4rem;
+      color: nth($color-light, 8);
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: nth($color-light, 1);
+      }
+      > .name {
+        width: 200px;
+      }
+      > .category {
+        width: 200px;
+        text-align: left;
+      }
+      > div {
+        > button {
+          background-color: white;
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+
+  .addProduct {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .background {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(black, 0.6);
+      backdrop-filter: blur(5px);
+    }
+
+    .productsWindow {
+      width: 700px;
+      height: 90vh;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      border-radius: 12px;
+      background-color: white;
+      z-index: 10;
+      font-size: 1.4rem;
+      input {
+        outline: none;
+        border: 1px solid nth($color-light, 3);
+        padding: 6px 10px;
+        border-radius: 6px;
+        &:hover {
+          border-color: nth($color-light, 5);
+        }
+        &:focus {
+          border: 2px solid nth($color-light, 8);
+        }
+      }
+
+      > .header {
+        padding-bottom: 20px;
+        color: nth($color-light, 8);
+        font-size: 1.6rem;
+        border-bottom: 1px solid nth($color-light, 3);
+      }
+      > .nameAndCat {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        > div {
+          display: flex;
+          align-items: center;
+          > span {
+            display: inline-block;
+            width: 200px;
+          }
+        }
+      }
+
+      > .row {
+        width: 100%;
+        height: auto;
+        padding: 16px 0;
+        display: flex;
+        border-bottom: 1px solid nth($color-light, 3);
+        align-items: flex-start;
+        > .col1 {
+          flex-grow: 1;
+        }
+        > .col2 {
+          flex-grow: 3;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+        > .col3 {
+          flex-grow: 3;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 24px;
+        }
+      }
+
+      > .windowControl {
+        display: flex;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 2px solid nth($color-green, 5);
+        justify-content: flex-end;
+        gap: 24px;
+        > button {
+          width: 140px;
+        }
+      }
+    }
+  }
+}

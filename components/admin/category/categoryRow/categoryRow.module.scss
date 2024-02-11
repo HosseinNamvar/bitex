@@ -1,0 +1,15 @@
+@import "/public/css/variables.module.scss";
+
+.categoryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  padding-left: 16px;
+  border-top: 1px solid nth($color-light, 2);
+  > div {
+    > button {
+      margin-left: 8px;
+    }
+  }
+}

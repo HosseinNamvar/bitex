@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import ProductCard from "@/components/store/common/productCard";
-import DropDownList from "@/components/store/UI/dropDown";
+import DropDownList from "@/components/UI/dropDown";
+import LineList from "@/components/UI/lineList";
 
 import { ProductsData } from "@/data/products";
 import { sortDropdonwData } from "@/data/uiElementsData";
@@ -203,14 +204,11 @@ const ListPage = () => {
                 height={12}
               />
               <span>Sort By:</span>
-              <div className={styles.switchSort}>
-                <span>Most Viewed</span>
-                <span className={styles.active}>Top Seller</span>
-                <span>Most Expensive</span>
-                <span>Cheapest</span>
-                <span>Newest</span>
-                <span>Most Popular</span>
-              </div>
+              <LineList
+                data={sortDropdonwData}
+                selectedId={sortIndex}
+                onChange={handleSortChange}
+              />
             </div>
             <div className={styles.listContainer}>
               {ProductsData.map((product, index) => (

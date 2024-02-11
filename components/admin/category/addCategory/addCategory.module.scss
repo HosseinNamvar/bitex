@@ -1,0 +1,24 @@
+@import "/public/css/variables.module.scss";
+
+.addCategory {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 12px 0;
+
+  > .row {
+    display: flex;
+    padding: 0 12px;
+    height: 40px;
+    align-items: center;
+    gap: 16px;
+
+    > .col1 {
+      width: 120px;
+    }
+    > .error {
+      width: 100%;
+      color: nth($color-red, 5);
+    }
+  }
+}

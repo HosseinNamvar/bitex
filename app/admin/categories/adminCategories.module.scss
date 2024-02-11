@@ -1,0 +1,43 @@
+@import "/public/css/variables.module.scss";
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  > .head {
+    width: 100%;
+    margin-top: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    > h3 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: nth($color-light, 8);
+    }
+    > button {
+      width: 200px;
+    }
+  }
+
+  > .dataTable {
+    margin-top: 24px;
+    span {
+      display: inline-block;
+      width: 200px;
+      color: nth($color-light, 8);
+      font-size: 1.4rem;
+    }
+  }
+
+  .catLevel1 {
+    margin-bottom: 30px;
+    border-radius: 8px;
+    border: 1px solid nth($color-light, 2);
+  }
+  .catLevel2 {
+    margin-left: 24px;
+  }
+  .catLevel3 {
+    margin-left: 24px;
+  }
+}
