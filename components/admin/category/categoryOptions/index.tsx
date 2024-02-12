@@ -49,9 +49,10 @@ const CategoryOptions = ({ catId, type }: IProps) => {
         setIsLoading(false);
         setHasOptions(true);
       }
+    } else {
+      setErrorMsg("Invalid Data!");
     }
   };
-
   return (
     <div className={styles.optionsWindow}>
       <div className={styles.header}>

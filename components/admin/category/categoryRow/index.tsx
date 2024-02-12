@@ -16,6 +16,7 @@ import {
   updateCategory,
   updateSubCategory,
 } from "@/actions/category/category";
+import CategoryOptions from "../categoryOptions";
 
 type TSubCat = {
   id: string;
@@ -41,6 +42,7 @@ let initialSubCategory: TSubCat = {
   name: "",
   url: "",
 };
+let subCatId: string = "";
 
 const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -62,6 +64,7 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
     name: "",
     url: "",
   });
+  const [showSubOptions, setShowSubOptions] = useState(false);
 
   useEffect(() => {
     initialCategory.name = name;
@@ -215,6 +218,13 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
     }
   };
 
+  // --------------- OPTIONS SECTION ---------------
+  const handleShowSubCatOptions = (id: string) => {
+    subCatId = id;
+    console.log(subCatId);
+    setShowSubOptions(true);
+  };
+
   return (
     <div className={styles.categoryRow}>
       <div className={styles.parentRow}>
@@ -237,7 +247,10 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
             <div className={styles.row} key={subCat.id}>
               <span>{subCat.name}</span>
               <div>
-                <Button text="Options" onClick={() => setShowOptions(true)} />
+                <Button
+                  text="Options"
+                  onClick={() => handleShowSubCatOptions(subCat.id)}
+                />
               </div>
               <div>
                 <Button
@@ -336,6 +349,25 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
           onCancel={() => setShowSubDelete(false)}
           onClose={() => setShowSubDelete(false)}
           onSubmit={() => handleDeleteSubCat()}
+        />
+      )}
+      {/* --------------- OPTIONS SECTION --------------- */}
+      {showOptions && (
+        <Popup
+          content={<CategoryOptions catId={catId} type="category" />}
+          isLoading={isLoading}
+          onCancel={() => setShowOptions(false)}
+          onClose={() => setShowOptions(false)}
+          onSubmit={() => setShowOptions(false)}
+        />
+      )}
+      {showSubOptions && (
+        <Popup
+          content={<CategoryOptions catId={subCatId} type="subCategory" />}
+          isLoading={isLoading}
+          onCancel={() => setShowSubOptions(false)}
+          onClose={() => setShowSubOptions(false)}
+          onSubmit={() => setShowSubOptions(false)}
         />
       )}
     </div>
