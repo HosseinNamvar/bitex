@@ -90,14 +90,6 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
         onClick={() => setShowWindow({ showWindow: true, windowTypeID: 0 })}
         text="Add Group"
       />
-      <Button
-        onClick={() => setShowWindow({ showWindow: true, windowTypeID: 1 })}
-        text="Add Category"
-      />
-      <Button
-        onClick={() => setShowWindow({ showWindow: true, windowTypeID: 2 })}
-        text="Add Sub Category"
-      />
       {showWindow.showWindow && (
         <Popup
           content={windowContent[showWindow.windowTypeID]}

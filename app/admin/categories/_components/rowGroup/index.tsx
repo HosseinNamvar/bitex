@@ -13,7 +13,8 @@ import {
   updateGroup,
 } from "@/actions/category/categoryGroup";
 
-import CategoryOptions from "../categoryOptions";
+import CategoryOptions from "@/components/admin/category/categoryOptions";
+
 import GroupCategory from "@/components/admin/forms/groupCategory";
 import AddCategory from "@/components/admin/category/addCategory";
 import { TAddCategoryAction, addCategory } from "@/actions/category/category";
