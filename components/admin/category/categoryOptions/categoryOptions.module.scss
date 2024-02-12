@@ -1,220 +1,197 @@
 @import "/public/css/variables.module.scss";
 
-.categoryOptions {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
+.optionsWindow {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  .background {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(black, 0.6);
-    backdrop-filter: blur(5px);
+  height: 500px;
+  flex-direction: column;
+  background-color: white;
+  z-index: 10;
+  font-size: 1.4rem;
+  input {
+    outline: none;
+    border: 1px solid nth($color-light, 3);
+    padding: 6px 10px;
+    border-radius: 6px;
+    &:hover {
+      border-color: nth($color-light, 5);
+    }
+    &:focus {
+      border: 2px solid nth($color-light, 8);
+    }
   }
 
-  .optionsWindow {
-    width: 700px;
-    height: 90vh;
-    position: relative;
+  > .header {
     display: flex;
-    flex-direction: column;
-    padding: 12px 24px;
-    border-radius: 12px;
-    background-color: white;
-    z-index: 10;
-    font-size: 1.4rem;
-    input {
-      outline: none;
-      border: 1px solid nth($color-light, 3);
-      padding: 6px 10px;
-      border-radius: 6px;
-      &:hover {
-        border-color: nth($color-light, 5);
-      }
-      &:focus {
-        border: 2px solid nth($color-light, 8);
-      }
-    }
-
-    > .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-      color: nth($color-light, 8);
-      > h2 {
-        font-weight: 400;
-        font-size: 1.6rem;
-      }
-      > div {
-        display: flex;
-        > h3 {
-          color: nth($color-light, 5);
-          cursor: pointer;
-          font-weight: 400;
-          font-size: 1.4rem;
-          padding: 12px 16px;
-          transition: background-color 0.3s;
-          &:hover {
-            background-color: nth($color-light, 1);
-          }
-        }
-        > .active {
-          cursor: default;
-          color: nth($color-light, 9);
-          border-bottom: 2px solid nth($color-blue, 5);
-          &:hover {
-            background-color: white;
-          }
-        }
-      }
+    align-items: center;
+    justify-content: space-between;
+    color: nth($color-light, 8);
+    > h2 {
+      flex-grow: 1;
+      font-weight: 400;
+      font-size: 1.6rem;
+      height: 100%;
+      padding-top: 6px;
       border-bottom: 1px solid nth($color-light, 3);
     }
-
-    > .tabContainer {
-      > .optionRow {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 16px;
-        padding-bottom: 12px;
-        border-bottom: 3px solid nth($color-light, 2);
-        > .col1 {
-          color: nth($color-light, 8);
-          font-size: 1.6rem;
-          min-width: 200px;
-        }
-        > .col2 {
-          display: flex;
-          flex-direction: column;
-          > .textRow {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            > div {
-              > button {
-                margin-left: 8px;
-              }
-            }
-          }
-          > .textAdd {
-            border-top: 1px solid nth($color-light, 3);
-            margin-top: 16px;
-            padding-top: 8px;
-            > button {
-              margin-left: 8px;
-            }
-          }
-
-          > .colorRow {
-            display: flex;
-            justify-content: space-between;
-            > div {
-              margin-left: 16px;
-              > span {
-                width: 100px;
-                text-align: center;
-              }
-              > button {
-                margin-left: 8px;
-              }
-            }
-          }
-          > .colorAdd {
-            padding-top: 12px;
-            margin-top: 12px;
-            border-top: 1px solid nth($color-light, 2);
-            > div {
-              margin-left: 10px;
-              > input {
-                margin-left: 16px;
-                width: 90px;
-              }
-            }
-            > button {
-              width: 200px;
-              margin: 8px 24px;
-            }
-          }
+    > div {
+      display: flex;
+      > h3 {
+        color: nth($color-light, 5);
+        cursor: pointer;
+        border-radius: 6px 8px 0 0;
+        font-weight: 400;
+        font-size: 1.4rem;
+        padding: 12px 16px;
+        transition: background-color 0.3s;
+        border-bottom: 1px solid nth($color-light, 3);
+        &:hover {
+          background-color: nth($color-light, 1);
         }
       }
-      > .optionsAdd {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 16px;
-        padding-bottom: 12px;
-        border-bottom: 6px solid nth($color-light, 8);
-        > div {
-          display: flex;
-          align-items: center;
-          > span {
-            width: 40px;
-          }
-        }
-        > button {
-          width: 160px;
+      > .active {
+        cursor: default;
+        color: nth($color-light, 9);
+        border-bottom: 2px solid nth($color-blue, 5);
+        &:hover {
+          background-color: white;
         }
       }
     }
+    // border-bottom: 1px solid nth($color-light, 3);
+  }
 
-    > .tabContainer {
+  > .tabContainer {
+    display: flex;
+    flex-direction: column;
+    > .addCategoryOption {
+      margin-top: 40px;
       display: flex;
       flex-direction: column;
-      > .specGroup {
-        padding-bottom: 16px;
-        border-bottom: 1px solid nth($color-light, 4);
-        > .specTitle {
-          display: flex;
-          justify-content: space-between;
-          > div {
-            > button {
-              width: 80px;
-              margin-left: 8px;
-            }
-          }
-        }
-        > .specRow {
-          display: flex;
-          margin-top: 12px;
-          margin-left: 16px;
-          justify-content: space-between;
-          > div {
-            > button {
-              width: 80px;
-              margin-left: 8px;
-            }
-          }
-        }
+      align-items: center;
+      justify-content: center;
+      > span {
+        text-align: center;
+        margin-bottom: 30px;
+        width: 300px;
       }
-      > .specGroupAdd {
+    }
+    > .optionsAdd {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      background-color: nth($color-light, 1);
+      padding: 12px 16px;
+      > div {
         display: flex;
         align-items: center;
-        height: 80px;
+        > span {
+          width: 40px;
+        }
+      }
+      > button {
+        width: 160px;
+      }
+    }
+    > .optionRow {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid nth($color-light, 2);
+      > .col1 {
+        color: nth($color-light, 8);
+        font-size: 1.6rem;
+        min-width: 200px;
+      }
+      > .col2 {
+        display: flex;
+        flex-direction: column;
+        > .textRow {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          > div {
+            > button {
+              margin-left: 8px;
+            }
+          }
+        }
+        > .textAdd {
+          border-top: 1px solid nth($color-light, 3);
+          margin-top: 16px;
+          padding-top: 8px;
+          > button {
+            margin-left: 8px;
+          }
+        }
+
+        > .colorRow {
+          display: flex;
+          justify-content: space-between;
+          > div {
+            margin-left: 16px;
+            > span {
+              width: 100px;
+              text-align: center;
+            }
+            > button {
+              margin-left: 8px;
+            }
+          }
+        }
+        > .colorAdd {
+          padding-top: 12px;
+          margin-top: 12px;
+          border-top: 1px solid nth($color-light, 2);
+          > div {
+            margin-left: 10px;
+            > input {
+              margin-left: 16px;
+              width: 90px;
+            }
+          }
+          > button {
+            width: 200px;
+            margin: 8px 24px;
+          }
+        }
       }
     }
 
-    > .windowControl {
-      display: flex;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      position: absolute;
-      padding: 16px;
-      border-top: 2px solid nth($color-light, 5);
-      justify-content: flex-end;
-      gap: 24px;
-      > button {
-        width: 140px;
+    // -------------------- SPECIFICATION SECTION --------------------
+    > .specGroup {
+      padding-bottom: 16px;
+      border-bottom: 1px solid nth($color-light, 4);
+      > .specTitle {
+        display: flex;
+        justify-content: space-between;
+        > div {
+          > button {
+            width: 80px;
+            margin-left: 8px;
+          }
+        }
       }
+      > .specRow {
+        display: flex;
+        margin-top: 12px;
+        margin-left: 16px;
+        justify-content: space-between;
+        > div {
+          > button {
+            width: 80px;
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+    > .specGroupAdd {
+      display: flex;
+      align-items: center;
+      height: 80px;
     }
   }
 }

@@ -155,7 +155,14 @@ const CatGroupRow = ({ data, onReset }: IProps) => {
         </div>
       )}
       {showOptions ? (
-        <CategoryOptions onClose={() => setShowOptions(false)} />
+        <Popup
+          content={<CategoryOptions type="group" catId={groupId} />}
+          isLoading={false}
+          onClose={() => setShowOptions(false)}
+          onCancel={() => setShowOptions(false)}
+          onSubmit={() => setShowOptions(false)}
+          title=""
+        />
       ) : (
         ""
       )}
