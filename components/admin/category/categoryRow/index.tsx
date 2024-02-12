@@ -12,6 +12,7 @@ import {
   TUpdateCategoryAction,
   addSubCategory,
   deleteCategory,
+  deleteSubCategory,
   updateCategory,
   updateSubCategory,
 } from "@/actions/category/category";
@@ -192,6 +193,28 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
     }
   };
 
+  const handleShowDeleteSub = (id: string) => {
+    initialSubCategory = { id, name: "", url: "" };
+    setErrorMsg("");
+    setShowSubDelete(true);
+  };
+
+  const handleDeleteSubCat = async () => {
+    setIsLoading(true);
+    const response = await deleteSubCategory(initialSubCategory.id);
+    if (response.error) {
+      setErrorMsg(response.error);
+      setIsLoading(false);
+      return;
+    }
+    if (response.res) {
+      setErrorMsg("");
+      setIsLoading(false);
+      setShowSubDelete(false);
+      onReset();
+    }
+  };
+
   return (
     <div className={styles.categoryRow}>
       <div className={styles.parentRow}>
@@ -227,7 +250,10 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
                     })
                   }
                 />
-                <Button text="Delete" onClick={() => setShowDelete(true)} />
+                <Button
+                  text="Delete"
+                  onClick={() => handleShowDeleteSub(subCat.id)}
+                />
               </div>
             </div>
           ))}
@@ -282,6 +308,7 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
         />
       )}
 
+      {/* --------------- SUB CATEGORY SECTION --------------- */}
       {showSubEdit && (
         <Popup
           width="380px"
@@ -298,6 +325,17 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
           onSubmit={() => handleEditSub()}
           confirmBtnText="Save"
           title={`Edit Sub Category`}
+        />
+      )}
+
+      {showSubDelete && (
+        <Popup
+          width="300px"
+          content={<div className={styles.deleteText}>Are you sure?</div>}
+          isLoading={isLoading}
+          onCancel={() => setShowSubDelete(false)}
+          onClose={() => setShowSubDelete(false)}
+          onSubmit={() => handleDeleteSubCat()}
         />
       )}
     </div>
