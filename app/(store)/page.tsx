@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Metadata } from "next";
 
 import styles from "./page.module.scss";
 
@@ -16,6 +17,10 @@ import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
 import HomeBlogCard from "@/components/store/home/blogCard";
 import HCompanyLogo from "@/components/store/home/companyLogo";
+
+export const metadata: Metadata = {
+  title: "BITEX - Homepage",
+};
 
 export default function Home() {
   return (
