@@ -2,14 +2,46 @@
 
 .categoryRow {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  padding-left: 16px;
-  border-top: 1px solid nth($color-light, 2);
-  > div {
-    > button {
-      margin-left: 8px;
+  flex-direction: column;
+  border: 1px solid nth($color-light, 2);
+  margin-bottom: 8px;
+  border-radius: 6px;
+  &:nth-child(2n-1) {
+    background-color: nth($color-light, 1);
+  }
+
+  > .parentRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    padding-left: 24px;
+    border-top: 1px soli nth($color-light, 2);
+
+    > div {
+      > button {
+        background-color: white;
+        margin-left: 8px;
+      }
+    }
+  }
+  > .childRows {
+    display: flex;
+    flex-direction: column;
+    padding-top: 8px;
+    border-top: 1px solid nth($color-light, 3);
+    > .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 8px 8px;
+      margin-left: 30px;
+
+      > div {
+        > button {
+          margin-left: 8px;
+        }
+      }
     }
   }
   .deleteText {

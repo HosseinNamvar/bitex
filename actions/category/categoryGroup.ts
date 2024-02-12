@@ -21,7 +21,16 @@ const UpdateCategoryGroup = z.object({
 export type TReadGroup = {
   id: string;
   name: string;
-  categories: { id: string; name: string; url: string }[];
+  categories: {
+    id: string;
+    name: string;
+    url: string;
+    subCategories?: {
+      id: string;
+      name: string;
+      url: string;
+    }[];
+  }[];
 };
 
 export const getAllGroups = async () => {
@@ -35,6 +44,13 @@ export const getAllGroups = async () => {
             id: true,
             name: true,
             url: true,
+            subCategories: {
+              select: {
+                id: true,
+                name: true,
+                url: true,
+              },
+            },
           },
         },
       },

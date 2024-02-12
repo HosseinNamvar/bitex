@@ -147,6 +147,7 @@ const CatGroupRow = ({ data, onReset }: IProps) => {
               catId={cat.id}
               url={cat.url}
               key={cat.id}
+              subCategories={cat.subCategories}
               onReset={onReset}
             />
           ))}
