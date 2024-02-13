@@ -8,6 +8,13 @@
   padding-left: 20px;
   align-items: center;
 
+  > span {
+    display: inline-block;
+    width: 200px;
+    color: nth($color-light, 8);
+    font-size: 1.4rem;
+  }
+
   > div {
     > button {
       margin-left: 8px;
