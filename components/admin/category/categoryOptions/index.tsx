@@ -23,16 +23,15 @@ const CategoryOptions = ({ catId, type }: IProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const getCategoryOption = async () => {
-    if (catId) {
-      const response = await getCategoryOptions(catId);
-      if (response.res) setHasOptions(true);
-    }
-  };
-
   useEffect(() => {
+    const getCategoryOption = async () => {
+      if (catId) {
+        const response = await getCategoryOptions(catId);
+        if (response.res) setHasOptions(true);
+      }
+    };
     getCategoryOption();
-  }, []);
+  }, [catId]);
 
   const handleActivateOptions = async () => {
     if (catId && type) {
