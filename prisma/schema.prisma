@@ -10,58 +10,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model CategoryGroup {
-  id         String           @id @default(auto()) @map("_id") @db.ObjectId
-  name       String           @unique
-  url        String
-  iconUrl    String
-  iconSize   Int[]
-  categories Category[]
-  options    CategoryOption[]
-}
-
 model Category {
-  id              String           @id @default(auto()) @map("_id") @db.ObjectId
-  name            String           @unique
-  url             String
-  subCategories   SubCategory[]
-  options         CategoryOption[]
-  CategoryGroup   CategoryGroup    @relation(fields: [categoryGroupId], references: [id])
-  categoryGroupId String           @db.ObjectId
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  parentID String? @db.ObjectId
+
+  name            String            @unique
+  url             String            @unique
+  iconUrl         String?
+  iconSize        Int[]
+  Category_Option Category_Option[]
 }
 
-model SubCategory {
-  id         String           @id @default(auto()) @map("_id") @db.ObjectId
-  name       String           @unique
-  url        String
-  options    CategoryOption[]
-  Category   Category         @relation(fields: [categoryId], references: [id])
-  categoryId String           @db.ObjectId
+model Category_Option {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  option     Option   @relation(fields: [optionID], references: [id])
+  optionID   String   @db.ObjectId
+  category   Category @relation(fields: [categoryID], references: [id])
+  categoryID String   @db.ObjectId
+
+  @@unique([optionID, categoryID])
 }
 
-model CategoryOption {
-  id              String         @id @default(auto()) @map("_id") @db.ObjectId
-  textOptions     TextOption[]
-  colorOptions    ColorOption[]
-  SubCategory     SubCategory?   @relation(fields: [subCategoryId], references: [id])
-  subCategoryId   String?        @db.ObjectId
-  Category        Category?      @relation(fields: [categoryId], references: [id])
-  categoryId      String?        @db.ObjectId
-  CategoryGroup   CategoryGroup? @relation(fields: [categoryGroupId], references: [id])
-  categoryGroupId String?        @db.ObjectId
+model Option {
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  name            String            @unique
+  options         NameValue[]
+  Category_Option Category_Option[]
 }
 
-model TextOption {
-  id               String         @id @default(auto()) @map("_id") @db.ObjectId
-  name             String
-  CategoryOption   CategoryOption @relation(fields: [categoryOptionId], references: [id])
-  categoryOptionId String         @db.ObjectId
-}
-
-model ColorOption {
-  id               String          @id @default(auto()) @map("_id") @db.ObjectId
-  name             String
-  color            String
-  CategoryOption   CategoryOption? @relation(fields: [categoryOptionId], references: [id])
-  categoryOptionId String?         @db.ObjectId
+type NameValue {
+  name  String
+  value String
 }

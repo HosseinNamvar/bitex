@@ -1,5 +1,5 @@
 "use client";
-import { TAddCategory } from "@/types/common";
+import { TAddCategory } from "@/actions/category/category";
 import styles from "./addCategory.module.scss";
 
 interface IProps {

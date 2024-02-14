@@ -3,41 +3,46 @@ import styles from "./categoryOptions.module.scss";
 
 import { useEffect, useState } from "react";
 
-import RadioButton from "@/components/UI/radioButton";
 import Button from "@/components/UI/button";
+import AddOption from "./AddOption";
 
+// -------- ACTIONS --------
 import {
   TActivateOptions,
+  TGetCategoryOption,
   activateCategoryOptions,
   getCategoryOptions,
 } from "@/actions/category/categoryOptions";
 
 interface IProps {
-  catId: string;
-  type: "group" | "category" | "subCategory";
+  name: string;
+  categoryData: TActivateOptions;
 }
 
-const CategoryOptions = ({ catId, type }: IProps) => {
+const CategoryOptions = ({ categoryData, name }: IProps) => {
+  const { parentCatId, type } = categoryData;
   const [isOption, setIsOption] = useState(true);
-  const [hasOptions, setHasOptions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [options, setOptions] = useState<TGetCategoryOption | null>(null);
 
-  useEffect(() => {
-    const getCategoryOption = async () => {
-      if (catId) {
-        const response = await getCategoryOptions(catId);
-        if (response.res) setHasOptions(true);
+  const getCategoryOption = async () => {
+    if (parentCatId) {
+      const response = await getCategoryOptions(parentCatId);
+      if (response.res) {
+        setOptions(response.res);
       }
-    };
+    }
+  };
+  useEffect(() => {
     getCategoryOption();
-  }, [catId]);
+  }, []);
 
   const handleActivateOptions = async () => {
-    if (catId && type) {
+    if (parentCatId && type) {
       const data: TActivateOptions = {
-        parentCatId: catId,
-        type: type,
+        parentCatId,
+        type,
       };
       setIsLoading(true);
       const response = await activateCategoryOptions(data);
@@ -46,16 +51,18 @@ const CategoryOptions = ({ catId, type }: IProps) => {
         setErrorMsg(response?.error);
       } else if (response?.res) {
         setIsLoading(false);
-        setHasOptions(true);
       }
     } else {
       setErrorMsg("Invalid Data!");
     }
   };
+
+  const handleAddOption = async () => {};
+  const handleReloadData = async () => {};
   return (
     <div className={styles.optionsWindow}>
       <div className={styles.header}>
-        <h2>Category Options/Specifications</h2>
+        <h2>{`${name} - (${categoryData.type})`}</h2>
         <div>
           <h3
             className={isOption ? styles.active : ""}
@@ -75,46 +82,40 @@ const CategoryOptions = ({ catId, type }: IProps) => {
       {isOption ? (
         // ------------------ OPTIONS SECTION ------------------
         <div className={styles.tabContainer}>
-          {hasOptions ? (
+          {options ? (
             <>
-              <div className={styles.optionsAdd}>
-                <div>
-                  <span>Add:</span>
-                  <input type="text" />
-                </div>
-                <div>
-                  <span>type</span>
-                  <RadioButton id="1" value="color" groupName="addOptions" />
-                  <RadioButton id="2" value="type" groupName="addOptions" />
-                </div>
-                <Button text="Add" onClick={() => console.log("Add")} />
-              </div>
-              <div className={styles.optionRow}>
+              <AddOption
+                categoryOptionId={options.id}
+                reloadRequest={handleReloadData}
+              />
+              {options.id}
+              {/* {options} */}
+              {/* <div className={styles.optionRow}>
                 <div className={styles.col1}>Storage Capacity</div>
                 <div className={styles.col2}>
                   <div className={styles.textRow}>
                     <span>128GB</span>
                     <div>
-                      <Button text="edit" onClick={() => console.log("edit")} />
+                      <Button text="edit" onClick={() => ("edit")} />
                       <Button
                         text="delete"
-                        onClick={() => console.log("delete")}
+                        onClick={() => ("delete")}
                       />
                     </div>
                   </div>
                   <div className={styles.textRow}>
                     <span>256GB</span>
                     <div>
-                      <Button text="edit" onClick={() => console.log("edit")} />
+                      <Button text="edit" onClick={() => ("edit")} />
                       <Button
                         text="delete"
-                        onClick={() => console.log("delete")}
+                        onClick={() => ("delete")}
                       />
                     </div>
                   </div>
                   <div className={styles.textAdd}>
                     <input type="text" />
-                    <Button text="Add" onClick={() => console.log("Add")} />
+                    <Button text="Add" onClick={() => ("Add")} />
                   </div>
                 </div>
               </div>
@@ -127,10 +128,10 @@ const CategoryOptions = ({ catId, type }: IProps) => {
                       <span>#000000</span>
                     </div>
                     <div>
-                      <Button text="edit" onClick={() => console.log("edit")} />
+                      <Button text="edit" onClick={() => ("edit")} />
                       <Button
                         text="delete"
-                        onClick={() => console.log("delete")}
+                        onClick={() => ("delete")}
                       />
                     </div>
                   </div>
@@ -140,10 +141,10 @@ const CategoryOptions = ({ catId, type }: IProps) => {
                       <span>#000000</span>
                     </div>{" "}
                     <div>
-                      <Button text="edit" onClick={() => console.log("edit")} />
+                      <Button text="edit" onClick={() => ("edit")} />
                       <Button
                         text="delete"
-                        onClick={() => console.log("delete")}
+                        onClick={() => ("delete")}
                       />
                     </div>
                   </div>
@@ -152,10 +153,10 @@ const CategoryOptions = ({ catId, type }: IProps) => {
                       <input type="text" />
                       <input type="text" />
                     </div>
-                    <Button text="Add" onClick={() => console.log("Add")} />
+                    <Button text="Add" onClick={() => ("Add")} />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </>
           ) : (
             <div className={styles.addCategoryOption}>
@@ -171,42 +172,43 @@ const CategoryOptions = ({ catId, type }: IProps) => {
         </div>
       ) : (
         // ------------------ SPECIFICATION SECTION ------------------
-        <div className={styles.tabContainer}>
-          <div className={styles.specGroup}>
-            <div className={styles.specTitle}>
-              <span>Overall</span>
-              <div>
-                <Button text="edit" onClick={() => console.log("")} />
-                <Button text="edit" onClick={() => console.log("")} />
-              </div>
-            </div>
-            <div className={styles.specRow}>
-              <span>Dimension</span>
-              <div>
-                <Button text="edit" onClick={() => console.log("")} />
-                <Button text="edit" onClick={() => console.log("")} />
-              </div>
-            </div>
-            <div className={styles.specRow}>
-              <span>SimCard</span>
-              <div>
-                <Button text="edit" onClick={() => console.log("")} />
-                <Button text="delete" onClick={() => console.log("")} />
-              </div>
-            </div>
-            <div className={styles.specAdd}>
-              <input type="text" />
-              <Button text="Add" onClick={() => console.log("")} />
-            </div>
-          </div>
-          <div className={styles.specGroupAdd}>
-            <div>
-              <span>Add Group:</span>
-              <input type="text" />
-            </div>
-            <Button text="Add" onClick={() => console.log("")} />
-          </div>
-        </div>
+        // <div className={styles.tabContainer}>
+        //   <div className={styles.specGroup}>
+        //     <div className={styles.specTitle}>
+        //       <span>Overall</span>
+        //       <div>
+        //         <Button text="edit" onClick={() => ("")} />
+        //         <Button text="edit" onClick={() => ("")} />
+        //       </div>
+        //     </div>
+        //     <div className={styles.specRow}>
+        //       <span>Dimension</span>
+        //       <div>
+        //         <Button text="edit" onClick={() => ("")} />
+        //         <Button text="edit" onClick={() => ("")} />
+        //       </div>
+        //     </div>
+        //     <div className={styles.specRow}>
+        //       <span>SimCard</span>
+        //       <div>
+        //         <Button text="edit" onClick={() => ("")} />
+        //         <Button text="delete" onClick={() => ("")} />
+        //       </div>
+        //     </div>
+        //     <div className={styles.specAdd}>
+        //       <input type="text" />
+        //       <Button text="Add" onClick={() => ("")} />
+        //     </div>
+        //   </div>
+        //   <div className={styles.specGroupAdd}>
+        //     <div>
+        //       <span>Add Group:</span>
+        //       <input type="text" />
+        //     </div>
+        //     <Button text="Add" onClick={() => ("")} />
+        //   </div>
+        // </div>
+        ""
       )}
     </div>
   );

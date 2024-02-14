@@ -5,90 +5,100 @@ import { useEffect, useState } from "react";
 
 import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
-import AddCategory from "../addCategory";
-import { TAddCategory } from "@/types/common";
 import {
-  TAddCategoryAction,
-  TUpdateCategoryAction,
-  addSubCategory,
+  addCategory,
   deleteCategory,
-  deleteSubCategory,
   updateCategory,
-  updateSubCategory,
+  TAddCategory,
+  TGetAllCategories,
+  TUpdateCategory,
 } from "@/actions/category/category";
+import AddCategory from "../addCategory";
 import CategoryOptions from "../categoryOptions";
 
-type TSubCat = {
+interface IProps {
+  data: TGetAllCategories;
+  subCategories: TGetAllCategories[];
+  onReset: () => void;
+}
+
+const initialCategory: TAddCategory = {
+  parentID: null,
+  name: "",
+  url: "",
+  iconSize: [],
+  iconUrl: null,
+};
+
+type TEditSubCat = {
   id: string;
   name: string;
   url: string;
 };
 
-interface IProps {
-  name: string;
-  url: string;
-  catId: string;
-  subCategories?: TSubCat[];
-  onReset: () => void;
-}
-
-let initialCategory: TAddCategory = {
-  name: "",
-  url: "",
-};
-
-let initialSubCategory: TSubCat = {
+let selectedSubCategory: TEditSubCat = {
   id: "",
   name: "",
   url: "",
 };
-let subCatId: string = "";
 
-const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
+const Category = ({ onReset, data, subCategories }: IProps) => {
+  const { id: categoryID, name: categoryName, url: categoryUrl } = data;
+
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [showAddSubCategory, setShowAddSubCategory] = useState(false);
-  const [categoryData, setCategoryData] = useState<TAddCategory>({ name, url });
+
   const [subCategoryData, setSubCategoryData] = useState<TAddCategory>({
-    name: "",
-    url: "",
+    ...initialCategory,
   });
 
   // --------------- SUB CATEGORY ---------------
   const [showSubEdit, setShowSubEdit] = useState(false);
   const [showSubDelete, setShowSubDelete] = useState(false);
-  const [subCatData, setSubCatData] = useState<TAddCategory>({
-    name: "",
-    url: "",
-  });
+
   const [showSubOptions, setShowSubOptions] = useState(false);
 
-  useEffect(() => {
-    initialCategory.name = name;
-    initialCategory.url = url;
-  }, [name, url]);
+  //-------- Refactored
+  const [addSubCategoryData, setAddSubCategoryData] = useState<TAddCategory>({
+    ...initialCategory,
+    parentID: categoryID,
+  });
+  const [editCategoryData, setEditCategoryData] = useState<TAddCategory>({
+    ...data,
+  });
 
-  const showEditWindow = async () => {
-    setCategoryData({ name, url });
-    setErrorMsg("");
-    setShowEdit(true);
-  };
+  // SUB CATEGORY
+  const [editSubCatData, setEditSubCatData] = useState<TAddCategory>({
+    ...initialCategory,
+  });
+
+  // useEffect(() => {
+  //   initialCategory.name = name;
+  //   initialCategory.url = url;
+  // }, [name, url]);
+
+  // const showEditWindow = () => {
+  //   setCategoryData({ name, url });
+  //   setErrorMsg("");
+  //   setShowEdit(true);
+  // };
 
   const handleUpdate = async () => {
-    if (categoryData.name === "" || categoryData.url === "") {
+    if (editCategoryData.name === "" || editCategoryData.url === "") {
       setErrorMsg("Fields should not be an empty");
       return;
     }
 
-    let updatedData: TUpdateCategoryAction = { catId };
+    let updatedData: TUpdateCategory = { id: categoryID, iconSize: [] };
 
-    if (categoryData.name !== initialCategory.name)
-      updatedData.name = categoryData.name;
-    if (categoryData.url !== initialCategory.url)
-      updatedData.url = categoryData.url;
+    if (editCategoryData.name !== categoryName)
+      updatedData.name = editCategoryData.name;
+    if (editCategoryData.url !== categoryUrl)
+      updatedData.url = editCategoryData.url;
 
     if (!updatedData.url && !updatedData.name) {
       setShowEdit(false);
@@ -104,45 +114,51 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
       setErrorMsg("");
       onReset();
     } else {
-      setErrorMsg(JSON.stringify(response.error));
+      setErrorMsg(response.error);
     }
   };
 
   const handleDeleteCat = async () => {
     setIsLoading(true);
-    const response = await deleteCategory(catId);
+    const response = await deleteCategory(categoryID);
+    if (response.error) {
+      setErrorMsg(response.error);
+      setIsLoading(false);
+      return;
+    }
     if (response.res) {
+      setErrorMsg("");
       setShowDelete(false);
+      setIsLoading(false);
       onReset();
     }
-    setIsLoading(false);
   };
 
   // --------------- SUB CATEGORY MANAGING SECTION ---------------
   const handleAddSub = async () => {
-    if (subCategoryData.name === "")
+    if (addSubCategoryData.name === "") {
       setErrorMsg("Category Name should not be empty");
-    if (subCategoryData.url === "") setErrorMsg("URL should not be empty");
+      return;
+    }
+    if (addSubCategoryData.url === "") {
+      setErrorMsg("URL should not be empty");
+      return;
+    }
 
-    const data: TAddCategoryAction = {
-      groupId: catId,
-      ...subCategoryData,
+    const data: TAddCategory = {
+      ...addSubCategoryData,
     };
     setIsLoading(true);
 
-    const response = await addSubCategory(data);
+    const response = await addCategory(data);
 
     if (response.error) {
       setErrorMsg(response.error);
       setIsLoading(false);
     }
-    if (response.res === "{}") {
-      setErrorMsg("nothing added!");
-      setIsLoading(false);
-      return;
-    }
     if (response.res) {
       setSubCategoryData({
+        ...addSubCategoryData,
         name: "",
         url: "",
       });
@@ -153,28 +169,32 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
     }
   };
 
-  const handleShowEditSub = (data: TAddCategory & { id: string }) => {
-    initialSubCategory = { ...data };
-    setSubCatData({ name: data.name, url: data.url });
+  const handleShowEditSub = (data: TEditSubCat) => {
+    const { name, url } = data;
+    selectedSubCategory = { ...data };
+    setEditSubCatData({ ...editSubCatData, name, url });
     setErrorMsg("");
     setShowSubEdit(true);
   };
 
   const handleEditSub = async () => {
-    if (subCatData.name === "") {
+    if (editSubCatData.name === "") {
       setErrorMsg("Category Name should not be empty");
       return;
     }
-    if (subCatData.url === "") {
+    if (editSubCatData.url === "") {
       setErrorMsg("URL should not be empty");
       return;
     }
 
-    let updatedData: TUpdateCategoryAction = { catId: initialSubCategory.id };
-    if (subCatData.name !== initialSubCategory.name)
-      updatedData.name = subCatData.name;
-    if (subCatData.url !== initialSubCategory.url)
-      updatedData.url = subCatData.url;
+    let updatedData: TUpdateCategory = {
+      id: selectedSubCategory.id,
+      iconSize: [],
+    };
+    if (editSubCatData.name !== selectedSubCategory.name)
+      updatedData.name = editSubCatData.name;
+    if (editSubCatData.url !== selectedSubCategory.url)
+      updatedData.url = editSubCatData.url;
 
     if (!updatedData.url && !updatedData.name) {
       setShowSubEdit(false);
@@ -183,28 +203,27 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
     }
 
     setIsLoading(true);
-    console.log(updatedData);
-    const response = await updateSubCategory(updatedData);
+    const response = await updateCategory(updatedData);
     if (!response.error) {
       setIsLoading(false);
       setErrorMsg("");
       setShowSubEdit(false);
       onReset();
     } else {
-      setErrorMsg(JSON.stringify(response.error));
+      setErrorMsg(response.error);
       setIsLoading(false);
     }
   };
 
   const handleShowDeleteSub = (id: string) => {
-    initialSubCategory = { id, name: "", url: "" };
+    selectedSubCategory = { id, name: "", url: "" };
     setErrorMsg("");
     setShowSubDelete(true);
   };
 
   const handleDeleteSubCat = async () => {
     setIsLoading(true);
-    const response = await deleteSubCategory(initialSubCategory.id);
+    const response = await deleteCategory(selectedSubCategory.id);
     if (response.error) {
       setErrorMsg(response.error);
       setIsLoading(false);
@@ -219,16 +238,15 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
   };
 
   // --------------- OPTIONS SECTION ---------------
-  const handleShowSubCatOptions = (id: string) => {
-    subCatId = id;
-    console.log(subCatId);
-    setShowSubOptions(true);
-  };
+  // const handleShowSubCatOptions = (data: TSubCat) => {
+  //   selectedSubCat = { ...data };
+  //   setShowSubOptions(true);
+  // };
 
   return (
     <div className={styles.categoryRow}>
       <div className={styles.parentRow}>
-        <span>{name}</span>
+        <span>{categoryName}</span>
         <div>
           <Button text="Options" onClick={() => setShowOptions(true)} />
           <Button
@@ -237,7 +255,7 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
           />
         </div>
         <div>
-          <Button text="Edit" onClick={showEditWindow} />
+          <Button text="Edit" onClick={() => setShowEdit(true)} />
           <Button text="Delete" onClick={() => setShowDelete(true)} />
         </div>
       </div>
@@ -249,7 +267,8 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
               <div>
                 <Button
                   text="Options"
-                  onClick={() => handleShowSubCatOptions(subCat.id)}
+                  // onClick={() => handleShowSubCatOptions(subCat)}
+                  onClick={() => console.log()}
                 />
               </div>
               <div>
@@ -278,8 +297,8 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
           content={
             <AddCategory
               errorMsg={errorMsg}
-              onChange={setCategoryData}
-              data={categoryData}
+              onChange={setEditCategoryData}
+              data={editCategoryData}
             />
           }
           isLoading={isLoading}
@@ -297,8 +316,8 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
           content={
             <AddCategory
               errorMsg={errorMsg}
-              onChange={setSubCategoryData}
-              data={subCategoryData}
+              onChange={setAddSubCategoryData}
+              data={addSubCategoryData}
             />
           }
           isLoading={isLoading}
@@ -313,7 +332,12 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
       {showDelete && (
         <Popup
           width="300px"
-          content={<div className={styles.deleteText}>Are you sure?</div>}
+          content={
+            <div className={styles.deleteText}>
+              <span>Are you sure?</span>
+              <span>{errorMsg}</span>
+            </div>
+          }
           isLoading={isLoading}
           onCancel={() => setShowDelete(false)}
           onClose={() => setShowDelete(false)}
@@ -328,8 +352,8 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
           content={
             <AddCategory
               errorMsg={errorMsg}
-              onChange={setSubCatData}
-              data={subCatData}
+              onChange={setEditSubCatData}
+              data={editSubCatData}
             />
           }
           isLoading={isLoading}
@@ -344,7 +368,12 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
       {showSubDelete && (
         <Popup
           width="300px"
-          content={<div className={styles.deleteText}>Are you sure?</div>}
+          content={
+            <div className={styles.deleteText}>
+              <span>Are you sure?</span>
+              <span>{errorMsg}</span>
+            </div>
+          }
           isLoading={isLoading}
           onCancel={() => setShowSubDelete(false)}
           onClose={() => setShowSubDelete(false)}
@@ -354,7 +383,12 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
       {/* --------------- OPTIONS SECTION --------------- */}
       {showOptions && (
         <Popup
-          content={<CategoryOptions catId={catId} type="category" />}
+          content={
+            <CategoryOptions
+              categoryData={{ parentCatId: id, type: "category" }}
+              name={name}
+            />
+          }
           isLoading={isLoading}
           onCancel={() => setShowOptions(false)}
           onClose={() => setShowOptions(false)}
@@ -363,7 +397,15 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
       )}
       {showSubOptions && (
         <Popup
-          content={<CategoryOptions catId={subCatId} type="subCategory" />}
+          content={
+            <CategoryOptions
+              categoryData={{
+                parentCatId: id,
+                type: "subCategory",
+              }}
+              name={selectedSubCat.name}
+            />
+          }
           isLoading={isLoading}
           onCancel={() => setShowSubOptions(false)}
           onClose={() => setShowSubOptions(false)}
@@ -374,4 +416,4 @@ const CategoryRow = ({ catId, name, url, subCategories, onReset }: IProps) => {
   );
 };
 
-export default CategoryRow;
+export default Category;

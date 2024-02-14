@@ -1,22 +1,34 @@
 "use client";
 import styles from "./adminCategories.module.scss";
 
-import CatGroupRow from "./_components/rowGroup";
-import { TReadGroup, getAllGroups } from "@/actions/category/categoryGroup";
+import CatGroupRow from "@/components/admin/category/rowGroup";
+import {
+  TGetAllCategories,
+  getAllCategories,
+} from "@/actions/category/category";
 import AddCategoryGroup from "@/components/admin/category/addCategoryGroup";
 import { useEffect, useState } from "react";
 
 const AdminCategories = () => {
-  const [allGroups, setAllGroup] = useState<TReadGroup[]>([]);
+  const [allCategories, setAllCategories] = useState<TGetAllCategories[]>([]);
 
   const getData = async () => {
-    const data = await getAllGroups();
-    if (data.res) setAllGroup(data.res);
+    const data = await getAllCategories();
+    if (data.res) setAllCategories(data.res);
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+  const groups: TGetAllCategories[] = [];
+  const categories: TGetAllCategories[] = [];
+
+  if (allCategories.length > 0) {
+    allCategories.forEach((cat) => {
+      cat.parentID === null ? groups.push(cat) : categories.push(cat);
+    });
+  }
   return (
     <div className={styles.categoryList}>
       <div className={styles.head}>
@@ -24,10 +36,14 @@ const AdminCategories = () => {
         <AddCategoryGroup onReset={getData} />
       </div>
       <div className={styles.dataTable}>
-        {allGroups.length > 0 &&
-          allGroups.map((group) => (
+        {groups.length > 0 &&
+          groups.map((group) => (
             <div className={styles.catLevel1} key={group.id}>
-              <CatGroupRow onReset={getData} data={group} />
+              <CatGroupRow
+                onReset={getData}
+                data={group}
+                categories={categories}
+              />
             </div>
           ))}
       </div>

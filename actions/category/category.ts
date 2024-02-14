@@ -2,90 +2,171 @@
 import { z } from "zod";
 import { db } from "@/lib/db";
 
-const AddCategory = z.object({
-  groupId: z.string(),
+const GetAllCategories = z.object({
+  id: z.string(),
+  parentID: z.string().min(6).nullable(),
   name: z.string().min(3),
   url: z.string().min(3),
+  iconSize: z.array(z.number().int()),
+  iconUrl: z.string().min(3).nullable(),
+});
+
+const AddCategory = z.object({
+  parentID: z.string().min(6).nullable(),
+  name: z.string().min(3),
+  url: z.string().min(3),
+  iconSize: z.array(z.number().int()),
+  iconUrl: z.string().min(3).nullable(),
 });
 
 const UpdateCategory = z.object({
-  catId: z.string(),
+  id: z.string(),
   name: z.string().min(3).optional(),
   url: z.string().min(3).optional(),
+  iconSize: z.array(z.number().int()),
+  iconUrl: z.string().min(3).optional(),
 });
 
-export type TAddCategoryAction = z.infer<typeof AddCategory>;
-export type TUpdateCategoryAction = z.infer<typeof UpdateCategory>;
+// const AddCategoryGroup = z.object({
+//   name: z.string().min(3),
+//   url: z.string().min(3),
+//   iconSize: z.tuple([z.number().min(3).int(), z.number().min(3).int()]),
+//   iconUrl: z.string().min(3),
+// });
 
-export const addCategory = async (data: TAddCategoryAction) => {
-  if (!AddCategory.safeParse(data).success)
-    return { error: "Data is not Valid" };
+export type TGetAllCategories = z.infer<typeof GetAllCategories>;
+export type TAddCategory = z.infer<typeof AddCategory>;
+export type TUpdateCategory = z.infer<typeof UpdateCategory>;
+
+export const getAllCategories = async () => {
   try {
-    const categoryGroup = db.categoryGroup.findUnique({
-      where: {
-        id: data.groupId,
-      },
-      select: {
-        id: true,
-      },
-    });
+    const result = await db.category.findMany();
 
-    if (!categoryGroup) return { error: "Category Group not found!" };
+    if (!result) return { error: "Can't read categories" };
+    return { res: result };
+  } catch (error) {
+    return { error: "Cant read Category Groups" };
+  }
+};
 
+export const addCategory = async (data: TAddCategory) => {
+  if (!AddCategory.safeParse(data).success) return { error: "Invalid Data!" };
+
+  try {
     const result = await db.category.create({
       data: {
+        parentID: data.parentID,
         name: data.name,
         url: data.url,
-        CategoryGroup: {
-          connect: {
-            id: data.groupId,
-          },
-        },
+        iconSize: [...data.iconSize],
+        iconUrl: data.iconUrl,
       },
     });
-
-    if (!result) return { error: "can not add category" };
-
-    return { res: JSON.stringify(result) };
+    if (!result) return { error: "cant add to database" };
+    return { res: result };
   } catch (error) {
     return { error: JSON.stringify(error) };
   }
 };
 
-export const updateCategory = async (data: TUpdateCategoryAction) => {
+export const updateCategory = async (data: TUpdateCategory) => {
   if (!UpdateCategory.safeParse(data).success)
-    return { error: "Data is not valid!" };
+    return { error: "Data is no valid" };
+
+  const { id, iconSize, ...values } = data;
 
   try {
-    const { catId, ...values } = data;
-    const result = await db.category.update({
+    let result = await db.category.update({
       where: {
-        id: data.catId,
+        id,
       },
       data: {
+        iconSize: [...iconSize],
         ...values,
       },
     });
-
-    if (!result) return { error: "Cant' update!" };
-    return { res: JSON.stringify(result) };
-  } catch (err) {
-    return { error: JSON.stringify(err) };
+    if (result) return { res: result };
+    return { error: "Can't update it" };
+  } catch (error) {
+    return {
+      error: JSON.stringify(error),
+    };
   }
 };
+
+// export const addCategory = async (data: TAddCategoryAction) => {
+//   if (!AddCategory.safeParse(data).success)
+//     return { error: "Data is not Valid" };
+//   try {
+//     const categoryGroup = db.category.findUnique({
+//       where: {
+//         id: data.groupId,
+//       },
+//       select: {
+//         id: true,
+//       },
+//     });
+
+//     if (!categoryGroup) return { error: "Category Group not found!" };
+
+//     const result = await db.category.create({
+//       data: {
+//         name: data.name,
+//         url: data.url,
+//         parentID: data.groupId,
+//       },
+//     });
+
+//     if (!result) return { error: "can not add category" };
+
+//     return { res: JSON.stringify(result) };
+//   } catch (error) {
+//     return { error: JSON.stringify(error) };
+//   }
+// };
+
+// export const updateCategory = async (data: TUpdateCategoryAction) => {
+//   if (!UpdateCategory.safeParse(data).success)
+//     return { error: "Data is not valid!" };
+
+//   try {
+//     const { catId, ...values } = data;
+//     const result = await db.category.update({
+//       where: {
+//         id: data.catId,
+//       },
+//       data: {
+//         ...values,
+//       },
+//     });
+
+//     if (!result) return { error: "Cant' update!" };
+//     return { res: JSON.stringify(result) };
+//   } catch (err) {
+//     return { error: JSON.stringify(err) };
+//   }
+// };
 
 export const deleteCategory = async (id: string) => {
   if (!id) return { error: "Can't delete it!" };
 
   try {
-    const result = await db.category.delete({
+    const hasParent = await db.category.findFirst({
       where: {
-        id,
+        parentID: id,
       },
     });
+    if (!hasParent) {
+      const result = await db.category.delete({
+        where: {
+          id,
+        },
+      });
 
-    if (!result) return { error: "Can't delete it!" };
-    return { res: JSON.stringify(result) };
+      if (!result) return { error: "Can't delete it!" };
+      return { res: JSON.stringify(result) };
+    }
+    return { error: "It has child!" };
   } catch (error) {
     return { error: "Can't delete it!" };
   }
@@ -93,76 +174,55 @@ export const deleteCategory = async (id: string) => {
 
 // --------------------  SUB CATEGORY ------------------
 
-export const addSubCategory = async (data: TAddCategoryAction) => {
-  if (!AddCategory.safeParse(data).success)
-    return { error: "Data is not Valid" };
-  try {
-    const category = db.category.findUnique({
-      where: {
-        id: data.groupId,
-      },
-      select: {
-        id: true,
-      },
-    });
+// export const addSubCategory = async (data: TAddCategoryAction) => {
+//   if (!AddCategory.safeParse(data).success)
+//     return { error: "Data is not Valid" };
+//   try {
+//     const category = db.category.findUnique({
+//       where: {
+//         id: data.groupId,
+//       },
+//       select: {
+//         id: true,
+//       },
+//     });
 
-    if (!category) return { error: "Category Group not found!" };
+//     if (!category) return { error: "Category Group not found!" };
 
-    const result = await db.subCategory.create({
-      data: {
-        name: data.name,
-        url: data.url,
-        Category: {
-          connect: {
-            id: data.groupId,
-          },
-        },
-      },
-    });
+//     const result = await db.category.create({
+//       data: {
+//         name: data.name,
+//         url: data.url,
+//         parentID: data.groupId,
+//       },
+//     });
 
-    if (!result) return { error: "can not add category" };
+//     if (!result) return { error: "can not add category" };
 
-    return { res: JSON.stringify(result) };
-  } catch (error) {
-    return { error: JSON.stringify(error) };
-  }
-};
+//     return { res: JSON.stringify(result) };
+//   } catch (error) {
+//     return { error: JSON.stringify(error) };
+//   }
+// };
 
-export const updateSubCategory = async (data: TUpdateCategoryAction) => {
-  if (!UpdateCategory.safeParse(data).success)
-    return { error: "Data is not valid!" };
+// export const updateSubCategory = async (data: TUpdateCategoryAction) => {
+//   if (!UpdateCategory.safeParse(data).success)
+//     return { error: "Data is not valid!" };
 
-  try {
-    const { catId, ...values } = data;
-    const result = await db.subCategory.update({
-      where: {
-        id: data.catId,
-      },
-      data: {
-        ...values,
-      },
-    });
+//   try {
+//     const { catId, ...values } = data;
+//     const result = await db.subCategory.update({
+//       where: {
+//         id: data.catId,
+//       },
+//       data: {
+//         ...values,
+//       },
+//     });
 
-    if (!result) return { error: "Cant' update!" };
-    return { res: JSON.stringify(result) };
-  } catch (err) {
-    return { error: JSON.stringify(err) };
-  }
-};
-
-export const deleteSubCategory = async (id: string) => {
-  if (!id) return { error: "Can't delete it!" };
-
-  try {
-    const result = await db.subCategory.delete({
-      where: {
-        id,
-      },
-    });
-
-    if (!result) return { error: "Can't delete it!" };
-    return { res: JSON.stringify(result) };
-  } catch (error) {
-    return { error: "Can't delete it!" };
-  }
-};
+//     if (!result) return { error: "Cant' update!" };
+//     return { res: JSON.stringify(result) };
+//   } catch (err) {
+//     return { error: JSON.stringify(err) };
+//   }
+// };
