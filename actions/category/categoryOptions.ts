@@ -3,6 +3,12 @@
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { TOptionSet } from "@/types/common";
+import { OptionSetType } from "@prisma/client";
+
+const AddOptionSet = z.object({
+  name: z.string().min(3),
+  type: z.enum([OptionSetType.COLOR, OptionSetType.TEXT]),
+});
 
 export const getOptionSetByCatID = async (categoryID: string) => {
   if (!categoryID || categoryID === "") return { error: "Invalid Data!" };
@@ -25,7 +31,34 @@ export const getOptionSetByCatID = async (categoryID: string) => {
   }
 };
 
-export const addOptionSet = async () => {};
+export const addOptionSet = async (data: TOptionSet) => {
+  if (!AddOptionSet.safeParse(data).success) return { error: "Invalid Data" };
+
+  try {
+    const result = await db.category.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        Category_Option: {
+          create: {
+            option: {
+              create: {
+                name: data.name,
+                type: data.type,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!result) return { error: "failed" };
+    return { res: result };
+  } catch (error) {
+    return { res: JSON.stringify(error) };
+  }
+};
+
 export const updateOptionSet = async () => {};
 export const deleteOptionSet = async () => {};
 

@@ -35,7 +35,9 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
   }, []);
 
   const handleAddOption = async () => {};
-  const handleReloadData = async () => {};
+  const handleReloadData = async () => {
+    getCategoryOptionSet();
+  };
 
   return (
     <div className={styles.optionsWindow}>

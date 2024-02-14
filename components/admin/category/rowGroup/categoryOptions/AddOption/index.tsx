@@ -1,15 +1,11 @@
 "use client";
 import styles from "./addOption.module.scss";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Button from "@/components/UI/button";
-import {
-  TActivateOptions,
-  addOption,
-  addTextOption,
-  getOptions,
-} from "@/actions/category/categoryOptions";
+import { addOptionSet } from "@/actions/category/categoryOptions";
+import { TOptionSet } from "@/types/common";
 
 interface IProps {
   categoryOptionId: string;
@@ -24,20 +20,23 @@ const AddOption = ({ categoryOptionId, reloadRequest }: IProps) => {
   const handleAddOption = async () => {
     if (!name || name === "") return;
 
-    const type = isColor ? "COLOR" : "TEXT";
+    const data: TOptionSet = {
+      id: categoryOptionId,
+      name,
+      options: [],
+      type: isColor ? "COLOR" : "TEXT",
+    };
 
     setIsLoading(true);
-    const result = await addOption({
-      categoryOptionId,
-      name,
-      type,
-    });
+    const result = await addOptionSet(data);
     if (result.error) {
       setIsLoading(false);
+      console.log(result.error);
       return;
     }
     if (result.res) {
       setName("");
+      console.log(result.res);
       setIsLoading(false);
       reloadRequest();
     }
@@ -51,6 +50,7 @@ const AddOption = ({ categoryOptionId, reloadRequest }: IProps) => {
           type="text"
           onChange={(e) => setName(e.currentTarget.value)}
           value={name}
+          disabled={isLoading}
         />
       </div>
       <div>
@@ -62,8 +62,11 @@ const AddOption = ({ categoryOptionId, reloadRequest }: IProps) => {
           Color
         </option>
       </div>
-      <Button text="Add Option" onClick={() => handleAddOption()} />
-      {isLoading && <div className={styles.loading} />}
+      <Button
+        text="Add Option"
+        disabled={isLoading}
+        onClick={() => handleAddOption()}
+      />
     </div>
   );
 };
