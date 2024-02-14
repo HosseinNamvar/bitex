@@ -169,12 +169,7 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
       )}
       {showOptions ? (
         <Popup
-          content={
-            <CategoryOptions
-              categoryData={{ parentCatId: groupId, type: "group" }}
-              name={name}
-            />
-          }
+          content={<CategoryOptions categoryID={groupId} categoryName={name} />}
           isLoading={false}
           onClose={() => setShowOptions(false)}
           onCancel={() => setShowOptions(false)}

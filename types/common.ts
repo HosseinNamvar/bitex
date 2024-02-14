@@ -1,3 +1,5 @@
+import { NameValue, OptionSetType } from "@prisma/client";
+
 export type TProductCard = {
   name: string;
   specs: string[];
@@ -46,4 +48,11 @@ export type TCategory = {
   iconSize: [number, number];
   url: string;
   subCategories?: TSubCategory[];
+};
+
+export type TOptionSet = {
+  id: string;
+  name: string;
+  options: NameValue[];
+  type: OptionSetType;
 };

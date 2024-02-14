@@ -7,62 +7,40 @@ import Button from "@/components/UI/button";
 import AddOption from "./AddOption";
 
 // -------- ACTIONS --------
-import {
-  TActivateOptions,
-  TGetCategoryOption,
-  activateCategoryOptions,
-  getCategoryOptions,
-} from "@/actions/category/categoryOptions";
+import { getOptionSetByCatID } from "@/actions/category/categoryOptions";
+import { TOptionSet } from "@/types/common";
 
 interface IProps {
-  name: string;
-  categoryData: TActivateOptions;
+  categoryName: string;
+  categoryID: string;
 }
 
-const CategoryOptions = ({ categoryData, name }: IProps) => {
-  const { parentCatId, type } = categoryData;
+const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
   const [isOption, setIsOption] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [options, setOptions] = useState<TGetCategoryOption | null>(null);
+  const [optionSetList, setOptionSetList] = useState<TOptionSet[]>([]);
 
-  const getCategoryOption = async () => {
-    if (parentCatId) {
-      const response = await getCategoryOptions(parentCatId);
+  const getCategoryOptionSet = async () => {
+    if (categoryID) {
+      const response = await getOptionSetByCatID(categoryID);
       if (response.res) {
-        setOptions(response.res);
+        setOptionSetList(response.res);
       }
     }
   };
-  useEffect(() => {
-    getCategoryOption();
-  }, []);
 
-  const handleActivateOptions = async () => {
-    if (parentCatId && type) {
-      const data: TActivateOptions = {
-        parentCatId,
-        type,
-      };
-      setIsLoading(true);
-      const response = await activateCategoryOptions(data);
-      if (response?.error) {
-        setIsLoading(false);
-        setErrorMsg(response?.error);
-      } else if (response?.res) {
-        setIsLoading(false);
-      }
-    } else {
-      setErrorMsg("Invalid Data!");
-    }
-  };
+  useEffect(() => {
+    getCategoryOptionSet();
+  }, []);
 
   const handleAddOption = async () => {};
   const handleReloadData = async () => {};
+
   return (
     <div className={styles.optionsWindow}>
       <div className={styles.header}>
-        <h2>{`${name} - (${categoryData.type})`}</h2>
+        <h2>{categoryName}</h2>
         <div>
           <h3
             className={isOption ? styles.active : ""}
@@ -82,13 +60,14 @@ const CategoryOptions = ({ categoryData, name }: IProps) => {
       {isOption ? (
         // ------------------ OPTIONS SECTION ------------------
         <div className={styles.tabContainer}>
-          {options ? (
+          <AddOption
+            categoryOptionId={categoryID}
+            reloadRequest={handleReloadData}
+          />
+          {optionSetList.length > 0 ? (
             <>
-              <AddOption
-                categoryOptionId={options.id}
-                reloadRequest={handleReloadData}
-              />
-              {options.id}
+              {/* {categoryID} */}
+              {optionSetList.length}
               {/* {options} */}
               {/* <div className={styles.optionRow}>
                 <div className={styles.col1}>Storage Capacity</div>
@@ -160,13 +139,7 @@ const CategoryOptions = ({ categoryData, name }: IProps) => {
             </>
           ) : (
             <div className={styles.addCategoryOption}>
-              <span>Options are not activated for this category</span>
-              <span>{errorMsg}</span>
-              <Button
-                text="Activate Options"
-                disabled={isLoading}
-                onClick={() => handleActivateOptions()}
-              />
+              <span>There is no Options for this category</span>
             </div>
           )}
         </div>

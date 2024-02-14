@@ -221,10 +221,10 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
   };
 
   // --------------- OPTIONS SECTION ---------------
-  // const handleShowSubCatOptions = (data: TSubCat) => {
-  //   selectedSubCat = { ...data };
-  //   setShowSubOptions(true);
-  // };
+  const handleShowSubCatOptions = (data: TEditSubCat) => {
+    selectedSubCategory = { ...data };
+    setShowSubOptions(true);
+  };
 
   return (
     <div className={styles.categoryRow}>
@@ -250,8 +250,13 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
               <div>
                 <Button
                   text="Options"
-                  // onClick={() => handleShowSubCatOptions(subCat)}
-                  onClick={() => console.log()}
+                  onClick={() =>
+                    handleShowSubCatOptions({
+                      id: subCat.id,
+                      name: subCat.name,
+                      url: "",
+                    })
+                  }
                 />
               </div>
               <div>
@@ -368,8 +373,8 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
         <Popup
           content={
             <CategoryOptions
-              categoryData={{ parentCatId: id, type: "category" }}
-              name={name}
+              categoryID={categoryID}
+              categoryName={categoryName}
             />
           }
           isLoading={isLoading}
@@ -382,11 +387,8 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
         <Popup
           content={
             <CategoryOptions
-              categoryData={{
-                parentCatId: id,
-                type: "subCategory",
-              }}
-              name={selectedSubCat.name}
+              categoryID={selectedSubCategory.id}
+              categoryName={selectedSubCategory.name}
             />
           }
           isLoading={isLoading}
