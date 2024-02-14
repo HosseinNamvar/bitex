@@ -14,32 +14,38 @@ model Category {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   parentID String? @db.ObjectId
 
-  name            String            @unique
-  url             String            @unique
+  name            String               @unique
+  url             String               @unique
   iconUrl         String?
   iconSize        Int[]
-  Category_Option Category_Option[]
+  Category_Option Category_OptionSet[]
 }
 
-model Category_Option {
+model Category_OptionSet {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  option     Option   @relation(fields: [optionID], references: [id])
-  optionID   String   @db.ObjectId
-  category   Category @relation(fields: [categoryID], references: [id])
-  categoryID String   @db.ObjectId
+  option     OptionSet @relation(fields: [optionID], references: [id])
+  optionID   String    @db.ObjectId
+  category   Category  @relation(fields: [categoryID], references: [id])
+  categoryID String    @db.ObjectId
 
   @@unique([optionID, categoryID])
 }
 
-model Option {
-  id              String            @id @default(auto()) @map("_id") @db.ObjectId
-  name            String            @unique
+model OptionSet {
+  id              String               @id @default(auto()) @map("_id") @db.ObjectId
+  name            String               @unique
   options         NameValue[]
-  Category_Option Category_Option[]
+  type            OptionSetType
+  Category_Option Category_OptionSet[]
 }
 
 type NameValue {
   name  String
   value String
+}
+
+enum OptionSetType {
+  TEXT
+  COLOR
 }

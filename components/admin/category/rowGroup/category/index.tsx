@@ -1,7 +1,7 @@
 "use client";
 import styles from "./categoryRow.module.scss";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
@@ -52,17 +52,12 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [showAddSubCategory, setShowAddSubCategory] = useState(false);
 
-  const [subCategoryData, setSubCategoryData] = useState<TAddCategory>({
-    ...initialCategory,
-  });
-
   // --------------- SUB CATEGORY ---------------
   const [showSubEdit, setShowSubEdit] = useState(false);
   const [showSubDelete, setShowSubDelete] = useState(false);
 
   const [showSubOptions, setShowSubOptions] = useState(false);
 
-  //-------- Refactored
   const [addSubCategoryData, setAddSubCategoryData] = useState<TAddCategory>({
     ...initialCategory,
     parentID: categoryID,
@@ -71,21 +66,9 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
     ...data,
   });
 
-  // SUB CATEGORY
   const [editSubCatData, setEditSubCatData] = useState<TAddCategory>({
     ...initialCategory,
   });
-
-  // useEffect(() => {
-  //   initialCategory.name = name;
-  //   initialCategory.url = url;
-  // }, [name, url]);
-
-  // const showEditWindow = () => {
-  //   setCategoryData({ name, url });
-  //   setErrorMsg("");
-  //   setShowEdit(true);
-  // };
 
   const handleUpdate = async () => {
     if (editCategoryData.name === "" || editCategoryData.url === "") {
@@ -157,7 +140,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       setIsLoading(false);
     }
     if (response.res) {
-      setSubCategoryData({
+      setAddSubCategoryData({
         ...addSubCategoryData,
         name: "",
         url: "",

@@ -25,8 +25,6 @@ interface IProps {
   onReset: () => void;
 }
 
-// type TCategory = TReadGroup["categories"];
-
 let initialCategory: TAddCategory = {
   name: "",
   url: "",

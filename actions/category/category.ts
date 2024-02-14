@@ -27,13 +27,6 @@ const UpdateCategory = z.object({
   iconUrl: z.string().min(3).optional(),
 });
 
-// const AddCategoryGroup = z.object({
-//   name: z.string().min(3),
-//   url: z.string().min(3),
-//   iconSize: z.tuple([z.number().min(3).int(), z.number().min(3).int()]),
-//   iconUrl: z.string().min(3),
-// });
-
 export type TGetAllCategories = z.infer<typeof GetAllCategories>;
 export type TAddCategory = z.infer<typeof AddCategory>;
 export type TUpdateCategory = z.infer<typeof UpdateCategory>;
@@ -94,59 +87,6 @@ export const updateCategory = async (data: TUpdateCategory) => {
   }
 };
 
-// export const addCategory = async (data: TAddCategoryAction) => {
-//   if (!AddCategory.safeParse(data).success)
-//     return { error: "Data is not Valid" };
-//   try {
-//     const categoryGroup = db.category.findUnique({
-//       where: {
-//         id: data.groupId,
-//       },
-//       select: {
-//         id: true,
-//       },
-//     });
-
-//     if (!categoryGroup) return { error: "Category Group not found!" };
-
-//     const result = await db.category.create({
-//       data: {
-//         name: data.name,
-//         url: data.url,
-//         parentID: data.groupId,
-//       },
-//     });
-
-//     if (!result) return { error: "can not add category" };
-
-//     return { res: JSON.stringify(result) };
-//   } catch (error) {
-//     return { error: JSON.stringify(error) };
-//   }
-// };
-
-// export const updateCategory = async (data: TUpdateCategoryAction) => {
-//   if (!UpdateCategory.safeParse(data).success)
-//     return { error: "Data is not valid!" };
-
-//   try {
-//     const { catId, ...values } = data;
-//     const result = await db.category.update({
-//       where: {
-//         id: data.catId,
-//       },
-//       data: {
-//         ...values,
-//       },
-//     });
-
-//     if (!result) return { error: "Cant' update!" };
-//     return { res: JSON.stringify(result) };
-//   } catch (err) {
-//     return { error: JSON.stringify(err) };
-//   }
-// };
-
 export const deleteCategory = async (id: string) => {
   if (!id) return { error: "Can't delete it!" };
 
@@ -171,58 +111,3 @@ export const deleteCategory = async (id: string) => {
     return { error: "Can't delete it!" };
   }
 };
-
-// --------------------  SUB CATEGORY ------------------
-
-// export const addSubCategory = async (data: TAddCategoryAction) => {
-//   if (!AddCategory.safeParse(data).success)
-//     return { error: "Data is not Valid" };
-//   try {
-//     const category = db.category.findUnique({
-//       where: {
-//         id: data.groupId,
-//       },
-//       select: {
-//         id: true,
-//       },
-//     });
-
-//     if (!category) return { error: "Category Group not found!" };
-
-//     const result = await db.category.create({
-//       data: {
-//         name: data.name,
-//         url: data.url,
-//         parentID: data.groupId,
-//       },
-//     });
-
-//     if (!result) return { error: "can not add category" };
-
-//     return { res: JSON.stringify(result) };
-//   } catch (error) {
-//     return { error: JSON.stringify(error) };
-//   }
-// };
-
-// export const updateSubCategory = async (data: TUpdateCategoryAction) => {
-//   if (!UpdateCategory.safeParse(data).success)
-//     return { error: "Data is not valid!" };
-
-//   try {
-//     const { catId, ...values } = data;
-//     const result = await db.subCategory.update({
-//       where: {
-//         id: data.catId,
-//       },
-//       data: {
-//         ...values,
-//       },
-//     });
-
-//     if (!result) return { error: "Cant' update!" };
-//     return { res: JSON.stringify(result) };
-//   } catch (err) {
-//     return { error: JSON.stringify(err) };
-//   }
-// };
