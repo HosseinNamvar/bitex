@@ -232,27 +232,34 @@ export const addSingleSpec = async (data: TSingleSpec) => {
     return { error: JSON.stringify(error) };
   }
 };
-export const deleteSingleSpec = async (data: TSingleOption) => {
-  // if (!SingleOption.safeParse(data).success) return { error: "Invalid Data!" };
-  // try {
-  //   const result = await db.optionSet.update({
-  //     where: {
-  //       id: data.optionSetID,
-  //     },
-  //     data: {
-  //       options: {
-  //         deleteMany: {
-  //           where: {
-  //             name: data.name,
-  //             value: data.name,
-  //           },
-  //         },
-  //       },
-  //     },
-  //   });
-  //   if (!result) return { error: "Can't Delete!" };
-  //   return { res: result };
-  // } catch (error) {
-  //   return { error: JSON.stringify(error) };
-  // }
+export const deleteSingleSpec = async (data: TSingleSpec) => {
+  if (!SingleSpec.safeParse(data).success) return { error: "Invalid Data!" };
+  try {
+    const specsList = await db.specGroup.findFirst({
+      where: {
+        id: data.specGroupID,
+      },
+      select: {
+        specs: true,
+      },
+    });
+    if (!specsList || !specsList.specs) return { error: "Can't fins Item!" };
+
+    const filteredList = specsList.specs.filter((spec) => spec !== data.value);
+
+    const result = await db.specGroup.update({
+      where: {
+        id: data.specGroupID,
+      },
+      data: {
+        specs: {
+          set: filteredList,
+        },
+      },
+    });
+    if (!result) return { error: "Can't Delete!" };
+    return { res: result };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
 };

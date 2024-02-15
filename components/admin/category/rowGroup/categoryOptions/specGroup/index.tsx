@@ -6,6 +6,7 @@ import Button from "@/components/UI/button";
 import { TSingleSpec, TSpecGroup } from "@/types/common";
 import {
   addSingleSpec,
+  deleteSingleSpec,
   deleteSpecGroup,
 } from "@/actions/category/categoryOptions";
 
@@ -53,6 +54,26 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
     }
   };
 
+  const handleDeleteSingleSpec = async (spec: string) => {
+    if (!id || !spec || spec === "") return;
+
+    setIsLoading(true);
+    const data: TSingleSpec = {
+      specGroupID: id,
+      value: spec,
+    };
+
+    const response = await deleteSingleSpec(data);
+    if (response.error) {
+      setIsLoading(false);
+      return;
+    }
+    if (response.res) {
+      setIsLoading(false);
+      reloadRequest();
+    }
+  };
+
   return (
     <div className={styles.specGroup}>
       <div className={styles.header}>
@@ -83,7 +104,11 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
           {specs.map((spec, index) => (
             <div className={styles.specRow} key={index}>
               <span>{spec}</span>
-              <Button disabled={isLoading} text="delete" onClick={() => ""} />
+              <Button
+                disabled={isLoading}
+                text="delete"
+                onClick={() => handleDeleteSingleSpec(spec)}
+              />
             </div>
           ))}
         </>
