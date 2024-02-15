@@ -9,6 +9,7 @@ import AddOption from "./AddOption";
 // -------- ACTIONS --------
 import { getOptionSetByCatID } from "@/actions/category/categoryOptions";
 import { TOptionSet } from "@/types/common";
+import OptionSet from "./optionSet";
 
 interface IProps {
   categoryName: string;
@@ -70,32 +71,7 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
             {optionSetList.length > 0 ? (
               <>
                 {optionSetList.map((optionSet) => (
-                  <div className={styles.optionRow} key={optionSet.id}>
-                    <div className={styles.col1}>
-                      <span>{optionSet.name}</span>
-                      <Button text="delete" />
-                    </div>
-                    <div className={styles.col2}>
-                      {optionSet.options.map((singleOption, index) => (
-                        <div className={styles.colorRow} key={index}>
-                          <div>
-                            <span>{singleOption.name}</span>
-                            <span>{singleOption.value}</span>
-                          </div>
-                          <div>
-                            <Button text="delete" onClick={() => "delete"} />
-                          </div>
-                        </div>
-                      ))}
-                      <div className={styles.colorAdd}>
-                        <div>
-                          <input type="text" />
-                          <input type="text" />
-                        </div>
-                        <Button text="Add" onClick={() => "Add"} />
-                      </div>
-                    </div>
-                  </div>
+                  <OptionSet key={optionSet.id} data={optionSet} />
                 ))}
               </>
             ) : (
