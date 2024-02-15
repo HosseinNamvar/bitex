@@ -14,11 +14,12 @@ model Category {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   parentID String? @db.ObjectId
 
-  name            String               @unique
-  url             String               @unique
-  iconUrl         String?
-  iconSize        Int[]
-  Category_Option Category_OptionSet[]
+  name               String               @unique
+  url                String               @unique
+  iconUrl            String?
+  iconSize           Int[]
+  Category_Option    Category_OptionSet[]
+  Category_SpecGroup Category_SpecGroup[]
 }
 
 model Category_OptionSet {
@@ -43,6 +44,29 @@ model OptionSet {
 type NameValue {
   name  String
   value String
+}
+
+model Category_SpecGroup {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  specGroup   SpecGroup @relation(fields: [specGroupID], references: [id], onDelete: Cascade)
+  specGroupID String    @db.ObjectId
+  category    Category  @relation(fields: [categoryID], references: [id])
+  categoryID  String    @db.ObjectId
+
+  @@unique([specGroupID, categoryID])
+}
+
+model SpecGroup {
+  id                 String               @id @default(auto()) @map("_id") @db.ObjectId
+  title              String
+  specs              Spec[]
+  Category_SpecGroup Category_SpecGroup[]
+}
+
+type Spec {
+  title  String
+  values String[]
 }
 
 enum OptionSetType {

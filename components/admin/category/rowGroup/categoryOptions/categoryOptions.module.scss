@@ -84,39 +84,15 @@
           width: 300px;
         }
       }
-
-      // -------------------- SPECIFICATION SECTION --------------------
-      > .specGroup {
-        padding-bottom: 16px;
-        border-bottom: 1px solid nth($color-light, 4);
-        > .specTitle {
-          display: flex;
-          justify-content: space-between;
-          > div {
-            > button {
-              width: 80px;
-              margin-left: 8px;
-            }
-          }
-        }
-        > .specRow {
-          display: flex;
-          margin-top: 12px;
-          margin-left: 16px;
-          justify-content: space-between;
-          > div {
-            > button {
-              width: 80px;
-              margin-left: 8px;
-            }
-          }
-        }
-      }
-      > .specGroupAdd {
-        display: flex;
-        align-items: center;
-        height: 80px;
-      }
+    }
+    // -------------------- SPECIFICATION SECTION --------------------
+    > .specGroupList {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: 100%;
+      overflow-y: scroll;
+      padding: 12px;
     }
   }
 }

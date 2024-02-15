@@ -1,4 +1,4 @@
-import { NameValue, OptionSetType } from "@prisma/client";
+import { NameValue, OptionSetType, Spec } from "@prisma/client";
 
 export type TProductCard = {
   name: string;
@@ -61,4 +61,10 @@ export type TSingleOption = {
   optionSetID: string;
   name: string;
   value: string;
+};
+
+export type TSpecGroup = {
+  id: string;
+  title: string;
+  specs: Spec[];
 };

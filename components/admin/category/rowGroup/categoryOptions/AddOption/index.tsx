@@ -31,12 +31,10 @@ const AddOption = ({ categoryOptionId, reloadRequest }: IProps) => {
     const result = await addOptionSet(data);
     if (result.error) {
       setIsLoading(false);
-      console.log(result.error);
       return;
     }
     if (result.res) {
       setName("");
-      console.log(result.res);
       setIsLoading(false);
       reloadRequest();
     }
