@@ -188,18 +188,18 @@ export const addSpecGroup = async (data: TSpecGroup) => {
   }
 };
 export const deleteSpecGroup = async (id: string) => {
-  // if (!id || id === "") return { error: "Invalid Data" };
-  // try {
-  //   const result = await db.optionSet.delete({
-  //     where: {
-  //       id,
-  //     },
-  //   });
-  //   if (!result) return { error: "failed" };
-  //   return { res: result };
-  // } catch (error) {
-  //   return { res: JSON.stringify(error) };
-  // }
+  if (!id || id === "") return { error: "Invalid Data" };
+  try {
+    const result = await db.specGroup.delete({
+      where: {
+        id,
+      },
+    });
+    if (!result) return { error: "failed" };
+    return { res: result };
+  } catch (error) {
+    return { res: JSON.stringify(error) };
+  }
 };
 
 // ------------------------- SINGLE SPEC -------------------------

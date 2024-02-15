@@ -31,11 +31,9 @@ const OptionSet = ({ data, reloadRequest }: IProps) => {
     const response = await deleteOptionSet(id);
     if (response.error) {
       setIsLoading(false);
-      console.log(response.error);
       return;
     }
     if (response.res) {
-      console.log(response.res);
       setIsLoading(false);
       reloadRequest();
     }
