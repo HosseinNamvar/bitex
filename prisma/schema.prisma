@@ -60,13 +60,8 @@ model Category_SpecGroup {
 model SpecGroup {
   id                 String               @id @default(auto()) @map("_id") @db.ObjectId
   title              String
-  specs              Spec[]
+  specs              String[]
   Category_SpecGroup Category_SpecGroup[]
-}
-
-type Spec {
-  title  String
-  values String[]
 }
 
 enum OptionSetType {

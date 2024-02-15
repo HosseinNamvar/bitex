@@ -2,7 +2,12 @@
 
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { TOptionSet, TSingleOption, TSpecGroup } from "@/types/common";
+import {
+  TOptionSet,
+  TSingleOption,
+  TSingleSpec,
+  TSpecGroup,
+} from "@/types/common";
 import { OptionSetType } from "@prisma/client";
 
 const AddOptionSet = z.object({
@@ -18,6 +23,11 @@ const SingleOption = z.object({
 
 const AddSpecGroup = z.object({
   title: z.string().min(3),
+});
+
+const SingleSpec = z.object({
+  specGroupID: z.string().min(6),
+  value: z.string().min(3),
 });
 
 export const getOptionSetByCatID = async (categoryID: string) => {
@@ -203,27 +213,24 @@ export const deleteSpecGroup = async (id: string) => {
 };
 
 // ------------------------- SINGLE SPEC -------------------------
-export const addSingleSpec = async (data: TSingleOption) => {
-  // if (!SingleOption.safeParse(data).success) return { error: "Invalid Data!" };
-  // try {
-  //   const result = await db.optionSet.update({
-  //     where: {
-  //       id: data.optionSetID,
-  //     },
-  //     data: {
-  //       options: {
-  //         push: {
-  //           name: data.name,
-  //           value: data.value,
-  //         },
-  //       },
-  //     },
-  //   });
-  //   if (!result) return { error: "Can't Insert!" };
-  //   return { res: result };
-  // } catch (error) {
-  //   return { error: JSON.stringify(error) };
-  // }
+export const addSingleSpec = async (data: TSingleSpec) => {
+  if (!SingleSpec.safeParse(data).success) return { error: "Invalid Data!" };
+  try {
+    const result = await db.specGroup.update({
+      where: {
+        id: data.specGroupID,
+      },
+      data: {
+        specs: {
+          push: data.value,
+        },
+      },
+    });
+    if (!result) return { error: "Can't Insert!" };
+    return { res: result };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
 };
 export const deleteSingleSpec = async (data: TSingleOption) => {
   // if (!SingleOption.safeParse(data).success) return { error: "Invalid Data!" };

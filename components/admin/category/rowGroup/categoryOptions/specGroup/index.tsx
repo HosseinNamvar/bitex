@@ -3,8 +3,11 @@ import styles from "./specGroup.module.scss";
 
 import { useState } from "react";
 import Button from "@/components/UI/button";
-import { TSpecGroup } from "@/types/common";
-import { deleteSpecGroup } from "@/actions/category/categoryOptions";
+import { TSingleSpec, TSpecGroup } from "@/types/common";
+import {
+  addSingleSpec,
+  deleteSpecGroup,
+} from "@/actions/category/categoryOptions";
 
 interface IProps {
   data: TSpecGroup;
@@ -14,7 +17,7 @@ interface IProps {
 const SpecGroup = ({ data, reloadRequest }: IProps) => {
   const { id, title, specs } = data;
   const [isLoading, setIsLoading] = useState(false);
-
+  const [specToAdd, setSpecToAdd] = useState("");
   const handleDeleteSpecGroup = async () => {
     if (!id) return;
     setIsLoading(true);
@@ -25,6 +28,27 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
     }
     if (response.res) {
       setIsLoading(false);
+      reloadRequest();
+    }
+  };
+
+  const handleAddSingleSpec = async () => {
+    if (!id || !specToAdd || specToAdd === "") return;
+
+    setIsLoading(true);
+    const data: TSingleSpec = {
+      specGroupID: id,
+      value: specToAdd,
+    };
+
+    const response = await addSingleSpec(data);
+    if (response.error) {
+      setIsLoading(false);
+      return;
+    }
+    if (response.res) {
+      setIsLoading(false);
+      setSpecToAdd("");
       reloadRequest();
     }
   };
@@ -41,18 +65,33 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
           />
         </div>
         <div>
-          <input disabled={isLoading} type="text" />
-          <Button disabled={isLoading} text="Add Spec" onClick={() => ""} />
+          <input
+            disabled={isLoading}
+            type="text"
+            value={specToAdd}
+            onChange={(e) => setSpecToAdd(e.currentTarget.value)}
+          />
+          <Button
+            disabled={isLoading}
+            text="Add Spec"
+            onClick={() => handleAddSingleSpec()}
+          />
         </div>
       </div>
-      <div className={styles.specRow}>
-        <span>Dimension</span>
-        <Button disabled={isLoading} text="delete" onClick={() => ""} />
-      </div>
-      <div className={styles.specRow}>
-        <span>SimCard</span>
-        <Button disabled={isLoading} text="delete" onClick={() => ""} />
-      </div>
+      {specs.length > 0 ? (
+        <>
+          {specs.map((spec, index) => (
+            <div className={styles.specRow} key={index}>
+              <span>{spec}</span>
+              <Button disabled={isLoading} text="delete" onClick={() => ""} />
+            </div>
+          ))}
+        </>
+      ) : (
+        <div className={styles.specRow}>
+          <span>There is no specification!</span>
+        </div>
+      )}
     </div>
   );
 };
