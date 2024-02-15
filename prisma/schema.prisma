@@ -24,7 +24,7 @@ model Category {
 model Category_OptionSet {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  option     OptionSet @relation(fields: [optionID], references: [id])
+  option     OptionSet @relation(fields: [optionID], references: [id], onDelete: Cascade)
   optionID   String    @db.ObjectId
   category   Category  @relation(fields: [categoryID], references: [id])
   categoryID String    @db.ObjectId

@@ -3,7 +3,6 @@ import styles from "./categoryOptions.module.scss";
 
 import { useEffect, useState } from "react";
 
-import Button from "@/components/UI/button";
 import AddOption from "./AddOption";
 
 // -------- ACTIONS --------
@@ -71,7 +70,11 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
             {optionSetList.length > 0 ? (
               <>
                 {optionSetList.map((optionSet) => (
-                  <OptionSet key={optionSet.id} data={optionSet} />
+                  <OptionSet
+                    key={optionSet.id}
+                    data={optionSet}
+                    reloadRequest={handleReloadData}
+                  />
                 ))}
               </>
             ) : (

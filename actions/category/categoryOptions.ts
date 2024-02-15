@@ -59,8 +59,21 @@ export const addOptionSet = async (data: TOptionSet) => {
   }
 };
 
-export const updateOptionSet = async () => {};
-export const deleteOptionSet = async () => {};
+export const deleteOptionSet = async (id: string) => {
+  if (!id || id === "") return { error: "Invalid Data" };
+
+  try {
+    const result = await db.optionSet.delete({
+      where: {
+        id,
+      },
+    });
+    if (!result) return { error: "failed" };
+    return { res: result };
+  } catch (error) {
+    return { res: JSON.stringify(error) };
+  }
+};
 
 // ------------------------- SINGLE OPTION -------------------------
 export const addSingleOption = async () => {};
