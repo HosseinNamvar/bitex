@@ -66,84 +66,44 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
             categoryOptionId={categoryID}
             reloadRequest={handleReloadData}
           />
-          {optionSetList.length > 0 ? (
-            <>
-              {/* {categoryID} */}
-              {optionSetList.length}
-              {/* {options} */}
-              {/* <div className={styles.optionRow}>
-                <div className={styles.col1}>Storage Capacity</div>
-                <div className={styles.col2}>
-                  <div className={styles.textRow}>
-                    <span>128GB</span>
-                    <div>
-                      <Button text="edit" onClick={() => ("edit")} />
-                      <Button
-                        text="delete"
-                        onClick={() => ("delete")}
-                      />
+          <div className={styles.optionList}>
+            {optionSetList.length > 0 ? (
+              <>
+                {optionSetList.map((optionSet) => (
+                  <div className={styles.optionRow} key={optionSet.id}>
+                    <div className={styles.col1}>
+                      <span>{optionSet.name}</span>
+                      <Button text="delete" />
+                    </div>
+                    <div className={styles.col2}>
+                      {optionSet.options.map((singleOption, index) => (
+                        <div className={styles.colorRow} key={index}>
+                          <div>
+                            <span>{singleOption.name}</span>
+                            <span>{singleOption.value}</span>
+                          </div>
+                          <div>
+                            <Button text="delete" onClick={() => "delete"} />
+                          </div>
+                        </div>
+                      ))}
+                      <div className={styles.colorAdd}>
+                        <div>
+                          <input type="text" />
+                          <input type="text" />
+                        </div>
+                        <Button text="Add" onClick={() => "Add"} />
+                      </div>
                     </div>
                   </div>
-                  <div className={styles.textRow}>
-                    <span>256GB</span>
-                    <div>
-                      <Button text="edit" onClick={() => ("edit")} />
-                      <Button
-                        text="delete"
-                        onClick={() => ("delete")}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.textAdd}>
-                    <input type="text" />
-                    <Button text="Add" onClick={() => ("Add")} />
-                  </div>
-                </div>
+                ))}
+              </>
+            ) : (
+              <div className={styles.addCategoryOption}>
+                <span>There is no Options for this category</span>
               </div>
-              <div className={styles.optionRow}>
-                <div className={styles.col1}>Color</div>
-                <div className={styles.col2}>
-                  <div className={styles.colorRow}>
-                    <div>
-                      <span>Red</span>
-                      <span>#000000</span>
-                    </div>
-                    <div>
-                      <Button text="edit" onClick={() => ("edit")} />
-                      <Button
-                        text="delete"
-                        onClick={() => ("delete")}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.colorRow}>
-                    <div>
-                      <span>Blue</span>
-                      <span>#000000</span>
-                    </div>{" "}
-                    <div>
-                      <Button text="edit" onClick={() => ("edit")} />
-                      <Button
-                        text="delete"
-                        onClick={() => ("delete")}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.colorAdd}>
-                    <div>
-                      <input type="text" />
-                      <input type="text" />
-                    </div>
-                    <Button text="Add" onClick={() => ("Add")} />
-                  </div>
-                </div>
-              </div> */}
-            </>
-          ) : (
-            <div className={styles.addCategoryOption}>
-              <span>There is no Options for this category</span>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       ) : (
         // ------------------ SPECIFICATION SECTION ------------------

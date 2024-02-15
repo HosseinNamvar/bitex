@@ -63,117 +63,131 @@
   > .tabContainer {
     display: flex;
     flex-direction: column;
-    > .addCategoryOption {
-      margin-top: 40px;
+    height: 100%;
+    overflow: hidden;
+    > .optionList {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      > span {
-        text-align: center;
-        margin-bottom: 30px;
-        width: 300px;
-      }
-    }
-
-    > .optionRow {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 3px solid nth($color-light, 2);
-      > .col1 {
-        color: nth($color-light, 8);
-        font-size: 1.6rem;
-        min-width: 200px;
-      }
-      > .col2 {
+      gap: 16px;
+      height: 100%;
+      overflow-y: scroll;
+      padding: 12px;
+      > .addCategoryOption {
+        margin-top: 40px;
         display: flex;
         flex-direction: column;
-        > .textRow {
-          display: flex;
-          width: 100%;
-          justify-content: space-between;
-          > div {
-            > button {
-              margin-left: 8px;
-            }
-          }
+        align-items: center;
+        justify-content: center;
+        > span {
+          text-align: center;
+          margin-bottom: 30px;
+          width: 300px;
         }
-        > .textAdd {
-          border-top: 1px solid nth($color-light, 3);
-          margin-top: 16px;
-          padding-top: 8px;
-          > button {
-            margin-left: 8px;
-          }
-        }
+      }
 
-        > .colorRow {
-          display: flex;
-          justify-content: space-between;
-          > div {
+      > .optionRow {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 8px;
+        padding: 12px;
+        border: 1px solid nth($color-light, 3);
+
+        > .col1 {
+          color: nth($color-light, 8);
+          font-size: 1.6rem;
+          min-width: 150px;
+          > button {
             margin-left: 16px;
-            > span {
-              width: 100px;
-              text-align: center;
+          }
+        }
+        > .col2 {
+          display: flex;
+          flex-direction: column;
+          > .textRow {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            > div {
+              > button {
+                margin-left: 8px;
+              }
             }
+          }
+          > .textAdd {
+            border-top: 1px solid nth($color-light, 3);
+            margin-top: 16px;
+            padding-top: 8px;
             > button {
               margin-left: 8px;
             }
           }
-        }
-        > .colorAdd {
-          padding-top: 12px;
-          margin-top: 12px;
-          border-top: 1px solid nth($color-light, 2);
-          > div {
-            margin-left: 10px;
-            > input {
+
+          > .colorRow {
+            display: flex;
+            justify-content: space-between;
+            > div {
               margin-left: 16px;
-              width: 90px;
+              > span {
+                width: 100px;
+                text-align: center;
+              }
+              > button {
+                margin-left: 8px;
+              }
             }
           }
-          > button {
-            width: 200px;
-            margin: 8px 24px;
+          > .colorAdd {
+            padding-top: 12px;
+            margin-top: 12px;
+            border-top: 1px solid nth($color-light, 2);
+            > div {
+              margin-left: 10px;
+              > input {
+                margin-left: 16px;
+                width: 90px;
+              }
+            }
+            > button {
+              width: 200px;
+              margin: 8px 24px;
+            }
           }
         }
       }
-    }
 
-    // -------------------- SPECIFICATION SECTION --------------------
-    > .specGroup {
-      padding-bottom: 16px;
-      border-bottom: 1px solid nth($color-light, 4);
-      > .specTitle {
-        display: flex;
-        justify-content: space-between;
-        > div {
-          > button {
-            width: 80px;
-            margin-left: 8px;
+      // -------------------- SPECIFICATION SECTION --------------------
+      > .specGroup {
+        padding-bottom: 16px;
+        border-bottom: 1px solid nth($color-light, 4);
+        > .specTitle {
+          display: flex;
+          justify-content: space-between;
+          > div {
+            > button {
+              width: 80px;
+              margin-left: 8px;
+            }
+          }
+        }
+        > .specRow {
+          display: flex;
+          margin-top: 12px;
+          margin-left: 16px;
+          justify-content: space-between;
+          > div {
+            > button {
+              width: 80px;
+              margin-left: 8px;
+            }
           }
         }
       }
-      > .specRow {
+      > .specGroupAdd {
         display: flex;
-        margin-top: 12px;
-        margin-left: 16px;
-        justify-content: space-between;
-        > div {
-          > button {
-            width: 80px;
-            margin-left: 8px;
-          }
-        }
+        align-items: center;
+        height: 80px;
       }
-    }
-    > .specGroupAdd {
-      display: flex;
-      align-items: center;
-      height: 80px;
     }
   }
 }
