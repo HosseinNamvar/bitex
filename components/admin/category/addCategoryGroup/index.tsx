@@ -5,7 +5,6 @@ import Button from "@/components/UI/button";
 import { TGetAllCategories, addCategory } from "@/actions/category/category";
 import Popup from "@/components/UI/popup";
 import GroupCategory from "../../forms/groupCategory";
-// import { TCategoryGroup } from "@/types/common";
 
 interface IProps {
   onReset: () => void;

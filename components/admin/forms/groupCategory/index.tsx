@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 import styles from "./groupCategory.module.scss";
-import { TCategoryGroup } from "@/types/common";
+import { TGetAllCategories } from "@/actions/category/category";
 
 interface IProps {
   errorMsg: string;
-  data: TCategoryGroup;
-  onChange: (data: TCategoryGroup) => void;
+  data: TGetAllCategories;
+  onChange: (data: TGetAllCategories) => void;
 }
 
 const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
@@ -42,7 +42,7 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
           }
           type="text"
           placeholder="ICON URL..."
-          value={data.iconUrl}
+          value={data.iconUrl || ""}
         />
       </div>
       <div className={styles.row}>
