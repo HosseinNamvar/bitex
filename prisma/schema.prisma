@@ -14,8 +14,8 @@ model Category {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   parentID String? @db.ObjectId
 
-  name               String               @unique
-  url                String               @unique
+  name               String
+  url                String
   iconUrl            String?
   iconSize           Int[]
   Category_Option    Category_OptionSet[]
@@ -35,7 +35,7 @@ model Category_OptionSet {
 
 model OptionSet {
   id              String               @id @default(auto()) @map("_id") @db.ObjectId
-  name            String               @unique
+  name            String
   options         NameValue[]
   type            OptionSetType
   Category_Option Category_OptionSet[]
