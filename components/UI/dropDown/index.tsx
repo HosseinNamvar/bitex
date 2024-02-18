@@ -12,12 +12,10 @@ interface IProps {
   selectedIndex?: number;
   isSearch?: boolean;
   disabled?: boolean;
-  onChange: (newxIndex: number) => void;
+  onChange: (newIndex: number) => void;
 }
 
 const DropDownList = ({
-  isSearch = false,
-  disabled = false,
   data,
   width = "auto",
   selectedIndex = 0,
@@ -41,19 +39,25 @@ const DropDownList = ({
       className={`${styles.dropDownList} ${isActive ? styles.isFocus : ""}`}
       style={{ width: width }}
     >
-      <span>{data[selectedIndex].text}</span>
-      <ArrowIcon width={8} />
-      <div className={`${styles.list} ${isActive ? styles.showOptions : ""}`}>
-        {data.map((option, index) => (
-          <span
-            className={index === selectedIndex ? styles.selectedOption : ""}
-            key={option.value}
-            onClick={() => handleChange(index)}
+      {data.length > 0 && (
+        <>
+          <span>{data[selectedIndex].text}</span>
+          <ArrowIcon width={8} />
+          <div
+            className={`${styles.list} ${isActive ? styles.showOptions : ""}`}
           >
-            {option.text}
-          </span>
-        ))}
-      </div>
+            {data.map((option, index) => (
+              <span
+                className={index === selectedIndex ? styles.selectedOption : ""}
+                key={option.value}
+                onClick={() => handleChange(index)}
+              >
+                {option.text}
+              </span>
+            ))}
+          </div>
+        </>
+      )}
     </button>
   );
 };
