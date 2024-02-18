@@ -41,10 +41,10 @@ const DropDownList = ({
       className={`${styles.dropDownList} ${isActive ? styles.isFocus : ""}`}
       style={{ width: width }}
     >
-      <span>{data.options[selectedIndex].text}</span>
+      <span>{data[selectedIndex].text}</span>
       <ArrowIcon width={8} />
       <div className={`${styles.list} ${isActive ? styles.showOptions : ""}`}>
-        {data.options.map((option, index) => (
+        {data.map((option, index) => (
           <span
             className={index === selectedIndex ? styles.selectedOption : ""}
             key={option.value}
