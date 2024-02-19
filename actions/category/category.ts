@@ -1,6 +1,7 @@
 "use server";
 import { z } from "zod";
 import { db } from "@/lib/db";
+import { TCategory, TGroupJSON } from "@/types/categories";
 
 const GetAllCategories = z.object({
   id: z.string(),
@@ -31,12 +32,70 @@ export type TGetAllCategories = z.infer<typeof GetAllCategories>;
 export type TAddCategory = z.infer<typeof AddCategory>;
 export type TUpdateCategory = z.infer<typeof UpdateCategory>;
 
+const convertToJson = (categoriesTable: TCategory[]): TGroupJSON[] => {
+  const generateCategoryGroups = (
+    categoriesTable: TCategory[]
+  ): TGroupJSON[] => {
+    return categoriesTable
+      .filter((tableRow) => tableRow.parentID === null)
+      .map((group) => ({ group, categories: [] }));
+  };
+
+  const fillCategoryArray = (
+    groups: TGroupJSON[],
+    categoriesTable: TCategory[]
+  ) => {
+    groups.forEach((group) => {
+      group.categories = getChildren(categoriesTable, group.group.id).map(
+        (category) => ({ category, subCategories: [] })
+      );
+    });
+  };
+
+  const fillSubCategoryArray = (
+    groups: TGroupJSON[],
+    categoriesTable: TCategory[]
+  ) => {
+    groups.forEach((group) => {
+      group.categories.forEach((category) => {
+        category.subCategories = getChildren(
+          categoriesTable,
+          category.category.id
+        );
+      });
+    });
+  };
+
+  const getChildren = (
+    array: TCategory[],
+    parentID: string | null
+  ): TCategory[] => {
+    return array.filter((item) => item.parentID === parentID);
+  };
+
+  const groups: TGroupJSON[] = generateCategoryGroups(categoriesTable);
+  fillCategoryArray(groups, categoriesTable);
+  fillSubCategoryArray(groups, categoriesTable);
+
+  return groups;
+};
+
 export const getAllCategories = async () => {
   try {
-    const result = await db.category.findMany();
+    const result: TGetAllCategories[] = await db.category.findMany();
 
     if (!result) return { error: "Can't read categories" };
     return { res: result };
+  } catch (error) {
+    return { error: "Cant read Category Groups" };
+  }
+};
+export const getAllCategoriesJSON = async () => {
+  try {
+    const result: TCategory[] = await db.category.findMany();
+
+    if (!result) return { error: "Can't read categories" };
+    return { res: convertToJson(result) };
   } catch (error) {
     return { error: "Cant read Category Groups" };
   }

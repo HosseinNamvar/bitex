@@ -73,12 +73,13 @@ enum OptionSetType {
 model Product {
   id         String        @id @default(auto()) @map("_id") @db.ObjectId
   name       String        @unique
-  desc       String
+  desc       String?
+  images     String[]
   category   Category      @relation(fields: [categoryID], references: [id])
   categoryID String        @db.ObjectId
   optionSets String[]      @db.ObjectId
   price      Float
-  salePrice  Float
+  salePrice  Float?
   specs      ProductSpec[]
 }
 

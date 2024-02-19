@@ -1,4 +1,4 @@
 export type TDropDown = {
-  value: number;
+  value: string;
   text: string;
-}[];
+};

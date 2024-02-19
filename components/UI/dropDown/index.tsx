@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { ArrowIcon } from "@/components/icons/svgIcons";
 
 interface IProps {
-  data: TDropDown;
+  data: TDropDown[];
   width?: string;
   selectedIndex?: number;
   isSearch?: boolean;
@@ -39,23 +39,32 @@ const DropDownList = ({
       className={`${styles.dropDownList} ${isActive ? styles.isFocus : ""}`}
       style={{ width: width }}
     >
-      {data.length > 0 && (
+      {data.length > 0 ? (
         <>
           <span>{data[selectedIndex].text}</span>
           <ArrowIcon width={8} />
           <div
             className={`${styles.list} ${isActive ? styles.showOptions : ""}`}
           >
-            {data.map((option, index) => (
-              <span
-                className={index === selectedIndex ? styles.selectedOption : ""}
-                key={option.value}
-                onClick={() => handleChange(index)}
-              >
-                {option.text}
-              </span>
-            ))}
+            <div className={styles.container}>
+              {data.map((option, index) => (
+                <span
+                  className={
+                    index === selectedIndex ? styles.selectedOption : ""
+                  }
+                  key={option.value}
+                  onClick={() => handleChange(index)}
+                >
+                  {option.text}
+                </span>
+              ))}
+            </div>
           </div>
+        </>
+      ) : (
+        <>
+          <span>---</span>
+          <ArrowIcon width={8} />
         </>
       )}
     </button>

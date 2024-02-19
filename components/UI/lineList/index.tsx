@@ -3,7 +3,7 @@ import { TDropDown } from "@/types/uiElements";
 import styles from "./lineList.module.scss";
 
 interface IProps {
-  data: TDropDown;
+  data: TDropDown[];
   selectedId: number;
   onChange: (newIndex: number) => void;
 }
