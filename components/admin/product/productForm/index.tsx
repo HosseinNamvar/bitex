@@ -7,21 +7,36 @@ import Button from "@/components/UI/button";
 import { useEffect, useState } from "react";
 import { getAllCategoriesJSON } from "@/actions/category/category";
 import { TGroupJSON } from "@/types/categories";
+import { getCategorySpecs } from "@/actions/category/specifications";
+import { SpecGroup } from "@prisma/client";
+
+const categoryListFirstItem: TDropDown = {
+  text: "Select A Category....",
+  value: "",
+};
 
 const ProductForm = () => {
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
-  const [categories, setCategories] = useState<TDropDown[]>([]);
+  const [categoryList, setCategoryList] = useState<TDropDown[]>([
+    categoryListFirstItem,
+  ]);
+  const [selectedCategoryListIndex, setSelectedCategoryListIndex] = useState(0);
+  const [categoriesJSON, setCategoriesJSON] = useState<TGroupJSON[]>([]);
+  const [selectedCategoryJSON, setSelectedCategoryJSON] = useState<
+    number | null
+  >(0);
+  const [categorySpecs, setCategorySpecs] = useState<SpecGroup[]>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await getAllCategoriesJSON();
       if (result.res) {
-        setCategories(convertJSONtoDropdownList(result.res));
+        // setCategoriesJSON(result.res);
+        setCategoryList(convertJSONtoDropdownList(result.res));
       }
     };
 
     const convertJSONtoDropdownList = (json: TGroupJSON[]): TDropDown[] => {
-      const dropDownData: TDropDown[] = [];
+      const dropDownData: TDropDown[] = [categoryListFirstItem];
       json.forEach((group) => {
         dropDownData.push({
           text: group.group.name,
@@ -53,9 +68,19 @@ const ProductForm = () => {
   }, []);
 
   const handleCategoryChange = (index: number) => {
-    setSelectedCategoryIndex(index);
+    setSelectedCategoryListIndex(index);
+    if (index === 0) {
+      setCategorySpecs([]);
+    } else {
+      getSpecGroup(categoryList[index].value);
+    }
   };
 
+  const getSpecGroup = async (categoryID: string) => {
+    const response = await getCategorySpecs(categoryID);
+    if (response.res) setCategorySpecs(response.res);
+  };
+  console.log(categorySpecs);
   return (
     <div className={styles.productForm}>
       <div className={styles.nameAndCat}>
@@ -78,9 +103,9 @@ const ProductForm = () => {
         <div>
           <span>Category</span>
           <DropDownList
-            data={categories}
+            data={categoryList}
             width="430px"
-            selectedIndex={selectedCategoryIndex}
+            selectedIndex={selectedCategoryListIndex}
             onChange={handleCategoryChange}
           />
         </div>
@@ -88,23 +113,27 @@ const ProductForm = () => {
       <div className={styles.specs}>
         <span className={styles.col1}>Specifications:</span>
         <div className={styles.col3}>
-          <span>Overall</span>
-          <div>
-            <span>Dimension</span>
-            <input type="text" />
-            <Button onClick={() => console.log("")} text="+" />
-          </div>
-          <div>
-            <span>Special Features</span>
-            <input type="text" />
-            <Button onClick={() => console.log("")} text="+" />
-          </div>
-          <span>Cameras</span>
-          <div>
-            <span>Front Camera</span>
-            <input type="text" />
-            <Button onClick={() => console.log("")} text="+" />
-          </div>
+          {categorySpecs.length > 0 ? (
+            <div>
+              {categorySpecs.map((specGroup) => (
+                <div key={specGroup.id}>
+                  <span>{specGroup.title}</span>
+                  <div>
+                    {specGroup.specs.map((spec, index) => (
+                      <div key={index}>
+                        <span>{spec}</span>
+                        <input type="text" />
+                      </div>
+                    ))}
+
+                    <Button onClick={() => console.log("")} text="+" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <span>Can not Find! </span>
+          )}
         </div>
       </div>
     </div>
