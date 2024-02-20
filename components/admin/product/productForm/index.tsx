@@ -30,7 +30,6 @@ const ProductForm = () => {
     const fetchCategories = async () => {
       const result = await getAllCategoriesJSON();
       if (result.res) {
-        // setCategoriesJSON(result.res);
         setCategoryList(convertJSONtoDropdownList(result.res));
       }
     };
@@ -80,7 +79,6 @@ const ProductForm = () => {
     const response = await getCategorySpecs(categoryID);
     if (response.res) setCategorySpecs(response.res);
   };
-  console.log(categorySpecs);
   return (
     <div className={styles.productForm}>
       <div className={styles.nameAndCat}>
@@ -111,26 +109,24 @@ const ProductForm = () => {
         </div>
       </div>
       <div className={styles.specs}>
-        <span className={styles.col1}>Specifications:</span>
-        <div className={styles.col3}>
+        <span>Specifications:</span>
+        <div className={styles.specGroups}>
           {categorySpecs.length > 0 ? (
-            <div>
+            <>
               {categorySpecs.map((specGroup) => (
-                <div key={specGroup.id}>
-                  <span>{specGroup.title}</span>
-                  <div>
+                <div className={styles.specGroupRow} key={specGroup.id}>
+                  <span className={styles.header}>{specGroup.title}</span>
+                  <>
                     {specGroup.specs.map((spec, index) => (
-                      <div key={index}>
+                      <div className={styles.specRow} key={index}>
                         <span>{spec}</span>
                         <input type="text" />
                       </div>
                     ))}
-
-                    <Button onClick={() => console.log("")} text="+" />
-                  </div>
+                  </>
                 </div>
               ))}
-            </div>
+            </>
           ) : (
             <span>Can not Find! </span>
           )}
