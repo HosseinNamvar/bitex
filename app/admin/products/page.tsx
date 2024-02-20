@@ -5,12 +5,27 @@ import { useState } from "react";
 import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
 import ProductForm from "@/components/admin/product/productForm";
+import { TAddProductFormValues } from "@/types/product";
+
+const initialForm: TAddProductFormValues = {
+  name: "",
+  desc: "",
+  price: "",
+  salePrice: "",
+  images: [],
+  categoryID: "",
+  specifications: [],
+};
 
 const AdminProducts = () => {
   const [showProductWindow, setShowProductWindow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formValues, setFormValues] =
+    useState<TAddProductFormValues>(initialForm);
 
-  const handleAddProduct = async () => {};
+  const handleAddProduct = async () => {
+    console.log(formValues);
+  };
 
   return (
     <div className={styles.adminProducts}>
@@ -68,7 +83,9 @@ const AdminProducts = () => {
       </div>
       {showProductWindow && (
         <Popup
-          content={<ProductForm />}
+          content={
+            <ProductForm formValues={formValues} onChange={setFormValues} />
+          }
           isLoading={isLoading}
           onCancel={() => setShowProductWindow(false)}
           onClose={() => setShowProductWindow(false)}

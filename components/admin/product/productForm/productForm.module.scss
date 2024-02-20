@@ -17,6 +17,12 @@
     > div {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      > .imgInputsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
       > span {
         display: inline-block;
         width: 200px;
