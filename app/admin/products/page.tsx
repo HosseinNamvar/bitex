@@ -6,6 +6,7 @@ import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
 import ProductForm from "@/components/admin/product/productForm";
 import { TAddProductFormValues } from "@/types/product";
+import { addProduct } from "@/actions/product/product";
 
 const initialForm: TAddProductFormValues = {
   name: "",
@@ -24,7 +25,15 @@ const AdminProducts = () => {
     useState<TAddProductFormValues>(initialForm);
 
   const handleAddProduct = async () => {
-    console.log(formValues);
+    setIsLoading(true);
+    const result = await addProduct(formValues);
+    if (result.error) {
+      setIsLoading(false);
+    }
+    if (result.res) {
+      setIsLoading(false);
+      setShowProductWindow(false);
+    }
   };
 
   return (
