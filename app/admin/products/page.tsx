@@ -1,12 +1,13 @@
 "use client";
 import styles from "./adminProducts.module.scss";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
 import ProductForm from "@/components/admin/product/productForm";
-import { TAddProductFormValues } from "@/types/product";
-import { addProduct } from "@/actions/product/product";
+import { TAddProductFormValues, TProductListItem } from "@/types/product";
+import { addProduct, getAllProducts } from "@/actions/product/product";
+import ProductListItem from "@/components/admin/product/productListItem";
 
 const initialForm: TAddProductFormValues = {
   name: "",
@@ -23,6 +24,16 @@ const AdminProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formValues, setFormValues] =
     useState<TAddProductFormValues>(initialForm);
+  const [productsList, setProductsList] = useState<TProductListItem[]>([]);
+
+  useEffect(() => {
+    getProductsList();
+  }, []);
+
+  const getProductsList = async () => {
+    const response = await getAllProducts();
+    if (response.res) setProductsList(response.res);
+  };
 
   const handleAddProduct = async () => {
     setIsLoading(true);
@@ -45,18 +56,17 @@ const AdminProducts = () => {
         />
       </div>
       <div className={styles.dataTable}>
-        <div className={styles.row}>
-          <span className={styles.name}>AMD Ryzen</span>
-          <span className={styles.category}>CPU</span>
-          <div>
-            <Button text="edit" onClick={() => console.log("edit product")} />
-            <Button
-              text="delete"
-              onClick={() => console.log("delete product")}
-            />
-          </div>
-        </div>
-        <div className={styles.row}>
+        {productsList.length > 0 ? (
+          <>
+            {productsList.map((product) => (
+              <ProductListItem key={product.id} data={product} />
+            ))}
+          </>
+        ) : (
+          <div>There is no product!</div>
+        )}
+
+        {/* <div className={styles.row}>
           <span className={styles.name}>Dell 27 inch IPS</span>
           <span className={styles.category}>Monitor</span>
           <div>
@@ -88,7 +98,7 @@ const AdminProducts = () => {
               onClick={() => console.log("delete product")}
             />
           </div>
-        </div>
+        </div> */}
       </div>
       {showProductWindow && (
         <Popup

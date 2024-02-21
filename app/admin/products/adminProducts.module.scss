@@ -12,33 +12,7 @@
   > .dataTable {
     display: flex;
     flex-direction: column;
-    > .row {
-      width: 100%;
-      height: 50px;
-      padding: 0 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.4rem;
-      color: nth($color-light, 8);
-      border-radius: 8px;
-      transition: background-color 0.3s;
-      &:hover {
-        background-color: nth($color-light, 1);
-      }
-      > .name {
-        width: 200px;
-      }
-      > .category {
-        width: 200px;
-        text-align: left;
-      }
-      > div {
-        > button {
-          background-color: white;
-          margin-left: 16px;
-        }
-      }
-    }
+    font-size: 1.4rem;
+    color: nth($color-light, 9);
   }
 }

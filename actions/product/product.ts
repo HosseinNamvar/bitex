@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { TAddProductFormValues } from "@/types/product";
+import { TAddProductFormValues, TProductListItem } from "@/types/product";
 
 const ValidateAddProduct = z.object({
   name: z.string().min(3),
@@ -17,6 +17,11 @@ const ValidateAddProduct = z.object({
     })
   ),
 });
+
+const convertStringToFloat = (str: string) => {
+  str.replace(/,/, ".");
+  return str ? parseFloat(str) : 0.0;
+};
 
 export const addProduct = async (data: TAddProductFormValues) => {
   if (!ValidateAddProduct.safeParse(data).success)
@@ -52,7 +57,24 @@ export const addProduct = async (data: TAddProductFormValues) => {
   }
 };
 
-const convertStringToFloat = (str: string) => {
-  str.replace(/,/, ".");
-  return str ? parseFloat(str) : 0.0;
+export const getAllProducts = async () => {
+  try {
+    const result: TProductListItem[] | null = await db.product.findMany({
+      select: {
+        id: true,
+        name: true,
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!result) return { error: "Can't Get Data from Database!" };
+    return { res: result };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
 };

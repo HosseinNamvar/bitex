@@ -61,3 +61,12 @@ export type TAddProductFormValues = {
   categoryID: string;
   specifications: ProductSpec[];
 };
+
+export type TProductListItem = {
+  id: string;
+  name: string;
+  category: {
+    id: string;
+    name: string;
+  };
+};
