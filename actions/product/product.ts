@@ -78,3 +78,19 @@ export const getAllProducts = async () => {
     return { error: JSON.stringify(error) };
   }
 };
+
+export const deleteProduct = async (productID: string) => {
+  if (!productID || productID === "") return { error: "Invalid Data!" };
+  try {
+    const result = await db.product.delete({
+      where: {
+        id: productID,
+      },
+    });
+
+    if (!result) return { error: "Can't Delete!" };
+    return { res: result };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
+};

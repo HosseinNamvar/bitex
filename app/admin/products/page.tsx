@@ -59,7 +59,11 @@ const AdminProducts = () => {
         {productsList.length > 0 ? (
           <>
             {productsList.map((product) => (
-              <ProductListItem key={product.id} data={product} />
+              <ProductListItem
+                key={product.id}
+                data={product}
+                requestReload={getProductsList}
+              />
             ))}
           </>
         ) : (
