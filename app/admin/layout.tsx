@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import styles from "./layout.module.scss";
 import AdminSidebar from "@/components/admin/sideBar";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
