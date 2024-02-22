@@ -71,6 +71,22 @@ export const ShoppingIconFill = ({ width, fill }: IProps) => {
   });
 };
 
+export const CheckIcon = ({ width, stroke, strokeWidth }: IProps) => {
+  return createIcon({
+    width,
+    viewBox: "0 0 10 8",
+    svgData: (
+      <path
+        d="M9 1L3.66667 7L1 4"
+        stroke={stroke}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    ),
+  });
+};
+
 export const ShoppingIconOutline = ({ width, fill, stroke }: IProps) => {
   return createIcon({
     width,
