@@ -1,26 +1,50 @@
 "use client";
-import Button from "@/components/UI/button";
 import styles from "./adminProducts.module.scss";
-import RadioButton from "@/components/UI/radioButton";
-import { useState } from "react";
-import DropDownList from "@/components/UI/dropDown";
-import { TDropDown } from "@/types/uiElements";
-import { CategoriesData } from "@/data/categories";
+
+import { useEffect, useState } from "react";
+import Button from "@/components/UI/button";
+import Popup from "@/components/UI/popup";
+import ProductForm from "@/components/admin/product/productForm";
+import { TAddProductFormValues, TProductListItem } from "@/types/product";
+import { addProduct, getAllProducts } from "@/actions/product/product";
+import ProductListItem from "@/components/admin/product/productListItem";
+
+const initialForm: TAddProductFormValues = {
+  name: "",
+  desc: "",
+  price: "",
+  salePrice: "",
+  images: [],
+  categoryID: "",
+  specifications: [],
+};
 
 const AdminProducts = () => {
   const [showProductWindow, setShowProductWindow] = useState(false);
-  const category: TDropDown = {
-    selectedIndex: 0,
-    options: [
-      {
-        text: "text01",
-        value: 0,
-      },
-      {
-        text: "text02",
-        value: 1,
-      },
-    ],
+  const [isLoading, setIsLoading] = useState(false);
+  const [formValues, setFormValues] =
+    useState<TAddProductFormValues>(initialForm);
+  const [productsList, setProductsList] = useState<TProductListItem[]>([]);
+
+  useEffect(() => {
+    getProductsList();
+  }, []);
+
+  const getProductsList = async () => {
+    const response = await getAllProducts();
+    if (response.res) setProductsList(response.res);
+  };
+
+  const handleAddProduct = async () => {
+    setIsLoading(true);
+    const result = await addProduct(formValues);
+    if (result.error) {
+      setIsLoading(false);
+    }
+    if (result.res) {
+      setIsLoading(false);
+      setShowProductWindow(false);
+    }
   };
 
   return (
@@ -32,18 +56,21 @@ const AdminProducts = () => {
         />
       </div>
       <div className={styles.dataTable}>
-        <div className={styles.row}>
-          <span className={styles.name}>AMD Ryzen</span>
-          <span className={styles.category}>CPU</span>
-          <div>
-            <Button text="edit" onClick={() => console.log("edit product")} />
-            <Button
-              text="delete"
-              onClick={() => console.log("delete product")}
-            />
-          </div>
-        </div>
-        <div className={styles.row}>
+        {productsList.length > 0 ? (
+          <>
+            {productsList.map((product) => (
+              <ProductListItem
+                key={product.id}
+                data={product}
+                requestReload={getProductsList}
+              />
+            ))}
+          </>
+        ) : (
+          <div>There is no product!</div>
+        )}
+
+        {/* <div className={styles.row}>
           <span className={styles.name}>Dell 27 inch IPS</span>
           <span className={styles.category}>Monitor</span>
           <div>
@@ -75,112 +102,20 @@ const AdminProducts = () => {
               onClick={() => console.log("delete product")}
             />
           </div>
-        </div>
+        </div> */}
       </div>
-      {showProductWindow ? (
-        <div className={styles.addProduct}>
-          <div
-            className={styles.background}
-            onClick={() => setShowProductWindow(false)}
-          />
-          <div className={styles.productsWindow}>
-            <div className={styles.header}>Add Product</div>
-            <div className={styles.nameAndCat}>
-              <div>
-                <span>Name:</span>
-                <input type="text" placeholder="Name..." />
-              </div>
-              <div>
-                <span>Short Descriptions:</span>
-                <input type="text" placeholder="Short Description..." />
-              </div>
-              <div>
-                <span>Category</span>
-                <DropDownList
-                  data={category}
-                  onChange={() => console.log("")}
-                />
-              </div>
-            </div>
-            <div className={styles.row}>
-              <span className={styles.col1}>On the sale:</span>
-              <div className={styles.col2}>
-                <RadioButton id="1" value="Yes" groupName="isSale" />
-                <RadioButton id="2" value="No" groupName="isSale" />
-              </div>
-            </div>
-            <div className={styles.row}>
-              <span className={styles.col1}></span>
-              <div className={styles.col2}>
-                <span>Duration:</span>
-                <input type="text" />
-              </div>
-            </div>
-            <div className={styles.row}>
-              <span className={styles.col1}></span>
-              <div className={styles.col2}>
-                <span>Sale Price:</span>
-                <input type="number" />
-              </div>
-            </div>
-            <div className={styles.row}>
-              <span className={styles.col1}>Options</span>
-              <div className={styles.col3}>
-                <span>Colors:</span>
-                <div>
-                  <input type="checkbox" />
-                  <span>Red</span>
-                </div>
-                <div>
-                  <input type="checkbox" />
-                  <span>Blue</span>
-                </div>
-              </div>
-            </div>
-            <div className={styles.row}>
-              <span className={styles.col1}></span>
-              <div className={styles.col3}>
-                <span>Storage Capacity:</span>
-                <div>
-                  <input type="checkbox" />
-                  <span>128GB</span>
-                </div>
-                <div>
-                  <input type="checkbox" />
-                  <span>256GB</span>
-                </div>
-              </div>
-            </div>
-            <div className={styles.row}>
-              <span className={styles.col1}>Specifications:</span>
-              <div className={styles.col3}>
-                <span>Overall</span>
-                <div>
-                  <span>Dimension</span>
-                  <input type="text" />
-                  <Button onClick={() => console.log("")} text="+" />
-                </div>
-                <div>
-                  <span>Special Features</span>
-                  <input type="text" />
-                  <Button onClick={() => console.log("")} text="+" />
-                </div>
-                <span>Cameras</span>
-                <div>
-                  <span>Front Camera</span>
-                  <input type="text" />
-                  <Button onClick={() => console.log("")} text="+" />
-                </div>
-              </div>
-            </div>
-            <div className={styles.windowControl}>
-              <Button text="cancel" onClick={() => console.log("")} />
-              <Button text="Add" onClick={() => console.log("")} />
-            </div>
-          </div>
-        </div>
-      ) : (
-        ""
+      {showProductWindow && (
+        <Popup
+          content={
+            <ProductForm formValues={formValues} onChange={setFormValues} />
+          }
+          isLoading={isLoading}
+          onCancel={() => setShowProductWindow(false)}
+          onClose={() => setShowProductWindow(false)}
+          onSubmit={() => handleAddProduct()}
+          confirmBtnText="Add Product"
+          title="Add New Product"
+        />
       )}
     </div>
   );

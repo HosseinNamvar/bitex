@@ -1,0 +1,98 @@
+@import "/public/css/variables.module.scss";
+
+.optionsWindow {
+  position: relative;
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+  background-color: white;
+  z-index: 10;
+  font-size: 1.4rem;
+  input {
+    outline: none;
+    border: 1px solid nth($color-light, 3);
+    padding: 6px 10px;
+    border-radius: 6px;
+    &:hover {
+      border-color: nth($color-light, 5);
+    }
+    &:focus {
+      border: 2px solid nth($color-light, 8);
+    }
+  }
+
+  > .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: nth($color-light, 8);
+    > h2 {
+      flex-grow: 1;
+      font-weight: 400;
+      font-size: 1.6rem;
+      height: 100%;
+      padding-top: 6px;
+      border-bottom: 1px solid nth($color-light, 3);
+    }
+    > div {
+      display: flex;
+      > h3 {
+        color: nth($color-light, 5);
+        cursor: pointer;
+        border-radius: 6px 8px 0 0;
+        font-weight: 400;
+        font-size: 1.4rem;
+        padding: 12px 16px;
+        transition: background-color 0.3s;
+        border-bottom: 1px solid nth($color-light, 3);
+        &:hover {
+          background-color: nth($color-light, 1);
+        }
+      }
+      > .active {
+        cursor: default;
+        color: nth($color-light, 9);
+        border-bottom: 2px solid nth($color-blue, 5);
+        &:hover {
+          background-color: white;
+        }
+      }
+    }
+  }
+
+  > .tabContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    > .optionList {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: 100%;
+      overflow-y: scroll;
+      padding: 12px;
+      > .addCategoryOption {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        > span {
+          text-align: center;
+          margin-bottom: 30px;
+          width: 300px;
+        }
+      }
+    }
+    // -------------------- SPECIFICATION SECTION --------------------
+    > .specGroupList {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: 100%;
+      overflow-y: scroll;
+      padding: 12px;
+    }
+  }
+}

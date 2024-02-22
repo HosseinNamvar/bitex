@@ -3,9 +3,9 @@ import { TDropDown } from "@/types/uiElements";
 import styles from "./lineList.module.scss";
 
 interface IProps {
-  data: TDropDown;
+  data: TDropDown[];
   selectedId: number;
-  onChange: (newxIndex: number) => void;
+  onChange: (newIndex: number) => void;
 }
 
 const LineList = ({ data, selectedId, onChange }: IProps) => {
@@ -15,7 +15,7 @@ const LineList = ({ data, selectedId, onChange }: IProps) => {
 
   return (
     <div className={styles.lineList}>
-      {data.options.map((item, index) => (
+      {data.map((item, index) => (
         <button
           key={index}
           className={selectedId === index ? styles.active : ""}

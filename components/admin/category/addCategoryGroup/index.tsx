@@ -2,27 +2,19 @@
 import { ElementRef, useRef, useState } from "react";
 import styles from "./addCategory.module.scss";
 import Button from "@/components/UI/button";
-import { addGroup } from "@/actions/category/categoryGroup";
+import { TGetAllCategories, addCategory } from "@/actions/category/category";
 import Popup from "@/components/UI/popup";
 import GroupCategory from "../../forms/groupCategory";
-import { TCategoryGroup } from "@/types/common";
-
-type ShowMenu = {
-  showWindow: boolean;
-  windowTypeID: number;
-};
 
 interface IProps {
   onReset: () => void;
 }
 
 const AddCategoryGroup = ({ onReset }: IProps) => {
-  const [showWindow, setShowWindow] = useState<ShowMenu>({
-    showWindow: false,
-    windowTypeID: 0,
-  });
-  const defaultGroupData: TCategoryGroup = {
+  const [showWindow, setShowWindow] = useState<boolean>(false);
+  const defaultGroupData: TGetAllCategories = {
     id: "",
+    parentID: null,
     name: "",
     url: "",
     iconSize: [10, 10],
@@ -31,24 +23,7 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [groupCategoryData, setGroupCategory] =
-    useState<TCategoryGroup>(defaultGroupData);
-
-  const windowContent: React.ReactNode[] = [
-    <GroupCategory
-      errorMsg={errorMsg}
-      data={groupCategoryData}
-      onChange={setGroupCategory}
-      key={1}
-    />,
-    <div className={styles.addCategory} key={2}>
-      <div className={styles.header}>Add new category</div>
-    </div>,
-    <div className={styles.addSubCategory} key={3}>
-      <div className={styles.header}>Add new sub category</div>
-    </div>,
-  ];
-
-  const groupNameRef = useRef<ElementRef<"form">>(null);
+    useState<TGetAllCategories>(defaultGroupData);
 
   const handleAddGroup = async () => {
     const { name, url, iconUrl, iconSize } = groupCategoryData;
@@ -71,12 +46,13 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
     }
 
     setButtonDisabled(true);
-    const res = await addGroup(groupCategoryData);
-    if (res) {
+    const result = await addCategory(groupCategoryData);
+
+    if (result.res) {
       setGroupCategory(defaultGroupData);
       setButtonDisabled(false);
       setErrorMsg("");
-      setShowWindow({ showWindow: false, windowTypeID: 0 });
+      setShowWindow(false);
       onReset();
     } else {
       setButtonDisabled(false);
@@ -86,24 +62,19 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
 
   return (
     <div className={styles.addCategoryGroup}>
-      <Button
-        onClick={() => setShowWindow({ showWindow: true, windowTypeID: 0 })}
-        text="Add Group"
-      />
-      <Button
-        onClick={() => setShowWindow({ showWindow: true, windowTypeID: 1 })}
-        text="Add Category"
-      />
-      <Button
-        onClick={() => setShowWindow({ showWindow: true, windowTypeID: 2 })}
-        text="Add Sub Category"
-      />
-      {showWindow.showWindow && (
+      <Button onClick={() => setShowWindow(true)} text="Add Group" />
+      {showWindow && (
         <Popup
-          content={windowContent[showWindow.windowTypeID]}
+          content={
+            <GroupCategory
+              errorMsg={errorMsg}
+              data={groupCategoryData}
+              onChange={setGroupCategory}
+            />
+          }
           isLoading={buttonDisabled}
-          onCancel={() => setShowWindow({ showWindow: false, windowTypeID: 0 })}
-          onClose={() => setShowWindow({ showWindow: false, windowTypeID: 0 })}
+          onCancel={() => setShowWindow(false)}
+          onClose={() => setShowWindow(false)}
           onSubmit={() => handleAddGroup()}
           title="Add Category Group"
         />

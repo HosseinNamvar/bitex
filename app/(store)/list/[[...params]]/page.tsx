@@ -9,13 +9,13 @@ import DropDownList from "@/components/UI/dropDown";
 import LineList from "@/components/UI/lineList";
 
 import { ProductsData } from "@/data/products";
-import { sortDropdonwData } from "@/data/uiElementsData";
+import { sortDropdownData } from "@/data/uiElementsData";
 import { useState } from "react";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import { redirect, useParams } from "next/navigation";
 
 const ListPage = () => {
-  const [sortIndex, setSortIndex] = useState(sortDropdonwData.selectedIndex);
+  const [sortIndex, setSortIndex] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
   const { params } = useParams<{ params: string[] }>();
 
@@ -71,7 +71,7 @@ const ListPage = () => {
             FILTERS
           </button>
           <DropDownList
-            data={sortDropdonwData}
+            data={sortDropdownData}
             width="170px"
             selectedIndex={sortIndex}
             onChange={handleSortChange}
@@ -205,7 +205,7 @@ const ListPage = () => {
               />
               <span>Sort By:</span>
               <LineList
-                data={sortDropdonwData}
+                data={sortDropdownData}
                 selectedId={sortIndex}
                 onChange={handleSortChange}
               />

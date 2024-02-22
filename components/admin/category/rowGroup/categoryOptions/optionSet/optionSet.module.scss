@@ -1,0 +1,70 @@
+@import "/public/css/variables.module.scss";
+
+.optionSet {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid nth($color-light, 3);
+
+  > .col1 {
+    color: nth($color-light, 8);
+    font-size: 1.6rem;
+    min-width: 150px;
+    > button {
+      margin-left: 16px;
+    }
+  }
+  > .col2 {
+    display: flex;
+    flex-direction: column;
+
+    > .singleOption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      user-select: none;
+      &:hover {
+        background-color: nth($color-light, 1);
+        > div {
+          > button {
+            opacity: 1;
+          }
+        }
+      }
+      > div {
+        margin-left: 16px;
+        > span {
+          width: 100px;
+          text-align: center;
+          margin-right: 8px;
+        }
+        > button {
+          opacity: 0.6;
+          margin-left: 8px;
+          transition: opacity 0.8s;
+        }
+      }
+    }
+    > .addSingleOption {
+      padding-top: 12px;
+      margin-top: 12px;
+      border-top: 1px solid nth($color-light, 2);
+      > div {
+        margin-left: 10px;
+        > input {
+          margin-left: 16px;
+          width: 90px;
+        }
+      }
+      > button {
+        width: 200px;
+        margin: 8px 24px;
+      }
+    }
+  }
+}

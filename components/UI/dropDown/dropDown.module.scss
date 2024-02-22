@@ -47,25 +47,32 @@
     padding: 4px;
     z-index: 10;
     transform-origin: center top;
-    > span {
-      display: block;
-      margin-bottom: 2px;
-      padding: 8px 16px;
-      font-size: 1.4rem;
-      font-weight: 400;
-      text-align: left;
-      color: nth($color-light, 8);
-      border-radius: 4px;
-      transition: background-color 0.3s;
-      &:last-child {
-        margin-bottom: 0;
+    > .container {
+      height: auto;
+      max-height: 250px;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+      > span {
+        display: block;
+        margin-bottom: 2px;
+        padding: 8px 16px;
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-align: left;
+        color: nth($color-light, 8);
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &:hover {
+          background-color: nth($color-light, 2);
+        }
       }
-      &:hover {
+      > .selectedOption {
         background-color: nth($color-light, 2);
       }
-    }
-    > .selectedOption {
-      background-color: nth($color-light, 2);
     }
   }
 
@@ -82,44 +89,3 @@
     stroke: nth($color-light, 7);
   }
 }
-
-// .profile {
-//   > button {
-//     border-radius: 6px;
-//     > span {
-//       user-select: none;
-//     }
-//     > svg {
-//       fill: white;
-//       transition: all 0.3s;
-//       stroke: nth($color-light, 8);
-//       stroke-width: 2;
-//     }
-//     &:hover {
-//       border-color: nth($color-light, 3);
-//     }
-//     &:active {
-//       > svg {
-//         fill: nth($color-light, 2);
-//       }
-//       border-color: nth($color-light, 5);
-//       background-color: nth($color-light, 2);
-//     }
-//   }
-//   .isActive {
-//     color: nth($color-light, 1);
-//     border-color: nth($color-blue, 3);
-//     background-color: nth($color-blue, 3);
-//     > svg {
-//       fill: nth($color-blue, 3);
-//       stroke: nth($color-light, 1);
-//     }
-//     &:hover {
-//       border-color: nth($color-blue, 3);
-//       background-color: nth($color-blue, 3);
-//     }
-//   }
-
-//   > .menu {
-//   }
-// }

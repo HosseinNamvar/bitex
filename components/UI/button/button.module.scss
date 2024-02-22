@@ -8,6 +8,7 @@
   border: 1px solid nth($color-light, 3);
   color: nth($color-light, 8);
   font-size: 1.4rem;
+  background-color: white;
   transition: background-color 0.3s;
   &:hover {
     background-color: nth($color-light, 2);

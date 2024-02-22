@@ -1,0 +1,43 @@
+@import "/public/css/variables.module.scss";
+
+.addSpecGroup {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  background-color: nth($color-light, 1);
+  padding: 6px;
+  padding-left: 16px;
+  margin: 6px 0;
+  position: relative;
+  > div {
+    display: flex;
+    align-items: center;
+    > span {
+      margin-right: 8px;
+    }
+
+    > option {
+      cursor: pointer;
+      border-radius: 6px;
+      user-select: none;
+      padding: 6px 16px;
+      transition: all 0.3s;
+      margin-right: 4px;
+      background-color: white;
+      border: 1px solid nth($color-light, 3);
+      &:hover {
+        background-color: nth($color-light, 2);
+      }
+      &:disabled {
+        cursor: default;
+        color: white;
+        background-color: nth($color-blue, 5);
+      }
+    }
+  }
+  > button {
+    width: 160px;
+  }
+}
