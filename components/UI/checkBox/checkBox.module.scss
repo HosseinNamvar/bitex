@@ -1,0 +1,72 @@
+@import "/public/css/variables.module.scss";
+
+.checkBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  &:hover {
+    > .box {
+      border-color: nth($color-light, 6);
+      background-color: rgba(nth($color-blue, 9), 0.2);
+    }
+    > span {
+      color: nth($color-light, 9);
+    }
+  }
+  &:active {
+    > .box {
+      background-color: rgba(nth($color-blue, 9), 0.6);
+    }
+  }
+
+  > .box {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid nth($color-light, 4);
+    transition: background-color 0.4s, border 0.6s;
+    > svg {
+      fill: none;
+      stroke: white;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+  }
+  > span {
+    color: nth($color-light, 7);
+    user-select: none;
+    font-size: 1.4rem;
+    transition: color 0.5s;
+  }
+}
+
+.checked {
+  &:hover {
+    > .box {
+      background-color: nth($color-blue, 4);
+    }
+  }
+  &:active {
+    > .box {
+      background-color: nth($color-blue, 3);
+    }
+  }
+
+  > span {
+    color: nth($color-light, 9);
+  }
+  > .box {
+    border: none;
+    background-color: nth($color-blue, 5);
+
+    > svg {
+      opacity: 1;
+    }
+  }
+}

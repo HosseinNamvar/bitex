@@ -13,10 +13,21 @@ import { sortDropdownData } from "@/data/uiElementsData";
 import { useState } from "react";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import { redirect, useParams } from "next/navigation";
+import CheckBox from "@/components/UI/checkBox";
+import SliderDouble from "@/components/UI/sliderDouble";
+
+type TFilters = {
+  stockStatus: "all" | "inStock" | "outStock";
+};
+
+const initialFilters: TFilters = {
+  stockStatus: "all",
+};
 
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState<TFilters>(initialFilters);
   const { params } = useParams<{ params: string[] }>();
 
   if (!params || params.length <= 0) redirect("/");
@@ -48,7 +59,6 @@ const ListPage = () => {
     }
     return link;
   };
-
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
@@ -99,14 +109,27 @@ const ListPage = () => {
                   <button />
                 </div>
                 <div className={styles.body}>
-                  <div>
-                    <input type="checkbox" id="inStock" />
-                    <label htmlFor="inStock">In stock</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="outOfStock" />
-                    <label htmlFor="outOfStock">Out of stock</label>
-                  </div>
+                  <CheckBox
+                    text="All"
+                    onClick={() =>
+                      setFilters({ ...filters, stockStatus: "all" })
+                    }
+                    isChecked={filters.stockStatus === "all"}
+                  />
+                  <CheckBox
+                    text="In Stock"
+                    onClick={() =>
+                      setFilters({ ...filters, stockStatus: "inStock" })
+                    }
+                    isChecked={filters.stockStatus === "inStock"}
+                  />
+                  <CheckBox
+                    text="Out of Stock"
+                    onClick={() =>
+                      setFilters({ ...filters, stockStatus: "outStock" })
+                    }
+                    isChecked={filters.stockStatus === "outStock"}
+                  />
                 </div>
               </div>
               <div className={styles.eachFilter}>
@@ -115,6 +138,11 @@ const ListPage = () => {
                   <button />
                 </div>
                 <div className={styles.body}>
+                  <SliderDouble
+                    minValue={0}
+                    maxValue={100}
+                    onChange={() => ""}
+                  />
                   <div className={styles.priceRange}>
                     <input type="range" />
                   </div>
