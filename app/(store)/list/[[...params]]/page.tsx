@@ -14,6 +14,7 @@ import { useState } from "react";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import { redirect, useParams } from "next/navigation";
 import CheckBox from "@/components/UI/checkBox";
+import SliderDouble from "@/components/UI/sliderDouble";
 
 type TFilters = {
   stockStatus: "all" | "inStock" | "outStock";
@@ -137,6 +138,11 @@ const ListPage = () => {
                   <button />
                 </div>
                 <div className={styles.body}>
+                  <SliderDouble
+                    minValue={0}
+                    maxValue={100}
+                    onChange={() => ""}
+                  />
                   <div className={styles.priceRange}>
                     <input type="range" />
                   </div>
