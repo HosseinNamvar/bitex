@@ -12,6 +12,7 @@ import ProductListItem from "@/components/admin/product/productListItem";
 const initialForm: TAddProductFormValues = {
   name: "",
   brandID: "",
+  specialFeatures: ["", "", ""],
   isAvailable: false,
   desc: "",
   price: "",

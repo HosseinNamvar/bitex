@@ -57,6 +57,14 @@
         width: 200px;
       }
     }
+    > .specialFeatures {
+      max-width: 500px;
+      > div {
+        display: flex;
+        gap: 8px;
+        flex-direction: column;
+      }
+    }
   }
 
   > .specs {

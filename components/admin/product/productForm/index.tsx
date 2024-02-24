@@ -135,6 +135,12 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
     }
   };
 
+  const handleSpecialFeatureChange = (index: number, value: string) => {
+    const newArray = [...props.specialFeatures];
+    newArray[index] = value;
+    onChange({ ...props, specialFeatures: newArray });
+  };
+
   return (
     <div className={styles.productForm}>
       <div className={styles.nameAndCat}>
@@ -165,6 +171,32 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
             }
             placeholder="Short Description..."
           />
+        </div>
+        <div className={styles.specialFeatures}>
+          <span>Special Features:</span>
+          <div>
+            <input
+              type="text"
+              value={props.specialFeatures[0]}
+              onChange={(e) =>
+                handleSpecialFeatureChange(0, e.currentTarget.value)
+              }
+            />
+            <input
+              type="text"
+              value={props.specialFeatures[1]}
+              onChange={(e) =>
+                handleSpecialFeatureChange(1, e.currentTarget.value)
+              }
+            />
+            <input
+              type="text"
+              value={props.specialFeatures[2]}
+              onChange={(e) =>
+                handleSpecialFeatureChange(2, e.currentTarget.value)
+              }
+            />
+          </div>
         </div>
         <div>
           <span>Price:</span>

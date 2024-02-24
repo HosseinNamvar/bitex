@@ -55,6 +55,7 @@ export type TProduct = {
 export type TAddProductFormValues = {
   name: string;
   isAvailable: boolean;
+  specialFeatures: string[];
   brandID: string;
   desc?: string;
   price: string;
