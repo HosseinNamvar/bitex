@@ -5,6 +5,7 @@ import { TAddProductFormValues, TProductListItem } from "@/types/product";
 
 const ValidateAddProduct = z.object({
   name: z.string().min(3),
+  brandID: z.string().min(6),
   desc: z.string().optional(),
   images: z.array(z.string()),
   categoryID: z.string().min(6),
@@ -42,6 +43,8 @@ export const addProduct = async (data: TAddProductFormValues) => {
           create: {
             name: data.name,
             desc: data.desc,
+            brandID: data.brandID,
+            isAvailable: data.isAvailable,
             price: price,
             salePrice: salePrice,
             images: [...data.images],
