@@ -71,21 +71,30 @@ enum OptionSetType {
 }
 
 model Product {
-  id         String        @id @default(auto()) @map("_id") @db.ObjectId
-  name       String        @unique
-  desc       String?
-  images     String[]
-  category   Category      @relation(fields: [categoryID], references: [id])
-  categoryID String        @db.ObjectId
-  optionSets String[]      @db.ObjectId
-  price      Float
-  salePrice  Float?
-  specs      ProductSpec[]
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String        @unique
+  isAvailable Boolean       @default(true)
+  desc        String?
+  images      String[]
+  category    Category      @relation(fields: [categoryID], references: [id])
+  categoryID  String        @db.ObjectId
+  optionSets  String[]      @db.ObjectId
+  price       Float
+  salePrice   Float?
+  specs       ProductSpec[]
+  brand       Brand         @relation(fields: [brandID], references: [id])
+  brandID     String        @db.ObjectId
 }
 
 type ProductSpec {
   specGroupID String
   specValues  String[]
+}
+
+model Brand {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String    @unique
+  products Product[]
 }
 
 // ---------------------- USER MANAGEMENT SECTION ---------------------- 
