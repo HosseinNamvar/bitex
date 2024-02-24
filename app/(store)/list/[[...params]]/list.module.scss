@@ -226,38 +226,6 @@
         gap: 8px;
         margin-bottom: 60px;
       }
-
-      .pagingContainer {
-        width: 100%;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        font-size: 1.6rem;
-        > button {
-          color: nth($color-light, 5);
-          width: 36px;
-          height: 36px;
-          border-radius: 4px;
-          font-size: 1.6rem;
-          border: none;
-          cursor: pointer;
-          background-color: white;
-          &:hover {
-            background-color: nth($color-light, 2);
-          }
-        }
-        .active {
-          cursor: default;
-          border-radius: 8px;
-          border: 1px solid nth($color-light, 7);
-          color: nth($color-light, 8);
-          font-weight: 500;
-          &:hover {
-            background-color: white;
-          }
-        }
-      }
     }
   }
 }

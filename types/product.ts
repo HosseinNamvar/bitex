@@ -89,3 +89,17 @@ export type TFilters = {
     isSelected: boolean;
   }[];
 };
+
+export type TListItem = {
+  id: string;
+  name: string;
+  isAvailable: boolean;
+  specialFeatures: string[];
+  images: string[];
+  price: number;
+  salePrice: number | null;
+  brand: {
+    id: string;
+    name: string;
+  };
+};

@@ -2,6 +2,7 @@ import { NameValue, OptionSetType } from "@prisma/client";
 
 export type TProductCard = {
   name: string;
+  isAvailable?: boolean;
   specs: string[];
   price: number;
   dealPrice?: number;

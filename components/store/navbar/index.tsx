@@ -73,7 +73,7 @@ const StoreNavBar = () => {
             <hr />
             <ul className={styles.topCategories}>
               <li>
-                <Link href={"/list/computers"}>PC</Link>
+                <Link href={"/list/pc-laptops/computer/pcs"}>PC</Link>
               </li>
               <li>
                 <Link href={"/list/laptops"}>Laptop</Link>

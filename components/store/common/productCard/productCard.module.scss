@@ -9,6 +9,30 @@
   border-radius: 12px;
   padding: 8px;
   transition: all 0.5s;
+  position: relative;
+  > .outOfStock {
+    display: flex;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    top: 10px;
+    background-color: rgba(white, 0.4);
+    position: absolute;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    > span {
+      font-size: 2rem;
+      color: nth($color-light, 8);
+      font-weight: 300;
+      padding: 4px 24px;
+      backdrop-filter: blur(6px);
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(black, 0.1);
+      background-color: rgba(white, 0.1);
+    }
+  }
   &:hover {
     box-shadow: 0 1px 4px rgba(#000000, 0.2);
     > .imageWrapper {

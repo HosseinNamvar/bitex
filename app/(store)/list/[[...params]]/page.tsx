@@ -8,15 +8,15 @@ import ProductCard from "@/components/store/common/productCard";
 import DropDownList from "@/components/UI/dropDown";
 import LineList from "@/components/UI/lineList";
 
-import { ProductsData } from "@/data/products";
 import { sortDropdownData } from "@/data/uiElementsData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CloseIcon, SearchIcon } from "@/components/icons/svgIcons";
-import { redirect, useParams } from "next/navigation";
+import { redirect, useParams, usePathname } from "next/navigation";
 import CheckBox from "@/components/UI/checkBox";
 import PriceSlider from "@/components/UI/priceSlider";
-import { TFilters } from "@/types/product";
+import { TFilters, TListItem } from "@/types/product";
 import Button from "@/components/UI/button";
+import { getList } from "@/actions/list/listServices";
 
 const initialFilters: TFilters = {
   stockStatus: "all",
@@ -46,11 +46,30 @@ const initialFilters: TFilters = {
   priceMinMax: [0, 100],
 };
 
+const pathToArray = (path: string) => {
+  const pathWithoutList = path.split("/list/")[1];
+  const pathArray = pathWithoutList.split("/");
+  return pathArray;
+};
+
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(0);
+  const [productList, setProductList] = useState<TListItem[]>([]);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<TFilters>(initialFilters);
   const { params } = useParams<{ params: string[] }>();
+  const pathName = usePathname();
+
+  useEffect(() => {
+    const getProductsList = async () => {
+      const pathArray = pathToArray(pathName);
+      const response = await getList(pathArray);
+      if (response.res) {
+        setProductList(response.res);
+      }
+    };
+    getProductsList();
+  }, [pathName]);
 
   if (!params || params.length <= 0) redirect("/");
 
@@ -87,6 +106,7 @@ const ListPage = () => {
     newBrandList[index].isSelected = !newBrandList[index].isSelected;
     setFilters({ ...filters, brands: newBrandList });
   };
+
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
@@ -213,31 +233,24 @@ const ListPage = () => {
               />
             </div>
             <div className={styles.listContainer}>
-              {ProductsData.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  imgUrl={product.imgUrl}
-                  name={product.name}
-                  price={product.price}
-                  dealPrice={product.dealPrice}
-                  specs={product.specs}
-                  url={product.url}
-                />
-              ))}
-            </div>
-            <div className={styles.pagingContainer}>
-              <button className={styles.first} />
-              <button className={styles.numbers}>1</button>
-              <button className={styles.numbers}>2</button>
-              <button className={styles.numbers}>3</button>
-              <button className={`${styles.numbers} ${styles.active}`}>
-                4
-              </button>
-              <button className={styles.numbers}>5</button>
-              <button className={styles.numbers}>6</button>
-              <button className={styles.numbers}>7</button>
-              <button className={styles.numbers}>8</button>
-              <button className={styles.last} />
+              {productList.length > 0 ? (
+                <>
+                  {productList.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      imgUrl={[product.images[0], product.images[1]]}
+                      name={product.name}
+                      price={product.price}
+                      isAvailable={product.isAvailable}
+                      dealPrice={product.salePrice || undefined}
+                      specs={product.specialFeatures}
+                      url={"/product/" + product.id}
+                    />
+                  ))}
+                </>
+              ) : (
+                <div>No Product in {getPageHeader()}</div>
+              )}
             </div>
           </div>
         </div>
