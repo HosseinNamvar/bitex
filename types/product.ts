@@ -70,3 +70,8 @@ export type TProductListItem = {
     name: string;
   };
 };
+
+export type TBrand = {
+  id: string;
+  name: string;
+};
