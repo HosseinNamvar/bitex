@@ -14,7 +14,7 @@ import { useState } from "react";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import { redirect, useParams } from "next/navigation";
 import CheckBox from "@/components/UI/checkBox";
-import SliderDouble from "@/components/UI/sliderDouble";
+import PriceSlider from "@/components/UI/priceSlider";
 
 type TFilters = {
   stockStatus: "all" | "inStock" | "outStock";
@@ -138,25 +138,11 @@ const ListPage = () => {
                   <button />
                 </div>
                 <div className={styles.body}>
-                  <SliderDouble
-                    minValue={0}
-                    maxValue={100}
+                  <PriceSlider
+                    minValue={2000}
+                    maxValue={6000}
                     onChange={() => ""}
                   />
-                  <div className={styles.priceRange}>
-                    <input type="range" />
-                  </div>
-                  <div className={styles.priceInputs}>
-                    <div>
-                      <label>From</label>
-                      <input type="number" />
-                    </div>
-                    <hr />
-                    <div>
-                      <label>To</label>
-                      <input type="number" />
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className={styles.eachFilter}>
