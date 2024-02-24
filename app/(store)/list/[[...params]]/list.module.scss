@@ -115,11 +115,6 @@
               font-weight: 500;
               color: nth($color-light, 9);
             }
-            > button {
-              width: 20px;
-              height: 20px;
-              border: none;
-            }
           }
 
           .body {
@@ -141,19 +136,23 @@
 
             .searchInput {
               display: block;
-              margin-bottom: 16px;
+              margin-bottom: 8px;
+              position: relative;
               > input {
                 width: 100%;
                 height: 32px;
                 padding-left: 40px;
                 border-radius: 6px;
                 border: 1px solid nth($color-light, 4);
-                background-image: url("/images/icons/searchIcon.svg");
-                background-repeat: no-repeat;
-                background-position: 10px center;
                 &:focus {
                   border-color: nth($color-light, 8);
                 }
+              }
+              > svg {
+                position: absolute;
+                left: 14px;
+                top: 9px;
+                stroke: nth($color-light, 8);
               }
             }
             .optionsList {
@@ -179,27 +178,21 @@
                   font-size: 1.4rem;
                   color: nth($color-light, 7);
                 }
-                .colorBox {
-                  width: 16px;
-                  height: 16px;
-                  border-radius: 4px;
-                  right: 0;
-                  top: 4px;
-                  position: absolute;
-                }
-                .black {
-                  background-color: #484848;
-                }
-                .blue {
-                  background-color: #628ae6;
-                }
-                .red {
-                  background-color: #ed4a4a;
-                }
-                .green {
-                  background-color: #7ac38f;
-                }
               }
+            }
+          }
+        }
+        > .apply {
+          > button {
+            width: 100%;
+            color: nth($color-light, 1);
+            border: none;
+            background-color: nth($color-blue, 5);
+            &:hover {
+              background-color: nth($color-blue, 6);
+            }
+            &:active {
+              background-color: nth($color-blue, 4);
             }
           }
         }

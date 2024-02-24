@@ -13,7 +13,7 @@ const CheckBox = ({ text, isChecked, onClick }: IProps) => {
   return (
     <div
       className={`${styles.checkBox} ${isChecked ? styles.checked : ""}`}
-      onClick={isChecked ? () => "" : onClick}
+      onClick={onClick}
     >
       <div className={styles.box}>
         <CheckIcon width={10} strokeWidth={1.5} />

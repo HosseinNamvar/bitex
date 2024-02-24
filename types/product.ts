@@ -77,3 +77,14 @@ export type TBrand = {
   id: string;
   name: string;
 };
+
+export type TFilters = {
+  stockStatus: "all" | "inStock" | "outStock";
+  priceMinMax: [number, number];
+  filterPriceMinMax: [number, number];
+  brands: {
+    id: string;
+    name: string;
+    isSelected: boolean;
+  }[];
+};
