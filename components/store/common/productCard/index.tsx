@@ -23,18 +23,8 @@ const ProductCard = ({
         </div>
       )}
       <Link href={url} className={styles.imageWrapper}>
-        <Image
-          src={"/images/products/" + imgUrl[0]}
-          alt={name}
-          fill
-          sizes="(max-width: 240px)"
-        />
-        <Image
-          src={"/images/products/" + imgUrl[1]}
-          alt={name}
-          fill
-          sizes="(max-width: 240px)"
-        />
+        <Image src={imgUrl[0]} alt={name} fill sizes="(max-width: 240px)" />
+        <Image src={imgUrl[1]} alt={name} fill sizes="(max-width: 240px)" />
       </Link>
       <Link href={url}>
         <span>{name}</span>

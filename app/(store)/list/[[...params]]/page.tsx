@@ -46,6 +46,8 @@ const initialFilters: TFilters = {
   priceMinMax: [0, 100],
 };
 
+const imgBaseUrl = process.env.IMG_URL;
+
 const pathToArray = (path: string) => {
   const pathWithoutList = path.split("/list/")[1];
   const pathArray = pathWithoutList.split("/");
@@ -238,7 +240,10 @@ const ListPage = () => {
                   {productList.map((product) => (
                     <ProductCard
                       key={product.id}
-                      imgUrl={[product.images[0], product.images[1]]}
+                      imgUrl={[
+                        imgBaseUrl + product.images[0],
+                        imgBaseUrl + product.images[1],
+                      ]}
                       name={product.name}
                       price={product.price}
                       isAvailable={product.isAvailable}
