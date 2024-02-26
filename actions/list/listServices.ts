@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { TListItem } from "@/types/product";
+import { TListItem, TProductPath } from "@/types/product";
 
 export const getList = async (pathList: string[]) => {
   if (!pathList || pathList.length > 3 || pathList.length === 0)
@@ -20,6 +20,33 @@ export const getList = async (pathList: string[]) => {
   const result = await getProductsByCategories(allRelatedCategories);
   if (!result) return { error: "Can't Find Product!" };
   return { res: result };
+};
+
+export const getSubCategories = async (pathList: string[]) => {
+  if (!pathList || pathList.length > 3 || pathList.length === 0)
+    return { error: "Invalid Path" };
+
+  const categoryID = await findCategoryFromPathArray(pathList);
+  if (categoryID === "") return { error: "Invalid Path Name" };
+
+  try {
+    const result = await db.category.findMany({
+      where: {
+        parentID: categoryID,
+      },
+    });
+    if (!result) return { error: "Invalid Data!" };
+    const subCategories: TProductPath[] = [];
+    result.forEach((cat) => {
+      subCategories.push({
+        label: cat.name,
+        url: cat.url,
+      });
+    });
+    return { res: subCategories };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
 };
 
 const findCategoryFromPathArray = async (pathArray: string[]) => {

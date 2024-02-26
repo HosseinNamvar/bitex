@@ -39,7 +39,7 @@ export type TProductBoard = {
   defaultQuantity: number;
 };
 
-type TProductPath = {
+export type TProductPath = {
   label: string;
   url: string;
 };

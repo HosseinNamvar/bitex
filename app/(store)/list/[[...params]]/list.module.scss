@@ -180,6 +180,15 @@
                 }
               }
             }
+
+            > .subCategories {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 12px;
+              color: nth($color-light, 8);
+              font-size: 1.4rem;
+            }
           }
         }
         > .apply {

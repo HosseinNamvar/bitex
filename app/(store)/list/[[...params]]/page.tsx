@@ -3,20 +3,20 @@ import styles from "./list.module.scss";
 
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { redirect, useParams, usePathname } from "next/navigation";
 
 import ProductCard from "@/components/store/common/productCard";
 import DropDownList from "@/components/UI/dropDown";
 import LineList from "@/components/UI/lineList";
 
 import { sortDropdownData } from "@/data/uiElementsData";
-import { useEffect, useState } from "react";
-import { CloseIcon, SearchIcon } from "@/components/icons/svgIcons";
-import { redirect, useParams, usePathname } from "next/navigation";
+import { CloseIcon } from "@/components/icons/svgIcons";
 import CheckBox from "@/components/UI/checkBox";
 import PriceSlider from "@/components/UI/priceSlider";
-import { TFilters, TListItem } from "@/types/product";
+import { TFilters, TListItem, TProductPath } from "@/types/product";
 import Button from "@/components/UI/button";
-import { getList } from "@/actions/list/listServices";
+import { getList, getSubCategories } from "@/actions/list/listServices";
 
 const initialFilters: TFilters = {
   stockStatus: "all",
@@ -62,6 +62,8 @@ const ListPage = () => {
   const { params } = useParams<{ params: string[] }>();
   const pathName = usePathname();
 
+  const [subCategories, setSubCategories] = useState<TProductPath[]>([]);
+
   useEffect(() => {
     const getProductsList = async () => {
       const pathArray = pathToArray(pathName);
@@ -70,7 +72,16 @@ const ListPage = () => {
         setProductList(response.res);
       }
     };
+    const getSubCategoriesFromDB = async () => {
+      const pathArray = pathToArray(pathName);
+      const response = await getSubCategories(pathArray);
+      if (response.res) {
+        setSubCategories(response.res);
+      }
+      console.log(response.res);
+    };
     getProductsList();
+    getSubCategoriesFromDB();
   }, [pathName]);
 
   if (!params || params.length <= 0) redirect("/");
@@ -153,6 +164,24 @@ const ListPage = () => {
                   <CloseIcon width={12} />
                 </button>
               </div>
+              {subCategories && subCategories.length > 0 ? (
+                <div className={styles.eachFilter}>
+                  <div className={styles.header}>
+                    <h3>In This Category:</h3>
+                  </div>
+                  <div className={styles.body}>
+                    <div className={styles.subCategories}>
+                      {subCategories.map((cat, index) => (
+                        <Link href={pathName + "/" + cat.url} key={index}>
+                          {cat.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
               <div className={styles.eachFilter}>
                 <div className={styles.header}>
                   <h3>Availability</h3>
