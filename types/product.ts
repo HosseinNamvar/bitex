@@ -28,14 +28,14 @@ export type TProductOption = {
 };
 
 export type TProductBoard = {
-  id: number;
+  id: string;
   name: string;
   shortDesc: string;
   price: number;
   dealDate?: Date;
   dealPrice?: number;
-  options: TProductOption[];
-  imageUrl: string;
+  specialFeatures?: string[];
+  options?: TProductOption[];
   defaultQuantity: number;
 };
 
@@ -73,6 +73,13 @@ export type TProductListItem = {
     name: string;
   };
 };
+export type TCartListItemDB = {
+  id: string;
+  name: string;
+  images: string[];
+  price: number;
+  salePrice: number | null;
+};
 
 export type TBrand = {
   id: string;
@@ -102,4 +109,25 @@ export type TListItem = {
     id: string;
     name: string;
   };
+};
+
+export type TSpecification = {
+  groupName: string;
+  specs: {
+    name: string;
+    value: string;
+  }[];
+};
+
+export type TProductPageInfo = {
+  id: string;
+  name: string;
+  isAvailable: boolean;
+  desc: string | null;
+  images: string[];
+  optionSets: string[];
+  specialFeatures: string[];
+  price: number;
+  salePrice: number | null;
+  specifications: TSpecification[];
 };

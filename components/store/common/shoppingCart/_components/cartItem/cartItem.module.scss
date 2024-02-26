@@ -9,6 +9,7 @@
   border-bottom: 1px solid nth($color-light, 2);
   .leftCol {
     min-width: 120px;
+    cursor: pointer;
     > img {
       border-radius: 10px;
       overflow: hidden;
@@ -21,6 +22,10 @@
     flex-grow: 1;
     flex-direction: column;
 
+    > h2 {
+      cursor: pointer;
+      font-weight: 400;
+    }
     .productName {
       font-size: 1.4rem;
       color: nth($color-light, 8);

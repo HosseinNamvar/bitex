@@ -1,9 +1,11 @@
 "use client";
-import { ShoppingIconFill } from "@/components/icons/svgIcons";
 import styles from "./addToCartButton.module.scss";
+
+import { useDispatch } from "react-redux";
+
+import { ShoppingIconFill } from "@/components/icons/svgIcons";
 import { TCartItem } from "@/types/shoppingCart";
 import { add } from "@/store/shoppingCart";
-import { useDispatch } from "react-redux";
 
 interface IProps {
   cartItemData: TCartItem;

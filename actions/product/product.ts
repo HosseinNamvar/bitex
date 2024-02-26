@@ -1,7 +1,14 @@
 "use server";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { TAddProductFormValues, TProductListItem } from "@/types/product";
+import {
+  TAddProductFormValues,
+  TCartListItemDB,
+  TProductListItem,
+  TProductPageInfo,
+  TSpecification,
+} from "@/types/product";
+import { ProductSpec } from "@prisma/client";
 
 const ValidateAddProduct = z.object({
   name: z.string().min(3),
@@ -84,6 +91,68 @@ export const getAllProducts = async () => {
   }
 };
 
+export const getOneProduct = async (productID: string) => {
+  if (!productID || productID === "") return { error: "Invalid Product ID!" };
+
+  try {
+    const result = await db.product.findFirst({
+      where: {
+        id: productID,
+      },
+      select: {
+        id: true,
+        name: true,
+        desc: true,
+        images: true,
+        price: true,
+        salePrice: true,
+        specs: true,
+        specialFeatures: true,
+        isAvailable: true,
+        optionSets: true,
+      },
+    });
+    if (!result) return { error: "Invalid Data!" };
+
+    const specifications = await generateSpecTable(result.specs);
+
+    if (!specifications || specifications.length === 0)
+      return { error: "Invalid Date" };
+
+    const { specs, ...others } = result;
+    const mergedResult: TProductPageInfo = { ...others, specifications };
+
+    return { res: mergedResult };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
+};
+
+export const getCartProducts = async (productIDs: string[]) => {
+  if (!productIDs || productIDs.length === 0)
+    return { error: "Invalid Product List" };
+
+  try {
+    const result: TCartListItemDB[] | null = await db.product.findMany({
+      where: {
+        id: { in: productIDs },
+      },
+      select: {
+        id: true,
+        name: true,
+        images: true,
+        price: true,
+        salePrice: true,
+      },
+    });
+
+    if (!result) return { error: "Can't Get Data from Database!" };
+    return { res: result };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
+};
+
 export const deleteProduct = async (productID: string) => {
   if (!productID || productID === "") return { error: "Invalid Data!" };
   try {
@@ -97,5 +166,41 @@ export const deleteProduct = async (productID: string) => {
     return { res: result };
   } catch (error) {
     return { error: JSON.stringify(error) };
+  }
+};
+
+const generateSpecTable = async (rawSpec: ProductSpec[]) => {
+  try {
+    const specGroupIDs = rawSpec.map((spec) => spec.specGroupID);
+
+    const result = await db.specGroup.findMany({
+      where: {
+        id: { in: specGroupIDs },
+      },
+    });
+    if (!result || result.length === 0) return null;
+
+    const specifications: TSpecification[] = [];
+
+    rawSpec.forEach((spec) => {
+      const groupSpecIndex = result.findIndex((g) => g.id === spec.specGroupID);
+      const tempSpecs: { name: string; value: string }[] = [];
+      spec.specValues.forEach((s, index) => {
+        tempSpecs.push({
+          name: result[groupSpecIndex].specs[index] || "",
+          value: s || "",
+        });
+      });
+
+      specifications.push({
+        groupName: result[groupSpecIndex].title || "",
+        specs: tempSpecs,
+      });
+    });
+    if (specifications.length === 0) return null;
+
+    return specifications;
+  } catch (error) {
+    return null;
   }
 };
