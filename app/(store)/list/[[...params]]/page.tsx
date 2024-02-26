@@ -234,29 +234,38 @@ const ListPage = () => {
                 onChange={handleSortChange}
               />
             </div>
-            <div className={styles.listContainer}>
-              {productList.length > 0 ? (
-                <>
-                  {productList.map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      imgUrl={[
-                        imgBaseUrl + product.images[0],
-                        imgBaseUrl + product.images[1],
-                      ]}
-                      name={product.name}
-                      price={product.price}
-                      isAvailable={product.isAvailable}
-                      dealPrice={product.salePrice || undefined}
-                      specs={product.specialFeatures}
-                      url={"/product/" + product.id}
-                    />
-                  ))}
-                </>
-              ) : (
-                <div>No Product in {getPageHeader()}</div>
-              )}
-            </div>
+            {productList.length > 0 ? (
+              <div className={styles.listContainer}>
+                {productList.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    imgUrl={[
+                      imgBaseUrl + product.images[0],
+                      imgBaseUrl + product.images[1],
+                    ]}
+                    name={product.name}
+                    price={product.price}
+                    isAvailable={product.isAvailable}
+                    dealPrice={product.salePrice || undefined}
+                    specs={product.specialFeatures}
+                    url={"/product/" + product.id}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.noItemContainer}>
+                <span> There is no product in {getPageHeader()} category!</span>
+                <div>
+                  <span> Please Check These Categories:</span>
+                  <div>
+                    <Link href={"/list/pc-laptops/computer"}>Computers</Link>
+                    <Link href={"/list/pc-laptops/laptops"}>Laptop</Link>
+                    <Link href={"/list/smartphones"}>Mobile</Link>
+                    <Link href={"/list/tablets"}>Tablet</Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
