@@ -8,8 +8,6 @@ import { redirect, useParams } from "next/navigation";
 import ProductCard from "@/components/store/common/productCard";
 import { TopProducts } from "@/data/homepageData";
 
-import { OneProduct as product } from "@/data/products";
-
 import ProductBoard from "@/components/store/productPage/productBoard";
 import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
 import Gallery from "@/components/store/productPage/gallery";
@@ -26,25 +24,31 @@ const ProductPage = () => {
   useEffect(() => {
     const getProductFromDB = async () => {
       const response = await getOneProduct(productId.toString());
-      if (response.error || !response.res) redirect("/");
+      if (response.error) redirect("/");
       setProductInfo(response.res);
     };
     getProductFromDB();
   }, [productId]);
 
   if (productInfo === undefined) return "";
+  let fullPath = "";
 
+  const generatePath = (index: number) => {
+    fullPath += "/" + productInfo.path[index].url;
+    return (
+      <Link key={index} href={"/list/" + fullPath}>
+        {productInfo.path[index].name}
+      </Link>
+    );
+  };
   return (
     <div className="storeContainer">
       <div className={styles.productPage}>
         <div className={styles.upperSection}>
           <div className={styles.leftSection}>
             <div className={styles.path}>
-              {product.path.map((path, index) => (
-                <Link href={path.url} key={index}>
-                  {path.label}
-                </Link>
-              ))}
+              <Link href={"/"}>Home</Link>
+              {productInfo.path.map((item, index) => generatePath(index))}
             </div>
             <Gallery images={productInfo.images} />
           </div>

@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import {
   TAddProductFormValues,
   TCartListItemDB,
+  TPath,
   TProductListItem,
   TProductPageInfo,
   TSpecification,
@@ -110,17 +111,32 @@ export const getOneProduct = async (productID: string) => {
         specialFeatures: true,
         isAvailable: true,
         optionSets: true,
+        category: {
+          select: {
+            id: true,
+            parentID: true,
+          },
+        },
       },
     });
     if (!result) return { error: "Invalid Data!" };
 
     const specifications = await generateSpecTable(result.specs);
-
     if (!specifications || specifications.length === 0)
       return { error: "Invalid Date" };
 
+    const pathArray: TPath[] | null = await getPathByCategoryID(
+      result.category.id,
+      result.category.parentID
+    );
+    if (!pathArray || pathArray.length === 0) return { error: "Invalid Date" };
+
     const { specs, ...others } = result;
-    const mergedResult: TProductPageInfo = { ...others, specifications };
+    const mergedResult: TProductPageInfo = {
+      ...others,
+      specifications,
+      path: pathArray,
+    };
 
     return { res: mergedResult };
   } catch (error) {
@@ -200,6 +216,49 @@ const generateSpecTable = async (rawSpec: ProductSpec[]) => {
     if (specifications.length === 0) return null;
 
     return specifications;
+  } catch (error) {
+    return null;
+  }
+};
+
+const getPathByCategoryID = async (
+  categoryID: string,
+  parentID: string | null
+) => {
+  try {
+    if (!categoryID || categoryID === "") return null;
+    if (!parentID || parentID === "") return null;
+    const result: TPath[] = await db.category.findMany({
+      where: {
+        OR: [{ id: categoryID }, { id: parentID }, { parentID: null }],
+      },
+      select: {
+        id: true,
+        parentID: true,
+        name: true,
+        url: true,
+      },
+    });
+    if (!result || result.length === 0) return null;
+
+    const path: TPath[] = [];
+    let tempCatID: string | null = categoryID;
+    let searchCount = 0;
+
+    const generatePath = () => {
+      const foundCatIndex = result.findIndex((cat) => cat.id === tempCatID);
+      if (foundCatIndex === -1) return;
+      path.unshift(result[foundCatIndex]);
+      tempCatID = result[foundCatIndex].parentID;
+      if (!tempCatID) return;
+      searchCount++;
+      if (searchCount <= 3) generatePath();
+      return;
+    };
+    generatePath();
+
+    if (!path || path.length === 0) return null;
+    return path;
   } catch (error) {
     return null;
   }

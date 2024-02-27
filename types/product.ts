@@ -119,6 +119,13 @@ export type TSpecification = {
   }[];
 };
 
+export type TPath = {
+  id: string;
+  parentID: string | null;
+  name: string;
+  url: string;
+};
+
 export type TProductPageInfo = {
   id: string;
   name: string;
@@ -130,4 +137,5 @@ export type TProductPageInfo = {
   price: number;
   salePrice: number | null;
   specifications: TSpecification[];
+  path: TPath[];
 };
