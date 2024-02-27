@@ -10,6 +10,7 @@
   font-size: 1.4rem;
   background-color: white;
   transition: background-color 0.3s;
+  user-select: none;
   &:hover {
     background-color: nth($color-light, 2);
   }
