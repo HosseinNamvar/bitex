@@ -10,6 +10,11 @@ export const getList = async (pathList: string[]) => {
   const categoryID = await findCategoryFromPathArray(pathList);
   if (categoryID === "") return { error: "Invalid Path Name" };
 
+  const subCategories: TProductPath[] | null = await getSubCategories(
+    categoryID
+  );
+  if (!subCategories) return { error: "Invalid Sub Categories" };
+
   const allRelatedCategories = await findCategoryChildren(
     categoryID,
     pathList.length
@@ -19,23 +24,18 @@ export const getList = async (pathList: string[]) => {
 
   const result = await getProductsByCategories(allRelatedCategories);
   if (!result) return { error: "Can't Find Product!" };
-  return { res: result };
+
+  return { products: result, subCategories: subCategories };
 };
 
-export const getSubCategories = async (pathList: string[]) => {
-  if (!pathList || pathList.length > 3 || pathList.length === 0)
-    return { error: "Invalid Path" };
-
-  const categoryID = await findCategoryFromPathArray(pathList);
-  if (categoryID === "") return { error: "Invalid Path Name" };
-
+const getSubCategories = async (catID: string) => {
   try {
     const result = await db.category.findMany({
       where: {
-        parentID: categoryID,
+        parentID: catID,
       },
     });
-    if (!result) return { error: "Invalid Data!" };
+    if (!result) return null;
     const subCategories: TProductPath[] = [];
     result.forEach((cat) => {
       subCategories.push({
@@ -43,9 +43,9 @@ export const getSubCategories = async (pathList: string[]) => {
         url: cat.url,
       });
     });
-    return { res: subCategories };
+    return subCategories;
   } catch (error) {
-    return { error: JSON.stringify(error) };
+    return null;
   }
 };
 

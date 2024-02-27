@@ -89,7 +89,7 @@ export type TBrand = {
 export type TFilters = {
   stockStatus: "all" | "inStock" | "outStock";
   priceMinMax: [number, number];
-  filterPriceMinMax: [number, number];
+  priceMinMaxLimitation: [number, number];
   brands: {
     id: string;
     name: string;

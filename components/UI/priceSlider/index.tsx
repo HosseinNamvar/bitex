@@ -1,22 +1,17 @@
 "use client";
-import { useState } from "react";
 import styles from "./priceSlider.module.scss";
-
-interface IProps {
-  minValue: number;
-  maxValue: number;
-  onChange: (value: number) => void;
-}
 
 type TValue = [number, number];
 
-const PriceSlider = ({ minValue, maxValue, onChange }: IProps) => {
-  const range = maxValue - minValue;
-  const gapValue = range / 10;
-  const [sliderValues, setSliderValues] = useState<TValue>([
-    minValue,
-    maxValue,
-  ]);
+interface IProps {
+  sliderValues: [number, number];
+  minMaxLimit: [number, number];
+  onChange: (value: TValue) => void;
+}
+
+const PriceSlider = ({ sliderValues, minMaxLimit, onChange }: IProps) => {
+  const range = minMaxLimit[1] - minMaxLimit[0];
+  const gapValue = range / 20;
 
   const handleChangeValue = (
     index: number,
@@ -24,22 +19,22 @@ const PriceSlider = ({ minValue, maxValue, onChange }: IProps) => {
     isSliderData: boolean
   ) => {
     const newValue = isSliderData
-      ? (parseInt(e.currentTarget.value) / 100) * range + minValue
+      ? (parseFloat(e.currentTarget.value) / 100) * range + minMaxLimit[0]
       : parseInt(e.currentTarget.value);
     if (index === 0) {
-      if (newValue < sliderValues[1] - gapValue && newValue >= minValue)
-        setSliderValues([newValue, sliderValues[1]]);
+      if (newValue < sliderValues[1] - gapValue) {
+        onChange([Math.floor(newValue), sliderValues[1]]);
+      }
     }
     if (index === 1) {
-      if (newValue > sliderValues[0] + gapValue && newValue <= maxValue)
-        setSliderValues([sliderValues[0], newValue]);
+      if (newValue > sliderValues[0] + gapValue) {
+        onChange([sliderValues[0], Math.floor(newValue)]);
+      }
     }
   };
-
   const convertToPercent = (n: number) => {
-    return ((n - minValue) / range) * 100;
+    return Math.floor(((n - minMaxLimit[0]) / range) * 100);
   };
-
   return (
     <div className={styles.sliderDouble}>
       <div className={styles.sliders}>

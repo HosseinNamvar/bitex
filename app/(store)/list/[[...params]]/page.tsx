@@ -14,36 +14,15 @@ import { sortDropdownData } from "@/data/uiElementsData";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import CheckBox from "@/components/UI/checkBox";
 import PriceSlider from "@/components/UI/priceSlider";
-import { TFilters, TListItem, TProductPath } from "@/types/product";
+import { TBrand, TFilters, TListItem, TProductPath } from "@/types/product";
 import Button from "@/components/UI/button";
-import { getList, getSubCategories } from "@/actions/list/listServices";
+import { getList } from "@/actions/list/listServices";
 
 const initialFilters: TFilters = {
   stockStatus: "all",
-  brands: [
-    {
-      id: "1",
-      name: "apple",
-      isSelected: true,
-    },
-    {
-      id: "2",
-      name: "Sony",
-      isSelected: true,
-    },
-    {
-      id: "3",
-      name: "Samsung",
-      isSelected: true,
-    },
-    {
-      id: "4",
-      name: "Google",
-      isSelected: true,
-    },
-  ],
-  filterPriceMinMax: [0, 100],
-  priceMinMax: [0, 100],
+  brands: [],
+  priceMinMaxLimitation: [20, 100],
+  priceMinMax: [20, 100],
 };
 
 const imgBaseUrl = process.env.IMG_URL;
@@ -68,20 +47,37 @@ const ListPage = () => {
     const getProductsList = async () => {
       const pathArray = pathToArray(pathName);
       const response = await getList(pathArray);
-      if (response.res) {
-        setProductList(response.res);
+      if (response.products && response.subCategories) {
+        const brands = getBrands(response.products).map((m) => {
+          return { id: m.id, name: m.name, isSelected: true };
+        });
+        initialFilters.brands = [...brands];
+        initialFilters.priceMinMaxLimitation = getPriceLimit(response.products);
+        initialFilters.priceMinMax = initialFilters.priceMinMaxLimitation;
+        setFilters(initialFilters);
+        setSubCategories(response.subCategories);
+        setProductList(response.products);
       }
     };
-    const getSubCategoriesFromDB = async () => {
-      const pathArray = pathToArray(pathName);
-      const response = await getSubCategories(pathArray);
-      if (response.res) {
-        setSubCategories(response.res);
-      }
-      console.log(response.res);
+
+    const getBrands = (data: TListItem[]) => {
+      const brands: TBrand[] = [];
+      data.forEach((p) => {
+        const isFind = brands.findIndex((brand) => p.brand.id === brand.id);
+        if (isFind === -1) brands.push({ id: p.brand.id, name: p.brand.name });
+      });
+      return brands;
     };
+    const getPriceLimit = (data: TListItem[]) => {
+      const priceLimit: [number, number] = [data[0].price, data[0].price];
+      data.forEach((p) => {
+        if (p.price < priceLimit[0]) priceLimit[0] = Math.floor(p.price);
+        if (p.price > priceLimit[1]) priceLimit[1] = Math.ceil(p.price);
+      });
+      return priceLimit;
+    };
+
     getProductsList();
-    getSubCategoriesFromDB();
   }, [pathName]);
 
   if (!params || params.length <= 0) redirect("/");
@@ -115,11 +111,25 @@ const ListPage = () => {
   };
 
   const handleBrandChange = (index: number) => {
-    const newBrandList = [...filters.brands];
+    const newBrandList = JSON.parse(JSON.stringify(filters.brands));
     newBrandList[index].isSelected = !newBrandList[index].isSelected;
     setFilters({ ...filters, brands: newBrandList });
   };
 
+  const isFilterChanged = () => {
+    if (initialFilters.stockStatus !== filters.stockStatus) return true;
+
+    if (
+      JSON.stringify(initialFilters.brands) !== JSON.stringify(filters.brands)
+    )
+      return true;
+    if (
+      JSON.stringify(initialFilters.priceMinMax) !==
+      JSON.stringify(filters.priceMinMax)
+    )
+      return true;
+    return false;
+  };
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
@@ -216,9 +226,11 @@ const ListPage = () => {
                 </div>
                 <div className={styles.body}>
                   <PriceSlider
-                    minValue={2000}
-                    maxValue={6000}
-                    onChange={() => ""}
+                    sliderValues={filters.priceMinMax}
+                    minMaxLimit={filters.priceMinMaxLimitation}
+                    onChange={(value) =>
+                      setFilters({ ...filters, priceMinMax: [...value] })
+                    }
                   />
                 </div>
               </div>
@@ -227,12 +239,8 @@ const ListPage = () => {
                   <h3>Brand</h3>
                 </div>
                 <div className={styles.body}>
-                  {/* <div className={styles.searchInput}>
-                    <SearchIcon width={14} strokeWidth={1} />
-                    <input type="text" placeholder="Search Brands" />
-                  </div> */}
                   <div className={styles.optionsList}>
-                    {initialFilters.brands.map((brand, index) => (
+                    {filters.brands.map((brand, index) => (
                       <CheckBox
                         key={brand.id}
                         isChecked={brand.isSelected}
@@ -244,7 +252,7 @@ const ListPage = () => {
                 </div>
               </div>
               <div className={styles.apply}>
-                <Button text="Apply Changes" />
+                <Button text="Apply Changes" disabled={!isFilterChanged()} />
               </div>
             </div>
           </div>

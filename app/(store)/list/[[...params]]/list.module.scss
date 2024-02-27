@@ -203,6 +203,9 @@
             &:active {
               background-color: nth($color-blue, 4);
             }
+            &:disabled {
+              background-color: nth($color-blue, 7);
+            }
           }
         }
       }
