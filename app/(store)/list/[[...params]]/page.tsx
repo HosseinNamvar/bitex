@@ -17,6 +17,7 @@ import PriceSlider from "@/components/UI/priceSlider";
 import { TBrand, TFilters, TListItem, TProductPath } from "@/types/product";
 import Button from "@/components/UI/button";
 import { getList } from "@/actions/list/listServices";
+import { TListSort } from "@/types/list";
 
 const initialFilters: TFilters = {
   stockStatus: "all",
@@ -33,6 +34,14 @@ const pathToArray = (path: string) => {
   return pathArray;
 };
 
+const sortData: TListSort[] = [
+  { sortName: "id", sortType: "asc" },
+  { sortName: "id", sortType: "desc" },
+  { sortName: "price", sortType: "desc" },
+  { sortName: "price", sortType: "asc" },
+  { sortName: "name", sortType: "asc" },
+];
+
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(0);
   const [productList, setProductList] = useState<TListItem[]>([]);
@@ -46,7 +55,7 @@ const ListPage = () => {
   useEffect(() => {
     const getProductsList = async () => {
       const pathArray = pathToArray(pathName);
-      const response = await getList(pathArray);
+      const response = await getList(pathArray, sortData[sortIndex]);
       if (response.products && response.subCategories) {
         const brands = getBrands(response.products).map((m) => {
           return { id: m.id, name: m.name, isSelected: true };
@@ -78,7 +87,7 @@ const ListPage = () => {
     };
 
     getProductsList();
-  }, [pathName]);
+  }, [pathName, sortIndex]);
 
   if (!params || params.length <= 0) redirect("/");
 

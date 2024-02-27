@@ -2,8 +2,16 @@
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { TListItem, TProductPath } from "@/types/product";
+import { TListSort } from "@/types/list";
 
-export const getList = async (pathList: string[]) => {
+const ValidateSort = z.object({
+  sortName: z.enum(["id", "price", "name"]),
+  sortType: z.enum(["asc", "desc"]),
+});
+
+export const getList = async (pathList: string[], sortData: TListSort) => {
+  if (!ValidateSort.safeParse(sortData).success)
+    return { error: "Invalid Path" };
   if (!pathList || pathList.length > 3 || pathList.length === 0)
     return { error: "Invalid Path" };
 
@@ -22,7 +30,7 @@ export const getList = async (pathList: string[]) => {
   if (!allRelatedCategories || allRelatedCategories.length === 0)
     return { error: "Invalid Path Name" };
 
-  const result = await getProductsByCategories(allRelatedCategories);
+  const result = await getProductsByCategories(allRelatedCategories, sortData);
   if (!result) return { error: "Can't Find Product!" };
 
   return { products: result, subCategories: subCategories };
@@ -97,7 +105,10 @@ const findCategoryChildren = async (catID: string, numberOfParents: number) => {
   }
 };
 
-const getProductsByCategories = async (categories: string[]) => {
+const getProductsByCategories = async (
+  categories: string[],
+  sortData: TListSort
+) => {
   try {
     const result: TListItem[] | null = await db.product.findMany({
       where: {
@@ -117,6 +128,9 @@ const getProductsByCategories = async (categories: string[]) => {
         salePrice: true,
         specialFeatures: true,
         isAvailable: true,
+      },
+      orderBy: {
+        [sortData.sortName]: sortData.sortType,
       },
     });
     if (!result) return null;
