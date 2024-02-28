@@ -301,6 +301,41 @@
     }
   }
 }
+.boardLoading {
+  display: flex;
+  flex-direction: column;
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  > .title {
+    margin-top: 40px;
+    gap: 20px;
+  }
+  > .desc {
+    margin-top: 40px;
+  }
+  > .price {
+    margin-top: 60px;
+  }
+}
+.specLoading {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0 60px;
+  gap: 16px;
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
+  > .specs {
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    margin-left: 40px;
+  }
+}
 
 @media (max-width: 1440px) {
   .cardsContainer {

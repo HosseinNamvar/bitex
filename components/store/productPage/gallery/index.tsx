@@ -4,9 +4,10 @@ import styles from "./gallery.module.scss";
 
 import Image from "next/image";
 import { useState } from "react";
+import { SK_Box } from "@/components/UI/skeleton";
 
 interface IProps {
-  images: string[];
+  images?: string[];
 }
 
 const Gallery = ({ images }: IProps) => {
@@ -15,28 +16,40 @@ const Gallery = ({ images }: IProps) => {
   return (
     <div className={styles.gallery}>
       <div className={styles.imageList}>
-        {images.map((image, index) => (
-          <Image
-            src={process.env.IMG_URL + image}
-            alt=""
-            width={64}
-            height={64}
-            key={index}
-            className={index === selectedIndex ? styles.active : ""}
-            onClick={() => setSelectedIndex(index)}
-          />
-        ))}
+        {images ? (
+          images.map((image, index) => (
+            <Image
+              src={process.env.IMG_URL + image}
+              alt=""
+              width={64}
+              height={64}
+              key={index}
+              className={index === selectedIndex ? styles.active : ""}
+              onClick={() => setSelectedIndex(index)}
+            />
+          ))
+        ) : (
+          <>
+            <SK_Box width="64px" height="64px" />
+            <SK_Box width="64px" height="64px" />
+            <SK_Box width="64px" height="64px" />
+          </>
+        )}
       </div>
       <div className={styles.imageWrapper}>
-        <Image
-          src={process.env.IMG_URL + images[selectedIndex]}
-          alt=""
-          fill
-          sizes="(max-width:700px)"
-          onClick={() => setShowZoom(true)}
-        />
+        {images ? (
+          <Image
+            src={process.env.IMG_URL + images[selectedIndex]}
+            alt=""
+            fill
+            sizes="(max-width:700px)"
+            onClick={() => setShowZoom(true)}
+          />
+        ) : (
+          <SK_Box width="90%" height="90%" />
+        )}
       </div>
-      {showZoom && (
+      {images && showZoom ? (
         <div className={styles.zoomWindow}>
           <div
             className={styles.background}
@@ -67,6 +80,8 @@ const Gallery = ({ images }: IProps) => {
             ))}
           </div>
         </div>
+      ) : (
+        ""
       )}
     </div>
   );

@@ -15,10 +15,13 @@ import Gallery from "@/components/store/productPage/gallery";
 import { getOneProduct } from "@/actions/product/product";
 import { TProductPageInfo } from "@/types/product";
 import Image from "next/image";
+import { SK_Box } from "@/components/UI/skeleton";
 
 const ProductPage = () => {
   const { productId } = useParams<{ productId: string[] }>();
-  const [productInfo, setProductInfo] = useState<TProductPageInfo>();
+  const [productInfo, setProductInfo] = useState<
+    TProductPageInfo | null | undefined
+  >(null);
   if (!productId) redirect("/");
 
   useEffect(() => {
@@ -34,12 +37,15 @@ const ProductPage = () => {
   let fullPath = "";
 
   const generatePath = (index: number) => {
-    fullPath += "/" + productInfo.path[index].url;
-    return (
-      <Link key={index} href={"/list/" + fullPath}>
-        {productInfo.path[index].name}
-      </Link>
-    );
+    if (productInfo) {
+      fullPath += "/" + productInfo.path[index].url;
+      return (
+        <Link key={index} href={"/list/" + fullPath}>
+          {productInfo.path[index].name}
+        </Link>
+      );
+    }
+    return <div></div>;
   };
   return (
     <div className="storeContainer">
@@ -47,23 +53,47 @@ const ProductPage = () => {
         <div className={styles.upperSection}>
           <div className={styles.leftSection}>
             <div className={styles.path}>
-              <Link href={"/"}>Home</Link>
-              {productInfo.path.map((item, index) => generatePath(index))}
+              {productInfo ? (
+                <>
+                  <Link href={"/"}>Home</Link>
+                  {productInfo.path.map((item, index) => generatePath(index))}
+                </>
+              ) : (
+                <SK_Box width="60%" height="15px" />
+              )}
             </div>
-            <Gallery images={productInfo.images} />
+            <Gallery images={productInfo?.images} />
           </div>
           <div className={styles.rightSection}>
-            <ProductBoard
-              boardData={{
-                id: productInfo.id,
-                defaultQuantity: 1,
-                name: productInfo.name,
-                price: productInfo.price,
-                dealPrice: productInfo.salePrice || undefined,
-                shortDesc: productInfo.desc || "",
-                specialFeatures: productInfo.specialFeatures,
-              }}
-            />
+            {productInfo ? (
+              <ProductBoard
+                boardData={{
+                  id: productInfo.id,
+                  defaultQuantity: 1,
+                  name: productInfo.name,
+                  price: productInfo.price,
+                  dealPrice: productInfo.salePrice || undefined,
+                  shortDesc: productInfo.desc || "",
+                  specialFeatures: productInfo.specialFeatures,
+                }}
+              />
+            ) : (
+              <div className={styles.boardLoading}>
+                <SK_Box width="60%" height="14px" />
+                <div className={styles.title}>
+                  <SK_Box width="40%" height="30px" />
+                  <SK_Box width="90%" height="16px" />
+                </div>
+                <div className={styles.desc}>
+                  <SK_Box width="40%" height="14px" />
+                  <SK_Box width="40%" height="14px" />
+                  <SK_Box width="40%" height="14px" />
+                </div>
+                <div className={styles.price}>
+                  <SK_Box width="30%" height="40px" />
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.lowerSection}>
@@ -71,27 +101,54 @@ const ProductPage = () => {
             {/* ----------------- SPECIFICATION SECTION ----------------- */}
             <div className={styles.specification}>
               <h2>Specification</h2>
-              {productInfo.specifications.map((spec, index) => (
-                <section key={index} className={styles.specGroup}>
-                  <div className={styles.specGroupHead}>
-                    <button>
-                      <MinusIcon width={12} />
-                      <MinusIcon width={12} />
-                    </button>
-                    <h3>{spec.groupName}</h3>
-                  </div>
-                  {spec.specs.map((row, index) => (
-                    <div key={index} className={styles.row}>
-                      <div className={styles.leftCol}>
-                        <span>{row.name}</span>
-                      </div>
-                      <div className={styles.rightCol}>
-                        <span key={index}>{row.value}</span>
-                      </div>
+              {productInfo ? (
+                productInfo.specifications.map((spec, index) => (
+                  <section key={index} className={styles.specGroup}>
+                    <div className={styles.specGroupHead}>
+                      <button>
+                        <MinusIcon width={12} />
+                        <MinusIcon width={12} />
+                      </button>
+                      <h3>{spec.groupName}</h3>
                     </div>
-                  ))}
-                </section>
-              ))}
+                    {spec.specs.map((row, index) => (
+                      <div key={index} className={styles.row}>
+                        <div className={styles.leftCol}>
+                          <span>{row.name}</span>
+                        </div>
+                        <div className={styles.rightCol}>
+                          <span key={index}>{row.value}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </section>
+                ))
+              ) : (
+                <>
+                  <div className={styles.specLoading}>
+                    <SK_Box width="200px" height="30px" />
+                    <div className={styles.specs}>
+                      <SK_Box width="10%" height="20px" />
+                      <SK_Box width="40%" height="16px" />
+                    </div>
+                    <div className={styles.specs}>
+                      <SK_Box width="10%" height="20px" />
+                      <SK_Box width="40%" height="16px" />
+                    </div>
+                  </div>
+                  <div className={styles.specLoading}>
+                    <SK_Box width="200px" height="30px" />
+                    <div className={styles.specs}>
+                      <SK_Box width="10%" height="20px" />
+                      <SK_Box width="40%" height="16px" />
+                    </div>
+                    <div className={styles.specs}>
+                      <SK_Box width="10%" height="20px" />
+                      <SK_Box width="40%" height="16px" />
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* ----------------- USER REVIEWS ----------------- */}
