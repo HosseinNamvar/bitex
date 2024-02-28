@@ -24,6 +24,7 @@ import {
 import Button from "@/components/UI/button";
 import { getList } from "@/actions/list/listServices";
 import { TListSort } from "@/types/list";
+import { SK_Box } from "@/components/UI/skeleton";
 
 const defaultFilters: TFilters = {
   stockStatus: "all",
@@ -344,6 +345,7 @@ const ListPage = () => {
                 onChange={handleSortChange}
               />
             </div>
+            <SK_Box width="200px" />
             {productList.length > 0 ? (
               <div className={styles.listContainer}>
                 {productList.map((product) => (

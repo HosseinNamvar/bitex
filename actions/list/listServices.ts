@@ -129,6 +129,8 @@ const getProductsByCategories = async (
   if (filters.stockStatus === "inStock") isAvailable = true;
   if (filters.stockStatus === "outStock") isAvailable = false;
 
+  const isInitialPrice = filters.priceMinMax[1] === 0;
+
   try {
     const result: TListItem[] | null = await db.product.findMany({
       where: {
@@ -146,9 +148,14 @@ const getProductsByCategories = async (
                 brandID: { in: brands },
               }
             : {},
-          {
-            price: { gt: filters.priceMinMax[0], lte: filters.priceMinMax[1] },
-          },
+          !isInitialPrice
+            ? {
+                price: {
+                  gt: filters.priceMinMax[0],
+                  lte: filters.priceMinMax[1],
+                },
+              }
+            : {},
         ],
       },
       select: {
