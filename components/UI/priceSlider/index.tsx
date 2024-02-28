@@ -1,4 +1,5 @@
 "use client";
+import { SK_Box } from "../skeleton";
 import styles from "./priceSlider.module.scss";
 
 type TValue = [number, number];
@@ -11,7 +12,12 @@ interface IProps {
 
 const PriceSlider = ({ sliderValues, minMaxLimit, onChange }: IProps) => {
   if (sliderValues[0] === 0 && sliderValues[1] === 0) {
-    return <div>Loading</div>;
+    return (
+      <div className={styles.loading} style={{ alignItems: "flex-start" }}>
+        <SK_Box width="100%" height="30px" />
+        <SK_Box width="60%" height="20px" />
+      </div>
+    );
   }
   const range = minMaxLimit[1] - minMaxLimit[0];
   const gapValue = range / 20;

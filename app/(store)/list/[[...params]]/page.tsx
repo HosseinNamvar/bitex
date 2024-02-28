@@ -49,6 +49,26 @@ const sortData: TListSort[] = [
   { sortName: "name", sortType: "asc" },
 ];
 
+const SKL_Product = (): React.ReactNode[] => {
+  const nodes: React.ReactNode[] = [];
+  for (let i = 0; i < 6; i++) {
+    nodes.push(
+      <div className={styles.item} key={i}>
+        <SK_Box width="100%" height="160px" />
+        <SK_Box width="70%" height="26px" />
+        <div>
+          <SK_Box width="40%" height="12px" />
+          <SK_Box width="40%" height="12px" />
+
+          <SK_Box width="40%" height="12px" />
+        </div>
+        <SK_Box width="60%" height="20px" />
+      </div>
+    );
+  }
+  return nodes;
+};
+
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(0);
   const [productList, setProductList] = useState<TListItem[]>([]);
@@ -59,11 +79,13 @@ const ListPage = () => {
     useState<TFilters>(defaultFilters);
   const { params } = useParams<{ params: string[] }>();
   const pathName = usePathname();
+  const [isListLoading, setIsListLoading] = useState(true);
 
   const [subCategories, setSubCategories] = useState<TProductPath[]>([]);
 
   useEffect(() => {
     const getProductsList = async () => {
+      setIsListLoading(true);
       const pathArray = pathToArray(pathName);
       const response = await getList(
         pathArray,
@@ -83,6 +105,7 @@ const ListPage = () => {
           );
           appliedFilters.priceMinMax = appliedFilters.priceMinMaxLimitation;
         }
+        setIsListLoading(false);
         setFilters(appliedFilters);
         setSubCategories(response.subCategories);
         setProductList(response.products);
@@ -303,22 +326,26 @@ const ListPage = () => {
                   <h3>Brand</h3>
                 </div>
                 <div className={styles.body}>
-                  <div className={styles.optionsList}>
-                    {filters.brands.length === 0 ? (
-                      <div>Loading</div>
-                    ) : (
-                      <>
-                        {filters.brands.map((brand, index) => (
-                          <CheckBox
-                            key={brand.id}
-                            isChecked={brand.isSelected}
-                            text={brand.name}
-                            onClick={() => handleBrandChange(index)}
-                          />
-                        ))}
-                      </>
-                    )}
-                  </div>
+                  {filters.brands.length === 0 ? (
+                    <div className={styles.loadingBrands}>
+                      <SK_Box width="100%" height="20px" />
+                      <SK_Box width="100%" height="20px" />
+                      <SK_Box width="100%" height="20px" />
+                      <SK_Box width="100%" height="20px" />
+                      <SK_Box width="100%" height="20px" />
+                    </div>
+                  ) : (
+                    <div className={styles.optionsList}>
+                      {filters.brands.map((brand, index) => (
+                        <CheckBox
+                          key={brand.id}
+                          isChecked={brand.isSelected}
+                          text={brand.name}
+                          onClick={() => handleBrandChange(index)}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className={styles.apply}>
@@ -345,43 +372,55 @@ const ListPage = () => {
                 onChange={handleSortChange}
               />
             </div>
-            <SK_Box width="200px" />
-            {productList.length > 0 ? (
-              <div className={styles.listContainer}>
-                {productList.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    imgUrl={[
-                      imgBaseUrl + product.images[0],
-                      imgBaseUrl + product.images[1],
-                    ]}
-                    name={product.name}
-                    price={product.price}
-                    isAvailable={product.isAvailable}
-                    dealPrice={product.salePrice || undefined}
-                    specs={product.specialFeatures}
-                    url={"/product/" + product.id}
-                  />
-                ))}
-              </div>
-            ) : isFilterApplied ? (
-              <div className={styles.noItemContainer}>
-                <span> There is no product!</span>
-                <Button text="Reset Filters" onClick={handleResetFilters} />
+            {isListLoading ? (
+              <div className={styles.sklList}>
+                {SKL_Product().map((skl) => skl)}
               </div>
             ) : (
-              <div className={styles.noItemContainer}>
-                <span> There is no product in {getPageHeader()} category!</span>
-                <div>
-                  <span> Please Check These Categories:</span>
-                  <div>
-                    <Link href={"/list/pc-laptops/computer"}>Computers</Link>
-                    <Link href={"/list/pc-laptops/laptops"}>Laptop</Link>
-                    <Link href={"/list/smartphones"}>Mobile</Link>
-                    <Link href={"/list/tablets"}>Tablet</Link>
+              <>
+                {productList.length > 0 ? (
+                  <div className={styles.listContainer}>
+                    {productList.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        imgUrl={[
+                          imgBaseUrl + product.images[0],
+                          imgBaseUrl + product.images[1],
+                        ]}
+                        name={product.name}
+                        price={product.price}
+                        isAvailable={product.isAvailable}
+                        dealPrice={product.salePrice || undefined}
+                        specs={product.specialFeatures}
+                        url={"/product/" + product.id}
+                      />
+                    ))}
                   </div>
-                </div>
-              </div>
+                ) : isFilterApplied ? (
+                  <div className={styles.noItemContainer}>
+                    <span> There is no product!</span>
+                    <Button text="Reset Filters" onClick={handleResetFilters} />
+                  </div>
+                ) : (
+                  <div className={styles.noItemContainer}>
+                    <span>
+                      {" "}
+                      There is no product in {getPageHeader()} category!
+                    </span>
+                    <div>
+                      <span> Please Check These Categories:</span>
+                      <div>
+                        <Link href={"/list/pc-laptops/computer"}>
+                          Computers
+                        </Link>
+                        <Link href={"/list/pc-laptops/laptops"}>Laptop</Link>
+                        <Link href={"/list/smartphones"}>Mobile</Link>
+                        <Link href={"/list/tablets"}>Tablet</Link>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
