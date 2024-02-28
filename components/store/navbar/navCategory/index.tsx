@@ -1,11 +1,12 @@
-"use-client";
+"use client";
 import styles from "./navCategory.module.scss";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useToggleMenu } from "@/hooks/useToggleMenu";
 import { ListIcon } from "@/components/icons/svgIcons";
-import { CategoriesData } from "@/data/categories";
+import { getAllCategoriesJSON } from "@/actions/category/category";
+import { TGroupJSON } from "@/types/categories";
 
 interface IProps {
   isNavbarVisible: boolean;
@@ -14,11 +15,23 @@ interface IProps {
 const NavBarCategory = ({ isNavbarVisible: isNavbarHide }: IProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useToggleMenu(false, dropdownRef);
+  const [categories, setCategories] = useState<TGroupJSON[]>([]);
 
   const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setIsActive(!isActive);
   };
+
+  useEffect(() => {
+    const getCategoriesDB = async () => {
+      const result = await getAllCategoriesJSON();
+      if (result.res) {
+        console.log(result.res);
+        setCategories(result.res);
+      }
+    };
+    getCategoriesDB();
+  }, []);
 
   if (!isNavbarHide && isActive) setIsActive(false);
 
@@ -32,9 +45,9 @@ const NavBarCategory = ({ isNavbarVisible: isNavbarHide }: IProps) => {
         ref={dropdownRef}
         className={`${styles.menu} ${isActive && styles.showMenu}`}
       >
-        {CategoriesData.map((item, index) => (
-          <Link key={index} href={item.url}>
-            {item.name}
+        {categories.map((item, index) => (
+          <Link key={index} href={"/list/" + item.group.url}>
+            {item.group.name}
           </Link>
         ))}
       </div>
