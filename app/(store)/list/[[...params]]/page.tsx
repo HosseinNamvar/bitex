@@ -35,12 +35,6 @@ const defaultFilters: TFilters = {
 
 const imgBaseUrl = process.env.IMG_URL;
 
-const pathToArray = (path: string) => {
-  const pathWithoutList = path.split("/list/")[1];
-  const pathArray = pathWithoutList.split("/");
-  return pathArray;
-};
-
 const sortData: TListSort[] = [
   { sortName: "id", sortType: "asc" },
   { sortName: "id", sortType: "desc" },
@@ -48,26 +42,6 @@ const sortData: TListSort[] = [
   { sortName: "price", sortType: "asc" },
   { sortName: "name", sortType: "asc" },
 ];
-
-const SKL_Product = (): React.ReactNode[] => {
-  const nodes: React.ReactNode[] = [];
-  for (let i = 0; i < 6; i++) {
-    nodes.push(
-      <div className={styles.item} key={i}>
-        <SK_Box width="100%" height="160px" />
-        <SK_Box width="70%" height="26px" />
-        <div>
-          <SK_Box width="40%" height="12px" />
-          <SK_Box width="40%" height="12px" />
-
-          <SK_Box width="40%" height="12px" />
-        </div>
-        <SK_Box width="60%" height="20px" />
-      </div>
-    );
-  }
-  return nodes;
-};
 
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(0);
@@ -427,6 +401,32 @@ const ListPage = () => {
       </div>
     </div>
   );
+};
+
+const SKL_Product = (): React.ReactNode[] => {
+  const nodes: React.ReactNode[] = [];
+  for (let i = 0; i < 6; i++) {
+    nodes.push(
+      <div className={styles.item} key={i}>
+        <SK_Box width="100%" height="160px" />
+        <SK_Box width="70%" height="26px" />
+        <div>
+          <SK_Box width="40%" height="12px" />
+          <SK_Box width="40%" height="12px" />
+
+          <SK_Box width="40%" height="12px" />
+        </div>
+        <SK_Box width="60%" height="20px" />
+      </div>
+    );
+  }
+  return nodes;
+};
+
+const pathToArray = (path: string) => {
+  const pathWithoutList = path.split("/list/")[1];
+  const pathArray = pathWithoutList.split("/");
+  return pathArray;
 };
 
 export default ListPage;
