@@ -6,9 +6,14 @@ interface IProps {
 }
 
 export const SK_Box = ({ width, height }: IProps) => {
-  return <div className={styles.skeletonBox} style={{ width, height }} />;
+  return <div className={styles.skeletonBase} style={{ width, height }} />;
 };
 
 export const SK_Circle = ({ width }: IProps) => {
-  return <div className={styles.skeletonCircle} style={{ width }} />;
+  return (
+    <div
+      className={`${styles.skeletonBase} ${styles.circle}`}
+      style={{ width, height: width }}
+    />
+  );
 };
