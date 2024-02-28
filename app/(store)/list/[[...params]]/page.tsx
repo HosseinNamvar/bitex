@@ -14,16 +14,22 @@ import { sortDropdownData } from "@/data/uiElementsData";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import CheckBox from "@/components/UI/checkBox";
 import PriceSlider from "@/components/UI/priceSlider";
-import { TBrand, TFilters, TListItem, TProductPath } from "@/types/product";
+import {
+  TBrand,
+  TFilterBrands,
+  TFilters,
+  TListItem,
+  TProductPath,
+} from "@/types/product";
 import Button from "@/components/UI/button";
 import { getList } from "@/actions/list/listServices";
 import { TListSort } from "@/types/list";
 
-const initialFilters: TFilters = {
+const defaultFilters: TFilters = {
   stockStatus: "all",
   brands: [],
-  priceMinMaxLimitation: [20, 100],
-  priceMinMax: [20, 100],
+  priceMinMaxLimitation: [0, 0],
+  priceMinMax: [0, 0],
 };
 
 const imgBaseUrl = process.env.IMG_URL;
@@ -46,7 +52,10 @@ const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(0);
   const [productList, setProductList] = useState<TListItem[]>([]);
   const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState<TFilters>(initialFilters);
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
+  const [filters, setFilters] = useState<TFilters>(defaultFilters);
+  const [appliedFilters, setAppliedFilters] =
+    useState<TFilters>(defaultFilters);
   const { params } = useParams<{ params: string[] }>();
   const pathName = usePathname();
 
@@ -55,15 +64,25 @@ const ListPage = () => {
   useEffect(() => {
     const getProductsList = async () => {
       const pathArray = pathToArray(pathName);
-      const response = await getList(pathArray, sortData[sortIndex]);
+      const response = await getList(
+        pathArray,
+        sortData[sortIndex],
+        appliedFilters
+      );
       if (response.products && response.subCategories) {
         const brands = getBrands(response.products).map((m) => {
           return { id: m.id, name: m.name, isSelected: true };
         });
-        initialFilters.brands = [...brands];
-        initialFilters.priceMinMaxLimitation = getPriceLimit(response.products);
-        initialFilters.priceMinMax = initialFilters.priceMinMaxLimitation;
-        setFilters(initialFilters);
+        if (appliedFilters.brands.length === 0) {
+          appliedFilters.brands = [...brands];
+        }
+        if (!isFilterApplied) {
+          appliedFilters.priceMinMaxLimitation = getPriceLimit(
+            response.products
+          );
+          appliedFilters.priceMinMax = appliedFilters.priceMinMaxLimitation;
+        }
+        setFilters(appliedFilters);
         setSubCategories(response.subCategories);
         setProductList(response.products);
       }
@@ -80,14 +99,20 @@ const ListPage = () => {
     const getPriceLimit = (data: TListItem[]) => {
       const priceLimit: [number, number] = [data[0].price, data[0].price];
       data.forEach((p) => {
-        if (p.price < priceLimit[0]) priceLimit[0] = Math.floor(p.price);
-        if (p.price > priceLimit[1]) priceLimit[1] = Math.ceil(p.price);
+        if (p.price < priceLimit[0]) priceLimit[0] = p.price;
+        if (p.price > priceLimit[1]) priceLimit[1] = p.price;
       });
+      priceLimit[0] = Math.floor(priceLimit[0]);
+      priceLimit[0] = priceLimit[0] - (priceLimit[0] % 100);
+
+      priceLimit[1] = Math.ceil(priceLimit[1]);
+      priceLimit[1] = priceLimit[1] + (100 - (priceLimit[1] % 100));
+
       return priceLimit;
     };
 
     getProductsList();
-  }, [pathName, sortIndex]);
+  }, [pathName, sortIndex, appliedFilters, isFilterApplied]);
 
   if (!params || params.length <= 0) redirect("/");
 
@@ -125,20 +150,48 @@ const ListPage = () => {
     setFilters({ ...filters, brands: newBrandList });
   };
 
-  const isFilterChanged = () => {
-    if (initialFilters.stockStatus !== filters.stockStatus) return true;
+  const defineFilterChangeStatus = () => {
+    if (appliedFilters.stockStatus !== filters.stockStatus) return false;
 
     if (
-      JSON.stringify(initialFilters.brands) !== JSON.stringify(filters.brands)
+      JSON.stringify(appliedFilters.brands) !== JSON.stringify(filters.brands)
     )
-      return true;
+      return false;
     if (
-      JSON.stringify(initialFilters.priceMinMax) !==
+      JSON.stringify(appliedFilters.priceMinMax) !==
       JSON.stringify(filters.priceMinMax)
     )
-      return true;
-    return false;
+      return false;
+
+    return true;
   };
+  let isFilterChanged: boolean = defineFilterChangeStatus();
+  const handleApplyFilter = () => {
+    const newFilter: TFilters = {
+      brands: JSON.parse(JSON.stringify(filters.brands)),
+      priceMinMax: [...filters.priceMinMax],
+      stockStatus: filters.stockStatus,
+      priceMinMaxLimitation: [...filters.priceMinMaxLimitation],
+    };
+    setIsFilterApplied(true);
+    setAppliedFilters(newFilter);
+  };
+
+  const handleResetFilters = () => {
+    const newBrands: TFilterBrands[] = [];
+    filters.brands.forEach((b) =>
+      newBrands.push({ id: b.id, name: b.name, isSelected: true })
+    );
+    const newFilter: TFilters = {
+      brands: newBrands,
+      priceMinMax: [...filters.priceMinMaxLimitation],
+      stockStatus: "all",
+      priceMinMaxLimitation: [...filters.priceMinMaxLimitation],
+    };
+    setIsFilterApplied(false);
+    setAppliedFilters(newFilter);
+  };
+
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
@@ -176,6 +229,7 @@ const ListPage = () => {
               className={styles.background}
               onClick={() => toggleFiltersWindow(false)}
             />
+
             <div className={styles.filtersWindow}>
               <div className={styles.header}>
                 <h2>Filters</h2>
@@ -249,19 +303,29 @@ const ListPage = () => {
                 </div>
                 <div className={styles.body}>
                   <div className={styles.optionsList}>
-                    {filters.brands.map((brand, index) => (
-                      <CheckBox
-                        key={brand.id}
-                        isChecked={brand.isSelected}
-                        text={brand.name}
-                        onClick={() => handleBrandChange(index)}
-                      />
-                    ))}
+                    {filters.brands.length === 0 ? (
+                      <div>Loading</div>
+                    ) : (
+                      <>
+                        {filters.brands.map((brand, index) => (
+                          <CheckBox
+                            key={brand.id}
+                            isChecked={brand.isSelected}
+                            text={brand.name}
+                            onClick={() => handleBrandChange(index)}
+                          />
+                        ))}
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
               <div className={styles.apply}>
-                <Button text="Apply Changes" disabled={!isFilterChanged()} />
+                <Button
+                  text="Apply Changes"
+                  disabled={isFilterChanged}
+                  onClick={() => handleApplyFilter()}
+                />
               </div>
             </div>
           </div>
@@ -297,6 +361,11 @@ const ListPage = () => {
                     url={"/product/" + product.id}
                   />
                 ))}
+              </div>
+            ) : isFilterApplied ? (
+              <div className={styles.noItemContainer}>
+                <span> There is no product!</span>
+                <Button text="Reset Filters" onClick={handleResetFilters} />
               </div>
             ) : (
               <div className={styles.noItemContainer}>

@@ -10,6 +10,9 @@ interface IProps {
 }
 
 const PriceSlider = ({ sliderValues, minMaxLimit, onChange }: IProps) => {
+  if (sliderValues[0] === 0 && sliderValues[1] === 0) {
+    return <div>Loading</div>;
+  }
   const range = minMaxLimit[1] - minMaxLimit[0];
   const gapValue = range / 20;
 

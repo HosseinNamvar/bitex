@@ -90,11 +90,12 @@ export type TFilters = {
   stockStatus: "all" | "inStock" | "outStock";
   priceMinMax: [number, number];
   priceMinMaxLimitation: [number, number];
-  brands: {
-    id: string;
-    name: string;
-    isSelected: boolean;
-  }[];
+  brands: TFilterBrands[];
+};
+export type TFilterBrands = {
+  id: string;
+  name: string;
+  isSelected: boolean;
 };
 
 export type TListItem = {

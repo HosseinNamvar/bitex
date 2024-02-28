@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { TListItem, TProductPath } from "@/types/product";
+import { TFilters, TListItem, TProductPath } from "@/types/product";
 import { TListSort } from "@/types/list";
 
 const ValidateSort = z.object({
@@ -9,7 +9,11 @@ const ValidateSort = z.object({
   sortType: z.enum(["asc", "desc"]),
 });
 
-export const getList = async (pathList: string[], sortData: TListSort) => {
+export const getList = async (
+  pathList: string[],
+  sortData: TListSort,
+  filters: TFilters
+) => {
   if (!ValidateSort.safeParse(sortData).success)
     return { error: "Invalid Path" };
   if (!pathList || pathList.length > 3 || pathList.length === 0)
@@ -30,7 +34,11 @@ export const getList = async (pathList: string[], sortData: TListSort) => {
   if (!allRelatedCategories || allRelatedCategories.length === 0)
     return { error: "Invalid Path Name" };
 
-  const result = await getProductsByCategories(allRelatedCategories, sortData);
+  const result = await getProductsByCategories(
+    allRelatedCategories,
+    sortData,
+    filters
+  );
   if (!result) return { error: "Can't Find Product!" };
 
   return { products: result, subCategories: subCategories };
@@ -107,12 +115,41 @@ const findCategoryChildren = async (catID: string, numberOfParents: number) => {
 
 const getProductsByCategories = async (
   categories: string[],
-  sortData: TListSort
+  sortData: TListSort,
+  filters: TFilters
 ) => {
+  const brands: string[] | null = filters.brands.length > 0 ? [] : null;
+  if (brands) {
+    filters.brands.forEach((brand) => {
+      if (brand.isSelected) return brands.push(brand.id);
+    });
+  }
+
+  let isAvailable: boolean | null = null;
+  if (filters.stockStatus === "inStock") isAvailable = true;
+  if (filters.stockStatus === "outStock") isAvailable = false;
+
   try {
     const result: TListItem[] | null = await db.product.findMany({
       where: {
-        categoryID: { in: categories },
+        AND: [
+          {
+            categoryID: { in: categories },
+          },
+          isAvailable !== null
+            ? {
+                isAvailable: isAvailable,
+              }
+            : {},
+          brands
+            ? {
+                brandID: { in: brands },
+              }
+            : {},
+          {
+            price: { gt: filters.priceMinMax[0], lte: filters.priceMinMax[1] },
+          },
+        ],
       },
       select: {
         id: true,
