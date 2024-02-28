@@ -25,6 +25,7 @@ import Button from "@/components/UI/button";
 import { getList } from "@/actions/list/listServices";
 import { TListSort } from "@/types/list";
 import { SK_Box } from "@/components/UI/skeleton";
+import NoItem from "@/components/store/listPage/noItem";
 
 const defaultFilters: TFilters = {
   stockStatus: "all",
@@ -45,7 +46,7 @@ const sortData: TListSort[] = [
 
 const ListPage = () => {
   const [sortIndex, setSortIndex] = useState(0);
-  const [productList, setProductList] = useState<TListItem[]>([]);
+  const [productList, setProductList] = useState<TListItem[] | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
   const [filters, setFilters] = useState<TFilters>(defaultFilters);
@@ -66,14 +67,18 @@ const ListPage = () => {
         sortData[sortIndex],
         appliedFilters
       );
-      if (response.products && response.subCategories) {
+      if (
+        response.products &&
+        response.products.length > 0 &&
+        response.subCategories
+      ) {
         const brands = getBrands(response.products).map((m) => {
           return { id: m.id, name: m.name, isSelected: true };
         });
         if (appliedFilters.brands.length === 0) {
           appliedFilters.brands = [...brands];
         }
-        if (!isFilterApplied) {
+        if (!isFilterApplied && response.products) {
           appliedFilters.priceMinMaxLimitation = getPriceLimit(
             response.products
           );
@@ -84,6 +89,14 @@ const ListPage = () => {
         setSubCategories(response.subCategories);
         setProductList(response.products);
       }
+      if (
+        response.products &&
+        response.products.length === 0 &&
+        isFilterApplied
+      ) {
+        setProductList([]);
+      }
+      setIsListLoading(false);
     };
 
     const getBrands = (data: TListItem[]) => {
@@ -203,202 +216,195 @@ const ListPage = () => {
           ))}
         </div>
       </div>
-      <div className="storeContainer flexCol">
-        <div className={styles.mobileFilter}>
-          <button
-            className={styles.filterBtn}
-            onClick={() => toggleFiltersWindow(true)}
-          >
-            FILTERS
-          </button>
-          <DropDownList
-            data={sortDropdownData}
-            width="170px"
-            selectedIndex={sortIndex}
-            onChange={handleSortChange}
-          />
-        </div>
-        <div className={styles.main}>
-          <div
-            className={`${styles.filtersContainer} 
-              ${showFilters ? styles.showMobileFilters : ""}`}
-          >
-            <div
-              className={styles.background}
-              onClick={() => toggleFiltersWindow(false)}
+      {!productList && !isListLoading ? (
+        <NoItem pageHeader={getPageHeader()} />
+      ) : (
+        <div className="storeContainer flexCol">
+          <div className={styles.mobileFilter}>
+            <button
+              className={styles.filterBtn}
+              onClick={() => toggleFiltersWindow(true)}
+            >
+              FILTERS
+            </button>
+            <DropDownList
+              data={sortDropdownData}
+              width="170px"
+              selectedIndex={sortIndex}
+              onChange={handleSortChange}
             />
-
-            <div className={styles.filtersWindow}>
-              <div className={styles.header}>
-                <h2>Filters</h2>
-                <button onClick={() => toggleFiltersWindow(false)}>
-                  <CloseIcon width={12} />
-                </button>
-              </div>
-              {subCategories && subCategories.length > 0 ? (
-                <div className={styles.eachFilter}>
-                  <div className={styles.header}>
-                    <h3>In This Category:</h3>
-                  </div>
-                  <div className={styles.body}>
-                    <div className={styles.subCategories}>
-                      {subCategories.map((cat, index) => (
-                        <Link href={pathName + "/" + cat.url} key={index}>
-                          {cat.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                ""
-              )}
-              <div className={styles.eachFilter}>
-                <div className={styles.header}>
-                  <h3>Availability</h3>
-                </div>
-                <div className={styles.body}>
-                  <CheckBox
-                    text="All"
-                    onClick={() =>
-                      setFilters({ ...filters, stockStatus: "all" })
-                    }
-                    isChecked={filters.stockStatus === "all"}
-                  />
-                  <CheckBox
-                    text="In Stock"
-                    onClick={() =>
-                      setFilters({ ...filters, stockStatus: "inStock" })
-                    }
-                    isChecked={filters.stockStatus === "inStock"}
-                  />
-                  <CheckBox
-                    text="Out of Stock"
-                    onClick={() =>
-                      setFilters({ ...filters, stockStatus: "outStock" })
-                    }
-                    isChecked={filters.stockStatus === "outStock"}
-                  />
-                </div>
-              </div>
-              <div className={styles.eachFilter}>
-                <div className={styles.header}>
-                  <h3>Price</h3>
-                </div>
-                <div className={styles.body}>
-                  <PriceSlider
-                    sliderValues={filters.priceMinMax}
-                    minMaxLimit={filters.priceMinMaxLimitation}
-                    onChange={(value) =>
-                      setFilters({ ...filters, priceMinMax: [...value] })
-                    }
-                  />
-                </div>
-              </div>
-              <div className={styles.eachFilter}>
-                <div className={styles.header}>
-                  <h3>Brand</h3>
-                </div>
-                <div className={styles.body}>
-                  {filters.brands.length === 0 ? (
-                    <div className={styles.loadingBrands}>
-                      <SK_Box width="100%" height="20px" />
-                      <SK_Box width="100%" height="20px" />
-                      <SK_Box width="100%" height="20px" />
-                      <SK_Box width="100%" height="20px" />
-                      <SK_Box width="100%" height="20px" />
-                    </div>
-                  ) : (
-                    <div className={styles.optionsList}>
-                      {filters.brands.map((brand, index) => (
-                        <CheckBox
-                          key={brand.id}
-                          isChecked={brand.isSelected}
-                          text={brand.name}
-                          onClick={() => handleBrandChange(index)}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className={styles.apply}>
-                <Button
-                  text="Apply Changes"
-                  disabled={isFilterChanged}
-                  onClick={() => handleApplyFilter()}
-                />
-              </div>
-            </div>
           </div>
-          <div className={styles.rightCol}>
-            <div className={styles.sortContainer}>
-              <Image
-                src={"/images/icons/sortIcon.svg"}
-                alt="Sort"
-                width={16}
-                height={12}
+          <div className={styles.main}>
+            <div
+              className={`${styles.filtersContainer} 
+              ${showFilters ? styles.showMobileFilters : ""}`}
+            >
+              <div
+                className={styles.background}
+                onClick={() => toggleFiltersWindow(false)}
               />
-              <span>Sort By:</span>
-              <LineList
-                data={sortDropdownData}
-                selectedId={sortIndex}
-                onChange={handleSortChange}
-              />
-            </div>
-            {isListLoading ? (
-              <div className={styles.sklList}>
-                {SKL_Product().map((skl) => skl)}
-              </div>
-            ) : (
-              <>
-                {productList.length > 0 ? (
-                  <div className={styles.listContainer}>
-                    {productList.map((product) => (
-                      <ProductCard
-                        key={product.id}
-                        imgUrl={[
-                          imgBaseUrl + product.images[0],
-                          imgBaseUrl + product.images[1],
-                        ]}
-                        name={product.name}
-                        price={product.price}
-                        isAvailable={product.isAvailable}
-                        dealPrice={product.salePrice || undefined}
-                        specs={product.specialFeatures}
-                        url={"/product/" + product.id}
-                      />
-                    ))}
-                  </div>
-                ) : isFilterApplied ? (
-                  <div className={styles.noItemContainer}>
-                    <span> There is no product!</span>
-                    <Button text="Reset Filters" onClick={handleResetFilters} />
-                  </div>
-                ) : (
-                  <div className={styles.noItemContainer}>
-                    <span>
-                      {" "}
-                      There is no product in {getPageHeader()} category!
-                    </span>
-                    <div>
-                      <span> Please Check These Categories:</span>
-                      <div>
-                        <Link href={"/list/pc-laptops/computer"}>
-                          Computers
-                        </Link>
-                        <Link href={"/list/pc-laptops/laptops"}>Laptop</Link>
-                        <Link href={"/list/smartphones"}>Mobile</Link>
-                        <Link href={"/list/tablets"}>Tablet</Link>
+
+              <div className={styles.filtersWindow}>
+                <div className={styles.header}>
+                  <h2>Filters</h2>
+                  <button onClick={() => toggleFiltersWindow(false)}>
+                    <CloseIcon width={12} />
+                  </button>
+                </div>
+                {subCategories && subCategories.length > 0 ? (
+                  <div className={styles.eachFilter}>
+                    <div className={styles.header}>
+                      <h3>In This Category:</h3>
+                    </div>
+                    <div className={styles.body}>
+                      <div className={styles.subCategories}>
+                        {subCategories.map((cat, index) => (
+                          <Link href={pathName + "/" + cat.url} key={index}>
+                            {cat.label}
+                          </Link>
+                        ))}
                       </div>
                     </div>
                   </div>
+                ) : (
+                  ""
                 )}
-              </>
-            )}
+                <div className={styles.eachFilter}>
+                  <div className={styles.header}>
+                    <h3>Availability</h3>
+                  </div>
+                  <div className={styles.body}>
+                    <CheckBox
+                      text="All"
+                      onClick={() =>
+                        setFilters({ ...filters, stockStatus: "all" })
+                      }
+                      isChecked={filters.stockStatus === "all"}
+                    />
+                    <CheckBox
+                      text="In Stock"
+                      onClick={() =>
+                        setFilters({ ...filters, stockStatus: "inStock" })
+                      }
+                      isChecked={filters.stockStatus === "inStock"}
+                    />
+                    <CheckBox
+                      text="Out of Stock"
+                      onClick={() =>
+                        setFilters({ ...filters, stockStatus: "outStock" })
+                      }
+                      isChecked={filters.stockStatus === "outStock"}
+                    />
+                  </div>
+                </div>
+                <div className={styles.eachFilter}>
+                  <div className={styles.header}>
+                    <h3>Price</h3>
+                  </div>
+                  <div className={styles.body}>
+                    <PriceSlider
+                      sliderValues={filters.priceMinMax}
+                      minMaxLimit={filters.priceMinMaxLimitation}
+                      onChange={(value) =>
+                        setFilters({ ...filters, priceMinMax: [...value] })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className={styles.eachFilter}>
+                  <div className={styles.header}>
+                    <h3>Brand</h3>
+                  </div>
+                  <div className={styles.body}>
+                    {filters.brands.length === 0 ? (
+                      <div className={styles.loadingBrands}>
+                        <SK_Box width="100%" height="20px" />
+                        <SK_Box width="100%" height="20px" />
+                        <SK_Box width="100%" height="20px" />
+                        <SK_Box width="100%" height="20px" />
+                        <SK_Box width="100%" height="20px" />
+                      </div>
+                    ) : (
+                      <div className={styles.optionsList}>
+                        {filters.brands.map((brand, index) => (
+                          <CheckBox
+                            key={brand.id}
+                            isChecked={brand.isSelected}
+                            text={brand.name}
+                            onClick={() => handleBrandChange(index)}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.apply}>
+                  <Button
+                    text="Apply Changes"
+                    disabled={isFilterChanged}
+                    onClick={() => handleApplyFilter()}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={styles.rightCol}>
+              <div className={styles.sortContainer}>
+                <Image
+                  src={"/images/icons/sortIcon.svg"}
+                  alt="Sort"
+                  width={16}
+                  height={12}
+                />
+                <span>Sort By:</span>
+                <LineList
+                  data={sortDropdownData}
+                  selectedId={sortIndex}
+                  onChange={handleSortChange}
+                />
+              </div>
+              {isListLoading ? (
+                <div className={styles.sklList}>
+                  {SKL_Product().map((skl) => skl)}
+                </div>
+              ) : (
+                <>
+                  {productList && productList.length > 0 ? (
+                    <div className={styles.listContainer}>
+                      {productList.map((product) => (
+                        <ProductCard
+                          key={product.id}
+                          imgUrl={[
+                            imgBaseUrl + product.images[0],
+                            imgBaseUrl + product.images[1],
+                          ]}
+                          name={product.name}
+                          price={product.price}
+                          isAvailable={product.isAvailable}
+                          dealPrice={product.salePrice || undefined}
+                          specs={product.specialFeatures}
+                          url={"/product/" + product.id}
+                        />
+                      ))}
+                    </div>
+                  ) : productList &&
+                    productList.length === 0 &&
+                    isFilterApplied ? (
+                    <div className={styles.noItemContainer}>
+                      <span> There is no product!</span>
+                      <Button
+                        text="Reset Filters"
+                        onClick={handleResetFilters}
+                      />
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
