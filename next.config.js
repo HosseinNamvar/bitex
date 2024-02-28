@@ -5,7 +5,13 @@ const nextConfig = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+      },
+    ],
   },
   env: {
     IMG_URL: process.env.CLOUDINARY_URL,
