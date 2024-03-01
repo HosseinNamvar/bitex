@@ -242,6 +242,18 @@
     }
   }
 }
+.noItemContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  min-height: 400px;
+  gap: 16px;
+  > button {
+    width: 200px;
+  }
+}
 
 .sklList {
   display: flex;
