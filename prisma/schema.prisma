@@ -98,6 +98,19 @@ model Brand {
   products Product[]
 }
 
+model PageVisit {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  time     DateTime? @default(now())
+  pageType PageType
+  pageID   String    @db.ObjectId
+}
+
+enum PageType {
+  MAIN
+  LIST
+  PRODUCT
+}
+
 // ---------------------- USER MANAGEMENT SECTION ---------------------- 
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
