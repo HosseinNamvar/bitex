@@ -1,8 +1,10 @@
 "use client";
-import { CloseIcon } from "@/components/icons/svgIcons";
 import styles from "./filters.module.scss";
-import { TFilters, TProductPath } from "@/types/product";
+
 import Link from "next/link";
+
+import { CloseIcon } from "@/components/icons/svgIcons";
+import { TFilters, TProductPath } from "@/types/product";
 import CheckBox from "@/components/UI/checkBox";
 import PriceSlider from "@/components/UI/priceSlider";
 import { SK_Box } from "@/components/UI/skeleton";
