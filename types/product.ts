@@ -30,6 +30,7 @@ export type TProductOption = {
 export type TProductBoard = {
   id: string;
   name: string;
+  isAvailable: boolean;
   shortDesc: string;
   price: number;
   dealDate?: Date;

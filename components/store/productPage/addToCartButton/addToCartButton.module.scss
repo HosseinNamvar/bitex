@@ -23,6 +23,13 @@
   &:active {
     background-color: #dc4e44;
   }
+  &:disabled {
+    cursor: default;
+    opacity: 0.4;
+    &:hover {
+      background-color: #fc4335;
+    }
+  }
 }
 
 @media (max-width: 480px) {

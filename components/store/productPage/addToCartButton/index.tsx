@@ -8,10 +8,11 @@ import { TCartItem } from "@/types/shoppingCart";
 import { add } from "@/store/shoppingCart";
 
 interface IProps {
+  disabled: boolean;
   cartItemData: TCartItem;
 }
 
-const AddToCartButton = ({ cartItemData }: IProps) => {
+const AddToCartButton = ({ cartItemData, disabled }: IProps) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -20,9 +21,19 @@ const AddToCartButton = ({ cartItemData }: IProps) => {
   };
 
   return (
-    <button className={styles.addToCart} onClick={() => handleAddToCart()}>
-      <ShoppingIconFill width={16} />
-      Add to Cart
+    <button
+      disabled={disabled}
+      className={styles.addToCart}
+      onClick={() => handleAddToCart()}
+    >
+      {disabled ? (
+        "not Available"
+      ) : (
+        <>
+          <ShoppingIconFill width={16} />
+          Add to Cart
+        </>
+      )}
     </button>
   );
 };

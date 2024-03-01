@@ -70,6 +70,7 @@ const ProductPage = () => {
               <ProductBoard
                 boardData={{
                   id: productInfo.id,
+                  isAvailable: productInfo.isAvailable,
                   defaultQuantity: 1,
                   name: productInfo.name,
                   price: productInfo.price,

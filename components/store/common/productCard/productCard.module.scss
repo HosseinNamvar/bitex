@@ -74,12 +74,6 @@
     border-bottom: 1px solid white;
     margin: 10px 0 8px 8px;
     transition: all 0.3s;
-
-    &:hover {
-      font-weight: 500;
-      color: nth($color-light, 10);
-      border-bottom-color: nth($color-light, 9);
-    }
   }
 
   .specWrapper {

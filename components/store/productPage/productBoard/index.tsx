@@ -15,6 +15,7 @@ const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
   const {
     name,
     id,
+    isAvailable,
     specialFeatures,
     price,
     shortDesc,
@@ -88,7 +89,7 @@ const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
       {/* ----------------- ADD TO CART SECTION ----------------- */}
       <section className={styles.addToCartSection}>
         <Quantity onChange={handleQuantityChange} quantity={quantity} />
-        <AddToCartButton cartItemData={cartItemData} />
+        <AddToCartButton cartItemData={cartItemData} disabled={!isAvailable} />
       </section>
     </div>
   );

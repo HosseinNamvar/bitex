@@ -14,13 +14,14 @@ const ProductCard = ({
   staticWidth = false,
 }: TProductCard) => {
   return (
-    <div
+    <Link
+      href={url}
       className={`${styles.productCard} ${staticWidth && styles.staticWidth} `}
     >
       {!isAvailable && (
-        <div className={styles.outOfStock}>
+        <Link className={styles.outOfStock} href={url}>
           <span> Out of Stock</span>
-        </div>
+        </Link>
       )}
       <Link href={url} className={styles.imageWrapper}>
         <Image src={imgUrl[0]} alt={name} fill sizes="(max-width: 240px)" />
@@ -68,7 +69,7 @@ const ProductCard = ({
           <button className={styles.addFavorite} />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
