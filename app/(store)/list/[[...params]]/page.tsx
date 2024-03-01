@@ -35,8 +35,8 @@ const defaultFilters: TFilters = {
 const imgBaseUrl = process.env.IMG_URL;
 
 const sortData: TListSort[] = [
-  { sortName: "id", sortType: "asc" },
   { sortName: "id", sortType: "desc" },
+  { sortName: "id", sortType: "asc" },
   { sortName: "price", sortType: "desc" },
   { sortName: "price", sortType: "asc" },
   { sortName: "name", sortType: "asc" },
