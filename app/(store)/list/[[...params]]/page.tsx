@@ -4,7 +4,7 @@ import styles from "./list.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { redirect, useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 import ProductCard from "@/components/store/common/productCard";
 import DropDownList from "@/components/UI/dropDown";
@@ -43,6 +43,7 @@ const sortData: TListSort[] = [
 ];
 
 const ListPage = () => {
+  const router = useRouter();
   const [sortIndex, setSortIndex] = useState(0);
   const [productList, setProductList] = useState<TListItem[] | null>(null);
   const [showFilters, setShowFilters] = useState(false);
@@ -65,6 +66,7 @@ const ListPage = () => {
         sortData[sortIndex],
         appliedFilters
       );
+      if (response.error) router.push("/");
       if (
         response.products &&
         response.products.length > 0 &&
@@ -121,9 +123,9 @@ const ListPage = () => {
     };
 
     getProductsList();
-  }, [pathName, sortIndex, appliedFilters, isFilterApplied]);
+  }, [pathName, sortIndex, appliedFilters, isFilterApplied, router]);
 
-  if (!params || params.length <= 0) redirect("/");
+  if (!params || params.length <= 0) router.push("/");
 
   const handleSortChange = (newIndex: number) => {
     setSortIndex(newIndex);

@@ -3,7 +3,7 @@ import styles from "./productPage.module.scss";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { redirect, useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import ProductCard from "@/components/store/common/productCard";
 import { TopProducts } from "@/data/homepageData";
@@ -18,20 +18,21 @@ import Image from "next/image";
 import { SK_Box } from "@/components/UI/skeleton";
 
 const ProductPage = () => {
+  const router = useRouter();
   const { productId } = useParams<{ productId: string[] }>();
   const [productInfo, setProductInfo] = useState<
     TProductPageInfo | null | undefined
   >(null);
-  if (!productId) redirect("/");
+  if (!productId) router.push("/");
 
   useEffect(() => {
     const getProductFromDB = async () => {
       const response = await getOneProduct(productId.toString());
-      if (response.error) redirect("/");
+      if (response.error) router.push("/");
       setProductInfo(response.res);
     };
     getProductFromDB();
-  }, [productId]);
+  }, [productId, router]);
 
   if (productInfo === undefined) return "";
   let fullPath = "";
