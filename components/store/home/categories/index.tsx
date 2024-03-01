@@ -38,7 +38,7 @@ const HomeCategoryList = () => {
 const Skeletons = () => {
   const skeletons: React.ReactNode[] = [];
   for (let i = 0; i <= 10; i++) {
-    skeletons.push(<SK_Box width="100%" height="16px" />);
+    skeletons.push(<SK_Box key={i} width="100%" height="16px" />);
   }
   return skeletons;
 };
