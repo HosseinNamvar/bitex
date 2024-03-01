@@ -49,8 +49,10 @@ const ListPage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
   const [filters, setFilters] = useState<TFilters>(defaultFilters);
-  const [appliedFilters, setAppliedFilters] =
-    useState<TFilters>(defaultFilters);
+  const [appliedFilters, setAppliedFilters] = useState<TFilters>({
+    ...defaultFilters,
+    priceMinMax: [...defaultFilters.priceMinMax],
+  });
   const { params } = useParams<{ params: string[] }>();
   const pathName = usePathname();
   const [isListLoading, setIsListLoading] = useState(true);
