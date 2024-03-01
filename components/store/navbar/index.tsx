@@ -8,6 +8,7 @@ import NavBarFavorite from "./navFavorite";
 import NavBarShopping from "./navShopping";
 import NavBarCategory from "./navCategory";
 import { useEffect, useState } from "react";
+import AddVisit from "../common/addVisit";
 
 const StoreNavBar = () => {
   const [hideNavbar, setHideNavbar] = useState(false);
@@ -118,6 +119,7 @@ const StoreNavBar = () => {
           </div>
         </div>
       </section>
+      <AddVisit />
     </nav>
   );
 };

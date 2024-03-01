@@ -1,27 +1,29 @@
 "use server";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { PageVisit } from "@prisma/client";
+import { TAddPageVisit } from "@/types/common";
 
 const ValidatePageVisit = z.object({
   pageType: z.enum(["MAIN", "LIST", "PRODUCT"]),
-  pageID: z.string().min(6),
 });
 
-export const addVisit = async (data: PageVisit) => {
+export const addVisit = async (data: TAddPageVisit) => {
+  //   if (process.env.NODE_ENV !== "production") return { error: "Invalid ENV!" };
+
   if (!ValidatePageVisit.safeParse(data).success)
     return { error: "Invalid Data!" };
 
   try {
     const result = await db.pageVisit.create({
       data: {
-        pageID: data.pageID,
         pageType: data.pageType,
+        pagePath: data.pagePath,
+        productID: data.productID,
       },
     });
 
     if (!result) return { error: "Invalid Data!" };
-    return result;
+    return { res: result };
   } catch (error) {
     return { error: JSON.stringify(error) };
   }
