@@ -67,13 +67,11 @@
     }
   }
 
-  > a span {
+  > .title {
     font-size: 1.6rem;
     display: inline-block;
     color: nth($color-light, 8);
-    border-bottom: 1px solid white;
     margin: 10px 0 8px 8px;
-    transition: all 0.3s;
   }
 
   .specWrapper {
