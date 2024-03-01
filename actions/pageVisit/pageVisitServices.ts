@@ -8,7 +8,7 @@ const ValidatePageVisit = z.object({
 });
 
 export const addVisit = async (data: TAddPageVisit) => {
-  //   if (process.env.NODE_ENV !== "production") return { error: "Invalid ENV!" };
+  if (process.env.NODE_ENV !== "production") return { error: "Invalid ENV!" };
 
   if (!ValidatePageVisit.safeParse(data).success)
     return { error: "Invalid Data!" };
@@ -23,6 +23,32 @@ export const addVisit = async (data: TAddPageVisit) => {
     });
 
     if (!result) return { error: "Invalid Data!" };
+    return { res: result };
+  } catch (error) {
+    return { error: JSON.stringify(error) };
+  }
+};
+
+export const getTrafficReport = async () => {
+  try {
+    const result = await db.pageVisit.findMany({
+      include: {
+        product: {
+          select: {
+            name: true,
+            category: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        id: "desc",
+      },
+    });
+    if (!result) return { error: "Can not read Data!" };
     return { res: result };
   } catch (error) {
     return { error: JSON.stringify(error) };
