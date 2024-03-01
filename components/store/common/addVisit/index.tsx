@@ -24,7 +24,6 @@ const AddVisit = () => {
         data.productID = pathArr[pathArr.length - 1];
       }
       const response = await addVisit(data);
-      console.log(response);
     };
     addingVisit();
   }, [pathName]);
