@@ -26,7 +26,6 @@ const NavBarCategory = ({ isNavbarVisible: isNavbarHide }: IProps) => {
     const getCategoriesDB = async () => {
       const result = await getAllCategoriesJSON();
       if (result.res) {
-        console.log(result.res);
         setCategories(result.res);
       }
     };
