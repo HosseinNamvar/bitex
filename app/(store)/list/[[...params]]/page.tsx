@@ -99,21 +99,6 @@ const ListPage = () => {
       setIsListLoading(false);
     };
 
-    const getPriceLimit = (data: TListItem[]) => {
-      const priceLimit: [number, number] = [data[0].price, data[0].price];
-      data.forEach((p) => {
-        if (p.price < priceLimit[0]) priceLimit[0] = p.price;
-        if (p.price > priceLimit[1]) priceLimit[1] = p.price;
-      });
-      priceLimit[0] = Math.floor(priceLimit[0]);
-      priceLimit[0] = priceLimit[0] - (priceLimit[0] % 100);
-
-      priceLimit[1] = Math.ceil(priceLimit[1]);
-      priceLimit[1] = priceLimit[1] + (100 - (priceLimit[1] % 100));
-
-      return priceLimit;
-    };
-
     getProductsList();
   }, [pathName, sortIndex, appliedFilters, isFilterApplied, router]);
 
@@ -319,7 +304,7 @@ const SKL_Product = (): React.ReactNode[] => {
   }
   return nodes;
 };
-
+// -------- GET UNIQUE BRAND LIST FROM PRODUCT LIST --------
 const getBrandsFromProducts = (productList: TListItem[]) => {
   return productList.map((product) => product.brand);
 };
@@ -337,11 +322,35 @@ const addIsSelectedValueToBrands = (brandList: TBrand[]) => {
     isSelected: true,
   }));
 };
-
 const generateBrands = (productList: TListItem[]) => {
   const listOfProductsBrand: TBrand[] = getBrandsFromProducts(productList);
   const uniqueBrandList = removeDuplicatedBrands(listOfProductsBrand);
   return addIsSelectedValueToBrands(uniqueBrandList);
+};
+
+// -------- GET PRICE LIMIT FROM PRODUCT LIST --------
+const getPricesFromProducts = (productList: TListItem[]) => {
+  return productList.map((product) => product.price);
+};
+const findMinMax = (array: number[]) => {
+  const minMax: [number, number] = [Math.min(...array), Math.max(...array)];
+  return minMax;
+};
+const roundMaxMinPricesWithMargin = (minMax: [number, number]) => {
+  const roundedPrices: [number, number] = [...minMax];
+  roundedPrices[0] = Math.floor(roundedPrices[0]);
+  roundedPrices[0] = roundedPrices[0] - (roundedPrices[0] % 100);
+
+  roundedPrices[1] = Math.ceil(roundedPrices[1]);
+  roundedPrices[1] = roundedPrices[1] + (100 - (roundedPrices[1] % 100));
+  return roundedPrices;
+};
+const getPriceLimit = (productList: TListItem[]) => {
+  const allProductsPrices: number[] = getPricesFromProducts(productList);
+  const minMaxValues = findMinMax(allProductsPrices);
+  const roundedPrices = roundMaxMinPricesWithMargin(minMaxValues);
+
+  return roundedPrices;
 };
 
 export default ListPage;
