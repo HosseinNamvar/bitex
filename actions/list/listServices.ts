@@ -10,16 +10,18 @@ const ValidateSort = z.object({
 });
 
 export const getList = async (
-  pathList: string[],
+  path: string,
   sortData: TListSort,
   filters: TFilters
 ) => {
   if (!ValidateSort.safeParse(sortData).success)
     return { error: "Invalid Path" };
-  if (!pathList || pathList.length > 3 || pathList.length === 0)
+  if (!path || path === "") return { error: "Invalid Path" };
+  const pathArray = pathToArray(path);
+  if (!pathArray || pathArray.length > 3 || pathArray.length === 0)
     return { error: "Invalid Path" };
 
-  const categoryID = await findCategoryFromPathArray(pathList);
+  const categoryID = await findCategoryFromPathArray(pathArray);
   if (categoryID === "") return { error: "Invalid Path Name" };
 
   const subCategories: TProductPath[] | null = await getSubCategories(
@@ -29,7 +31,7 @@ export const getList = async (
 
   const allRelatedCategories = await findCategoryChildren(
     categoryID,
-    pathList.length
+    pathArray.length
   );
   if (!allRelatedCategories || allRelatedCategories.length === 0)
     return { error: "Invalid Path Name" };
@@ -182,4 +184,10 @@ const getProductsByCategories = async (
   } catch (error) {
     return null;
   }
+};
+
+const pathToArray = (path: string) => {
+  const pathWithoutList = path.split("/list/")[1];
+  const pathArray = pathWithoutList.split("/");
+  return pathArray;
 };

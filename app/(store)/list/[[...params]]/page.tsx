@@ -62,9 +62,8 @@ const ListPage = () => {
   useEffect(() => {
     const getProductsList = async () => {
       setIsListLoading(true);
-      const pathArray = pathToArray(pathName);
       const response = await getList(
-        pathArray,
+        pathName,
         sortData[sortIndex],
         appliedFilters
       );
@@ -328,12 +327,6 @@ const SKL_Product = (): React.ReactNode[] => {
     );
   }
   return nodes;
-};
-
-const pathToArray = (path: string) => {
-  const pathWithoutList = path.split("/list/")[1];
-  const pathArray = pathWithoutList.split("/");
-  return pathArray;
 };
 
 export default ListPage;
