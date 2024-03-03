@@ -72,7 +72,7 @@ enum OptionSetType {
 
 model Product {
   id              String        @id @default(auto()) @map("_id") @db.ObjectId
-  name            String        @unique
+  name            String
   isAvailable     Boolean       @default(true)
   desc            String?
   specialFeatures String[]
