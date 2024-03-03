@@ -73,9 +73,12 @@ const ListPage = () => {
         response.products.length > 0 &&
         response.subCategories
       ) {
-        const brands = getBrands(response.products).map((m) => {
-          return { id: m.id, name: m.name, isSelected: true };
-        });
+        const listOfProductsBrand: TBrand[] = retrieveBrandsFromProducts(
+          response.products
+        );
+        const uniqueBrandList = removeDuplicatedBrands(listOfProductsBrand);
+        const brands = addIsSelectedValueToBrands(uniqueBrandList);
+
         if (appliedFilters.brands.length === 0) {
           appliedFilters.brands = [...brands];
         }
@@ -100,14 +103,6 @@ const ListPage = () => {
       setIsListLoading(false);
     };
 
-    const getBrands = (data: TListItem[]) => {
-      const brands: TBrand[] = [];
-      data.forEach((p) => {
-        const isFind = brands.findIndex((brand) => p.brand.id === brand.id);
-        if (isFind === -1) brands.push({ id: p.brand.id, name: p.brand.name });
-      });
-      return brands;
-    };
     const getPriceLimit = (data: TListItem[]) => {
       const priceLimit: [number, number] = [data[0].price, data[0].price];
       data.forEach((p) => {
@@ -327,6 +322,24 @@ const SKL_Product = (): React.ReactNode[] => {
     );
   }
   return nodes;
+};
+
+const retrieveBrandsFromProducts = (productList: TListItem[]) => {
+  return productList.map((product) => product.brand);
+};
+const removeDuplicatedBrands = (list: TBrand[]) => {
+  const newList: TBrand[] = [];
+  list.forEach((listItem) => {
+    const isFind = newList.findIndex((brand) => listItem.id === brand.id);
+    if (isFind === -1) newList.push({ id: listItem.id, name: listItem.name });
+  });
+  return newList;
+};
+const addIsSelectedValueToBrands = (brandList: TBrand[]) => {
+  return brandList.map((b) => ({
+    ...b,
+    isSelected: true,
+  }));
 };
 
 export default ListPage;
