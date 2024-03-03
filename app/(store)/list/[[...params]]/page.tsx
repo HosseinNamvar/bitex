@@ -73,11 +73,7 @@ const ListPage = () => {
         response.products.length > 0 &&
         response.subCategories
       ) {
-        const listOfProductsBrand: TBrand[] = retrieveBrandsFromProducts(
-          response.products
-        );
-        const uniqueBrandList = removeDuplicatedBrands(listOfProductsBrand);
-        const brands = addIsSelectedValueToBrands(uniqueBrandList);
+        const brands = generateBrands(response.products);
 
         if (appliedFilters.brands.length === 0) {
           appliedFilters.brands = [...brands];
@@ -324,7 +320,7 @@ const SKL_Product = (): React.ReactNode[] => {
   return nodes;
 };
 
-const retrieveBrandsFromProducts = (productList: TListItem[]) => {
+const getBrandsFromProducts = (productList: TListItem[]) => {
   return productList.map((product) => product.brand);
 };
 const removeDuplicatedBrands = (list: TBrand[]) => {
@@ -340,6 +336,12 @@ const addIsSelectedValueToBrands = (brandList: TBrand[]) => {
     ...b,
     isSelected: true,
   }));
+};
+
+const generateBrands = (productList: TListItem[]) => {
+  const listOfProductsBrand: TBrand[] = getBrandsFromProducts(productList);
+  const uniqueBrandList = removeDuplicatedBrands(listOfProductsBrand);
+  return addIsSelectedValueToBrands(uniqueBrandList);
 };
 
 export default ListPage;
