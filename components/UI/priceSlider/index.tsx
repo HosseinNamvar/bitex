@@ -1,4 +1,5 @@
 "use client";
+import { TPageStatus } from "@/types/list";
 import { SK_Box } from "../skeleton";
 import styles from "./priceSlider.module.scss";
 
@@ -7,16 +8,28 @@ type TValue = [number, number];
 interface IProps {
   sliderValues: [number, number];
   minMaxLimit: [number, number];
+  pageStatus: TPageStatus;
   onChange: (value: TValue) => void;
 }
 
-const PriceSlider = ({ sliderValues, minMaxLimit, onChange }: IProps) => {
-  if (sliderValues[0] === 0 && sliderValues[1] === 0) {
+const PriceSlider = ({
+  sliderValues,
+  minMaxLimit,
+  pageStatus,
+  onChange,
+}: IProps) => {
+  if (pageStatus === "pageLoading") {
     return (
       <div className={styles.loading} style={{ alignItems: "flex-start" }}>
         <SK_Box width="100%" height="30px" />
         <SK_Box width="60%" height="20px" />
       </div>
+    );
+  }
+
+  if (pageStatus === "categoryHasNoProduct") {
+    return (
+      <div className={styles.loading} style={{ alignItems: "flex-start" }} />
     );
   }
   const range = minMaxLimit[1] - minMaxLimit[0];

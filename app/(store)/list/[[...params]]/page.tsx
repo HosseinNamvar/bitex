@@ -20,7 +20,7 @@ import {
 } from "@/types/product";
 import Button from "@/components/UI/button";
 import { getList } from "@/actions/list/listServices";
-import { TListSort } from "@/types/list";
+import { TListSort, TPageStatus } from "@/types/list";
 import { SK_Box } from "@/components/UI/skeleton";
 import NoItem from "@/components/store/listPage/noItem";
 import Filters from "@/components/store/listPage/filters";
@@ -44,8 +44,13 @@ const sortData: TListSort[] = [
 
 const ListPage = () => {
   const router = useRouter();
+  const { params } = useParams<{ params: string[] }>();
+  const pathName = usePathname();
+
+  const [productList, setProductList] = useState<TListItem[]>([]);
+  const [subCategories, setSubCategories] = useState<TProductPath[]>([]);
+
   const [sortIndex, setSortIndex] = useState(0);
-  const [productList, setProductList] = useState<TListItem[] | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
   const [filters, setFilters] = useState<TFilters>(defaultFilters);
@@ -53,54 +58,37 @@ const ListPage = () => {
     ...defaultFilters,
     priceMinMax: [...defaultFilters.priceMinMax],
   });
-  const { params } = useParams<{ params: string[] }>();
-  const pathName = usePathname();
-  const [isListLoading, setIsListLoading] = useState(true);
 
-  const [subCategories, setSubCategories] = useState<TProductPath[]>([]);
+  const [isListLoading, setIsListLoading] = useState(true);
 
   useEffect(() => {
     const getProductsList = async () => {
       setIsListLoading(true);
+
       const response = await getList(
         pathName,
         sortData[sortIndex],
         appliedFilters
       );
-      if (response.error) router.push("/");
-      if (
-        response.products &&
-        response.products.length > 0 &&
-        response.subCategories
-      ) {
-        const brands = generateBrands(response.products);
+      if (response.error || !response.products || !response.subCategories)
+        return router.push("/");
 
-        if (appliedFilters.brands.length === 0) {
-          appliedFilters.brands = [...brands];
-        }
-        if (!isFilterApplied && response.products) {
-          appliedFilters.priceMinMaxLimitation = getPriceLimit(
-            response.products
-          );
-          appliedFilters.priceMinMax = appliedFilters.priceMinMaxLimitation;
-        }
-        setIsListLoading(false);
+      if (isFilterApplied) {
         setFilters(appliedFilters);
+        setProductList(response.products);
+        setIsListLoading(false);
+      } else {
+        const filtersFromDB = getFiltersFromProductList(response.products);
+        setFilters(filtersFromDB);
         setSubCategories(response.subCategories);
         setProductList(response.products);
+
+        setIsListLoading(false);
       }
-      if (
-        response.products &&
-        response.products.length === 0 &&
-        isFilterApplied
-      ) {
-        setProductList([]);
-      }
-      setIsListLoading(false);
     };
 
     getProductsList();
-  }, [pathName, sortIndex, appliedFilters, isFilterApplied, router]);
+  }, [router, pathName, sortIndex, appliedFilters, isFilterApplied]);
 
   if (!params || params.length <= 0) router.push("/");
 
@@ -145,6 +133,7 @@ const ListPage = () => {
       JSON.stringify(appliedFilters.brands) !== JSON.stringify(filters.brands)
     )
       return false;
+
     if (
       JSON.stringify(appliedFilters.priceMinMax) !==
       JSON.stringify(filters.priceMinMax)
@@ -180,6 +169,55 @@ const ListPage = () => {
     setAppliedFilters(newFilter);
   };
 
+  const getPageStatus = (): TPageStatus => {
+    if (isListLoading) {
+      if (isFilterApplied) return "filterLoading";
+      return "pageLoading";
+    }
+
+    if (productList.length > 0) return "filledProductList";
+
+    if (isFilterApplied) return "filterHasNoProduct";
+
+    return "categoryHasNoProduct";
+  };
+  const currentPageStatus: TPageStatus = getPageStatus();
+
+  const pageStatusJSX = {
+    pageLoading: (
+      <div className={styles.sklList}>{SKL_Product().map((skl) => skl)}</div>
+    ),
+    filterLoading: (
+      <div className={styles.sklList}>{SKL_Product().map((skl) => skl)}</div>
+    ),
+    filledProductList: (
+      <div className={styles.listContainer}>
+        {productList.map((product) => (
+          <ProductCard
+            key={product.id}
+            imgUrl={[
+              imgBaseUrl + product.images[0],
+              imgBaseUrl + product.images[1],
+            ]}
+            name={product.name}
+            price={product.price}
+            isAvailable={product.isAvailable}
+            dealPrice={product.salePrice || undefined}
+            specs={product.specialFeatures}
+            url={"/product/" + product.id}
+          />
+        ))}
+      </div>
+    ),
+    categoryHasNoProduct: <NoItem pageHeader={getPageHeader()} />,
+    filterHasNoProduct: (
+      <div className={styles.noItemContainer}>
+        <span> There is no product!</span>
+        <Button text="Reset Filters" onClick={handleResetFilters} />
+      </div>
+    ),
+  }[currentPageStatus];
+
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
@@ -193,97 +231,58 @@ const ListPage = () => {
           ))}
         </div>
       </div>
-      {!productList && !isListLoading ? (
-        <NoItem pageHeader={getPageHeader()} />
-      ) : (
-        <div className="storeContainer flexCol">
-          <div className={styles.mobileFilter}>
-            <button
-              className={styles.filterBtn}
-              onClick={() => toggleFiltersWindow(true)}
-            >
-              FILTERS
-            </button>
-            <DropDownList
-              data={sortDropdownData}
-              width="170px"
-              selectedIndex={sortIndex}
-              onChange={handleSortChange}
-            />
-          </div>
-          <div className={styles.main}>
-            <Filters
-              onToggleWindow={toggleFiltersWindow}
-              showFilters={showFilters}
-              subCategories={subCategories}
-              filters={filters}
-              onFilterChange={setFilters}
-              pathName={pathName}
-              onBrandChange={handleBrandChange}
-              isFilterChanged={isFilterChanged}
-              onApplyFilter={handleApplyFilter}
-            />
-            <div className={styles.rightCol}>
-              <div className={styles.sortContainer}>
-                <Image
-                  src={"/images/icons/sortIcon.svg"}
-                  alt="Sort"
-                  width={16}
-                  height={12}
-                />
-                <span>Sort By:</span>
-                <LineList
-                  data={sortDropdownData}
-                  selectedId={sortIndex}
-                  onChange={handleSortChange}
-                />
-              </div>
-              {isListLoading ? (
-                <div className={styles.sklList}>
-                  {SKL_Product().map((skl) => skl)}
-                </div>
-              ) : (
-                <>
-                  {productList && productList.length > 0 ? (
-                    <div className={styles.listContainer}>
-                      {productList.map((product) => (
-                        <ProductCard
-                          key={product.id}
-                          imgUrl={[
-                            imgBaseUrl + product.images[0],
-                            imgBaseUrl + product.images[1],
-                          ]}
-                          name={product.name}
-                          price={product.price}
-                          isAvailable={product.isAvailable}
-                          dealPrice={product.salePrice || undefined}
-                          specs={product.specialFeatures}
-                          url={"/product/" + product.id}
-                        />
-                      ))}
-                    </div>
-                  ) : productList &&
-                    productList.length === 0 &&
-                    isFilterApplied ? (
-                    <div className={styles.noItemContainer}>
-                      <span> There is no product!</span>
-                      <Button
-                        text="Reset Filters"
-                        onClick={handleResetFilters}
-                      />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </>
-              )}
+      <div className="storeContainer flexCol">
+        <div className={styles.mobileFilter}>
+          <button
+            className={styles.filterBtn}
+            onClick={() => toggleFiltersWindow(true)}
+          >
+            FILTERS
+          </button>
+          <DropDownList
+            data={sortDropdownData}
+            width="170px"
+            selectedIndex={sortIndex}
+            onChange={handleSortChange}
+          />
+        </div>
+        <div className={styles.main}>
+          <Filters
+            onToggleWindow={toggleFiltersWindow}
+            showFilters={showFilters}
+            subCategories={subCategories}
+            filters={filters}
+            onFilterChange={setFilters}
+            pathName={pathName}
+            onBrandChange={handleBrandChange}
+            isFilterChanged={isFilterChanged}
+            onApplyFilter={handleApplyFilter}
+            pageStatus={currentPageStatus}
+          />
+          <div className={styles.rightCol}>
+            <div className={styles.sortContainer}>
+              <Image
+                src={"/images/icons/sortIcon.svg"}
+                alt="Sort"
+                width={16}
+                height={12}
+              />
+              <span>Sort By:</span>
+              <LineList
+                data={sortDropdownData}
+                selectedId={sortIndex}
+                onChange={handleSortChange}
+              />
             </div>
+            {pageStatusJSX}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
+
+export default ListPage;
 
 const SKL_Product = (): React.ReactNode[] => {
   const nodes: React.ReactNode[] = [];
@@ -304,6 +303,7 @@ const SKL_Product = (): React.ReactNode[] => {
   }
   return nodes;
 };
+
 // -------- GET UNIQUE BRAND LIST FROM PRODUCT LIST --------
 const getBrandsFromProducts = (productList: TListItem[]) => {
   return productList.map((product) => product.brand);
@@ -353,4 +353,13 @@ const getPriceLimit = (productList: TListItem[]) => {
   return roundedPrices;
 };
 
-export default ListPage;
+// -------- GET INITIAL FILTERS --------
+const getFiltersFromProductList = (productsList: TListItem[]) => {
+  const newFilter: TFilters = {
+    brands: generateBrands(productsList),
+    priceMinMax: getPriceLimit(productsList),
+    priceMinMaxLimitation: getPriceLimit(productsList),
+    stockStatus: "all",
+  };
+  return newFilter;
+};

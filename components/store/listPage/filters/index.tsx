@@ -9,6 +9,7 @@ import CheckBox from "@/components/UI/checkBox";
 import PriceSlider from "@/components/UI/priceSlider";
 import { SK_Box } from "@/components/UI/skeleton";
 import Button from "@/components/UI/button";
+import { TPageStatus } from "@/types/list";
 
 interface IProps {
   showFilters: boolean;
@@ -16,6 +17,7 @@ interface IProps {
   pathName: string;
   filters: TFilters;
   isFilterChanged: boolean;
+  pageStatus: TPageStatus;
   onToggleWindow: (value: boolean) => void;
   onFilterChange: (value: TFilters) => void;
   onBrandChange: (value: number) => void;
@@ -28,6 +30,7 @@ const Filters = ({
   filters,
   pathName,
   isFilterChanged,
+  pageStatus,
   onToggleWindow,
   onFilterChange,
   onBrandChange,
@@ -36,7 +39,7 @@ const Filters = ({
   return (
     <div
       className={`${styles.filtersContainer} 
-  ${showFilters ? styles.showMobileFilters : ""}`}
+                  ${showFilters ? styles.showMobileFilters : ""}`}
     >
       <div
         className={styles.background}
@@ -102,6 +105,7 @@ const Filters = ({
             <PriceSlider
               sliderValues={filters.priceMinMax}
               minMaxLimit={filters.priceMinMaxLimitation}
+              pageStatus={pageStatus}
               onChange={(value) =>
                 onFilterChange({ ...filters, priceMinMax: [...value] })
               }
@@ -110,10 +114,10 @@ const Filters = ({
         </div>
         <div className={styles.eachFilter}>
           <div className={styles.header}>
-            <h3>Brand</h3>
+            <h3>Brands</h3>
           </div>
           <div className={styles.body}>
-            {filters.brands.length === 0 ? (
+            {pageStatus === "pageLoading" ? (
               <div className={styles.loadingBrands}>
                 <SK_Box width="100%" height="20px" />
                 <SK_Box width="100%" height="20px" />
@@ -121,6 +125,8 @@ const Filters = ({
                 <SK_Box width="100%" height="20px" />
                 <SK_Box width="100%" height="20px" />
               </div>
+            ) : pageStatus === "categoryHasNoProduct" ? (
+              <div className={styles.optionsList} />
             ) : (
               <div className={styles.optionsList}>
                 {filters.brands.map((brand, index) => (
