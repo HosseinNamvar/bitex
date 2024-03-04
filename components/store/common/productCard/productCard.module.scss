@@ -12,25 +12,27 @@
   position: relative;
   > .outOfStock {
     display: flex;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    top: 10px;
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+    top: 9px;
     background-color: rgba(white, 0.4);
+    backdrop-filter: blur(1px);
     position: absolute;
     z-index: 1;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
     > span {
-      font-size: 2rem;
-      color: nth($color-light, 8);
+      margin-top: 60px;
+      font-size: 1.6rem;
+      color: nth($color-light, 1);
       font-weight: 300;
       padding: 4px 24px;
       backdrop-filter: blur(6px);
       border-radius: 6px;
-      box-shadow: 0 0 10px rgba(black, 0.1);
-      background-color: rgba(white, 0.1);
+      box-shadow: 0 0 10px rgba(black, 0.2);
+      background-color: rgba(black, 0.6);
     }
   }
   &:hover {
