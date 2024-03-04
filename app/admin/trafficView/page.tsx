@@ -19,7 +19,6 @@ const convertTime = (time: Date) => {
 
 const TrafficView = async () => {
   const response = await getTrafficReport();
-  console.log(response.res);
   return (
     <div className={styles.trafficView}>
       {response.res &&
