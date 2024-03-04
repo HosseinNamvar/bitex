@@ -230,6 +230,20 @@ const ListPage = () => {
             </Link>
           ))}
         </div>
+        <div className={styles.childrenContainer}>
+          {subCategories && subCategories.length > 0 ? (
+            <div className={styles.children}>
+              More:
+              {subCategories.map((cat, index) => (
+                <Link href={pathName + "/" + cat.url} key={index}>
+                  {cat.label}
+                </Link>
+              ))}
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
       <div className="storeContainer flexCol">
         <div className={styles.mobileFilter}>
@@ -250,10 +264,8 @@ const ListPage = () => {
           <Filters
             onToggleWindow={toggleFiltersWindow}
             showFilters={showFilters}
-            subCategories={subCategories}
             filters={filters}
             onFilterChange={setFilters}
-            pathName={pathName}
             onBrandChange={handleBrandChange}
             isFilterChanged={isFilterChanged}
             onApplyFilter={handleApplyFilter}

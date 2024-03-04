@@ -46,6 +46,40 @@
         }
       }
     }
+    > .childrenContainer {
+      height: 30px;
+      .children {
+        display: flex;
+        gap: 12px;
+        border: 1px solid nth($color-light, 4);
+        background-color: nth($color-light, 1);
+        border-radius: 4px;
+        margin-top: 8px;
+        padding: 4px 12px;
+        color: nth($color-light, 5);
+        font-size: 1.4rem;
+        a {
+          color: nth($color-light, 7);
+          &:after {
+            content: "-";
+            width: 4px;
+            height: 8px;
+            margin-left: 8px;
+            display: inline-block;
+            background-repeat: no-repeat;
+            background-position: center center;
+          }
+          &:hover {
+            color: nth($color-light, 9);
+          }
+          &:last-child {
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
   }
   .mobileFilter {
     display: none;

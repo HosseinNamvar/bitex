@@ -1,10 +1,8 @@
 "use client";
 import styles from "./filters.module.scss";
 
-import Link from "next/link";
-
 import { CloseIcon } from "@/components/icons/svgIcons";
-import { TFilters, TProductPath } from "@/types/product";
+import { TFilters } from "@/types/product";
 import CheckBox from "@/components/UI/checkBox";
 import PriceSlider from "@/components/UI/priceSlider";
 import { SK_Box } from "@/components/UI/skeleton";
@@ -13,8 +11,6 @@ import { TPageStatus } from "@/types/list";
 
 interface IProps {
   showFilters: boolean;
-  subCategories: TProductPath[];
-  pathName: string;
   filters: TFilters;
   isFilterChanged: boolean;
   pageStatus: TPageStatus;
@@ -26,9 +22,7 @@ interface IProps {
 
 const Filters = ({
   showFilters,
-  subCategories,
   filters,
-  pathName,
   isFilterChanged,
   pageStatus,
   onToggleWindow,
@@ -53,24 +47,6 @@ const Filters = ({
             <CloseIcon width={12} />
           </button>
         </div>
-        {subCategories && subCategories.length > 0 ? (
-          <div className={styles.eachFilter}>
-            <div className={styles.header}>
-              <h3>In This Category:</h3>
-            </div>
-            <div className={styles.body}>
-              <div className={styles.subCategories}>
-                {subCategories.map((cat, index) => (
-                  <Link href={pathName + "/" + cat.url} key={index}>
-                    {cat.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
         <div className={styles.eachFilter}>
           <div className={styles.header}>
             <h3>Availability</h3>
