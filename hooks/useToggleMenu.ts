@@ -29,7 +29,7 @@ export const useToggleMenu = (
     return () => {
       document.removeEventListener("click", toggle);
     };
-  }, [isActive, refElement]);
+  }, [isActive, refElement, forceToggle]);
 
   return [isActive, setIsActive] as const;
 };
