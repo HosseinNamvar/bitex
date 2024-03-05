@@ -212,6 +212,21 @@
 
 @media (max-width: 768px) {
   .listPage {
+    > .header {
+      height: auto;
+      padding: 20px 10px;
+      > .childrenContainer {
+        height: auto;
+        .children {
+          a {
+            color: nth($color-light, 7);
+            &:after {
+              content: "";
+            }
+          }
+        }
+      }
+    }
     .main {
       padding-top: 12px;
       .rightCol {
