@@ -9,6 +9,32 @@
   border-radius: 12px;
   padding: 8px;
   transition: all 0.5s;
+  position: relative;
+  > .outOfStock {
+    display: flex;
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+    top: 9px;
+    background-color: rgba(white, 0.4);
+    backdrop-filter: blur(1px);
+    position: absolute;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    > span {
+      margin-top: 60px;
+      font-size: 1.6rem;
+      color: nth($color-light, 1);
+      font-weight: 300;
+      padding: 4px 24px;
+      backdrop-filter: blur(6px);
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(black, 0.2);
+      background-color: rgba(black, 0.6);
+    }
+  }
   &:hover {
     box-shadow: 0 1px 4px rgba(#000000, 0.2);
     > .imageWrapper {
@@ -43,19 +69,11 @@
     }
   }
 
-  > a span {
+  > .title {
     font-size: 1.6rem;
     display: inline-block;
     color: nth($color-light, 8);
-    border-bottom: 1px solid white;
     margin: 10px 0 8px 8px;
-    transition: all 0.3s;
-
-    &:hover {
-      font-weight: 500;
-      color: nth($color-light, 10);
-      border-bottom-color: nth($color-light, 9);
-    }
   }
 
   .specWrapper {

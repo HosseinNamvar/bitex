@@ -2,11 +2,11 @@ import { TDropDown } from "@/types/uiElements";
 
 export const sortDropdownData: TDropDown[] = [
   {
-    text: "Most Viewed",
+    text: "Newest",
     value: "0",
   },
   {
-    text: "Top Seller",
+    text: "Oldest",
     value: "1",
   },
   {
@@ -18,11 +18,7 @@ export const sortDropdownData: TDropDown[] = [
     value: "3",
   },
   {
-    text: "Newest",
+    text: "Name",
     value: "4",
-  },
-  {
-    text: "Most Popular",
-    value: "5",
   },
 ];

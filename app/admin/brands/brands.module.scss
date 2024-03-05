@@ -1,0 +1,67 @@
+@import "/public/css/variables.module.scss";
+
+.brands {
+  > .addingSection {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    > input {
+      font-size: 1.4rem;
+      border-radius: 4px;
+      padding: 4px 8px;
+      color: nth($color-light, 8);
+      border: 1px solid nth($color-light, 6);
+    }
+  }
+
+  > .brandsList {
+    width: 500px;
+    margin-top: 40px;
+    font-size: 1.4rem;
+    color: nth($color-light, 8);
+
+    > .list {
+      display: flex;
+      flex-direction: column;
+
+      > .row {
+        display: flex;
+        align-items: center;
+        padding: 6px;
+        padding-left: 24px;
+        border-radius: 8px;
+        justify-content: space-between;
+        transition: background-color 0.4s;
+
+        &:hover {
+          background-color: nth($color-light, 1);
+        }
+
+        > .buttonsWrapper {
+          display: flex;
+          gap: 16px;
+        }
+      }
+    }
+  }
+}
+.deleteMsg {
+  text-align: center;
+  padding: 12px 0 24px;
+}
+.editSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 48px 12px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+  > span {
+    width: 100%;
+    display: block;
+    overflow-wrap: break-word;
+    color: nth($color-red, 5);
+  }
+}

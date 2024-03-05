@@ -9,10 +9,16 @@ import { getAllCategoriesJSON } from "@/actions/category/category";
 import { TGroupJSON } from "@/types/categories";
 import { getCategorySpecs } from "@/actions/category/specifications";
 import { ProductSpec, SpecGroup } from "@prisma/client";
-import { TAddProductFormValues } from "@/types/product";
+import { TAddProductFormValues, TBrand } from "@/types/product";
+import { getAllBrands } from "@/actions/brands/brands";
 
 const categoryListFirstItem: TDropDown = {
   text: "Select A Category....",
+  value: "",
+};
+
+const brandListFirstItem: TDropDown = {
+  text: "Select A Brand....",
   value: "",
 };
 
@@ -25,7 +31,9 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
   const [categoryList, setCategoryList] = useState<TDropDown[]>([
     categoryListFirstItem,
   ]);
+  const [brandList, setBrandList] = useState<TDropDown[]>([brandListFirstItem]);
   const [selectedCategoryListIndex, setSelectedCategoryListIndex] = useState(0);
+  const [selectedBrandListIndex, setSelectedBrandListIndex] = useState(0);
 
   const [categorySpecs, setCategorySpecs] = useState<SpecGroup[]>([]);
 
@@ -34,6 +42,13 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
       const result = await getAllCategoriesJSON();
       if (result.res) {
         setCategoryList(convertJSONtoDropdownList(result.res));
+      }
+    };
+
+    const fetchBrands = async () => {
+      const result = await getAllBrands();
+      if (result.res) {
+        setBrandList(convertBrandsToDropdownList(result.res));
       }
     };
 
@@ -66,7 +81,20 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
       return dropDownData;
     };
 
+    const convertBrandsToDropdownList = (brandList: TBrand[]): TDropDown[] => {
+      const dropDownData: TDropDown[] = [brandListFirstItem];
+      brandList.forEach((brand) => {
+        dropDownData.push({
+          text: brand.name,
+          value: brand.id,
+        });
+      });
+
+      return dropDownData;
+    };
+
     fetchCategories();
+    fetchBrands();
   }, []);
 
   const handleCategoryChange = (index: number) => {
@@ -81,6 +109,11 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
     } else {
       getSpecGroup(categoryList[index].value);
     }
+  };
+
+  const handleBrandChange = (index: number) => {
+    setSelectedBrandListIndex(index);
+    onChange({ ...props, brandID: brandList[index].value });
   };
 
   const getSpecGroup = async (categoryID: string) => {
@@ -100,6 +133,12 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
       });
       setCategorySpecs(response.res);
     }
+  };
+
+  const handleSpecialFeatureChange = (index: number, value: string) => {
+    const newArray = [...props.specialFeatures];
+    newArray[index] = value;
+    onChange({ ...props, specialFeatures: newArray });
   };
 
   return (
@@ -133,6 +172,32 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
             placeholder="Short Description..."
           />
         </div>
+        <div className={styles.specialFeatures}>
+          <span>Special Features:</span>
+          <div>
+            <input
+              type="text"
+              value={props.specialFeatures[0]}
+              onChange={(e) =>
+                handleSpecialFeatureChange(0, e.currentTarget.value)
+              }
+            />
+            <input
+              type="text"
+              value={props.specialFeatures[1]}
+              onChange={(e) =>
+                handleSpecialFeatureChange(1, e.currentTarget.value)
+              }
+            />
+            <input
+              type="text"
+              value={props.specialFeatures[2]}
+              onChange={(e) =>
+                handleSpecialFeatureChange(2, e.currentTarget.value)
+              }
+            />
+          </div>
+        </div>
         <div>
           <span>Price:</span>
           <input
@@ -159,6 +224,32 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
               })
             }
             placeholder="0.00€"
+          />
+        </div>
+        <div>
+          <span>Is In Stock:</span>
+          <div className={styles.inStockSwitch}>
+            <span
+              className={props.isAvailable ? styles.available : ""}
+              onClick={() => onChange({ ...props, isAvailable: true })}
+            >
+              In Stock
+            </span>
+            <span
+              className={!props.isAvailable ? styles.notAvailable : ""}
+              onClick={() => onChange({ ...props, isAvailable: false })}
+            >
+              Out Of Stock
+            </span>
+          </div>
+        </div>
+        <div>
+          <span>Brand:</span>
+          <DropDownList
+            data={brandList}
+            width="200px"
+            selectedIndex={selectedBrandListIndex}
+            onChange={handleBrandChange}
           />
         </div>
         <div>

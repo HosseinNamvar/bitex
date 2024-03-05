@@ -8,6 +8,9 @@ import styles from "./shoppingCart.module.scss";
 import CartItem from "./_components/cartItem";
 import { CloseIcon, ShoppingIconEmpty } from "@/components/icons/svgIcons";
 import { useEffect, useState } from "react";
+import { getCartProducts } from "@/actions/product/product";
+import { TCartItemData } from "@/types/shoppingCart";
+import { TCartListItemDB } from "@/types/product";
 
 interface IProps {
   isVisible: boolean;
@@ -15,12 +18,45 @@ interface IProps {
   handleOnClose: () => void;
 }
 
-const ShoppingCart = ({ isVisible, quantity = 0, handleOnClose }: IProps) => {
-  const [cartItems, setCartItems] = useState<ICartState>();
+const ShoppingCart = ({ isVisible, quantity, handleOnClose }: IProps) => {
+  const [cartItems, setCartItems] = useState<TCartItemData[]>();
   const localCartItems = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
-    localCartItems && setCartItems(localCartItems);
+    const convertDBtoCartItems = (rawData: TCartListItemDB[]) => {
+      const cartListItem: TCartItemData[] = [];
+      rawData.forEach((item) => {
+        cartListItem.push({
+          productId: item.id,
+          imgUrl: process.env.IMG_URL + item.images[0],
+          price: item.price,
+          quantity:
+            localCartItems.items.find((f) => f.productId === item.id)
+              ?.quantity || 0,
+          productName: item.name,
+          dealPrice: item.salePrice || undefined,
+        });
+      });
+      if (cartListItem.length > 0) return cartListItem;
+      return null;
+    };
+    const getProductsFromDB = async () => {
+      const productsIDs = localCartItems.items.map((s) => s.productId);
+
+      if (productsIDs?.length === 0) setCartItems([]);
+
+      if (productsIDs) {
+        const response = await getCartProducts(productsIDs);
+        if (response.res) {
+          const finalResult = convertDBtoCartItems(response.res);
+          finalResult ? setCartItems(finalResult) : "";
+        }
+      }
+    };
+
+    if (localCartItems) {
+      getProductsFromDB();
+    }
   }, [localCartItems]);
 
   return (
@@ -36,16 +72,12 @@ const ShoppingCart = ({ isVisible, quantity = 0, handleOnClose }: IProps) => {
           </button>
         </div>
         <div className={styles.itemsContainer}>
-          {cartItems && cartItems.items.length > 0 ? (
-            cartItems.items.map((item) => (
+          {cartItems && cartItems.length > 0 ? (
+            cartItems.map((item) => (
               <CartItem
-                imgUrl={item.imgUrl}
-                price={item.price}
-                productId={item.productId}
-                productName={item.productName}
-                quantity={item.quantity}
+                data={item}
+                onLinkClicked={handleOnClose}
                 key={item.productId}
-                url={item.url}
               />
             ))
           ) : (
@@ -53,15 +85,11 @@ const ShoppingCart = ({ isVisible, quantity = 0, handleOnClose }: IProps) => {
               <div className={styles.icon}>
                 <ShoppingIconEmpty width={36} />
               </div>
-              <span>
-                Please
-                <Link href={""}>SIGN IN</Link>
-                to view your saved Cart.
-              </span>
+              <span>Shopping Cart is Empty.</span>
             </div>
           )}
           <div className={styles.lowerSection}>
-            {cartItems && cartItems.items.length > 0 && (
+            {cartItems && cartItems.length > 0 && (
               <button className={styles.checkout}>CHECKOUT</button>
             )}
             <button onClick={handleOnClose}>Back to Shop</button>

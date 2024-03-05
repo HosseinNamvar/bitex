@@ -8,6 +8,7 @@ import NavBarFavorite from "./navFavorite";
 import NavBarShopping from "./navShopping";
 import NavBarCategory from "./navCategory";
 import { useEffect, useState } from "react";
+import AddVisit from "../common/addVisit";
 
 const StoreNavBar = () => {
   const [hideNavbar, setHideNavbar] = useState(false);
@@ -73,10 +74,10 @@ const StoreNavBar = () => {
             <hr />
             <ul className={styles.topCategories}>
               <li>
-                <Link href={"/list/computers"}>PC</Link>
+                <Link href={"/list/pc-laptops/computer/pcs"}>PC</Link>
               </li>
               <li>
-                <Link href={"/list/laptops"}>Laptop</Link>
+                <Link href={"/list/pc-laptops/laptops"}>Laptop</Link>
               </li>
               <li>
                 <Link href={"/list/smartphones"}>Mobile</Link>
@@ -85,10 +86,10 @@ const StoreNavBar = () => {
                 <Link href={"/list/tvs"}>TV</Link>
               </li>
               <li>
-                <Link href={"/list/games"}>Gaming</Link>
+                <Link href={"/list/video-games"}>Gaming</Link>
               </li>
               <li>
-                <Link href={"/list/cameras"}>Camera</Link>
+                <Link href={"/list/photography"}>Camera</Link>
               </li>
               <li>
                 <Link href={"/list/tablets"}>Tablet</Link>
@@ -118,6 +119,7 @@ const StoreNavBar = () => {
           </div>
         </div>
       </section>
+      <AddVisit />
     </nav>
   );
 };

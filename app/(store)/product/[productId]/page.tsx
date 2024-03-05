@@ -1,57 +1,101 @@
 "use client";
+import styles from "./productPage.module.scss";
+
 import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 import ProductCard from "@/components/store/common/productCard";
 import { TopProducts } from "@/data/homepageData";
-import styles from "./productPage.module.scss";
 
-import { OneProduct as product } from "@/data/products";
 import ProductBoard from "@/components/store/productPage/productBoard";
 import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
-import { redirect, useParams } from "next/navigation";
+import Gallery from "@/components/store/productPage/gallery";
+
+import { getOneProduct } from "@/actions/product/product";
+import { TProductPageInfo } from "@/types/product";
+import Image from "next/image";
+import { SK_Box } from "@/components/UI/skeleton";
 
 const ProductPage = () => {
+  const router = useRouter();
   const { productId } = useParams<{ productId: string[] }>();
-  if (!productId || productId.length !== 1) redirect("/");
+  const [productInfo, setProductInfo] = useState<
+    TProductPageInfo | null | undefined
+  >(null);
+  if (!productId) router.push("/");
 
+  useEffect(() => {
+    const getProductFromDB = async () => {
+      const response = await getOneProduct(productId.toString());
+      if (response.error) router.push("/");
+      setProductInfo(response.res);
+    };
+    getProductFromDB();
+  }, [productId, router]);
+
+  if (productInfo === undefined) return "";
+  let fullPath = "";
+
+  const generatePath = (index: number) => {
+    if (productInfo) {
+      fullPath += "/" + productInfo.path[index].url;
+      return (
+        <Link key={index} href={"/list/" + fullPath}>
+          {productInfo.path[index].name}
+        </Link>
+      );
+    }
+    return <div></div>;
+  };
   return (
     <div className="storeContainer">
       <div className={styles.productPage}>
         <div className={styles.upperSection}>
           <div className={styles.leftSection}>
             <div className={styles.path}>
-              {product.path.map((path, index) => (
-                <Link href={path.url} key={index}>
-                  {path.label}
-                </Link>
-              ))}
+              {productInfo ? (
+                <>
+                  <Link href={"/"}>Home</Link>
+                  {productInfo.path.map((item, index) => generatePath(index))}
+                </>
+              ) : (
+                <SK_Box width="60%" height="15px" />
+              )}
             </div>
-            <div className={styles.gallery}>
-              <div className={styles.imageList}>
-                {product.gallery.map((image, index) => (
-                  <Image
-                    src={"/images/products/" + image}
-                    alt=""
-                    width={64}
-                    height={64}
-                    key={index}
-                    className={index === 0 ? styles.active : ""}
-                  />
-                ))}
-              </div>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={"/images/products/" + product.gallery[0]}
-                  alt=""
-                  fill
-                  sizes="(max-width:700px)"
-                />
-              </div>
-            </div>
+            <Gallery images={productInfo?.images} />
           </div>
           <div className={styles.rightSection}>
-            <ProductBoard boardData={product.board} />
+            {productInfo ? (
+              <ProductBoard
+                boardData={{
+                  id: productInfo.id,
+                  isAvailable: productInfo.isAvailable,
+                  defaultQuantity: 1,
+                  name: productInfo.name,
+                  price: productInfo.price,
+                  dealPrice: productInfo.salePrice || undefined,
+                  shortDesc: productInfo.desc || "",
+                  specialFeatures: productInfo.specialFeatures,
+                }}
+              />
+            ) : (
+              <div className={styles.boardLoading}>
+                <SK_Box width="60%" height="14px" />
+                <div className={styles.title}>
+                  <SK_Box width="40%" height="30px" />
+                  <SK_Box width="90%" height="16px" />
+                </div>
+                <div className={styles.desc}>
+                  <SK_Box width="40%" height="14px" />
+                  <SK_Box width="40%" height="14px" />
+                  <SK_Box width="40%" height="14px" />
+                </div>
+                <div className={styles.price}>
+                  <SK_Box width="30%" height="40px" />
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.lowerSection}>
@@ -59,29 +103,54 @@ const ProductPage = () => {
             {/* ----------------- SPECIFICATION SECTION ----------------- */}
             <div className={styles.specification}>
               <h2>Specification</h2>
-              {product.specification.map((spec, index) => (
-                <section key={index} className={styles.specGroup}>
-                  <div className={styles.specGroupHead}>
-                    <button>
-                      <MinusIcon width={12} />
-                      <MinusIcon width={12} />
-                    </button>
-                    <h3>{spec.groupName}</h3>
-                  </div>
-                  {spec.specs.map((row, index) => (
-                    <div key={index} className={styles.row}>
-                      <div className={styles.leftCol}>
-                        <span>{row.label}</span>
-                      </div>
-                      <div className={styles.rightCol}>
-                        {row.data.map((d, index) => (
-                          <span key={index}>{d}</span>
-                        ))}
-                      </div>
+              {productInfo ? (
+                productInfo.specifications.map((spec, index) => (
+                  <section key={index} className={styles.specGroup}>
+                    <div className={styles.specGroupHead}>
+                      <button>
+                        <MinusIcon width={12} />
+                        <MinusIcon width={12} />
+                      </button>
+                      <h3>{spec.groupName}</h3>
                     </div>
-                  ))}
-                </section>
-              ))}
+                    {spec.specs.map((row, index) => (
+                      <div key={index} className={styles.row}>
+                        <div className={styles.leftCol}>
+                          <span>{row.name}</span>
+                        </div>
+                        <div className={styles.rightCol}>
+                          <span key={index}>{row.value}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </section>
+                ))
+              ) : (
+                <>
+                  <div className={styles.specLoading}>
+                    <SK_Box width="200px" height="30px" />
+                    <div className={styles.specs}>
+                      <SK_Box width="10%" height="20px" />
+                      <SK_Box width="40%" height="16px" />
+                    </div>
+                    <div className={styles.specs}>
+                      <SK_Box width="10%" height="20px" />
+                      <SK_Box width="40%" height="16px" />
+                    </div>
+                  </div>
+                  <div className={styles.specLoading}>
+                    <SK_Box width="200px" height="30px" />
+                    <div className={styles.specs}>
+                      <SK_Box width="10%" height="20px" />
+                      <SK_Box width="40%" height="16px" />
+                    </div>
+                    <div className={styles.specs}>
+                      <SK_Box width="10%" height="20px" />
+                      <SK_Box width="40%" height="16px" />
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* ----------------- USER REVIEWS ----------------- */}
@@ -116,12 +185,9 @@ const ProductPage = () => {
                 </div>
                 <div className={styles.body}>
                   <span>
-                    {`It took awhile to find the right pillow. All of the ones I
-                  have tried were not "true" memory foam. Memory foam is dense
-                  and not light weight. So all of the other pillows were too
-                  soft and did not support my head correctly. I have slept so
-                  well on this pillow that am waking up in more pain because my
-                  apine is re-adjusting to its proper position`}
+                    {`Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Temporibus suscipit debitis reiciendis repellendus! Repellat rem beatae quo quis 
+                    tenetur. Culpa quae ratione delectus id odit in nesciunt saepe pariatur vitae.`}
                   </span>
                 </div>
               </div>

@@ -18,6 +18,35 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      > .inStockSwitch {
+        > span {
+          cursor: pointer;
+          border-radius: 4px;
+          padding: 4px 12px;
+          margin-left: 4px;
+          border: 1px solid nth($color-light, 2);
+          transition: background-color 0.3s;
+          &:hover {
+            background-color: nth($color-light, 1);
+          }
+        }
+        > .available {
+          border: none;
+          color: nth($color-light, 1);
+          background-color: nth($color-green, 5);
+          &:hover {
+            background-color: nth($color-blue, 5);
+          }
+        }
+        > .notAvailable {
+          border: none;
+          color: nth($color-light, 1);
+          background-color: nth($color-red, 5);
+          &:hover {
+            background-color: nth($color-red, 5);
+          }
+        }
+      }
       > .imgInputsContainer {
         display: flex;
         flex-direction: column;
@@ -26,6 +55,14 @@
       > span {
         display: inline-block;
         width: 200px;
+      }
+    }
+    > .specialFeatures {
+      max-width: 500px;
+      > div {
+        display: flex;
+        gap: 8px;
+        flex-direction: column;
       }
     }
   }

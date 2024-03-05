@@ -28,18 +28,19 @@ export type TProductOption = {
 };
 
 export type TProductBoard = {
-  id: number;
+  id: string;
   name: string;
+  isAvailable: boolean;
   shortDesc: string;
   price: number;
   dealDate?: Date;
   dealPrice?: number;
-  options: TProductOption[];
-  imageUrl: string;
+  specialFeatures?: string[];
+  options?: TProductOption[];
   defaultQuantity: number;
 };
 
-type TProductPath = {
+export type TProductPath = {
   label: string;
   url: string;
 };
@@ -54,6 +55,9 @@ export type TProduct = {
 
 export type TAddProductFormValues = {
   name: string;
+  isAvailable: boolean;
+  specialFeatures: string[];
+  brandID: string;
   desc?: string;
   price: string;
   salePrice?: string;
@@ -69,4 +73,71 @@ export type TProductListItem = {
     id: string;
     name: string;
   };
+};
+export type TCartListItemDB = {
+  id: string;
+  name: string;
+  images: string[];
+  price: number;
+  salePrice: number | null;
+};
+
+export type TBrand = {
+  id: string;
+  name: string;
+};
+
+export type TFilters = {
+  stockStatus: "all" | "inStock" | "outStock";
+  priceMinMax: [number, number];
+  priceMinMaxLimitation: [number, number];
+  brands: TFilterBrands[];
+};
+export type TFilterBrands = {
+  id: string;
+  name: string;
+  isSelected: boolean;
+};
+
+export type TListItem = {
+  id: string;
+  name: string;
+  isAvailable: boolean;
+  specialFeatures: string[];
+  images: string[];
+  price: number;
+  salePrice: number | null;
+  brand: {
+    id: string;
+    name: string;
+  };
+};
+
+export type TSpecification = {
+  groupName: string;
+  specs: {
+    name: string;
+    value: string;
+  }[];
+};
+
+export type TPath = {
+  id: string;
+  parentID: string | null;
+  name: string;
+  url: string;
+};
+
+export type TProductPageInfo = {
+  id: string;
+  name: string;
+  isAvailable: boolean;
+  desc: string | null;
+  images: string[];
+  optionSets: string[];
+  specialFeatures: string[];
+  price: number;
+  salePrice: number | null;
+  specifications: TSpecification[];
+  path: TPath[];
 };

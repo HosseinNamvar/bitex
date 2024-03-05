@@ -8,14 +8,21 @@
   margin-right: 16px;
   border-radius: 12px;
   padding: 0 24px;
-  font-size: 1.6rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 400;
   color: nth($color-light, 9);
   box-shadow: 0 2px 4px rgba(black, 0.15);
   z-index: 3;
   ul {
     :last-child {
       border-bottom: none;
+    }
+    > .loading {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 22px;
     }
   }
 }

@@ -1,0 +1,98 @@
+@import "/public/css/variables.module.scss";
+
+.sliderDouble {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+  gap: 24px;
+  > .sliders {
+    width: 100%;
+    position: relative;
+    > .progress {
+      height: 4px;
+      position: absolute;
+      background-color: nth($color-blue, 5);
+      margin-left: 6px;
+    }
+    > .fullProgress {
+      height: 4px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      border-radius: 4px;
+      background-color: nth($color-light, 2);
+    }
+
+    > input {
+      position: absolute;
+      left: 0;
+      top: -10px;
+      width: 100%;
+      transform-origin: center center;
+      pointer-events: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background: none;
+    }
+    > input[type="range"]::-webkit-slider-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      pointer-events: auto;
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: nth($color-light, 1);
+      border: 2px solid nth($color-blue, 5);
+    }
+    > input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      pointer-events: auto;
+      appearance: none;
+      -moz-appearance: none;
+      background-color: nth($color-light, 1);
+      border: 2px solid nth($color-blue, 5);
+    }
+  }
+
+  > .priceInputs {
+    display: flex;
+    height: auto;
+    gap: 12px;
+
+    > hr {
+      height: 20px;
+      margin-top: 30px;
+      opacity: 0.5;
+    }
+    > div {
+      > label {
+        display: block;
+        width: 100%;
+        font-size: 1.4rem;
+        color: nth($color-light, 7);
+        margin-bottom: 8px;
+      }
+      > input {
+        width: 100%;
+        height: 30px;
+        border-radius: 6px;
+        padding: 12px;
+        border: 1px solid nth($color-light, 5);
+        &:hover {
+          border-color: nth($color-light, 9);
+        }
+      }
+    }
+  }
+}
+
+.loading {
+  width: 100%;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 26px;
+}

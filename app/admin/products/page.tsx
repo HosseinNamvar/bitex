@@ -11,6 +11,9 @@ import ProductListItem from "@/components/admin/product/productListItem";
 
 const initialForm: TAddProductFormValues = {
   name: "",
+  brandID: "",
+  specialFeatures: ["", "", ""],
+  isAvailable: false,
   desc: "",
   price: "",
   salePrice: "",
@@ -69,40 +72,6 @@ const AdminProducts = () => {
         ) : (
           <div>There is no product!</div>
         )}
-
-        {/* <div className={styles.row}>
-          <span className={styles.name}>Dell 27 inch IPS</span>
-          <span className={styles.category}>Monitor</span>
-          <div>
-            <Button text="edit" onClick={() => console.log("edit product")} />
-            <Button
-              text="delete"
-              onClick={() => console.log("delete product")}
-            />
-          </div>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.name}>Apple iPhone 6s 64GB</span>
-          <span className={styles.category}>Mobile</span>
-          <div>
-            <Button text="edit" onClick={() => console.log("edit product")} />
-            <Button
-              text="delete"
-              onClick={() => console.log("delete product")}
-            />
-          </div>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.name}>Asus Rog Pro</span>
-          <span className={styles.category}>Laptop</span>
-          <div>
-            <Button text="edit" onClick={() => console.log("edit product")} />
-            <Button
-              text="delete"
-              onClick={() => console.log("delete product")}
-            />
-          </div>
-        </div> */}
       </div>
       {showProductWindow && (
         <Popup

@@ -3,34 +3,94 @@ import styles from "./list.module.scss";
 
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 import ProductCard from "@/components/store/common/productCard";
 import DropDownList from "@/components/UI/dropDown";
 import LineList from "@/components/UI/lineList";
 
-import { ProductsData } from "@/data/products";
 import { sortDropdownData } from "@/data/uiElementsData";
-import { useState } from "react";
-import { CloseIcon } from "@/components/icons/svgIcons";
-import { redirect, useParams } from "next/navigation";
-import CheckBox from "@/components/UI/checkBox";
-import SliderDouble from "@/components/UI/sliderDouble";
+import {
+  TBrand,
+  TFilterBrands,
+  TFilters,
+  TListItem,
+  TProductPath,
+} from "@/types/product";
+import Button from "@/components/UI/button";
+import { getList } from "@/actions/list/listServices";
+import { TListSort, TPageStatus } from "@/types/list";
+import { SK_Box } from "@/components/UI/skeleton";
+import NoItem from "@/components/store/listPage/noItem";
+import Filters from "@/components/store/listPage/filters";
 
-type TFilters = {
-  stockStatus: "all" | "inStock" | "outStock";
-};
-
-const initialFilters: TFilters = {
+const defaultFilters: TFilters = {
   stockStatus: "all",
+  brands: [],
+  priceMinMaxLimitation: [0, 0],
+  priceMinMax: [0, 0],
 };
+
+const imgBaseUrl = process.env.IMG_URL;
+
+const sortData: TListSort[] = [
+  { sortName: "id", sortType: "desc" },
+  { sortName: "id", sortType: "asc" },
+  { sortName: "price", sortType: "desc" },
+  { sortName: "price", sortType: "asc" },
+  { sortName: "name", sortType: "asc" },
+];
 
 const ListPage = () => {
+  const router = useRouter();
+  const { params } = useParams<{ params: string[] }>();
+  const pathName = usePathname();
+
+  const [productList, setProductList] = useState<TListItem[]>([]);
+  const [subCategories, setSubCategories] = useState<TProductPath[]>([]);
+
   const [sortIndex, setSortIndex] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState<TFilters>(initialFilters);
-  const { params } = useParams<{ params: string[] }>();
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
+  const [filters, setFilters] = useState<TFilters>(defaultFilters);
+  const [appliedFilters, setAppliedFilters] = useState<TFilters>({
+    ...defaultFilters,
+    priceMinMax: [...defaultFilters.priceMinMax],
+  });
 
-  if (!params || params.length <= 0) redirect("/");
+  const [isListLoading, setIsListLoading] = useState(true);
+
+  useEffect(() => {
+    const getProductsList = async () => {
+      setIsListLoading(true);
+
+      const response = await getList(
+        pathName,
+        sortData[sortIndex],
+        appliedFilters
+      );
+      if (response.error || !response.products || !response.subCategories)
+        return router.push("/");
+
+      if (isFilterApplied) {
+        setFilters(appliedFilters);
+        setProductList(response.products);
+        setIsListLoading(false);
+      } else {
+        const filtersFromDB = getFiltersFromProductList(response.products);
+        setFilters(filtersFromDB);
+        setSubCategories(response.subCategories);
+        setProductList(response.products);
+
+        setIsListLoading(false);
+      }
+    };
+
+    getProductsList();
+  }, [router, pathName, sortIndex, appliedFilters, isFilterApplied]);
+
+  if (!params || params.length <= 0) router.push("/");
 
   const handleSortChange = (newIndex: number) => {
     setSortIndex(newIndex);
@@ -59,6 +119,105 @@ const ListPage = () => {
     }
     return link;
   };
+
+  const handleBrandChange = (index: number) => {
+    const newBrandList = JSON.parse(JSON.stringify(filters.brands));
+    newBrandList[index].isSelected = !newBrandList[index].isSelected;
+    setFilters({ ...filters, brands: newBrandList });
+  };
+
+  const defineFilterChangeStatus = () => {
+    if (appliedFilters.stockStatus !== filters.stockStatus) return false;
+
+    if (
+      JSON.stringify(appliedFilters.brands) !== JSON.stringify(filters.brands)
+    )
+      return false;
+
+    if (
+      JSON.stringify(appliedFilters.priceMinMax) !==
+      JSON.stringify(filters.priceMinMax)
+    )
+      return false;
+
+    return true;
+  };
+  let isFilterChanged: boolean = defineFilterChangeStatus();
+  const handleApplyFilter = () => {
+    const newFilter: TFilters = {
+      brands: JSON.parse(JSON.stringify(filters.brands)),
+      priceMinMax: [...filters.priceMinMax],
+      stockStatus: filters.stockStatus,
+      priceMinMaxLimitation: [...filters.priceMinMaxLimitation],
+    };
+    setIsFilterApplied(true);
+    setAppliedFilters(newFilter);
+  };
+
+  const handleResetFilters = () => {
+    const newBrands: TFilterBrands[] = [];
+    filters.brands.forEach((b) =>
+      newBrands.push({ id: b.id, name: b.name, isSelected: true })
+    );
+    const newFilter: TFilters = {
+      brands: newBrands,
+      priceMinMax: [...filters.priceMinMaxLimitation],
+      stockStatus: "all",
+      priceMinMaxLimitation: [...filters.priceMinMaxLimitation],
+    };
+    setIsFilterApplied(false);
+    setAppliedFilters(newFilter);
+  };
+
+  const getPageStatus = (): TPageStatus => {
+    if (isListLoading) {
+      if (isFilterApplied) return "filterLoading";
+      return "pageLoading";
+    }
+
+    if (productList.length > 0) return "filledProductList";
+
+    if (isFilterApplied) return "filterHasNoProduct";
+
+    return "categoryHasNoProduct";
+  };
+  const currentPageStatus: TPageStatus = getPageStatus();
+
+  const pageStatusJSX = {
+    pageLoading: (
+      <div className={styles.sklList}>{SKL_Product().map((skl) => skl)}</div>
+    ),
+    filterLoading: (
+      <div className={styles.sklList}>{SKL_Product().map((skl) => skl)}</div>
+    ),
+    filledProductList: (
+      <div className={styles.listContainer}>
+        {productList.map((product) => (
+          <ProductCard
+            key={product.id}
+            imgUrl={[
+              imgBaseUrl + product.images[0],
+              imgBaseUrl + product.images[1],
+            ]}
+            name={product.name}
+            price={product.price}
+            isAvailable={product.isAvailable}
+            dealPrice={product.salePrice || undefined}
+            specs={product.specialFeatures}
+            url={"/product/" + product.id}
+          />
+        ))}
+      </div>
+    ),
+    categoryHasNoProduct: <NoItem pageHeader={getPageHeader()} />,
+    filterHasNoProduct: (
+      <div className={styles.noItemContainer}>
+        <span> There is no product!</span>
+        <Button text="Reset Filters" onClick={handleResetFilters} />
+      </div>
+    ),
+  }[currentPageStatus];
+
   return (
     <div className={styles.listPage}>
       <div className={styles.header}>
@@ -70,6 +229,20 @@ const ListPage = () => {
               {item[0].toUpperCase() + item.slice(1)}
             </Link>
           ))}
+        </div>
+        <div className={styles.childrenContainer}>
+          {subCategories && subCategories.length > 0 ? (
+            <div className={styles.children}>
+              More:
+              {subCategories.map((cat, index) => (
+                <Link href={pathName + "/" + cat.url} key={index}>
+                  {cat.label}
+                </Link>
+              ))}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="storeContainer flexCol">
@@ -88,141 +261,16 @@ const ListPage = () => {
           />
         </div>
         <div className={styles.main}>
-          <div
-            className={`${styles.filtersContainer} 
-              ${showFilters ? styles.showMobileFilters : ""}`}
-          >
-            <div
-              className={styles.background}
-              onClick={() => toggleFiltersWindow(false)}
-            />
-            <div className={styles.filtersWindow}>
-              <div className={styles.header}>
-                <h2>Filters</h2>
-                <button onClick={() => toggleFiltersWindow(false)}>
-                  <CloseIcon width={12} />
-                </button>
-              </div>
-              <div className={styles.eachFilter}>
-                <div className={styles.header}>
-                  <h3>Availability</h3>
-                  <button />
-                </div>
-                <div className={styles.body}>
-                  <CheckBox
-                    text="All"
-                    onClick={() =>
-                      setFilters({ ...filters, stockStatus: "all" })
-                    }
-                    isChecked={filters.stockStatus === "all"}
-                  />
-                  <CheckBox
-                    text="In Stock"
-                    onClick={() =>
-                      setFilters({ ...filters, stockStatus: "inStock" })
-                    }
-                    isChecked={filters.stockStatus === "inStock"}
-                  />
-                  <CheckBox
-                    text="Out of Stock"
-                    onClick={() =>
-                      setFilters({ ...filters, stockStatus: "outStock" })
-                    }
-                    isChecked={filters.stockStatus === "outStock"}
-                  />
-                </div>
-              </div>
-              <div className={styles.eachFilter}>
-                <div className={styles.header}>
-                  <h3>Price</h3>
-                  <button />
-                </div>
-                <div className={styles.body}>
-                  <SliderDouble
-                    minValue={0}
-                    maxValue={100}
-                    onChange={() => ""}
-                  />
-                  <div className={styles.priceRange}>
-                    <input type="range" />
-                  </div>
-                  <div className={styles.priceInputs}>
-                    <div>
-                      <label>From</label>
-                      <input type="number" />
-                    </div>
-                    <hr />
-                    <div>
-                      <label>To</label>
-                      <input type="number" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.eachFilter}>
-                <div className={styles.header}>
-                  <h3>Colors</h3>
-                  <button />
-                </div>
-                <div className={styles.body}>
-                  <div className={styles.searchInput}>
-                    <input type="text" placeholder="Search Color" />
-                  </div>
-                  <div className={styles.optionsList}>
-                    <div>
-                      <input type="checkbox" id="colorBlack" />
-                      <label htmlFor="colorBlack">Black</label>
-                      <div className={`${styles.colorBox} ${styles.black}`} />
-                    </div>
-                    <div>
-                      <input type="checkbox" id="colorBlue" />
-                      <label htmlFor="colorBlue">Blue</label>
-                      <div className={`${styles.colorBox} ${styles.blue}`} />
-                    </div>
-                    <div>
-                      <input type="checkbox" id="colorRed" />
-                      <label htmlFor="colorRed">Red</label>
-                      <div className={`${styles.colorBox} ${styles.red}`} />
-                    </div>
-                    <div>
-                      <input type="checkbox" id="colorGreen" />
-                      <label htmlFor="colorGreen">Green</label>
-                      <div className={`${styles.colorBox} ${styles.green}`} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.eachFilter}>
-                <div className={styles.header}>
-                  <h3>Options</h3>
-                  <button />
-                </div>
-                <div className={styles.body}>
-                  <div className={styles.searchInput}>
-                    <input type="text" placeholder="Search Option" />
-                  </div>
-                  <div className={styles.optionsList}>
-                    <div>
-                      <input type="checkbox" id="option1" />
-                      <label htmlFor="option1">Option 1</label>
-                    </div>
-                    <div>
-                      <input type="checkbox" id="option2" />
-                      <label htmlFor="option2">Option 2</label>
-                    </div>
-                    <div>
-                      <input type="checkbox" id="option3" />
-                      <label htmlFor="option3">Option 3</label>
-                    </div>
-                    <div>
-                      <input type="checkbox" id="option4" />
-                      <label htmlFor="option4">Option 4</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Filters
+            onToggleWindow={toggleFiltersWindow}
+            showFilters={showFilters}
+            filters={filters}
+            onFilterChange={setFilters}
+            onBrandChange={handleBrandChange}
+            isFilterChanged={isFilterChanged}
+            onApplyFilter={handleApplyFilter}
+            pageStatus={currentPageStatus}
+          />
           <div className={styles.rightCol}>
             <div className={styles.sortContainer}>
               <Image
@@ -238,33 +286,7 @@ const ListPage = () => {
                 onChange={handleSortChange}
               />
             </div>
-            <div className={styles.listContainer}>
-              {ProductsData.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  imgUrl={product.imgUrl}
-                  name={product.name}
-                  price={product.price}
-                  dealPrice={product.dealPrice}
-                  specs={product.specs}
-                  url={product.url}
-                />
-              ))}
-            </div>
-            <div className={styles.pagingContainer}>
-              <button className={styles.first} />
-              <button className={styles.numbers}>1</button>
-              <button className={styles.numbers}>2</button>
-              <button className={styles.numbers}>3</button>
-              <button className={`${styles.numbers} ${styles.active}`}>
-                4
-              </button>
-              <button className={styles.numbers}>5</button>
-              <button className={styles.numbers}>6</button>
-              <button className={styles.numbers}>7</button>
-              <button className={styles.numbers}>8</button>
-              <button className={styles.last} />
-            </div>
+            {pageStatusJSX}
           </div>
         </div>
       </div>
@@ -273,3 +295,83 @@ const ListPage = () => {
 };
 
 export default ListPage;
+
+const SKL_Product = (): React.ReactNode[] => {
+  const nodes: React.ReactNode[] = [];
+  for (let i = 0; i < 6; i++) {
+    nodes.push(
+      <div className={styles.item} key={i}>
+        <SK_Box width="100%" height="160px" />
+        <SK_Box width="70%" height="26px" />
+        <div>
+          <SK_Box width="40%" height="12px" />
+          <SK_Box width="40%" height="12px" />
+
+          <SK_Box width="40%" height="12px" />
+        </div>
+        <SK_Box width="60%" height="20px" />
+      </div>
+    );
+  }
+  return nodes;
+};
+
+// -------- GET UNIQUE BRAND LIST FROM PRODUCT LIST --------
+const getBrandsFromProducts = (productList: TListItem[]) => {
+  return productList.map((product) => product.brand);
+};
+const removeDuplicatedBrands = (list: TBrand[]) => {
+  const newList: TBrand[] = [];
+  list.forEach((listItem) => {
+    const isFind = newList.findIndex((brand) => listItem.id === brand.id);
+    if (isFind === -1) newList.push({ id: listItem.id, name: listItem.name });
+  });
+  return newList;
+};
+const addIsSelectedValueToBrands = (brandList: TBrand[]) => {
+  return brandList.map((b) => ({
+    ...b,
+    isSelected: true,
+  }));
+};
+const generateBrands = (productList: TListItem[]) => {
+  const listOfProductsBrand: TBrand[] = getBrandsFromProducts(productList);
+  const uniqueBrandList = removeDuplicatedBrands(listOfProductsBrand);
+  return addIsSelectedValueToBrands(uniqueBrandList);
+};
+
+// -------- GET PRICE LIMIT FROM PRODUCT LIST --------
+const getPricesFromProducts = (productList: TListItem[]) => {
+  return productList.map((product) => product.price);
+};
+const findMinMax = (array: number[]) => {
+  const minMax: [number, number] = [Math.min(...array), Math.max(...array)];
+  return minMax;
+};
+const roundMaxMinPricesWithMargin = (minMax: [number, number]) => {
+  const roundedPrices: [number, number] = [...minMax];
+  roundedPrices[0] = Math.floor(roundedPrices[0]);
+  roundedPrices[0] = roundedPrices[0] - (roundedPrices[0] % 100);
+
+  roundedPrices[1] = Math.ceil(roundedPrices[1]);
+  roundedPrices[1] = roundedPrices[1] + (100 - (roundedPrices[1] % 100));
+  return roundedPrices;
+};
+const getPriceLimit = (productList: TListItem[]) => {
+  const allProductsPrices: number[] = getPricesFromProducts(productList);
+  const minMaxValues = findMinMax(allProductsPrices);
+  const roundedPrices = roundMaxMinPricesWithMargin(minMaxValues);
+
+  return roundedPrices;
+};
+
+// -------- GET INITIAL FILTERS --------
+const getFiltersFromProductList = (productsList: TListItem[]) => {
+  const newFilter: TFilters = {
+    brands: generateBrands(productsList),
+    priceMinMax: getPriceLimit(productsList),
+    priceMinMaxLimitation: getPriceLimit(productsList),
+    stockStatus: "all",
+  };
+  return newFilter;
+};

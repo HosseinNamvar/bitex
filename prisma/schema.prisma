@@ -71,21 +71,47 @@ enum OptionSetType {
 }
 
 model Product {
-  id         String        @id @default(auto()) @map("_id") @db.ObjectId
-  name       String        @unique
-  desc       String?
-  images     String[]
-  category   Category      @relation(fields: [categoryID], references: [id])
-  categoryID String        @db.ObjectId
-  optionSets String[]      @db.ObjectId
-  price      Float
-  salePrice  Float?
-  specs      ProductSpec[]
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  isAvailable     Boolean       @default(true)
+  desc            String?
+  specialFeatures String[]
+  images          String[]
+  category        Category      @relation(fields: [categoryID], references: [id])
+  categoryID      String        @db.ObjectId
+  optionSets      String[]      @db.ObjectId
+  price           Float
+  salePrice       Float?
+  specs           ProductSpec[]
+  brand           Brand         @relation(fields: [brandID], references: [id])
+  brandID         String        @db.ObjectId
+  PageVisit       PageVisit[]
 }
 
 type ProductSpec {
   specGroupID String
   specValues  String[]
+}
+
+model Brand {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String    @unique
+  products Product[]
+}
+
+model PageVisit {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  time      DateTime? @default(now())
+  pageType  PageType
+  pagePath  String?
+  productID String?   @db.ObjectId
+  product   Product?  @relation(fields: [productID], references: [id])
+}
+
+enum PageType {
+  MAIN
+  LIST
+  PRODUCT
 }
 
 // ---------------------- USER MANAGEMENT SECTION ---------------------- 

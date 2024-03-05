@@ -1,0 +1,37 @@
+@import "/public/css/variables.module.scss";
+
+@keyframes loading {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeletonBase {
+  display: inline-block;
+  position: relative;
+  background-color: nth($color-light, 2);
+  border-radius: 4px;
+  overflow: hidden;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(white, 0) 0,
+      rgba(white, 0.2) 20%,
+      rgba(white, 0.5) 60%,
+      rgba(white, 0)
+    );
+    animation: loading 1.5s infinite;
+    content: "";
+  }
+}
+
+.circle {
+  border-radius: 50%;
+}

@@ -8,7 +8,7 @@ export interface ICartState {
 }
 
 type QuantityChange = {
-  productId: number;
+  productId: string;
   amount: number;
 };
 
@@ -32,7 +32,7 @@ const cartSlice = createSlice({
     toggleCart: (state: ICartState, action: PayloadAction<boolean>) => {
       state.isVisible = action.payload.valueOf();
     },
-    remove: (state: ICartState, action: PayloadAction<number>) => {
+    remove: (state: ICartState, action: PayloadAction<string>) => {
       state.items = state.items.filter(
         (item) => item.productId !== action.payload
       );

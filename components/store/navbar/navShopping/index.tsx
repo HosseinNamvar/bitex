@@ -44,6 +44,7 @@ const NavBarShopping = () => {
       </button>
       <ShoppingCart
         isVisible={cartData ? cartData.isVisible : false}
+        quantity={cartItemQuantity}
         handleOnClose={() => handleCartVisibility(false)}
       />
     </div>
