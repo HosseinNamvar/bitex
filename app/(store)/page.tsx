@@ -35,19 +35,19 @@ export default function Home() {
             imgUrl="/images/images/wideAd1.jpg"
             smallTitle="Smart Watches"
             title="Save Up to 99€"
-            url="#"
+            url="/list/watches"
           />
           <WideAd
             imgUrl="/images/images/wideAd2.jpg"
             smallTitle="Laptops"
             title="Save Up to 99€"
-            url="#"
+            url="/list/pc-laptops/laptops"
           />
           <WideAd
             imgUrl="/images/images/wideAd3.jpg"
             smallTitle="DJI Products"
             title="Save Up to 199€"
-            url="#"
+            url="/list/photography/drones"
           />
         </div>
         <div className={styles.homeSection}>
@@ -75,13 +75,13 @@ export default function Home() {
             imgUrl="/images/images/lensAd.jpg"
             smallTitle="Smart Watches"
             title="Save Up to 99€"
-            url="#"
+            url="/list/photography/cameras/lenses"
           />
           <WideAd
             imgUrl="/images/images/djiAd.jpg"
             smallTitle="Laptops"
             title="Save Up to 99€"
-            url="#"
+            url="/list/photography/drones"
           />
         </div>
         <div className={styles.homeSection}>
@@ -97,7 +97,7 @@ export default function Home() {
         <div className={styles.homeSection}>
           <div className={styles.sectionHeader}>
             <h2>Top Selling Products</h2>
-            <Link href={"/topProducts"}>view all</Link>
+            <Link href={"/"}>view all</Link>
           </div>
           <div className={styles.cardsWrapper}>
             {TopProducts.map((product, index) => (
@@ -133,26 +133,30 @@ export default function Home() {
         <div className={styles.companiesSection}>
           <h2>Selected Brands</h2>
           <div>
-            <HCompanyLogo width={104} bgPositionX={0} url="/companies/epson" />
-            <HCompanyLogo width={50} bgPositionX={-105} url="/companies/hp" />
-            <HCompanyLogo width={50} bgPositionX={-156} url="/companies/dell" />
+            <HCompanyLogo
+              width={104}
+              bgPositionX={0}
+              url="/list/photography/scanners/epson"
+            />
+            <HCompanyLogo width={50} bgPositionX={-105} url="/" />
+            <HCompanyLogo width={50} bgPositionX={-156} url="/" />
             <HCompanyLogo
               width={44}
               bgPositionX={-207}
-              url="/companies/apple"
+              url="/list/smartphones/apple-iphone"
             />
             <HCompanyLogo
               width={47}
               bgPositionX={-252}
-              url="/companies/xiaomi"
+              url="/list/smartphones/xiaomi"
             />
+            <HCompanyLogo width={54} bgPositionX={-300} url="/" />
+            <HCompanyLogo width={55} bgPositionX={-355} url="/" />
             <HCompanyLogo
-              width={54}
-              bgPositionX={-300}
-              url="/companies/logitech"
+              width={98}
+              bgPositionX={-411}
+              url="/list/pc-laptops/laptops/asus"
             />
-            <HCompanyLogo width={55} bgPositionX={-355} url="/companies/jbl" />
-            <HCompanyLogo width={98} bgPositionX={-411} url="/companies/asus" />
           </div>
         </div>
       </div>

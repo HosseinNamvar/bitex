@@ -7,23 +7,23 @@ export const CollectionsData: TCollectionCard[] = [
     collections: [
       {
         label: "iPad",
-        url: "/list/tablets/ipad",
+        url: "/list/tablets/apple",
       },
       {
         label: "Microsoft Surface",
-        url: "/list/tablets/surface",
+        url: "/list/pc-laptops/laptops/microsot",
       },
       {
         label: "Samsung Galaxy",
-        url: "/list/tablets/galaxy",
+        url: "/list/tablets/samsung",
       },
       {
         label: "Amazon Fire",
-        url: "/list/tablets/amazon",
+        url: "/list/tablets",
       },
       {
         label: "E-Readers",
-        url: "/list/tablets/ereader",
+        url: "/list/tablets",
       },
     ],
     imgUrl: "/images/images/collectionTablet.jpg",
@@ -34,15 +34,15 @@ export const CollectionsData: TCollectionCard[] = [
     collections: [
       {
         label: "iPhone",
-        url: "/list/smartphones/iphone",
+        url: "/list/smartphones/apple-iphone",
       },
       {
         label: "Samsung Galaxy",
-        url: "/list/smartphones/galaxy",
+        url: "/list/smartphones/samsung-galaxy",
       },
       {
         label: "Google",
-        url: "/list/smartphones/google",
+        url: "/list/smartphones/google-pixel",
       },
     ],
     imgUrl: "/images/images/collectionSmartphone.jpg",
@@ -57,19 +57,19 @@ export const CollectionsData: TCollectionCard[] = [
       },
       {
         label: "Samsung Galaxy",
-        url: "/list/watches/galaxy",
+        url: "/list/watches/Samsung",
       },
       {
         label: "Android Smartwatches",
-        url: "/list/watches/android",
+        url: "/list/watches",
       },
       {
         label: "Fitness Smartwatches",
-        url: "/list/watches/fitness",
+        url: "/list/watches",
       },
       {
         label: "Smartwatches Accessories",
-        url: "/list/watches/accessories",
+        url: "/list/watches",
       },
     ],
     imgUrl: "/images/images/collectionWatch.jpg",
@@ -80,27 +80,27 @@ export const CollectionsData: TCollectionCard[] = [
     collections: [
       {
         label: "Chargers",
-        url: "/list/accessories/charger",
+        url: "/",
       },
       {
         label: "Power Banks",
-        url: "/list/accessories/power-bank",
+        url: "/",
       },
       {
         label: "Cables",
-        url: "/list/accessories/cable",
+        url: "/",
       },
       {
         label: "PC Fans",
-        url: "/list/accessories/pc-fan",
+        url: "/",
       },
       {
         label: "Mobile Covers",
-        url: "/list/accessories/mobile-cover",
+        url: "/",
       },
     ],
     imgUrl: "/images/images/collectionAccessories.jpg",
-    url: "/list/accessories",
+    url: "/",
   },
 ];
 
@@ -114,7 +114,7 @@ export const TodayDeals: TDealCard[] = [
     price: 579.0,
     dealPrice: 519.0,
     specs: ["Wireless", "Noise Cancelling", "Built-In Microphone"],
-    url: "/product/1",
+    url: "/product/65e6ef559d4ab819d1158194",
     dealDate: new Date("1970-01-01T18:00:00"),
   },
   {
@@ -126,7 +126,7 @@ export const TodayDeals: TDealCard[] = [
     price: 79.99,
     dealPrice: 55.49,
     specs: ["Bluetooth", "White"],
-    url: "/product/1",
+    url: "/product/65e6f3fd9d4ab819d1158197",
     dealDate: new Date("1970-01-01T09:30:00"),
   },
   {
@@ -135,7 +135,7 @@ export const TodayDeals: TDealCard[] = [
     price: 1299.0,
     dealPrice: 1119.0,
     specs: ["8GB Memory", "256GB", "M3 chip"],
-    url: "/product/1",
+    url: "/product/65e22d7f580cd983d5aa5a2f",
     dealDate: new Date("1970-01-01T23:10:00"),
   },
   {
@@ -144,7 +144,7 @@ export const TodayDeals: TDealCard[] = [
     price: 1149.0,
     dealPrice: 1099.0,
     specs: ["Wi-Fi", "256GB", "12.9-Inch"],
-    url: "/product/1",
+    url: "/product/65e6244fcb99bb936d4cb7c0",
     dealDate: new Date("1970-01-01T06:30:00"),
   },
   {
@@ -153,7 +153,7 @@ export const TodayDeals: TDealCard[] = [
     price: 1199.99,
     specs: ["256GB", "Blue Titanium"],
     dealPrice: 1059.99,
-    url: "/product/1",
+    url: "/product/65e6530ecb99bb936d4cb7db",
     dealDate: new Date("1970-01-01T10:50:00"),
   },
 ];
@@ -164,7 +164,7 @@ export const TopProducts: TProductCard[] = [
     imgUrl: ["/images/products/airpods1.jpg", "/images/products/airpods2.jpg"],
     price: 129.99,
     specs: ["Built-In Microphone", "3rd generation", "Water Resistant"],
-    url: "/product/1",
+    url: "/product/65e6eed69d4ab819d1158193",
   },
   {
     name: "Apple Watch Ultra 2",
@@ -174,7 +174,7 @@ export const TopProducts: TProductCard[] = [
     ],
     price: 799.0,
     specs: ["GPS + Cellular", "Titanium", "49mm"],
-    url: "/product/1",
+    url: "/product/65e6f5339d4ab819d115819c",
   },
   {
     name: "ASUS ROG Laptop",
@@ -182,7 +182,7 @@ export const TopProducts: TProductCard[] = [
     price: 2499.99,
     dealPrice: 2149.99,
     specs: ["32GB RAM", "17inch display", "OLED Display"],
-    url: "/product/1",
+    url: "/product/65e6008bcb99bb936d4cb7ac",
   },
   {
     name: "PS5 Controller",
@@ -192,7 +192,7 @@ export const TopProducts: TProductCard[] = [
     ],
     price: 69,
     specs: ["Bluetooth", "Version 2"],
-    url: "/product/1",
+    url: "/product/65e6f5f89d4ab819d115819f",
   },
   {
     name: "Sony Alpha 7RV",
@@ -203,14 +203,14 @@ export const TopProducts: TProductCard[] = [
     price: 4499,
     specs: ["Full Frame", "Body", "40MP"],
     dealPrice: 3699,
-    url: "/product/1",
+    url: "/product/65e656decb99bb936d4cb7e4",
   },
 ];
 
 export const SlidesData: TSlide[] = [
   {
     imgUrl: "/images/images/PS5.webp",
-    url: "#",
+    url: "/product/65e6f80a9d4ab819d11581a2",
     alt: "/playstation5",
     msg: {
       title: "PLAY STATION 5",
@@ -219,7 +219,7 @@ export const SlidesData: TSlide[] = [
   },
   {
     imgUrl: "/images/images/wacom.jpg",
-    url: "/wacom",
+    url: "/product/65e6f7469d4ab819d11581a1",
     alt: "WACOM CINITIQ PRO",
     msg: {
       title: "WACOM CINITIQ PRO",
@@ -229,7 +229,7 @@ export const SlidesData: TSlide[] = [
   },
   {
     imgUrl: "/images/images/appleWatch.jpg",
-    url: "/apple-watch",
+    url: "/product/65e6f5339d4ab819d115819c",
     alt: "APPLE WATCH",
     msg: {
       title: "APPLE WATCH",
@@ -239,7 +239,7 @@ export const SlidesData: TSlide[] = [
   },
   {
     imgUrl: "/images/images/appleAirpods.jpg",
-    url: "/apple-airpods",
+    url: "/list/audio/headphones/apple",
     alt: "",
     msg: {
       title: "AIRPODS PRO",
@@ -251,30 +251,33 @@ export const SlidesData: TSlide[] = [
 
 export const BlogCardData: TBlogCard[] = [
   {
-    title: "Merry & Bright: How Building Meaningful Careers",
-    imgUrl: "/images/blog/post1.png",
-    url: "/blog/1",
-    shortText: `The holiday season is well underway — lights are a-twinkling, bells are jingling,
-    and excited faces are beaming. Shelves are stocked with merry-making goodies and all the essentials,
-    and gifts arrive seamlessly as lists are checked off one by one. The secret behind all of
-    that oh-so-festive fun? Our incredible team.`,
+    title: "Praesent vestibulum nisi at mollis mollis",
+    imgUrl: "/images/blog/blogPost1.avif",
+    url: "#",
+    shortText: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet quam finibus,
+     gravida mi in, fermentum est. Nulla lacinia, orci ac dictum euismod, ligula leo suscipit lectus,
+      ac porttitor sem purus ac nisl. Nunc aliquet nisi tristique magna suscipit finibus. 
+      Praesent vestibulum nisi at mollis mollis. Phasellus sollicitudin felis sit amet eros 
+      accumsan rutrum. Phasellus est nisi, eleifend vel bibendum vitae, interdum ac tellus.`,
   },
   {
-    title: "The Great GifTogether Ties a Bow on a Year of Care in Action",
-    imgUrl: "/images/blog/post2.png",
-    url: "/blog/2",
-    shortText: `A wrapped gift, picked just for you, waiting to be opened —
-    it doesn’t take much to bring comfort and joy to someone’s holidays.
-    Now imagine that magic multiplied across the country, touching thousands of communities,
-    and you’ll get a sense of the true impact of Target’s annual Great GifTogether holiday giving event.`,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    imgUrl: "/images/blog/blogPost2.avif",
+    url: "#",
+    shortText: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet quam finibus,
+    gravida mi in, fermentum est. Nulla lacinia, orci ac dictum euismod, ligula leo suscipit lectus,
+     ac porttitor sem purus ac nisl. Nunc aliquet nisi tristique magna suscipit finibus. 
+     Praesent vestibulum nisi at mollis mollis. Phasellus sollicitudin felis sit amet eros 
+     accumsan rutrum. Phasellus est nisi, eleifend vel bibendum vitae, interdum ac tellus.`,
   },
   {
-    title:
-      "Talking Shop with Brett Craig, Target’s New Chief Information Officer",
-    imgUrl: "/images/blog/post3.jpg",
-    url: "/blog/3",
-    shortText: `Over the past 14 years, Brett Craig has led teams across Target, including in technology,
-    digital and merchandising. Originally a self-taught programmer,
-    his natural curiosity drives him to explore how technology connects to and shapes the future of retail commerce.`,
+    title: "Lorem ipsum dolor sit amet, consectetur",
+    imgUrl: "/images/blog/blogPost3.avif",
+    url: "#",
+    shortText: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet quam finibus,
+    gravida mi in, fermentum est. Nulla lacinia, orci ac dictum euismod, ligula leo suscipit lectus,
+     ac porttitor sem purus ac nisl. Nunc aliquet nisi tristique magna suscipit finibus. 
+     Praesent vestibulum nisi at mollis mollis. Phasellus sollicitudin felis sit amet eros 
+     accumsan rutrum. Phasellus est nisi, eleifend vel bibendum vitae, interdum ac tellus.`,
   },
 ];
