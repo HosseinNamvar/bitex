@@ -45,6 +45,7 @@ const StoreNavBar = () => {
               src={"/images/logo.png"}
               width={125}
               height={40}
+              quality={100}
             />
           </Link>
           <div className={styles.search}>
