@@ -88,12 +88,12 @@ const ShoppingCart = ({ isVisible, quantity, handleOnClose }: IProps) => {
               <span>Shopping Cart is Empty.</span>
             </div>
           )}
-          <div className={styles.lowerSection}>
-            {cartItems && cartItems.length > 0 && (
-              <button className={styles.checkout}>CHECKOUT</button>
-            )}
-            <button onClick={handleOnClose}>Back to Shop</button>
-          </div>
+        </div>
+        <div className={styles.lowerSection}>
+          {cartItems && cartItems.length > 0 && (
+            <button className={styles.checkout}>CHECKOUT</button>
+          )}
+          <button onClick={handleOnClose}>Back to Shop</button>
         </div>
       </div>
     </div>

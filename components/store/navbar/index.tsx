@@ -45,6 +45,7 @@ const StoreNavBar = () => {
               src={"/images/logo.png"}
               width={125}
               height={40}
+              quality={100}
             />
           </Link>
           <div className={styles.search}>
@@ -74,7 +75,7 @@ const StoreNavBar = () => {
             <hr />
             <ul className={styles.topCategories}>
               <li>
-                <Link href={"/list/pc-laptops/computer/pcs"}>PC</Link>
+                <Link href={"/list/pc-laptops/computer"}>Computer</Link>
               </li>
               <li>
                 <Link href={"/list/pc-laptops/laptops"}>Laptop</Link>
@@ -89,7 +90,7 @@ const StoreNavBar = () => {
                 <Link href={"/list/video-games"}>Gaming</Link>
               </li>
               <li>
-                <Link href={"/list/photography"}>Camera</Link>
+                <Link href={"/list/photography/cameras"}>Camera</Link>
               </li>
               <li>
                 <Link href={"/list/tablets"}>Tablet</Link>

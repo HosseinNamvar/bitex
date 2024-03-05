@@ -27,6 +27,9 @@
     bottom: 0px;
     width: 400px;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 140px;
     transition: all 0.5s $anim-easeOut;
 
     .header {
@@ -62,6 +65,8 @@
     }
 
     .itemsContainer {
+      height: 100%;
+      overflow-y: auto;
       .emptyContainer {
         width: 100%;
         display: flex;
@@ -95,6 +100,7 @@
       height: 140px;
       margin: 0 24px;
       border-top: 1px solid nth($color-light, 4);
+      background-color: white;
       position: absolute;
       bottom: 0;
       left: 0;
