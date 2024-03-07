@@ -1,0 +1,47 @@
+@import "/public/css/variables.module.scss";
+
+.warning {
+  position: fixed;
+  width: 100vw;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  z-index: 5;
+  > .wrapper {
+    display: flex;
+    max-width: 90vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-radius: 6px;
+    padding: 8px 12px;
+    background-color: rgba(nth($color-blue, 5), 0.8);
+    font-size: 1.4rem;
+    text-align: center;
+    backdrop-filter: blur(3px);
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      > a {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        color: nth($color-blue, 4);
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: nth($color-light, 1);
+        }
+        > svg {
+          fill: nth($color-blue, 5);
+        }
+      }
+    }
+  }
+}
