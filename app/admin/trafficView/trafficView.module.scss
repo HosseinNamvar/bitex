@@ -36,6 +36,13 @@
         border-radius: 4px;
         border: 1px solid nth($color-light, 3);
       }
+      > .deviceRes {
+        width: 110px;
+        text-align: center;
+        padding: 4px 0;
+        border-radius: 4px;
+        border: 1px solid nth($color-blue, 8);
+      }
       > .pagePath {
         width: 200px;
       }

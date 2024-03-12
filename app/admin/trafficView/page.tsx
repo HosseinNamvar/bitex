@@ -50,6 +50,7 @@ const TrafficView = () => {
       getTraffic();
     }
   };
+
   return (
     <div className={styles.trafficView}>
       {trafficList.length > 0 ? (
@@ -61,6 +62,7 @@ const TrafficView = () => {
               </div>
               <div className={styles.pageType}>{item.pageType}</div>
               <div className={styles.pagePath}>{item.pagePath}</div>
+              <div className={styles.deviceRes}>{item.deviceResolution}</div>
               <div>
                 {item.product &&
                   item.product?.category.name + " / " + item.product?.name}

@@ -14,6 +14,7 @@ export type TTrafficListItem = {
   pageType: PageType;
   pagePath: string | null;
   productID: string | null;
+  deviceResolution: string | null;
   product: {
     name: string;
     category: {
@@ -34,6 +35,7 @@ export const addVisit = async (data: TAddPageVisit) => {
         pageType: data.pageType,
         pagePath: data.pagePath,
         productID: data.productID,
+        deviceResolution: data.deviceResolution,
       },
     });
 
