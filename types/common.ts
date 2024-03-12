@@ -79,4 +79,5 @@ export type TAddPageVisit = {
   pageType: PageType;
   pagePath?: string;
   productID?: string;
+  deviceResolution?: string;
 };

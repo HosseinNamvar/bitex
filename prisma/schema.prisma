@@ -100,12 +100,13 @@ model Brand {
 }
 
 model PageVisit {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  time      DateTime? @default(now())
-  pageType  PageType
-  pagePath  String?
-  productID String?   @db.ObjectId
-  product   Product?  @relation(fields: [productID], references: [id])
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  time             DateTime? @default(now())
+  pageType         PageType
+  pagePath         String?
+  deviceResolution String?
+  productID        String?   @db.ObjectId
+  product          Product?  @relation(fields: [productID], references: [id])
 }
 
 enum PageType {

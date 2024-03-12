@@ -9,8 +9,14 @@ const AddVisit = () => {
   const pathName = usePathname();
   useEffect(() => {
     const addingVisit = async () => {
+      const deviceResolution =
+        window.screen.width.toString() +
+        " x " +
+        window.screen.height.toString();
+
       const data: TAddPageVisit = {
         pageType: "MAIN",
+        deviceResolution: deviceResolution,
       };
 
       if (pathName.includes("/list/")) {
