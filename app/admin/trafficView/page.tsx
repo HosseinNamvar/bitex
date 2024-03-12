@@ -1,5 +1,14 @@
+"use client";
 import styles from "./trafficView.module.scss";
-import { getTrafficReport } from "@/actions/pageVisit/pageVisitServices";
+
+import Button from "@/components/UI/button";
+
+import {
+  TTrafficListItem,
+  deleteTraffic,
+  getTrafficReport,
+} from "@/actions/pageVisit/pageVisitServices";
+import { useEffect, useState } from "react";
 
 const convertTime = (time: Date) => {
   return (
@@ -17,24 +26,58 @@ const convertTime = (time: Date) => {
   );
 };
 
-const TrafficView = async () => {
-  const response = await getTrafficReport();
+const TrafficView = () => {
+  const [trafficList, setTrafficList] = useState<TTrafficListItem[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const getTraffic = async () => {
+    setIsLoading(true);
+    const response = await getTrafficReport();
+    if (response.res) {
+      setTrafficList(response.res);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    getTraffic();
+  }, []);
+
+  const handleDeleteTraffic = async (id: string) => {
+    setIsLoading(true);
+    const response = await deleteTraffic(id);
+    if (response.res) {
+      getTraffic();
+    }
+  };
   return (
     <div className={styles.trafficView}>
-      {response.res &&
-        response.res.map((item) => (
+      {trafficList.length > 0 ? (
+        trafficList.map((item) => (
           <div key={item.id} className={styles.row}>
-            <div className={styles.time}>
-              {item.time ? convertTime(item.time) : ""}
+            <div className={styles.leftCol}>
+              <div className={styles.time}>
+                {item.time ? convertTime(item.time) : ""}
+              </div>
+              <div className={styles.pageType}>{item.pageType}</div>
+              <div className={styles.pagePath}>{item.pagePath}</div>
+              <div>
+                {item.product &&
+                  item.product?.category.name + " / " + item.product?.name}
+              </div>
             </div>
-            <div className={styles.pageType}>{item.pageType}</div>
-            <div className={styles.pagePath}>{item.pagePath}</div>
-            <div>
-              {item.product &&
-                item.product?.category.name + " / " + item.product?.name}
+            <div className={styles.rightCol}>
+              <Button
+                text="Delete"
+                onClick={() => handleDeleteTraffic(item.id)}
+                disabled={isLoading}
+              />
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 };
