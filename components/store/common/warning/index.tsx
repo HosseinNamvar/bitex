@@ -7,8 +7,8 @@ const Warning = () => {
     <div className={styles.warning}>
       <div className={styles.wrapper}>
         <span>
-          This website is a personal endeavor created for portfolio purposes and
-          is not a real business.
+          This website was created for portfolio purposes and is NOT a real
+          business.
         </span>
         <div className={styles.contact}>
           <span>Contact: </span>
