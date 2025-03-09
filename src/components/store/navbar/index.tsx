@@ -55,7 +55,7 @@ const StoreNavBar = () => {
               placeholder="Search"
             />
             <Image
-              src={"/images/icons/searchIcon.svg"}
+              src="/icons/searchIcon.svg"
               width={16}
               height={16}
               alt="Search"
@@ -108,7 +108,7 @@ const StoreNavBar = () => {
               <li className={styles.deal}>
                 <Link href={""}>
                   <Image
-                    src={"/images/icons/discountIcon.svg"}
+                    src="icons/discountIcon.svg"
                     alt="Top Deals"
                     width={18}
                     height={18}

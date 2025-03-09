@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.scss";
 
 const outfitFont = localFont({
-  src: "../public/fonts/Outfit-VariableFont.ttf",
+  src: "../../public/fonts/Outfit-VariableFont.ttf",
   fallback: ["sans-serif", "system-ui", "arial"],
 });
 

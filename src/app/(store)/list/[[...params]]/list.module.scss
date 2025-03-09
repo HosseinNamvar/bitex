@@ -32,7 +32,7 @@
           display: inline-block;
           background-repeat: no-repeat;
           background-position: center center;
-          background-image: url("/images/icons/arrowIcon01.svg");
+          background-image: url("/icons/arrowIcon01.svg");
         }
         &:hover {
           color: nth($color-light, 9);
@@ -97,7 +97,7 @@
       color: nth($color-light, 7);
       font-size: 1.4rem;
       letter-spacing: 1px;
-      background-image: url("/images/icons/filterIcon.svg");
+      background-image: url("/icons/filterIcon.svg");
       background-repeat: no-repeat;
       background-position: 10px center;
       transition: all 0.3s;
