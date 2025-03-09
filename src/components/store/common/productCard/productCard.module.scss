@@ -1,4 +1,4 @@
-@import "@/public/css/variables.module.scss";
+@import "/public/css/variables.module.scss";
 
 .staticWidth {
   min-width: 256px;
@@ -147,12 +147,12 @@
       }
       .addFavorite {
         background-color: rgba(white, 0);
-        background-image: url("/images/icons/heartIcon.svg");
+        background-image: url("/icons/heartIcon.svg");
         background-size: 20px 18px;
       }
       .addShopping {
         background-color: rgba(white, 0);
-        background-image: url("/images/icons/basketIcon.svg");
+        background-image: url("/icons/basketIcon.svg");
         background-size: 22px 19px;
       }
     }

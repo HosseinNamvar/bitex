@@ -12,7 +12,7 @@ const CategoryListItem = ({ categoryData }: { categoryData: TGroupJSON }) => {
       <Link href={"/list/" + group.url}>
         <div className={styles.iconWrapper}>
           <Image
-            src={"images/icons/" + group.iconUrl + ".svg"}
+            src={"/icons/" + group.iconUrl + ".svg"}
             alt={group.name}
             width={group.iconSize[0]}
             height={group.iconSize[1]}
@@ -24,7 +24,7 @@ const CategoryListItem = ({ categoryData }: { categoryData: TGroupJSON }) => {
         {categories && categories.length > 0 && (
           <Image
             className={styles.arrow}
-            src={"images/icons/arrowIcon01.svg"}
+            src={"/icons/arrowIcon01.svg"}
             width={6}
             height={10}
             alt=""

@@ -1,4 +1,4 @@
-@import "@/public/css/variables.module.scss";
+@import "/public/css/variables.module.scss";
 
 .productPage {
   width: 100%;
@@ -207,7 +207,7 @@
                 display: inline-block;
                 margin-left: 30px;
                 padding-left: 24px;
-                background-image: url("/images/icons/dateIcon.svg");
+                background-image: url("/icons/dateIcon.svg");
                 background-repeat: no-repeat;
                 background-position: left center;
               }

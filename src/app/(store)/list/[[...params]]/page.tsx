@@ -274,7 +274,7 @@ const ListPage = () => {
           <div className={styles.rightCol}>
             <div className={styles.sortContainer}>
               <Image
-                src={"/images/icons/sortIcon.svg"}
+                src={"/icons/sortIcon.svg"}
                 alt="Sort"
                 width={16}
                 height={12}
