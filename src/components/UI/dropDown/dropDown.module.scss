@@ -1,0 +1,91 @@
+@import "@/public/css/variables.module.scss";
+
+.dropDownList {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid nth($color-light, 2);
+  transition: background-color 0.4s;
+  &:hover {
+    background-color: nth($color-light, 1);
+  }
+  &:active {
+    background-color: nth($color-light, 2);
+  }
+
+  > span {
+    font-size: 1.4rem;
+    color: nth($color-light, 7);
+  }
+  > svg {
+    fill: none;
+    stroke: nth($color-light, 5);
+    transform: rotate(90deg);
+    transform-origin: 35% 50%;
+    transition: transform 0.4s $anim-easeOut, stroke 0.3s;
+  }
+
+  > .list {
+    width: 100%;
+    position: absolute;
+    top: 36px;
+    right: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid nth($color-light, 3);
+    background-color: white;
+    box-shadow: 0 0 6px rgba(black, 0.1);
+    transform: scale(0.97);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+    padding: 4px;
+    z-index: 10;
+    transform-origin: center top;
+    > .container {
+      height: auto;
+      max-height: 250px;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+      > span {
+        display: block;
+        margin-bottom: 2px;
+        padding: 8px 16px;
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-align: left;
+        color: nth($color-light, 8);
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &:hover {
+          background-color: nth($color-light, 2);
+        }
+      }
+      > .selectedOption {
+        background-color: nth($color-light, 2);
+      }
+    }
+  }
+
+  .showOptions {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.isFocus {
+  > svg {
+    transform: rotate(-90deg);
+    stroke: nth($color-light, 7);
+  }
+}

@@ -1,0 +1,106 @@
+@import "@/public/css/variables.module.scss";
+
+.cartItem {
+  display: flex;
+  margin: 20px 30px 0;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid nth($color-light, 2);
+  .leftCol {
+    min-width: 120px;
+    cursor: pointer;
+    > img {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid nth($color-light, 2);
+      object-fit: contain;
+    }
+  }
+  .rightCol {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+
+    > h2 {
+      cursor: pointer;
+      font-weight: 400;
+    }
+    .productName {
+      font-size: 1.4rem;
+      color: nth($color-light, 8);
+      margin-bottom: 24px;
+    }
+    .priceSection {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      :first-child {
+        font-size: 1.8rem;
+        color: nth($color-light, 10);
+      }
+      :last-child {
+        font-size: 1.4rem;
+        margin-left: 16px;
+        color: nth($color-light, 7);
+      }
+    }
+    .quantitySection {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      > button {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        transition: all 0.3s;
+        border: 1px solid white;
+        &:hover {
+          border-color: nth($color-light, 2);
+          background-color: nth($color-light, 1);
+        }
+        &:active {
+          border-color: nth($color-light, 3);
+          background-color: nth($color-light, 2);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .cartItem {
+    flex-direction: column;
+    .rightCol {
+      .productName {
+        margin-bottom: 12px;
+      }
+      .priceSection {
+        align-items: flex-start;
+        flex-direction: column-reverse;
+        margin-bottom: 10px;
+        :first-child {
+          font-size: 1.6rem;
+          font-weight: 600;
+          color: nth($color-light, 10);
+        }
+        :last-child {
+          font-size: 1.2rem;
+          margin-bottom: 6px;
+          margin-left: 0;
+        }
+      }
+      .quantitySection {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        > button {
+          width: 30px;
+          height: 30px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}
