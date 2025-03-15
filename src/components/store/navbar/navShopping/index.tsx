@@ -1,11 +1,12 @@
 "use-client";
-import styles from "./navShopping.module.scss";
+
 import ShoppingCart from "../../common/shoppingCart";
 import { ShoppingIconOutline } from "@/components/icons/svgIcons";
 import { useDispatch, useSelector } from "react-redux";
 import { ICartState, RootState } from "@/store/shoppingCart";
 import { toggleCart } from "@/store/shoppingCart";
 import { useEffect, useState } from "react";
+import { cn } from "@/shared/utils/styling";
 
 const NavBarShopping = () => {
   const dispatch = useDispatch();
@@ -31,17 +32,18 @@ const NavBarShopping = () => {
   };
 
   return (
-    <div className={styles.shopping}>
-      <button onClick={() => handleCartVisibility(true)}>
-        <ShoppingIconOutline width={24} />
+    <div className="flex items-center relative ml-9 hover:stroke-gray-700 stroke-gray-500 cursor-pointer">
+      <div onClick={() => handleCartVisibility(true)} className="border-none relative">
+        <ShoppingIconOutline width={24} className="fill-none stroke-inherit transition-all duration-300" />
         <span
-          className={`${
-            cartItemQuantity === 0 ? styles.emptyCart : styles.filledCart
-          }`}
+          className={cn(
+            "absolute -top-2 -right-4 text-sm size-6 leading-6  text-center rounded-full",
+            cartItemQuantity ? "text-white bg-red-500" : "text-gray-500 bg-gray-300"
+          )}
         >
           {cartItemQuantity}
         </span>
-      </button>
+      </div>
       <ShoppingCart
         isVisible={cartData ? cartData.isVisible : false}
         quantity={cartItemQuantity}
