@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  font-size: 0.625rem;
-}
-
 ::-webkit-scrollbar {
   height: 6px;
   width: 6px;
@@ -56,18 +52,6 @@ a {
   text-decoration: none;
   &:visited {
     color: inherit;
-  }
-}
-
-button {
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  padding: 0;
-  background: none;
-  color: inherit;
-  &:disabled {
-    opacity: 0.5;
   }
 }
 
