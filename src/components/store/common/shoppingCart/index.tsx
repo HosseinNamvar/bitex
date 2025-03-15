@@ -1,24 +1,24 @@
 "use client";
 
-import Link from "next/link";
 import { useSelector } from "react-redux";
-import { ICartState, RootState } from "@/store/shoppingCart";
+import { RootState } from "@/store/shoppingCart";
 
-import styles from "./shoppingCart.module.scss";
 import CartItem from "./_components/cartItem";
 import { CloseIcon, ShoppingIconEmpty } from "@/components/icons/svgIcons";
 import { useEffect, useState } from "react";
 import { getCartProducts } from "@/actions/product/product";
 import { TCartItemData } from "@/types/shoppingCart";
 import { TCartListItemDB } from "@/types/product";
+import { cn } from "@/shared/utils/styling";
+import Button from "@/components/UI/button";
 
-interface IProps {
+type TProps = {
   isVisible: boolean;
   quantity?: number;
   handleOnClose: () => void;
-}
+};
 
-const ShoppingCart = ({ isVisible, quantity, handleOnClose }: IProps) => {
+const ShoppingCart = ({ isVisible, quantity, handleOnClose }: TProps) => {
   const [cartItems, setCartItems] = useState<TCartItemData[]>();
   const localCartItems = useSelector((state: RootState) => state.cart);
 
@@ -30,9 +30,7 @@ const ShoppingCart = ({ isVisible, quantity, handleOnClose }: IProps) => {
           productId: item.id,
           imgUrl: process.env.IMG_URL + item.images[0],
           price: item.price,
-          quantity:
-            localCartItems.items.find((f) => f.productId === item.id)
-              ?.quantity || 0,
+          quantity: localCartItems.items.find((f) => f.productId === item.id)?.quantity || 0,
           productName: item.name,
           dealPrice: item.salePrice || undefined,
         });
@@ -61,39 +59,48 @@ const ShoppingCart = ({ isVisible, quantity, handleOnClose }: IProps) => {
 
   return (
     <div
-      className={`${styles.shoppingCart} ${!isVisible && styles.shoppingHide}`}
+      className={cn(
+        "fixed inset-0 z-20 transition-all duration-300 cursor-default",
+        isVisible ? "visible opacity-100" : "invisible opacity-0"
+      )}
     >
-      <div className={styles.background} onClick={handleOnClose} />
-      <div className={`${styles.cartWindow} ${isVisible && styles.showWindow}`}>
-        <div className={styles.header}>
-          <h2>Shopping Cart ({quantity})</h2>
-          <button onClick={handleOnClose}>
+      <div className="absolute inset-0 bg-black/60 cursor-pointer" onClick={handleOnClose} />
+      <div
+        className={cn(
+          "absolute top-0 bottom-0 right-0 w-[400px] bg-white flex flex-col pb-[140px] transition-transform duration-500 easeOutCustom",
+          isVisible ? "translate-x-0" : "translate-x-full"
+        )}
+      >
+        <div className="flex items-center justify-between py-3 border-b border-gray-300 mx-6">
+          <h2 className="text-gray-800 text-xl font-light">Shopping Cart ({quantity})</h2>
+          <Button onClick={handleOnClose} className="p-2 size-11 border-white hover:border-gray-300">
             <CloseIcon width={18} />
-          </button>
+          </Button>
         </div>
-        <div className={styles.itemsContainer}>
-          {cartItems && cartItems.length > 0 ? (
-            cartItems.map((item) => (
-              <CartItem
-                data={item}
-                onLinkClicked={handleOnClose}
-                key={item.productId}
-              />
-            ))
+        <div className="flex-1 overflow-y-auto">
+          {cartItems && cartItems.length ? (
+            cartItems.map((item) => <CartItem data={item} onLinkClicked={handleOnClose} key={item.productId} />)
           ) : (
-            <div className={styles.emptyContainer}>
-              <div className={styles.icon}>
-                <ShoppingIconEmpty width={36} />
+            <div className="flex flex-col items-center">
+              <div className="mt-20 mb-16 p-6 bg-gray-100 rounded-full">
+                <ShoppingIconEmpty width={36} className="fill-gray-500" />
               </div>
-              <span>Shopping Cart is Empty.</span>
+              <span className="text-center text-gray-500">Shopping Cart is Empty.</span>
             </div>
           )}
         </div>
-        <div className={styles.lowerSection}>
-          {cartItems && cartItems.length > 0 && (
-            <button className={styles.checkout}>CHECKOUT</button>
+        <div className="absolute bottom-0 left-0 right-0 h-[140px] bg-white border-t border-gray-300 flex flex-col items-center justify-center gap-4 mx-6">
+          {!!cartItems?.length && (
+            <Button className="w-4/5 text-sm font-semibold text-green-700 border-green-300 bg-green-50">
+              CHECKOUT
+            </Button>
           )}
-          <button onClick={handleOnClose}>Back to Shop</button>
+          <Button
+            onClick={handleOnClose}
+            className="text-gray-500 text-sm w-4/5 border-gray-300 bg-gray-100 hover:border-gray-400 hover:bg-gray-200 active:border-gray-500 active:bg-gray-300"
+          >
+            Back to Shop
+          </Button>
         </div>
       </div>
     </div>
