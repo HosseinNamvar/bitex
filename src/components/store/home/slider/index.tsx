@@ -65,7 +65,7 @@ const HomeSlider = () => {
   }
 
   return (
-    <div className="w-full ml-[272px] h-[500px] rounded-xl overflow-hidden relative hover:[&>.btnContainer]:opacity-100">
+    <div className="w-full lg:ml-[272px] h-[500px] rounded-xl overflow-hidden relative hover:[&>.btnContainer]:opacity-100">
       <div className="btnContainer absolute z-[2] left-7 top-0 bottom-0 flex justify-center items-center opacity-0 transition-all duration-500">
         <button
           onClick={() => handleSliding(activeSlideNum - 1)}
@@ -109,7 +109,7 @@ const HomeSlider = () => {
             {slide.msg && (
               <div
                 className={cn(
-                  "flex invisible opacity-0 flex-col absolute pt-[10%] items-center left-0 top-10 bottom-0 w-[50%] text-gray-100 transition-all duration-1000",
+                  "flex invisible opacity-0 flex-col w-full absolute pt-[10%] items-center top-10 bottom-0 lg:w-[50%] text-gray-100 transition-all duration-1000",
                   index === activeSlideNum && "opacity-100 visible animate-newSlide"
                 )}
               >
