@@ -65,7 +65,7 @@ const HomeSlider = () => {
   }
 
   return (
-    <div className="w-full lg:ml-[272px] h-[500px] rounded-xl overflow-hidden relative hover:[&>.btnContainer]:opacity-100">
+    <div className="w-full lg:ml-[272px] h-[240px] sm:h-[500px] rounded-xl overflow-hidden relative hover:[&>.btnContainer]:opacity-100">
       <div className="btnContainer absolute z-[2] left-7 top-0 bottom-0 flex justify-center items-center opacity-0 transition-all duration-500">
         <button
           onClick={() => handleSliding(activeSlideNum - 1)}
@@ -109,11 +109,11 @@ const HomeSlider = () => {
             {slide.msg && (
               <div
                 className={cn(
-                  "flex invisible opacity-0 flex-col w-full absolute pt-[10%] items-center top-10 bottom-0 lg:w-[50%] text-gray-100 transition-all duration-1000",
+                  "flex invisible opacity-0 flex-col w-full absolute pt-0 sm:pt-[10%] items-center top-10 bottom-0 lg:w-[50%] text-gray-100 transition-all duration-1000",
                   index === activeSlideNum && "opacity-100 visible animate-newSlide"
                 )}
               >
-                <h2 className="text-3xl font-light">{slide.msg.title}</h2>
+                <h2 className="sm:text-3xl text-lg font-light">{slide.msg.title}</h2>
                 {slide.msg.desc && (
                   <span
                     className={cn(
@@ -126,7 +126,7 @@ const HomeSlider = () => {
                 )}
                 <Link
                   href={slide.url}
-                  className="mt-20 text-gray-100 rounded-md font-normal px-6 py-3 bg-black/80 transition-all duration-300 hover:font-medium hover:text-gray-900 hover:bg-gray-100"
+                  className="mt-6 sm:mt-20 text-gray-100 rounded-md text-sm sm:text:base sm:px-6 sm:py-3 px-4 py-2 bg-black/80 transition-all duration-300 hover:font-medium hover:text-gray-900 hover:bg-gray-100"
                 >
                   {slide.msg.buttonText}
                 </Link>
@@ -141,13 +141,13 @@ const HomeSlider = () => {
           </div>
         ))}
       </div>
-      <div className="absolute bottom-5 left-0 right-0 flex gap-6 justify-center items-center">
-        {SlidesData.map((slide, index) => (
+      <div className="absolute bottom-5 left-0 right-0 flex gap-4 sm:gap-6 justify-center items-center">
+        {SlidesData.map((_, index) => (
           <div
             onClick={() => handleSliding(index)}
             key={index}
             className={cn(
-              "size-4 border border-white/30 bg-white/40  rounded-full opacity-35 transition-all duration-300",
+              "size-3 sm:size-4 border border-white/30 bg-white/40  rounded-full opacity-35 transition-all duration-300",
               index === activeSlideNum
                 ? "opacity-100 scale-110"
                 : "opacity-35 cursor-pointer hover:bg-white/80 scale-100"
