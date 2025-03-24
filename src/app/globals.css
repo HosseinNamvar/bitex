@@ -4,6 +4,10 @@
   --animate-newSlide: newSlide 1s;
   --animate-oldSlide: oldSlide 1s;
   --animate-autoSlide: autoSlide 5s linear;
+  --color-bitex-red-500: #eb4141;
+
+  --breakpoint-2xl: 90rem;
+  --breakpoint-3xl: 96rem;
 
   @keyframes newSlide {
     0% {
