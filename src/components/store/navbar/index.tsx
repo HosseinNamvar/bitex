@@ -44,7 +44,7 @@ const StoreNavBar = () => {
   }, []);
 
   return (
-    <nav className="flex flex-col transition-all pt-5 h-[116px] duration-700 fixed top-0 w-full z-10">
+    <nav className="flex flex-col bg-white transition-all pt-5 duration-700 fixed top-0 w-full z-10">
       <section className="w-full">
         <div className="storeContainer w-full relative flex justify-between items-center">
           <Link href={"/"} className="mr-0 xl:mr-20 lg:mr-10">
@@ -53,7 +53,7 @@ const StoreNavBar = () => {
           <div className="h-11 relative flex-1 mx-6 sm:mx-10">
             <input
               type="text"
-              className="text-gray-800 pl-4 size-full border-gray-300 focus:border-gray-500 border rounded-lg outline-gray-500 sm:pl-12"
+              className="text-gray-800 hidden sm:block pl-4 size-full border-gray-300 focus:border-gray-500 border rounded-lg outline-gray-500 sm:pl-12"
               placeholder="Search"
             />
             <Image
@@ -64,18 +64,18 @@ const StoreNavBar = () => {
               className="absolute top-3.5 left-5 hidden sm:block"
             />
           </div>
-          <div className="text-gray-500 flex">
+          <div className="text-gray-500 flex pr-2 md:pr-0">
             <NavBarProfile />
             <NavBarFavorite />
             <NavBarShopping />
           </div>
         </div>
       </section>
-      <section className="w-full border-b-gray-500 mt-5 border-t-gray-300 border-b border-t">
+      <section className="w-full border-b-gray-400 mt-5 border-t-gray-300 border-b border-t">
         <div className="storeContainer h-[50px] flex justify-between">
           <div className="flex items-center">
             <NavBarCategory isNavbarVisible={!hideNavbar} />
-            <hr className="h-4 border-l border-gray-300 mx-4" />
+            <hr className="h-4 border-l border-gray-300 mx-4 hidden sm:block" />
             <ul className="hidden lg:flex space-x-2">
               {NAVBAR_ITEMS.map(({ name, link }) => (
                 <li key={name}>
@@ -90,7 +90,7 @@ const StoreNavBar = () => {
             </ul>
           </div>
           <ul className="flex items-center">
-            <li>
+            <li className="hidden lg:block">
               <Link href={""} className="text-sm hover:bg-gray-100 py-2 px-4 rounded-lg transition-all duration-150">
                 PC Configuration
               </Link>
