@@ -7,7 +7,7 @@ import Warning from "@/components/store/common/warning";
 
 const StoreLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main>
+    <main className="bg-gray-50">
       <Provider store={shoppingCartStore}>
         <StoreNavBar />
         {children}
