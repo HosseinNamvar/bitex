@@ -98,9 +98,8 @@ const StoreNavBar = () => {
             <li className="gap-2">
               <Link
                 href={""}
-                className="text-sm text-red-900 flex gap-1 md:visible hover:bg-gray-100 py-2 px-4 rounded-lg transition-all duration-150"
+                className="text-sm bg-[url('/icons/discountIcon.svg')] bg-[0px_10px] bg-no-repeat text-red-900 flex gap-1 md:visible hover:bg-gray-100 py-2 pl-5 pr-4 rounded-lg transition-all duration-150"
               >
-                <Image src="icons/discountIcon.svg" alt="Top Deals" width={18} height={18} />
                 Top Deals
               </Link>
             </li>

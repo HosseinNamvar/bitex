@@ -32,7 +32,7 @@ const NavBarShopping = () => {
   };
 
   return (
-    <div className="flex items-center relative ml-9 hover:stroke-gray-700 stroke-gray-500 cursor-pointer">
+    <div className="flex items-center relative ml-9 mr-4 hover:stroke-gray-700 stroke-gray-500 cursor-pointer">
       <div onClick={() => handleCartVisibility(true)} className="border-none relative">
         <ShoppingIconOutline width={24} className="fill-none stroke-inherit transition-all duration-300" />
         <span
