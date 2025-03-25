@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
+input[type="range"]::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: auto;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #f9fafb; /* Tailwind: light-100 */
+  border: 2px solid #3b82f6; /* Tailwind: blue-500 */
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  pointer-events: auto;
+  appearance: none;
+  -moz-appearance: none;
+  background-color: #f9fafb; /* Tailwind: light-100 */
+  border: 2px solid #3b82f6; /* Tailwind: blue-500 */
+}
+
 @theme {
   --animate-newSlide: newSlide 1s;
   --animate-oldSlide: oldSlide 1s;
