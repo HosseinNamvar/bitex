@@ -4,7 +4,18 @@
   --animate-newSlide: newSlide 1s;
   --animate-oldSlide: oldSlide 1s;
   --animate-autoSlide: autoSlide 5s linear;
+  --animate-loading: loading 2s infinite;
   --color-bitex-red-500: #eb4141;
+
+  --color-bitex-blue-100: #264573;
+  --color-bitex-blue-200: #27559b;
+  --color-bitex-blue-300: #2863bd;
+  --color-bitex-blue-400: #2573e9;
+  --color-bitex-blue-500: #3385ff;
+  --color-bitex-blue-600: #5596f6;
+  --color-bitex-blue-700: #92bdfc;
+  --color-bitex-blue-800: #b9d5fe;
+  --color-bitex-blue-900: #d6e7ff;
 
   --breakpoint-2xl: 90rem;
   --breakpoint-3xl: 96rem;
@@ -37,6 +48,15 @@
     }
     100% {
       width: 100%;
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
     }
   }
 }
