@@ -33,7 +33,7 @@ const Filters = ({
   return (
     <div
       className={cn(
-        "min-w-[260px] lg:relative lg:visible  lg:opacity-100 fixed top-0 left-0 bottom-0 right-0 invisible opacity-0 transition-all duration-300 z-[20]",
+        "min-w-[260px] lg:relative lg:visible  lg:opacity-100 fixed top-0 left-0 bottom-0 right-0 invisible opacity-0 z-[20]",
         showFilters && "styles.showMobileFilters"
       )}
     >
