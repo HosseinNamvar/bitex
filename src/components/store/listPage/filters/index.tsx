@@ -1,5 +1,4 @@
 "use client";
-import styles from "./filters.module.scss";
 
 import { CloseIcon } from "@/components/icons/svgIcons";
 import { TFilters } from "@/types/product";
@@ -8,8 +7,9 @@ import PriceSlider from "@/components/UI/priceSlider";
 import { SK_Box } from "@/components/UI/skeleton";
 import Button from "@/components/UI/button";
 import { TPageStatus } from "@/types/list";
+import { cn } from "@/shared/utils/styling";
 
-interface IProps {
+type TProps = {
   showFilters: boolean;
   filters: TFilters;
   isFilterChanged: boolean;
@@ -18,7 +18,7 @@ interface IProps {
   onFilterChange: (value: TFilters) => void;
   onBrandChange: (value: number) => void;
   onApplyFilter: () => void;
-}
+};
 
 const Filters = ({
   showFilters,
@@ -29,29 +29,31 @@ const Filters = ({
   onFilterChange,
   onBrandChange,
   onApplyFilter,
-}: IProps) => {
+}: TProps) => {
   return (
     <div
-      className={`${styles.filtersContainer} 
-                  ${showFilters ? styles.showMobileFilters : ""}`}
+      className={cn(
+        "min-w-[260px] lg:relative lg:visible  lg:opacity-100 fixed top-0 left-0 bottom-0 right-0 invisible opacity-0 transition-all duration-300 z-[20]",
+        showFilters && "styles.showMobileFilters"
+      )}
     >
       <div
-        className={styles.background}
+        className="block w-screen h-screen invisible opacity-0 absolute bg-[rgba(0,0,0,0.6)] cursor-pointer backdrop-blur-[5px] transition-opacity duration-300"
         onClick={() => onToggleWindow(false)}
       />
 
-      <div className={styles.filtersWindow}>
-        <div className={styles.header}>
+      <div className="min-w-[220px] max-w-[260px] px-5 border-r border-gray-300 overflow-y-scroll">
+        <div className="hidden">
           <h2>Filters</h2>
           <button onClick={() => onToggleWindow(false)}>
             <CloseIcon width={12} />
           </button>
         </div>
-        <div className={styles.eachFilter}>
-          <div className={styles.header}>
-            <h3>Availability</h3>
+        <div className="w-full mb-4 border-b border-gray-300">
+          <div className="flex justify-between mb-3.5">
+            <h3 className="text-sm font-medium text-gray-800">Availability</h3>
           </div>
-          <div className={styles.body}>
+          <div className="w-full flex gap-2 px-2.5 mb-6 flex-col">
             <CheckBox
               text="All"
               onClick={() => onFilterChange({ ...filters, stockStatus: "all" })}
@@ -59,42 +61,36 @@ const Filters = ({
             />
             <CheckBox
               text="In Stock"
-              onClick={() =>
-                onFilterChange({ ...filters, stockStatus: "inStock" })
-              }
+              onClick={() => onFilterChange({ ...filters, stockStatus: "inStock" })}
               isChecked={filters.stockStatus === "inStock"}
             />
             <CheckBox
               text="Out of Stock"
-              onClick={() =>
-                onFilterChange({ ...filters, stockStatus: "outStock" })
-              }
+              onClick={() => onFilterChange({ ...filters, stockStatus: "outStock" })}
               isChecked={filters.stockStatus === "outStock"}
             />
           </div>
         </div>
-        <div className={styles.eachFilter}>
-          <div className={styles.header}>
-            <h3>Price</h3>
+        <div className="w-full mb-4 border-b border-gray-300">
+          <div className="flex justify-between mb-3.5">
+            <h3 className="text-sm font-medium text-gray-800">Price</h3>
           </div>
-          <div className={styles.body}>
+          <div className="w-full flex gap-2 px-2.5 mb-6 flex-col">
             <PriceSlider
               sliderValues={filters.priceMinMax}
               minMaxLimit={filters.priceMinMaxLimitation}
               pageStatus={pageStatus}
-              onChange={(value) =>
-                onFilterChange({ ...filters, priceMinMax: [...value] })
-              }
+              onChange={(value) => onFilterChange({ ...filters, priceMinMax: [...value] })}
             />
           </div>
         </div>
-        <div className={styles.eachFilter}>
-          <div className={styles.header}>
-            <h3>Brands</h3>
+        <div className="w-full mb-4 border-b border-gray-300">
+          <div className="flex justify-between mb-3.5">
+            <h3 className="text-sm font-medium text-gray-800">Brands</h3>
           </div>
-          <div className={styles.body}>
+          <div className="w-full flex gap-2 px-2.5 mb-6 flex-col">
             {pageStatus === "pageLoading" ? (
-              <div className={styles.loadingBrands}>
+              <div className={"styles.loadingBrands"}>
                 <SK_Box width="100%" height="20px" />
                 <SK_Box width="100%" height="20px" />
                 <SK_Box width="100%" height="20px" />
@@ -102,9 +98,9 @@ const Filters = ({
                 <SK_Box width="100%" height="20px" />
               </div>
             ) : pageStatus === "categoryHasNoProduct" ? (
-              <div className={styles.optionsList} />
+              <div className="w-full h-auto flex flex-col" />
             ) : (
-              <div className={styles.optionsList}>
+              <div className="w-full h-auto flex gap-2 flex-col">
                 {filters.brands.map((brand, index) => (
                   <CheckBox
                     key={brand.id}
@@ -117,12 +113,14 @@ const Filters = ({
             )}
           </div>
         </div>
-        <div className={styles.apply}>
+        <div className={"styles.apply"}>
           <Button
-            text="Apply Changes"
             disabled={isFilterChanged}
+            className="w-full py-1 text-sm rounded-md text-gray-100 border-none bg-bitex-blue-500 hover:bg-bitex-blue-600 active:bg-bitex-blue-400 disabled:bg-bitex-blue-700"
             onClick={() => onApplyFilter()}
-          />
+          >
+            Apply Changes
+          </Button>
         </div>
       </div>
     </div>
