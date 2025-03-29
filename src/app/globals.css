@@ -27,6 +27,7 @@ input[type="range"]::-moz-range-thumb {
   --animate-oldSlide: oldSlide 1s;
   --animate-autoSlide: autoSlide 5s linear;
   --animate-loading: loading 2s infinite;
+  --ease-bitex-easeOut: cubic-bezier(0, 0.68, 0.31, 1);
   --color-bitex-red-500: #eb4141;
 
   --color-bitex-blue-100: #264573;
