@@ -28,7 +28,7 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col border-t bg-white z-50 mt-12 border-t-gray-300 w-full">
+    <footer className="flex flex-col border-t bg-white z-50 border-t-gray-300 w-full">
       <div className="flex-col storeContainer">
         <div className="flex w-full items-center h-32 border-b border-b-gray-300">
           <Link href={"/"}>
