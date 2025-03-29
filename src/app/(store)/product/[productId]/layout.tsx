@@ -5,7 +5,7 @@ export const metadata: Metadata = {
 };
 
 const ProductLayout = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+  return <div className="bg-white">{children}</div>;
 };
 
 export default ProductLayout;
