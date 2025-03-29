@@ -1,5 +1,4 @@
 "use client";
-import styles from "./addToCartButton.module.scss";
 
 import { useDispatch } from "react-redux";
 
@@ -23,14 +22,16 @@ const AddToCartButton = ({ cartItemData, disabled }: IProps) => {
   return (
     <button
       disabled={disabled}
-      className={styles.addToCart}
+      className={
+        "flex justify-center items-center gap-5 cursor-pointer ml-6 sm:ml-10 text-sm sm:text-lg font-light px-8 sm:px-12 py-2.5 bg-bitex-red-500 rounded-lg text-white transition-all duration-300"
+      }
       onClick={() => handleAddToCart()}
     >
       {disabled ? (
         "not Available"
       ) : (
         <>
-          <ShoppingIconFill width={16} />
+          <ShoppingIconFill width={16} className="fill-white" />
           Add to Cart
         </>
       )}
