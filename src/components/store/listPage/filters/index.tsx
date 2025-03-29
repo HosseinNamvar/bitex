@@ -33,7 +33,7 @@ const Filters = ({
   return (
     <div
       className={cn(
-        "min-w-[260px] lg:relative lg:visible lg:transition-none lg:opacity-100 fixed inset-0 transition-all invisible opacity-0 z-[20]",
+        "min-w-[260px] lg:relative lg:visible lg:transition-none lg:opacity-100 fixed inset-0 transition-all invisible opacity-0 lg:z-1 z-20",
         {
           "visible opacity-100": showFilters,
         }
@@ -49,7 +49,7 @@ const Filters = ({
 
       <div
         className={cn(
-          "lg:min-w-[220px] w-[310px] ease-bitex-easeOut transition-all pb-8 duration-500 lg:w-auto max-w-[260px] absolute lg:relative h-full px-5 border-r bg-white z-20 border-gray-300 overflow-y-scroll",
+          "lg:min-w-[220px] w-[310px] ease-bitex-easeOut transition-all pb-8 duration-500 lg:w-auto max-w-[260px] absolute lg:relative h-full px-5 border-r bg-white lg:z-1 z-20 border-gray-300 overflow-y-scroll",
           showFilters ? "left-0" : "left-[-310px] lg:left-0"
         )}
       >
