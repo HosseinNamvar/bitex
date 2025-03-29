@@ -1,6 +1,6 @@
 "use client";
+import { cn } from "@/shared/utils/styling";
 import { TDropDown } from "@/types/uiElements";
-import styles from "./lineList.module.scss";
 
 interface IProps {
   data: TDropDown[];
@@ -14,11 +14,16 @@ const LineList = ({ data, selectedId, onChange }: IProps) => {
   };
 
   return (
-    <div className={styles.lineList}>
+    <div className="w-full flex gap-2 items-center h-8">
       {data.map((item, index) => (
         <button
           key={index}
-          className={selectedId === index ? styles.active : ""}
+          className={cn(
+            "inline-block text-sm transition-colors duration-300 px-4 py-1 rounded-full",
+            selectedId === index
+              ? "text-white cursor-default font-medium bg-gray-900 hover:bg-gray-900"
+              : "cursor-pointer text-gray-500 hover:bg-gray-200"
+          )}
           onClick={() => handleChange(index)}
         >
           {item.text}
