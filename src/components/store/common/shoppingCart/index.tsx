@@ -60,14 +60,14 @@ const ShoppingCart = ({ isVisible, quantity, handleOnClose }: TProps) => {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-20 transition-all duration-300 cursor-default",
+        "fixed inset-0 z-[50] transition-all duration-300 cursor-default",
         isVisible ? "visible opacity-100" : "invisible opacity-0"
       )}
     >
-      <div className="absolute inset-0 bg-black/60 cursor-pointer" onClick={handleOnClose} />
+      <div className="absolute inset-0 sm:bg-black/60 bg-black/40 cursor-pointer" onClick={handleOnClose} />
       <div
         className={cn(
-          "absolute top-0 bottom-0 right-0 w-[400px] bg-white flex flex-col pb-[140px] transition-transform duration-500 easeOutCustom",
+          "absolute top-0 bottom-0 right-0 sm:w-[400px] w-5/6 bg-white flex flex-col pb-[140px] transition-transform duration-500 easeOutCustom",
           isVisible ? "translate-x-0" : "translate-x-full"
         )}
       >
