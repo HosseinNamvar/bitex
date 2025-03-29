@@ -33,23 +33,36 @@ const Filters = ({
   return (
     <div
       className={cn(
-        "min-w-[260px] lg:relative lg:visible  lg:opacity-100 fixed top-0 left-0 bottom-0 right-0 invisible opacity-0 z-[20]",
-        showFilters && "styles.showMobileFilters"
+        "min-w-[260px] lg:relative lg:visible lg:transition-none lg:opacity-100 fixed inset-0 transition-all invisible opacity-0 z-[20]",
+        {
+          "visible opacity-100": showFilters,
+        }
       )}
     >
       <div
-        className="block w-screen h-screen invisible opacity-0 absolute bg-[rgba(0,0,0,0.6)] cursor-pointer backdrop-blur-[5px] transition-opacity duration-300"
+        className={cn(
+          "block w-screen h-screen lg:invisible opacity-0 absolute bg-[rgba(0,0,0,0.6)] cursor-pointer backdrop-blur-xs transition-opacity duration-300",
+          { "visible opacity-100": showFilters }
+        )}
         onClick={() => onToggleWindow(false)}
       />
 
-      <div className="min-w-[220px] max-w-[260px] px-5 border-r border-gray-300 overflow-y-scroll">
-        <div className="hidden">
+      <div
+        className={cn(
+          "lg:min-w-[220px] w-[310px] ease-bitex-easeOut transition-all pb-8 duration-500 lg:w-auto max-w-[260px] absolute lg:relative h-full px-5 border-r bg-white z-20 border-gray-300 overflow-y-scroll",
+          showFilters ? "left-0" : "left-[-310px] lg:left-0"
+        )}
+      >
+        <div className="lg:hidden pb-2 flex justify-between text-gray-500 items-center my-2 border-b border-gray-300">
           <h2>Filters</h2>
-          <button onClick={() => onToggleWindow(false)}>
+          <button
+            onClick={() => onToggleWindow(false)}
+            className="block border-white rounded-sm cursor-pointer p-3 duration-300 border hover:bg-gray-100 transition-colors hover:border-gray-200"
+          >
             <CloseIcon width={12} />
           </button>
         </div>
-        <div className="w-full mb-4 border-b border-gray-300">
+        <div className="w-full lg:mt-0 my-4 border-b border-gray-300">
           <div className="flex justify-between mb-3.5">
             <h3 className="text-sm font-medium text-gray-800">Availability</h3>
           </div>
@@ -90,7 +103,7 @@ const Filters = ({
           </div>
           <div className="w-full flex gap-2 px-2.5 mb-6 flex-col">
             {pageStatus === "pageLoading" ? (
-              <div className={"styles.loadingBrands"}>
+              <div className="flex flex-col gap-2">
                 <SK_Box width="100%" height="20px" />
                 <SK_Box width="100%" height="20px" />
                 <SK_Box width="100%" height="20px" />
@@ -113,15 +126,13 @@ const Filters = ({
             )}
           </div>
         </div>
-        <div className={"styles.apply"}>
-          <Button
-            disabled={isFilterChanged}
-            className="w-full py-1 text-sm rounded-md text-gray-100 border-none bg-bitex-blue-500 hover:bg-bitex-blue-600 active:bg-bitex-blue-400 disabled:bg-bitex-blue-700"
-            onClick={() => onApplyFilter()}
-          >
-            Apply Changes
-          </Button>
-        </div>
+        <Button
+          disabled={isFilterChanged}
+          className="w-full py-1 text-sm rounded-md text-gray-100 border-none bg-bitex-blue-500 hover:bg-bitex-blue-600 active:bg-bitex-blue-400 disabled:bg-bitex-blue-700"
+          onClick={() => onApplyFilter()}
+        >
+          Apply Changes
+        </Button>
       </div>
     </div>
   );
