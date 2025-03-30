@@ -34,14 +34,11 @@ const convertStringToFloat = (str: string) => {
 };
 
 export const addProduct = async (data: TAddProductFormValues) => {
-  if (!ValidateAddProduct.safeParse(data).success)
-    return { error: "Invalid Data!" };
+  if (!ValidateAddProduct.safeParse(data).success) return { error: "Invalid Data!" };
 
   try {
     const price = convertStringToFloat(data.price);
-    const salePrice = data.salePrice
-      ? convertStringToFloat(data.salePrice)
-      : null;
+    const salePrice = data.salePrice ? convertStringToFloat(data.salePrice) : null;
 
     const result = db.category.update({
       where: {
@@ -122,15 +119,12 @@ export const getOneProduct = async (productID: string) => {
     if (!result) return { error: "Invalid Data!" };
 
     const specifications = await generateSpecTable(result.specs);
-    if (!specifications || specifications.length === 0)
-      return { error: "Invalid Date" };
+    if (!specifications || specifications.length === 0) return { error: "Invalid Date" };
 
-    const pathArray: TPath[] | null = await getPathByCategoryID(
-      result.category.id,
-      result.category.parentID
-    );
+    const pathArray: TPath[] | null = await getPathByCategoryID(result.category.id, result.category.parentID);
     if (!pathArray || pathArray.length === 0) return { error: "Invalid Date" };
 
+    //eslint-disable-next-line
     const { specs, ...others } = result;
     const mergedResult: TProductPageInfo = {
       ...others,
@@ -145,8 +139,7 @@ export const getOneProduct = async (productID: string) => {
 };
 
 export const getCartProducts = async (productIDs: string[]) => {
-  if (!productIDs || productIDs.length === 0)
-    return { error: "Invalid Product List" };
+  if (!productIDs || productIDs.length === 0) return { error: "Invalid Product List" };
 
   try {
     const result: TCartListItemDB[] | null = await db.product.findMany({
@@ -216,15 +209,12 @@ const generateSpecTable = async (rawSpec: ProductSpec[]) => {
     if (specifications.length === 0) return null;
 
     return specifications;
-  } catch (error) {
+  } catch {
     return null;
   }
 };
 
-const getPathByCategoryID = async (
-  categoryID: string,
-  parentID: string | null
-) => {
+const getPathByCategoryID = async (categoryID: string, parentID: string | null) => {
   try {
     if (!categoryID || categoryID === "") return null;
     if (!parentID || parentID === "") return null;
@@ -259,7 +249,7 @@ const getPathByCategoryID = async (
 
     if (!path || path.length === 0) return null;
     return path;
-  } catch (error) {
+  } catch {
     return null;
   }
 };

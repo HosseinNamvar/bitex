@@ -1,14 +1,10 @@
 "use client";
-import styles from "./specGroup.module.scss";
 
 import { useState } from "react";
 import Button from "@/components/UI/button";
 import { TSingleSpec, TSpecGroup } from "@/types/common";
-import {
-  addSingleSpec,
-  deleteSingleSpec,
-  deleteSpecGroup,
-} from "@/actions/category/categoryOptions";
+import { addSingleSpec, deleteSingleSpec, deleteSpecGroup } from "@/actions/category/categoryOptions";
+import Input from "@/components/UI/input";
 
 interface IProps {
   data: TSpecGroup;
@@ -75,45 +71,42 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
   };
 
   return (
-    <div className={styles.specGroup}>
-      <div className={styles.header}>
-        <div>
+    <div className="w-full flex flex-col rounded-[8px] border border-gray-300 pb-2">
+      <div className="w-full p-3 flex justify-between border-b border-gray-200 mb-1.5">
+        <div className="flex items-center gap-3">
           <span>{title}</span>
-          <Button
-            disabled={isLoading}
-            text="delete"
-            onClick={() => handleDeleteSpecGroup()}
-          />
+          <Button disabled={isLoading} onClick={() => handleDeleteSpecGroup()}>
+            delete
+          </Button>
         </div>
-        <div>
-          <input
+        <div className="flex items-center gap-2">
+          <Input
             disabled={isLoading}
             type="text"
             value={specToAdd}
             onChange={(e) => setSpecToAdd(e.currentTarget.value)}
           />
-          <Button
-            disabled={isLoading}
-            text="Add Spec"
-            onClick={() => handleAddSingleSpec()}
-          />
+          <Button className="w-[150px]" disabled={isLoading} onClick={() => handleAddSingleSpec()}>
+            Add Spec
+          </Button>
         </div>
       </div>
-      {specs.length > 0 ? (
+      {specs.length ? (
         <>
           {specs.map((spec, index) => (
-            <div className={styles.specRow} key={index}>
+            <div
+              className="flex px-3 py-2 mx-2 justify-between items-center rounded-md transition-colors duration-300"
+              key={index}
+            >
               <span>{spec}</span>
-              <Button
-                disabled={isLoading}
-                text="delete"
-                onClick={() => handleDeleteSingleSpec(spec)}
-              />
+              <Button disabled={isLoading} onClick={() => handleDeleteSingleSpec(spec)}>
+                delete
+              </Button>
             </div>
           ))}
         </>
       ) : (
-        <div className={styles.specRow}>
+        <div className="flex px-3 py-2 mx-2 justify-between items-center rounded-md">
           <span>There is no specification!</span>
         </div>
       )}

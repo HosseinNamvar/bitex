@@ -1,6 +1,6 @@
 "use client";
 import { TAddCategory } from "@/actions/category/category";
-import styles from "./addCategory.module.scss";
+import Input from "@/components/UI/input";
 
 interface IProps {
   errorMsg: string;
@@ -10,31 +10,29 @@ interface IProps {
 
 const AddCategory = ({ data, errorMsg, onChange }: IProps) => {
   return (
-    <div className={styles.addCategory}>
-      <div className={styles.row}>
-        <span className={styles.col1}>Category Name:</span>
-        <input
-          name="name"
-          value={data.name}
-          onChange={(e) => onChange({ ...data, name: e.currentTarget.value })}
-          type="text"
-          placeholder="name..."
-        />
-      </div>
-      <div className={styles.row}>
-        <span className={styles.col1}>URL:</span>
-        <input
-          name="url"
-          onChange={(e) => onChange({ ...data, url: e.currentTarget.value })}
-          type="text"
-          placeholder="URL..."
-          value={data.url}
-        />
-      </div>
+    <div className="grid grid-cols-7 gap-y-3 items-center my-3 mx-4">
+      <span className="col-span-3">Category Name:</span>
+      <Input
+        className="col-span-4"
+        name="name"
+        value={data.name}
+        onChange={(e) => onChange({ ...data, name: e.currentTarget.value })}
+        type="text"
+        placeholder="name..."
+      />
+      <span className="col-span-3">URL:</span>
+      <Input
+        className="col-span-4"
+        name="url"
+        onChange={(e) => onChange({ ...data, url: e.currentTarget.value })}
+        type="text"
+        placeholder="URL..."
+        value={data.url}
+      />
 
       {errorMsg !== "" && (
-        <div className={styles.row}>
-          <span className={styles.error}>{errorMsg}</span>
+        <div className="col-span-7">
+          <span className="text-bitex-red-500">{errorMsg}</span>
         </div>
       )}
     </div>

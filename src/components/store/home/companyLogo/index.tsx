@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import styles from "./companyLogo.module.scss";
-
 interface IProps {
   width: number;
   bgPositionX: number;
@@ -11,7 +9,7 @@ interface IProps {
 const HCompanyLogo = ({ bgPositionX, url, width }: IProps) => {
   return (
     <Link
-      className={styles.companyLogo}
+      className="bg-[url('/icons/companiesIcons.png')] h-14 bg-no-repeat bg-[position-y:center] opacity-80 transition-opacity duration-300 hover:opacity-100"
       style={{ width: width, backgroundPositionX: bgPositionX }}
       href={url}
     />

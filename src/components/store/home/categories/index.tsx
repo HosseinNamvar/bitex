@@ -1,12 +1,11 @@
 "use client";
-import styles from "./homeCategoryList.module.scss";
 
 import { useEffect, useState } from "react";
 
-import CategoryListItem from "./_components/catListItem";
 import { TGroupJSON } from "@/types/categories";
 import { getAllCategoriesJSON } from "@/actions/category/category";
 import { SK_Box } from "@/components/UI/skeleton";
+import CategoryListItem from "./catListItem";
 
 const HomeCategoryList = () => {
   const [categories, setCategories] = useState<TGroupJSON[]>([]);
@@ -21,13 +20,17 @@ const HomeCategoryList = () => {
   }, []);
 
   return (
-    <div className={styles.categoriesContainer}>
-      <ul>
+    <div className="min-w-[256px] absolute h-[500px] hidden lg:block bg-white mr-4 rounded-xl px-6 text-gray-800 shadow-md z-[3]">
+      <ul className="mt-3">
         {!categories || categories.length === 0 ? (
-          <div className={styles.loading}>{Skeletons()}</div>
+          <div className="flex flex-col gap-7 justify-center mt-5">{Skeletons()}</div>
         ) : (
           categories.map((item, index) => (
-            <CategoryListItem key={index} categoryData={item} />
+            <CategoryListItem
+              key={index}
+              categoryData={item}
+              className={index === categories.length - 1 ? "border-b-0" : ""}
+            />
           ))
         )}
       </ul>

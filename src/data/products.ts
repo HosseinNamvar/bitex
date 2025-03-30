@@ -1,5 +1,4 @@
 import { TProductCard } from "@/types/common";
-import { TProduct } from "@/types/product";
 
 export const ProductsData: TProductCard[] = [
   {

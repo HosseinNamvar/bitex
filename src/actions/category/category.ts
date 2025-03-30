@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { TCategory, TGroupJSON } from "@/types/categories";
 
+//eslint-disable-next-line
 const GetAllCategories = z.object({
   id: z.string(),
   parentID: z.string().min(6).nullable(),
@@ -33,43 +34,28 @@ export type TAddCategory = z.infer<typeof AddCategory>;
 export type TUpdateCategory = z.infer<typeof UpdateCategory>;
 
 const convertToJson = (categoriesTable: TCategory[]): TGroupJSON[] => {
-  const generateCategoryGroups = (
-    categoriesTable: TCategory[]
-  ): TGroupJSON[] => {
-    return categoriesTable
-      .filter((tableRow) => tableRow.parentID === null)
-      .map((group) => ({ group, categories: [] }));
+  const generateCategoryGroups = (categoriesTable: TCategory[]): TGroupJSON[] => {
+    return categoriesTable.filter((tableRow) => tableRow.parentID === null).map((group) => ({ group, categories: [] }));
   };
 
-  const fillCategoryArray = (
-    groups: TGroupJSON[],
-    categoriesTable: TCategory[]
-  ) => {
+  const fillCategoryArray = (groups: TGroupJSON[], categoriesTable: TCategory[]) => {
     groups.forEach((group) => {
-      group.categories = getChildren(categoriesTable, group.group.id).map(
-        (category) => ({ category, subCategories: [] })
-      );
+      group.categories = getChildren(categoriesTable, group.group.id).map((category) => ({
+        category,
+        subCategories: [],
+      }));
     });
   };
 
-  const fillSubCategoryArray = (
-    groups: TGroupJSON[],
-    categoriesTable: TCategory[]
-  ) => {
+  const fillSubCategoryArray = (groups: TGroupJSON[], categoriesTable: TCategory[]) => {
     groups.forEach((group) => {
       group.categories.forEach((category) => {
-        category.subCategories = getChildren(
-          categoriesTable,
-          category.category.id
-        );
+        category.subCategories = getChildren(categoriesTable, category.category.id);
       });
     });
   };
 
-  const getChildren = (
-    array: TCategory[],
-    parentID: string | null
-  ): TCategory[] => {
+  const getChildren = (array: TCategory[], parentID: string | null): TCategory[] => {
     return array.filter((item) => item.parentID === parentID);
   };
 
@@ -86,7 +72,7 @@ export const getAllCategories = async () => {
 
     if (!result) return { error: "Can't read categories" };
     return { res: result };
-  } catch (error) {
+  } catch {
     return { error: "Cant read Category Groups" };
   }
 };
@@ -96,7 +82,7 @@ export const getAllCategoriesJSON = async () => {
 
     if (!result) return { error: "Can't read categories" };
     return { res: convertToJson(result) };
-  } catch (error) {
+  } catch {
     return { error: "Cant read Category Groups" };
   }
 };
@@ -122,13 +108,12 @@ export const addCategory = async (data: TAddCategory) => {
 };
 
 export const updateCategory = async (data: TUpdateCategory) => {
-  if (!UpdateCategory.safeParse(data).success)
-    return { error: "Data is no valid" };
+  if (!UpdateCategory.safeParse(data).success) return { error: "Data is no valid" };
 
   const { id, iconSize, ...values } = data;
 
   try {
-    let result = await db.category.update({
+    const result = await db.category.update({
       where: {
         id,
       },
@@ -166,7 +151,7 @@ export const deleteCategory = async (id: string) => {
       return { res: JSON.stringify(result) };
     }
     return { error: "It has child!" };
-  } catch (error) {
+  } catch {
     return { error: "Can't delete it!" };
   }
 };

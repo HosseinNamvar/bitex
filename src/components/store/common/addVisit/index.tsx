@@ -9,10 +9,7 @@ const AddVisit = () => {
   const pathName = usePathname();
   useEffect(() => {
     const addingVisit = async () => {
-      const deviceResolution =
-        window.screen.width.toString() +
-        " x " +
-        window.screen.height.toString();
+      const deviceResolution = window.screen.width.toString() + " x " + window.screen.height.toString();
 
       const data: TAddPageVisit = {
         pageType: "MAIN",
@@ -29,7 +26,7 @@ const AddVisit = () => {
         const pathArr = pathName.split("/product/");
         data.productID = pathArr[pathArr.length - 1];
       }
-      const response = await addVisit(data);
+      await addVisit(data);
     };
     addingVisit();
   }, [pathName]);

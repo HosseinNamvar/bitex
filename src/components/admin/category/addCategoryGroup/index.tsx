@@ -1,16 +1,15 @@
 "use client";
-import { ElementRef, useRef, useState } from "react";
-import styles from "./addCategory.module.scss";
+import { useState } from "react";
 import Button from "@/components/UI/button";
 import { TGetAllCategories, addCategory } from "@/actions/category/category";
 import Popup from "@/components/UI/popup";
 import GroupCategory from "../../forms/groupCategory";
 
-interface IProps {
+type TProps = {
   onReset: () => void;
-}
+};
 
-const AddCategoryGroup = ({ onReset }: IProps) => {
+const AddCategoryGroup = ({ onReset }: TProps) => {
   const [showWindow, setShowWindow] = useState<boolean>(false);
   const defaultGroupData: TGetAllCategories = {
     id: "",
@@ -22,12 +21,14 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
   };
   const [errorMsg, setErrorMsg] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [groupCategoryData, setGroupCategory] =
-    useState<TGetAllCategories>(defaultGroupData);
+  const [groupCategoryData, setGroupCategory] = useState<TGetAllCategories>(defaultGroupData);
 
   const handleAddGroup = async () => {
     const { name, url, iconUrl, iconSize } = groupCategoryData;
-    if (!name || !url || !iconUrl || !iconSize) return;
+    if (!name || !url || !iconUrl || !iconSize) {
+      setErrorMsg("All fields are required!");
+      return;
+    }
     if (name === "") {
       setErrorMsg("Name is empty!");
       return;
@@ -61,21 +62,17 @@ const AddCategoryGroup = ({ onReset }: IProps) => {
   };
 
   return (
-    <div className={styles.addCategoryGroup}>
-      <Button onClick={() => setShowWindow(true)} text="Add Group" />
+    <div>
+      <Button className="text-sm py-1" onClick={() => setShowWindow(true)}>
+        Add Group
+      </Button>
       {showWindow && (
         <Popup
-          content={
-            <GroupCategory
-              errorMsg={errorMsg}
-              data={groupCategoryData}
-              onChange={setGroupCategory}
-            />
-          }
+          content={<GroupCategory errorMsg={errorMsg} data={groupCategoryData} onChange={setGroupCategory} />}
           isLoading={buttonDisabled}
           onCancel={() => setShowWindow(false)}
           onClose={() => setShowWindow(false)}
-          onSubmit={() => handleAddGroup()}
+          onSubmit={handleAddGroup}
           title="Add Category Group"
         />
       )}

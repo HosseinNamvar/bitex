@@ -1,18 +1,11 @@
 import Link from "next/link";
 import { Metadata } from "next";
 
-import styles from "./page.module.scss";
-
 import HomeCategoryList from "@/components/store/home/categories";
 import HomeSlider from "@/components/store/home/slider";
 import TodayDealCard from "@/components/store/home/todayDealCard";
 import WideAd from "@/components/store/home/wideAd";
-import {
-  BlogCardData,
-  CollectionsData,
-  TodayDeals,
-  TopProducts,
-} from "@/data/homepageData";
+import { BlogCardData, CollectionsData, TodayDeals, TopProducts } from "@/data/homepageData";
 import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
 import HomeBlogCard from "@/components/store/home/blogCard";
@@ -24,13 +17,13 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className={styles.homePage}>
-      <div className="storeContainer flexCol">
-        <div className={styles.heroContainer}>
+    <div className="w-full bg-mint-500">
+      <div className="storeContainer flex-col">
+        <div className="flex w-full mt-40">
           <HomeCategoryList />
           <HomeSlider />
         </div>
-        <div className={styles.wideAdContainer}>
+        <div className="w-full mt-15 flex flex-col gap-4 md:flex-row">
           <WideAd
             imgUrl="/images/images/wideAd1.jpg"
             smallTitle="Smart Watches"
@@ -50,12 +43,17 @@ export default function Home() {
             url="/list/photography/drones"
           />
         </div>
-        <div className={styles.homeSection}>
-          <div className={styles.sectionHeader}>
-            <h2>Today’s Deals</h2>
-            <Link href={""}>view all</Link>
+        <div className="w-full mt-14">
+          <div className="flex w-full justify-between items-center mb-7">
+            <h2 className="text-2xl font-medium text-gray-700">Today’s Deals</h2>
+            <Link
+              href={""}
+              className="font-medium bg-[position:right_center] hover:pr-5 pr-6 text-gray-700 bg-[url('/icons/arrowIcon02.svg')] bg-no-repeat bg-right-center transition-all duration-300 ease-out"
+            >
+              view all
+            </Link>
           </div>
-          <div className={styles.cardsWrapper}>
+          <div className="flex justify-between gap-3.5 overflow-x-scroll pb-7 2xl:pb-0 2xl:overflow-x-hidden">
             {TodayDeals.map((deal, index) => (
               <TodayDealCard
                 productName={deal.name}
@@ -70,7 +68,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className={styles.wideAdContainer}>
+        <div className="w-full mt-15 flex gap-4 flex-col md:flex-row">
           <WideAd
             imgUrl="/images/images/lensAd.jpg"
             smallTitle="Smart Watches"
@@ -84,22 +82,22 @@ export default function Home() {
             url="/list/photography/drones"
           />
         </div>
-        <div className={styles.homeSection}>
-          <div className={styles.sectionHeader}>
-            <h2>Collections</h2>
+        <div className="w-full mt-14">
+          <div className="flex w-full justify-between items-center mb-7">
+            <h2 className="text-2xl font-medium text-gray-700">Collections</h2>
           </div>
-          <div className={styles.cardsWrapper}>
+          <div className="flex justify-between gap-3.5 overflow-x-scroll 2xl:overflow-x-hidden">
             {CollectionsData.map((collection, index) => (
               <CollectionCard collection={collection} key={index} />
             ))}
           </div>
         </div>
-        <div className={styles.homeSection}>
-          <div className={styles.sectionHeader}>
-            <h2>Top Selling Products</h2>
+        <div className="w-full mt-14">
+          <div className="flex w-full justify-between items-center mb-7">
+            <h2 className="text-2xl font-medium text-gray-700">Top Selling Products</h2>
             <Link href={"/"}>view all</Link>
           </div>
-          <div className={styles.cardsWrapper}>
+          <div className="flex justify-between gap-3.5 overflow-x-scroll pb-7 2xl:pb-2 2xl:overflow-x-visible">
             {TopProducts.map((product, index) => (
               <ProductCard
                 name={product.name}
@@ -114,11 +112,11 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className={styles.homeSection}>
-          <div className={styles.sectionHeader}>
-            <h2>Latest Posts</h2>
+        <div className="w-full mt-14">
+          <div className="flex w-full justify-between items-center mb-7">
+            <h2 className="text-2xl font-medium text-gray-700">Latest Posts</h2>
           </div>
-          <div className={styles.blogCardContainer}>
+          <div className="flex gap-6 flex-col md:flex-row">
             {BlogCardData.map((blog, index) => (
               <HomeBlogCard
                 key={index}
@@ -130,33 +128,17 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className={styles.companiesSection}>
-          <h2>Selected Brands</h2>
-          <div>
-            <HCompanyLogo
-              width={104}
-              bgPositionX={0}
-              url="/list/photography/scanners/epson"
-            />
+        <div className="w-full mt-24 mb-12 md:mb-32 flex flex-col">
+          <h2 className="text-2xl font-medium text-gray-700 text-center mb-10">Selected Brands</h2>
+          <div className="flex justify-between items-center md:flex-row md:gap-0 flex-col gap-8">
+            <HCompanyLogo width={104} bgPositionX={0} url="/list/photography/scanners/epson" />
             <HCompanyLogo width={50} bgPositionX={-105} url="/" />
             <HCompanyLogo width={50} bgPositionX={-156} url="/" />
-            <HCompanyLogo
-              width={44}
-              bgPositionX={-207}
-              url="/list/smartphones/apple-iphone"
-            />
-            <HCompanyLogo
-              width={47}
-              bgPositionX={-252}
-              url="/list/smartphones/xiaomi"
-            />
+            <HCompanyLogo width={44} bgPositionX={-207} url="/list/smartphones/apple-iphone" />
+            <HCompanyLogo width={47} bgPositionX={-252} url="/list/smartphones/xiaomi" />
             <HCompanyLogo width={54} bgPositionX={-300} url="/" />
             <HCompanyLogo width={55} bgPositionX={-355} url="/" />
-            <HCompanyLogo
-              width={98}
-              bgPositionX={-411}
-              url="/list/pc-laptops/laptops/asus"
-            />
+            <HCompanyLogo width={98} bgPositionX={-411} url="/list/pc-laptops/laptops/asus" />
           </div>
         </div>
       </div>

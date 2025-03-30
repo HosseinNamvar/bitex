@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.scss";
+import "./globals.css";
 
 const outfitFont = localFont({
-  src: "../../public/fonts/Outfit-VariableFont.ttf",
+  src: "../assets/fonts/Outfit-VariableFont.ttf",
   fallback: ["sans-serif", "system-ui", "arial"],
 });
 

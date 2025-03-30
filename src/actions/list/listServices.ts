@@ -9,38 +9,22 @@ const ValidateSort = z.object({
   sortType: z.enum(["asc", "desc"]),
 });
 
-export const getList = async (
-  path: string,
-  sortData: TListSort,
-  filters: TFilters
-) => {
-  if (!ValidateSort.safeParse(sortData).success)
-    return { error: "Invalid Path" };
+export const getList = async (path: string, sortData: TListSort, filters: TFilters) => {
+  if (!ValidateSort.safeParse(sortData).success) return { error: "Invalid Path" };
   if (!path || path === "") return { error: "Invalid Path" };
   const pathArray = pathToArray(path);
-  if (!pathArray || pathArray.length > 3 || pathArray.length === 0)
-    return { error: "Invalid Path" };
+  if (!pathArray || pathArray.length > 3 || pathArray.length === 0) return { error: "Invalid Path" };
 
   const categoryID = await findCategoryFromPathArray(pathArray);
   if (categoryID === "") return { error: "Invalid Path Name" };
 
-  const subCategories: TProductPath[] | null = await getSubCategories(
-    categoryID
-  );
+  const subCategories: TProductPath[] | null = await getSubCategories(categoryID);
   if (!subCategories) return { error: "Invalid Sub Categories" };
 
-  const allRelatedCategories = await findCategoryChildren(
-    categoryID,
-    pathArray.length
-  );
-  if (!allRelatedCategories || allRelatedCategories.length === 0)
-    return { error: "Invalid Path Name" };
+  const allRelatedCategories = await findCategoryChildren(categoryID, pathArray.length);
+  if (!allRelatedCategories || allRelatedCategories.length === 0) return { error: "Invalid Path Name" };
 
-  const result = await getProductsByCategories(
-    allRelatedCategories,
-    sortData,
-    filters
-  );
+  const result = await getProductsByCategories(allRelatedCategories, sortData, filters);
   if (!result) return { error: "Can't Find Product!" };
 
   return { products: result, subCategories: subCategories };
@@ -62,7 +46,7 @@ const getSubCategories = async (catID: string) => {
       });
     });
     return subCategories;
-  } catch (error) {
+  } catch {
     return null;
   }
 };
@@ -75,13 +59,11 @@ const findCategoryFromPathArray = async (pathArray: string[]) => {
     let parentID: string | null = null;
     let categoryID = "";
     pathArray.forEach((path) => {
-      categoryID =
-        result.filter((cat) => cat.parentID === parentID && cat.url === path)[0]
-          .id || "";
+      categoryID = result.filter((cat) => cat.parentID === parentID && cat.url === path)[0].id || "";
       parentID = categoryID;
     });
     return categoryID;
-  } catch (error) {
+  } catch {
     return "";
   }
 };
@@ -92,7 +74,7 @@ const findCategoryChildren = async (catID: string, numberOfParents: number) => {
     const result = await db.category.findMany();
     if (!result) return null;
 
-    let tempChildren: string[] = [];
+    const tempChildren: string[] = [];
     result.forEach((cat) => {
       if (cat.parentID === catID) {
         tempChildren.push(cat.id);
@@ -110,16 +92,12 @@ const findCategoryChildren = async (catID: string, numberOfParents: number) => {
     }
 
     return tempChildren.concat([catID]);
-  } catch (error) {
+  } catch {
     return null;
   }
 };
 
-const getProductsByCategories = async (
-  categories: string[],
-  sortData: TListSort,
-  filters: TFilters
-) => {
+const getProductsByCategories = async (categories: string[], sortData: TListSort, filters: TFilters) => {
   const brands: string[] | null = filters.brands.length > 0 ? [] : null;
   if (brands) {
     filters.brands.forEach((brand) => {
@@ -181,7 +159,7 @@ const getProductsByCategories = async (
     });
     if (!result) return null;
     return result;
-  } catch (error) {
+  } catch {
     return null;
   }
 };

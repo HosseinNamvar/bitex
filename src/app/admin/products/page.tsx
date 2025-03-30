@@ -1,5 +1,4 @@
 "use client";
-import styles from "./adminProducts.module.scss";
 
 import { useEffect, useState } from "react";
 import Button from "@/components/UI/button";
@@ -25,8 +24,7 @@ const initialForm: TAddProductFormValues = {
 const AdminProducts = () => {
   const [showProductWindow, setShowProductWindow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formValues, setFormValues] =
-    useState<TAddProductFormValues>(initialForm);
+  const [formValues, setFormValues] = useState<TAddProductFormValues>(initialForm);
   const [productsList, setProductsList] = useState<TProductListItem[]>([]);
 
   useEffect(() => {
@@ -51,22 +49,15 @@ const AdminProducts = () => {
   };
 
   return (
-    <div className={styles.adminProducts}>
-      <div className={styles.header}>
-        <Button
-          text="Add new product"
-          onClick={() => setShowProductWindow(true)}
-        />
+    <div className="flex flex-col">
+      <div className="flex items-center h-20 mb-8">
+        <Button onClick={() => setShowProductWindow(true)}>Add new product</Button>
       </div>
-      <div className={styles.dataTable}>
-        {productsList.length > 0 ? (
+      <div className="flex flex-col text-sm text-gray-800">
+        {productsList.length ? (
           <>
             {productsList.map((product) => (
-              <ProductListItem
-                key={product.id}
-                data={product}
-                requestReload={getProductsList}
-              />
+              <ProductListItem key={product.id} data={product} requestReload={getProductsList} />
             ))}
           </>
         ) : (
@@ -75,9 +66,7 @@ const AdminProducts = () => {
       </div>
       {showProductWindow && (
         <Popup
-          content={
-            <ProductForm formValues={formValues} onChange={setFormValues} />
-          }
+          content={<ProductForm formValues={formValues} onChange={setFormValues} />}
           isLoading={isLoading}
           onCancel={() => setShowProductWindow(false)}
           onClose={() => setShowProductWindow(false)}

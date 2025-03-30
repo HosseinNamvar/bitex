@@ -1,16 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import styles from "./brands.module.scss";
 
 import Button from "@/components/UI/button";
-import {
-  addBrand,
-  deleteBrand,
-  getAllBrands,
-  updateBrand,
-} from "@/actions/brands/brands";
+import { addBrand, deleteBrand, getAllBrands, updateBrand } from "@/actions/brands/brands";
 import { TBrand } from "@/types/product";
 import Popup from "@/components/UI/popup";
+import Input from "@/components/UI/input";
 
 let selectedBrandID = "";
 const Brand = () => {
@@ -26,8 +21,7 @@ const Brand = () => {
 
   const fetchBrands = async () => {
     const response = await getAllBrands();
-    if (response.error) {
-    }
+
     if (response.res) {
       setIsListLoading(false);
       setBrandList(response.res);
@@ -98,30 +92,33 @@ const Brand = () => {
   };
 
   return (
-    <div className={styles.brands}>
-      <div className={styles.addingSection}>
-        <input
+    <div>
+      <div className="flex gap-4 items-center">
+        <Input
           type="text"
+          className="w-[200px]"
           value={addValue}
           onChange={(e) => setAddValue(e.currentTarget.value)}
         />
-        <Button text="Add New Brand" disabled={isLoading} onClick={handleAdd} />
+        <Button disabled={isLoading} onClick={handleAdd}>
+          Add New Brand
+        </Button>
       </div>
-      <div className={styles.brandsList}>
+      <div className="w-[500px] mt-10 text-sm text-gray-800">
         {isListLoading ? (
           <div>LOADING...</div>
         ) : (
-          <div className={styles.list}>
+          <div className="flex flex-col">
             {brandList.length === 0 && <div>There is No Brand!</div>}
             {brandList.map((brand) => (
-              <div key={brand.id} className={styles.row}>
+              <div
+                key={brand.id}
+                className="flex items-center p-1.5 pl-6 rounded-lg justify-between transition-colors duration-400 hover:bg-gray-100"
+              >
                 <span>{brand.name}</span>
-                <div className={styles.buttonsWrapper}>
-                  <Button text="Edit" onClick={() => handleShowEdit(brand)} />
-                  <Button
-                    text="Delete"
-                    onClick={() => handleShowDelete(brand.id)}
-                  />
+                <div className="flex gap-4">
+                  <Button onClick={() => handleShowEdit(brand)}>Edit</Button>
+                  <Button onClick={() => handleShowDelete(brand.id)}>Delete</Button>
                 </div>
               </div>
             ))}
@@ -133,10 +130,11 @@ const Brand = () => {
           width="400px"
           title="Edit Brand Name"
           content={
-            <div className={styles.editSection}>
-              <div>
-                <span>Brand Name:</span>
-                <input
+            <div className="flex flex-col gap-4 py-10 px-3">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-600">Brand Name:</span>
+                <Input
+                  className="w-[200px]"
                   type="text"
                   value={editValue}
                   onChange={(e) => setEditValue(e.currentTarget.value)}
@@ -156,7 +154,7 @@ const Brand = () => {
       {showDelete && (
         <Popup
           width="300px"
-          content={<div className={styles.deleteMsg}>Are You Sure?</div>}
+          content={<div className="text-center py-3 pb-6">Are You Sure?</div>}
           isLoading={isLoading}
           onCancel={() => setShowDelete(false)}
           onClose={() => setShowDelete(false)}
