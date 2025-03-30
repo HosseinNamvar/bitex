@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
-import styles from "./groupCategory.module.scss";
+
 import { TGetAllCategories } from "@/actions/category/category";
+import Input from "@/components/UI/input";
 
 interface IProps {
   errorMsg: string;
@@ -11,45 +11,41 @@ interface IProps {
 
 const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
   const iconSize: number[] = data.iconSize ? [...data.iconSize] : [];
+
   return (
-    <div className={styles.groupCategoryForm}>
-      <div className={styles.row}>
-        <span className={styles.col1}>Category Group Name:</span>
-        <input
-          name="name"
-          value={data.name}
-          onChange={(e) => onChange({ ...data, name: e.currentTarget.value })}
-          type="text"
-          placeholder="name..."
-        />
-      </div>
-      <div className={styles.row}>
-        <span className={styles.col1}>URL:</span>
-        <input
-          name="url"
-          onChange={(e) => onChange({ ...data, url: e.currentTarget.value })}
-          type="text"
-          placeholder="URL..."
-          value={data.url}
-        />
-      </div>
-      <div className={styles.row}>
-        <span className={styles.col1}>ICON URL:</span>
-        <input
-          name="iconUrl"
-          onChange={(e) =>
-            onChange({ ...data, iconUrl: e.currentTarget.value })
-          }
-          type="text"
-          placeholder="ICON URL..."
-          value={data.iconUrl || ""}
-        />
-      </div>
-      <div className={styles.row}>
-        <span className={styles.col1}>ICON Size:</span>
+    <div className="grid grid-cols-3 text-gray-500 gap-y-4 items-center my-6 mx-4 text-sm">
+      <span>Category Group Name:</span>
+      <Input
+        className="col-span-2 w-[200px]"
+        name="name"
+        value={data.name}
+        onChange={(e) => onChange({ ...data, name: e.currentTarget.value })}
+        type="text"
+        placeholder="name..."
+      />
+      <span>URL:</span>
+      <Input
+        className="col-span-2 w-[200px]"
+        name="url"
+        onChange={(e) => onChange({ ...data, url: e.currentTarget.value })}
+        type="text"
+        placeholder="URL..."
+        value={data.url}
+      />
+      <span>ICON URL:</span>
+      <Input
+        className="col-span-2 w-[200px]"
+        name="iconUrl"
+        onChange={(e) => onChange({ ...data, iconUrl: e.currentTarget.value })}
+        type="text"
+        placeholder="ICON URL..."
+        value={data.iconUrl || ""}
+      />
+      <span>ICON Size:</span>
+      <div className="col-span-2 flex gap-2">
         {data.iconSize && (
           <>
-            <input
+            <Input
               name="iconSize1"
               type="number"
               onChange={(e) =>
@@ -61,7 +57,7 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
               placeholder="0"
               value={data.iconSize[0]}
             />
-            <input
+            <Input
               name="iconSize2"
               type="number"
               placeholder="0"
@@ -76,11 +72,7 @@ const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
           </>
         )}
       </div>
-      {errorMsg !== "" && (
-        <div className={styles.row}>
-          <span className={styles.error}>{errorMsg}</span>
-        </div>
-      )}
+      {errorMsg !== "" && <span className="col-span-3 text-bitex-red-500">{errorMsg}</span>}
     </div>
   );
 };
