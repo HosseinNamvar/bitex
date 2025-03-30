@@ -1,9 +1,8 @@
 "use client";
 import { CloseIcon } from "@/components/icons/svgIcons";
 import Button from "../button";
-import styles from "./popup.module.scss";
 
-interface IProps {
+type TProps = {
   title?: string;
   width?: string;
   confirmBtnText?: string;
@@ -13,7 +12,7 @@ interface IProps {
   onSubmit: () => void;
   isLoading: boolean;
   content: React.ReactNode;
-}
+};
 
 const Popup = ({
   title,
@@ -25,27 +24,32 @@ const Popup = ({
   onSubmit,
   isLoading,
   content,
-}: IProps) => {
+}: TProps) => {
   return (
-    <div className={styles.popup}>
-      <div className={styles.background} onClick={onClose} />
-      <div className={styles.window} style={width ? { width: width } : {}}>
+    <div className="fixed inset-0 overflow-hidden flex items-center justify-center">
+      <div className="absolute inset-0 cursor-pointer bg-[rgba(0,0,0,0.2)] backdrop-blur-[2px]" onClick={onClose} />
+      <div
+        className={
+          "w-[700px] max-h-[95vh] flex flex-col px-6 py-4 rounded-xl bg-white z-[10] text-gray-700 drop-shadow-sm origin-top animate-poppingUp ease-bitex-easeOut"
+        }
+        style={width ? { width: width } : {}}
+      >
         {title && (
-          <div className={styles.header}>
+          <div className="flex justify-between items-center pb-3 text-gray-700 border-b border-gray-300">
             {title}
-            <button onClick={onClose}>
+            <Button onClick={onClose} className="size-8 p-0 border border-white transition-colors duration-400">
               <CloseIcon width={12} />
-            </button>
+            </Button>
           </div>
         )}
         {content}
-        <div className={styles.windowControl}>
-          <Button text={cancelBtnText || "Cancel"} onClick={onCancel} />
-          <Button
-            text={confirmBtnText || "OK"}
-            disabled={isLoading}
-            onClick={onSubmit}
-          />
+        <div className="flex pt-4 border-t text-sm border-gray-300 justify-center items-center gap-6">
+          <Button className="w-[140px] py-1.5" onClick={onCancel}>
+            {cancelBtnText || "Cancel"}
+          </Button>
+          <Button className="w-[140px] py-1.5" disabled={isLoading} onClick={onSubmit}>
+            {confirmBtnText || "OK"}
+          </Button>
         </div>
       </div>
     </div>
