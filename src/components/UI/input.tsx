@@ -9,7 +9,7 @@ export const Input = (props: TProps) => {
 
   const sizeClasses = {
     sm: "px-2 py-1 text-xs rounded-sm",
-    md: "px-3 py-1.5 text-sm rounded-md",
+    md: "px-3 py-1 text-sm rounded-md",
     base: "px-4 py-2 text-base rounded-lg",
     lg: "px-5 py-2 text-lg rounded-lg",
   };

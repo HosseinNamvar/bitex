@@ -1,11 +1,11 @@
 "use client";
-import styles from "./addSpecGroup.module.scss";
 
 import { useState } from "react";
 
 import Button from "@/components/UI/button";
-import { addOptionSet, addSpecGroup } from "@/actions/category/categoryOptions";
+import { addSpecGroup } from "@/actions/category/categoryOptions";
 import { TSpecGroup } from "@/types/common";
+import Input from "@/components/UI/input";
 
 interface IProps {
   categorySpecGroupID: string;
@@ -39,21 +39,14 @@ const AddSpecGroup = ({ categorySpecGroupID, reloadRequest }: IProps) => {
   };
 
   return (
-    <div className={styles.addSpecGroup}>
-      <div>
-        <span>Title:</span>
-        <input
-          type="text"
-          onChange={(e) => setTitle(e.currentTarget.value)}
-          value={title}
-          disabled={isLoading}
-        />
+    <div className="w-full flex items-center justify-between rounded-lg bg-gray-100 px-2 py-1.5 my-1.5 relative">
+      <div className="flex items-center ml-2">
+        <span className="mr-2">Title:</span>
+        <Input type="text" onChange={(e) => setTitle(e.currentTarget.value)} value={title} disabled={isLoading} />
       </div>
-      <Button
-        text="Add Spec Group"
-        disabled={isLoading}
-        onClick={() => handleAddOption()}
-      />
+      <Button disabled={isLoading} onClick={() => handleAddOption()}>
+        Add Spec Group
+      </Button>
     </div>
   );
 };
