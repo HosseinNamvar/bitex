@@ -1,5 +1,4 @@
 "use client";
-import styles from "./rowGroup.module.scss";
 
 import { useState } from "react";
 import Button from "@/components/UI/button";
@@ -41,29 +40,18 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [groupCategoryData, setGroupCategoryData] =
-    useState<TGetAllCategories>(data);
-  const [addCategoryData, setAddCategoryData] =
-    useState<TAddCategory>(initialCategory);
+  const [groupCategoryData, setGroupCategoryData] = useState<TGetAllCategories>(data);
+  const [addCategoryData, setAddCategoryData] = useState<TAddCategory>(initialCategory);
 
   // ---------------------- FUNCTIONS ----------------------
   const handleUpdateGroup = async () => {
     let updatedData: TUpdateCategory = { id: groupId, iconSize: [10, 10] };
 
-    const keys = ["name", "url", "iconUrl"] as const;
+    groupCategoryData.name !== data.name ? (updatedData.name = groupCategoryData.name) : "";
 
-    groupCategoryData.name !== data.name
-      ? (updatedData.name = groupCategoryData.name)
-      : "";
+    groupCategoryData.url !== data.url ? (updatedData.url = groupCategoryData.url) : "";
 
-    groupCategoryData.url !== data.url
-      ? (updatedData.url = groupCategoryData.url)
-      : "";
-
-    if (
-      groupCategoryData.iconUrl &&
-      groupCategoryData.iconUrl !== data.iconUrl
-    ) {
+    if (groupCategoryData.iconUrl && groupCategoryData.iconUrl !== data.iconUrl) {
       updatedData.iconUrl = groupCategoryData.iconUrl;
     }
 
@@ -137,37 +125,40 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
   };
 
   return (
-    <div className={styles.catGroupRow}>
-      <span>{name}</span>
-      <div>
-        <Button
-          text="Options / Specifications"
-          onClick={() => setShowOptions(true)}
-        />
-        <Button text="Add Category" onClick={() => setShowAddCategory(true)} />
+    <div className="flex flex-wrap text-sm justify-between p-3 pl-5 items-center">
+      <span className="inline-block w-[200px] text-gray-700 text-sm">{name}</span>
+      <div className="flex gap-2">
+        <Button size="md" onClick={() => setShowOptions(true)}>
+          Options / Specifications
+        </Button>
+        <Button size="md" onClick={() => setShowAddCategory(true)}>
+          Add Category
+        </Button>
       </div>
-      <div>
-        <Button text="Edit" onClick={() => setShowEdit(true)} />
-        <Button text="Delete" onClick={() => setShowDelete(true)} />
+      <div className="flex gap-2">
+        <Button size="md" onClick={() => setShowEdit(true)}>
+          Edit
+        </Button>
+        <Button size="md" onClick={() => setShowDelete(true)}>
+          Delete
+        </Button>
       </div>
-      {categories.length > 0 && (
-        <div className={styles.categories}>
+      {!!categories.length && (
+        <div className="min-w-full flex flex-col mt-3">
           {categories?.map(
             (cat) =>
               cat.parentID === data.id && (
                 <Category
                   data={cat}
                   key={cat.id}
-                  subCategories={categories.filter(
-                    (c) => c.parentID === cat.id
-                  )}
+                  subCategories={categories.filter((c) => c.parentID === cat.id)}
                   onReset={onReset}
                 />
               )
           )}
         </div>
       )}
-      {showOptions ? (
+      {showOptions && (
         <Popup
           content={<CategoryOptions categoryID={groupId} categoryName={name} />}
           isLoading={false}
@@ -176,18 +167,10 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
           onSubmit={() => setShowOptions(false)}
           title=""
         />
-      ) : (
-        ""
       )}
       {showAddCategory && (
         <Popup
-          content={
-            <AddCategory
-              data={addCategoryData}
-              errorMsg={errorMsg}
-              onChange={setAddCategoryData}
-            />
-          }
+          content={<AddCategory data={addCategoryData} errorMsg={errorMsg} onChange={setAddCategoryData} />}
           width="360px"
           isLoading={isLoading}
           onCancel={() => setShowAddCategory(false)}
@@ -198,13 +181,7 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
       )}
       {showEdit && (
         <Popup
-          content={
-            <GroupCategory
-              errorMsg={errorMsg}
-              data={groupCategoryData}
-              onChange={setGroupCategoryData}
-            />
-          }
+          content={<GroupCategory errorMsg={errorMsg} data={groupCategoryData} onChange={setGroupCategoryData} />}
           isLoading={isLoading}
           onCancel={() => setShowEdit(false)}
           onClose={() => setShowEdit(false)}
@@ -215,7 +192,7 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
       {showDelete && (
         <Popup
           content={
-            <div className={styles.deleteText}>
+            <div className="w-full px-5 pt-5 pb-10 flex gap-4 flex-col items-center justify-center text-center">
               <span>Are you sure?</span>
               <span>{errorMsg}</span>
             </div>
