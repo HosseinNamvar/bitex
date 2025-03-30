@@ -27,6 +27,7 @@ input[type="range"]::-moz-range-thumb {
   --animate-oldSlide: oldSlide 1s;
   --animate-autoSlide: autoSlide 5s linear;
   --animate-loading: loading 2s infinite;
+  --animate-poppingUp: poppingUp 0.3s;
   --ease-bitex-easeOut: cubic-bezier(0, 0.68, 0.31, 1);
   --color-bitex-red-500: #eb4141;
 
@@ -80,6 +81,17 @@ input[type="range"]::-moz-range-thumb {
     }
     100% {
       transform: translateX(100%);
+    }
+  }
+
+  @keyframes poppingUp {
+    0% {
+      margin-top: 24px;
+      transform: scale(1.03);
+    }
+    100% {
+      margin-top: 0px;
+      transform: scale(1);
     }
   }
 }
