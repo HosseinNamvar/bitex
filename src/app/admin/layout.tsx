@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import styles from "./layout.module.scss";
 import AdminSidebar from "@/components/admin/sideBar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
@@ -15,10 +14,10 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
     redirect("/");
   }
   return (
-    <div className={styles.adminLayout}>
+    <div className="styles.adminLayout flex min-h-screen">
       <AdminSidebar />
-      <div className={styles.rightCol}>
-        <h1>Page Name</h1>
+      <div className="w-full p-6">
+        <h1 className="w-full block text-gray-700 text-2xl font-light pb-5 mb-2 border-b border-gray-300">Page Name</h1>
         {children}
       </div>
     </div>
