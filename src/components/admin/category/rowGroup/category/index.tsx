@@ -1,5 +1,5 @@
 "use client";
-import styles from "./categoryRow.module.scss";
+// import "styles from" "./categoryRow.module.scss";
 
 import { useState } from "react";
 
@@ -78,10 +78,8 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
 
     let updatedData: TUpdateCategory = { id: categoryID, iconSize: [] };
 
-    if (editCategoryData.name !== categoryName)
-      updatedData.name = editCategoryData.name;
-    if (editCategoryData.url !== categoryUrl)
-      updatedData.url = editCategoryData.url;
+    if (editCategoryData.name !== categoryName) updatedData.name = editCategoryData.name;
+    if (editCategoryData.url !== categoryUrl) updatedData.url = editCategoryData.url;
 
     if (!updatedData.url && !updatedData.name) {
       setShowEdit(false);
@@ -174,10 +172,8 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       id: selectedSubCategory.id,
       iconSize: [],
     };
-    if (editSubCatData.name !== selectedSubCategory.name)
-      updatedData.name = editSubCatData.name;
-    if (editSubCatData.url !== selectedSubCategory.url)
-      updatedData.url = editSubCatData.url;
+    if (editSubCatData.name !== selectedSubCategory.name) updatedData.name = editSubCatData.name;
+    if (editSubCatData.url !== selectedSubCategory.url) updatedData.url = editSubCatData.url;
 
     if (!updatedData.url && !updatedData.name) {
       setShowSubEdit(false);
@@ -227,41 +223,44 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
   };
 
   return (
-    <div className={styles.categoryRow}>
-      <div className={styles.parentRow}>
-        <span>{categoryName}</span>
-        <div>
-          <Button text="Options" onClick={() => setShowOptions(true)} />
-          <Button
-            text="+ Add Sub Category"
-            onClick={() => setShowAddSubCategory(true)}
-          />
+    <div className="flex flex-col border border-gray-200 mb-2 rounded-md [&:nth-child(2n-1)]:bg-gray-100">
+      <div className="flex items-center justify-between p-2.5 pl-6">
+        <span className="inline-block w-[200px] text-gray-800 text-sm">{categoryName}</span>
+        <div className="flex">
+          <Button className="ml-2" onClick={() => setShowOptions(true)}>
+            Options
+          </Button>
+          <Button className="ml-2" onClick={() => setShowAddSubCategory(true)}>
+            + Add Sub Category
+          </Button>
         </div>
-        <div>
-          <Button text="Edit" onClick={() => setShowEdit(true)} />
-          <Button text="Delete" onClick={() => setShowDelete(true)} />
+        <div className="flex">
+          <Button className="ml-2" onClick={() => setShowEdit(true)}>
+            Edit
+          </Button>
+          <Button className="ml-2" onClick={() => setShowDelete(true)}>
+            Delete
+          </Button>
         </div>
       </div>
-      {subCategories !== undefined && subCategories?.length > 0 && (
-        <div className={styles.childRows}>
+      {!!subCategories?.length && (
+        <div className="flex flex-col pt-2 border-t border-gray-300">
           {subCategories?.map((subCat) => (
-            <div className={styles.row} key={subCat.id}>
-              <span>{subCat.name}</span>
-              <div>
+            <div className="flex justify-between items-center mr-2 mb-2 ml-8" key={subCat.id}>
+              <span className="inline-block w-[200px] text-gray-600 text-sm">{subCat.name}</span>
+              <Button
+                onClick={() =>
+                  handleShowSubCatOptions({
+                    id: subCat.id,
+                    name: subCat.name,
+                    url: "",
+                  })
+                }
+              >
+                Options
+              </Button>
+              <div className="flex gap-2">
                 <Button
-                  text="Options"
-                  onClick={() =>
-                    handleShowSubCatOptions({
-                      id: subCat.id,
-                      name: subCat.name,
-                      url: "",
-                    })
-                  }
-                />
-              </div>
-              <div>
-                <Button
-                  text="Edit"
                   onClick={() =>
                     handleShowEditSub({
                       id: subCat.id,
@@ -269,11 +268,10 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
                       url: subCat.url,
                     })
                   }
-                />
-                <Button
-                  text="Delete"
-                  onClick={() => handleShowDeleteSub(subCat.id)}
-                />
+                >
+                  Edit
+                </Button>
+                <Button onClick={() => handleShowDeleteSub(subCat.id)}>Delete</Button>
               </div>
             </div>
           ))}
@@ -282,13 +280,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       {showEdit && (
         <Popup
           width="380px"
-          content={
-            <AddCategory
-              errorMsg={errorMsg}
-              onChange={setEditCategoryData}
-              data={editCategoryData}
-            />
-          }
+          content={<AddCategory errorMsg={errorMsg} onChange={setEditCategoryData} data={editCategoryData} />}
           isLoading={isLoading}
           onCancel={() => setShowEdit(false)}
           onClose={() => setShowEdit(false)}
@@ -301,13 +293,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       {showAddSubCategory && (
         <Popup
           width="380px"
-          content={
-            <AddCategory
-              errorMsg={errorMsg}
-              onChange={setAddSubCategoryData}
-              data={addSubCategoryData}
-            />
-          }
+          content={<AddCategory errorMsg={errorMsg} onChange={setAddSubCategoryData} data={addSubCategoryData} />}
           isLoading={isLoading}
           onCancel={() => setShowAddSubCategory(false)}
           onClose={() => setShowAddSubCategory(false)}
@@ -321,7 +307,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
         <Popup
           width="300px"
           content={
-            <div className={styles.deleteText}>
+            <div className="w-full px-5 pt-5 pb-10 flex gap-4 flex-col items-center justify-center text-center">
               <span>Are you sure?</span>
               <span>{errorMsg}</span>
             </div>
@@ -337,13 +323,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       {showSubEdit && (
         <Popup
           width="380px"
-          content={
-            <AddCategory
-              errorMsg={errorMsg}
-              onChange={setEditSubCatData}
-              data={editSubCatData}
-            />
-          }
+          content={<AddCategory errorMsg={errorMsg} onChange={setEditSubCatData} data={editSubCatData} />}
           isLoading={isLoading}
           onCancel={() => setShowSubEdit(false)}
           onClose={() => setShowSubEdit(false)}
@@ -357,7 +337,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
         <Popup
           width="300px"
           content={
-            <div className={styles.deleteText}>
+            <div className="w-full px-5 pt-5 pb-10 flex gap-4 flex-col items-center justify-center text-center">
               <span>Are you sure?</span>
               <span>{errorMsg}</span>
             </div>
@@ -371,12 +351,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       {/* --------------- OPTIONS SECTION --------------- */}
       {showOptions && (
         <Popup
-          content={
-            <CategoryOptions
-              categoryID={categoryID}
-              categoryName={categoryName}
-            />
-          }
+          content={<CategoryOptions categoryID={categoryID} categoryName={categoryName} />}
           isLoading={isLoading}
           onCancel={() => setShowOptions(false)}
           onClose={() => setShowOptions(false)}
@@ -385,12 +360,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       )}
       {showSubOptions && (
         <Popup
-          content={
-            <CategoryOptions
-              categoryID={selectedSubCategory.id}
-              categoryName={selectedSubCategory.name}
-            />
-          }
+          content={<CategoryOptions categoryID={selectedSubCategory.id} categoryName={selectedSubCategory.name} />}
           isLoading={isLoading}
           onCancel={() => setShowSubOptions(false)}
           onClose={() => setShowSubOptions(false)}
