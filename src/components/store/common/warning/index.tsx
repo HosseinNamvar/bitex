@@ -3,7 +3,7 @@ import { LinkedinIcon } from "@/components/icons/svgIcons";
 
 const Warning = () => {
   return (
-    <div className="fixed w-screen bottom-5 flex justify-center text-white z-10">
+    <div className="fixed w-screen bottom-5 flex justify-center text-white z-[2]">
       <div className="flex max-w-[90vw] flex-col justify-center items-center gap-3 rounded-md px-3 py-2 bg-blue-500/80 text-sm text-center backdrop-blur-sm">
         <span>This website was created for portfolio purposes and is NOT a real business.</span>
         <div className="flex items-center justify-center gap-3">
