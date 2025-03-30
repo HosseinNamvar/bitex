@@ -18,9 +18,7 @@ const CartItem = ({ data, onLinkClicked }: IProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleQuantityChange = (isReduced: boolean) => {
-    isReduced
-      ? dispatch(modifyQuantity({ amount: -1, productId }))
-      : dispatch(modifyQuantity({ amount: 1, productId }));
+    dispatch(modifyQuantity({ amount: isReduced ? -1 : 1, productId }));
   };
   const currentPrice = dealPrice === 0 ? price : dealPrice;
 

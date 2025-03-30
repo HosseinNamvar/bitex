@@ -91,7 +91,7 @@ const SpecGroup = ({ data, reloadRequest }: IProps) => {
           </Button>
         </div>
       </div>
-      {!!specs.length ? (
+      {specs.length ? (
         <>
           {specs.map((spec, index) => (
             <div

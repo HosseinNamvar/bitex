@@ -48,7 +48,7 @@ const TrafficView = () => {
 
   return (
     <div className="text-sm text-gray-800 flex flex-col overflow-y-scroll">
-      {!!trafficList.length ? (
+      {trafficList.length ? (
         trafficList.map((item) => (
           <div
             key={item.id}

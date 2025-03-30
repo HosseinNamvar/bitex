@@ -25,12 +25,17 @@ const HomeSlider = () => {
     };
   });
 
-  const handleSliding = (slideNum: number) => {
-    if (slideNum > activeSlideNum) {
-      activeSlideNum === SlidesData.length - 1 ? setActiveSlideNum(0) : setActiveSlideNum(slideNum);
-    } else if (slideNum < activeSlideNum) {
-      activeSlideNum === 0 ? setActiveSlideNum(SlidesData.length - 1) : setActiveSlideNum(slideNum);
-    }
+  const handleSliding = (newSlideNumber: number) => {
+    setActiveSlideNum((prev) => {
+      if (newSlideNumber === prev) return prev;
+
+      const slideLastIndex = SlidesData.length - 1;
+      if (newSlideNumber > prev) {
+        return activeSlideNum === slideLastIndex ? 0 : prev + 1;
+      }
+
+      return activeSlideNum === 0 ? slideLastIndex : prev - 1;
+    });
   };
 
   function touchStart(event: React.TouchEvent) {

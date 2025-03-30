@@ -24,7 +24,7 @@ interface IProps {
   onReset: () => void;
 }
 
-let initialCategory: TAddCategory = {
+const initialCategory: TAddCategory = {
   name: "",
   url: "",
   parentID: null,
@@ -45,11 +45,15 @@ const RowCatGroup = ({ data, categories, onReset }: IProps) => {
 
   // ---------------------- FUNCTIONS ----------------------
   const handleUpdateGroup = async () => {
-    let updatedData: TUpdateCategory = { id: groupId, iconSize: [10, 10] };
+    const updatedData: TUpdateCategory = { id: groupId, iconSize: [10, 10] };
 
-    groupCategoryData.name !== data.name ? (updatedData.name = groupCategoryData.name) : "";
+    if (groupCategoryData.name !== data.name) {
+      updatedData.name = groupCategoryData.name;
+    }
 
-    groupCategoryData.url !== data.url ? (updatedData.url = groupCategoryData.url) : "";
+    if (groupCategoryData.url !== data.url) {
+      updatedData.url = groupCategoryData.url;
+    }
 
     if (groupCategoryData.iconUrl && groupCategoryData.iconUrl !== data.iconUrl) {
       updatedData.iconUrl = groupCategoryData.iconUrl;

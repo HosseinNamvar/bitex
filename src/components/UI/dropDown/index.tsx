@@ -36,7 +36,7 @@ const DropDownList = ({ data, width = "auto", selectedIndex = 0, onChange }: TPr
       }
       style={{ width: width }}
     >
-      {!!data.length ? (
+      {data.length ? (
         <>
           <span className="text-sm text-gray-500">{data[selectedIndex].text}</span>
           <div

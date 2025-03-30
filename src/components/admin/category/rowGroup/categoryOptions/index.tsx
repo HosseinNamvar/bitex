@@ -98,7 +98,7 @@ const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
         <div className="flex flex-col h-full overflow-hidden">
           <AddOption categoryOptionId={categoryID} reloadRequest={handleReloadOptions} />
           <div className="flex flex-col gap-4 h-full overflow-y-scroll p-3">
-            {!!optionSetList.length ? (
+            {optionSetList.length ? (
               <>
                 {optionSetList.map((optionSet) => (
                   <OptionSet key={optionSet.id} data={optionSet} reloadRequest={handleReloadOptions} />

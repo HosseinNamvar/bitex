@@ -54,7 +54,7 @@ const AdminProducts = () => {
         <Button onClick={() => setShowProductWindow(true)}>Add new product</Button>
       </div>
       <div className="flex flex-col text-sm text-gray-800">
-        {!!productsList.length ? (
+        {productsList.length ? (
           <>
             {productsList.map((product) => (
               <ProductListItem key={product.id} data={product} requestReload={getProductsList} />

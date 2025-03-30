@@ -21,8 +21,7 @@ const Brand = () => {
 
   const fetchBrands = async () => {
     const response = await getAllBrands();
-    if (response.error) {
-    }
+
     if (response.res) {
       setIsListLoading(false);
       setBrandList(response.res);

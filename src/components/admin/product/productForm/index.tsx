@@ -299,7 +299,7 @@ const ProductForm = ({ formValues: props, onChange }: IProps) => {
       <div className="mt-5 border-t border-gray-200 w-full h-auto py-4 flex flex-col">
         <span className="text-base mb-4">Specifications:</span>
         <div className="flex-grow flex flex-col items-start gap-4 mb-6">
-          {!!categorySpecs.length ? (
+          {categorySpecs.length ? (
             <>
               {categorySpecs.map((specGroup, groupIndex) => (
                 <div className="w-full flex flex-col p-3 rounded-md border border-gray-300" key={specGroup.id}>

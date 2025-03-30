@@ -22,7 +22,12 @@ const AdminCategories = () => {
 
   if (allCategories.length > 0) {
     allCategories.forEach((cat) => {
-      cat.parentID === null ? groups.push(cat) : categories.push(cat);
+      if (cat.parentID) {
+        categories.push(cat);
+        return;
+      }
+
+      groups.push(cat);
     });
   }
   return (

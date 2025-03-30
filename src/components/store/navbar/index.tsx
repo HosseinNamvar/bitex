@@ -8,6 +8,7 @@ import NavBarShopping from "./navShopping";
 import NavBarCategory from "./navCategory";
 import { useEffect, useState } from "react";
 import AddVisit from "../common/addVisit";
+import { cn } from "@/shared/utils/styling";
 
 const NAVBAR_ITEMS = [
   { name: "Computer", link: "/list/pc-laptops/computer" },
@@ -28,8 +29,9 @@ const StoreNavBar = () => {
     if (typeof window !== "undefined") prevPositionY = window.scrollY;
     const handleScroll = () => {
       //---handle auto hiding navbar
-      if (typeof window !== "undefined") {
-        prevPositionY < window.scrollY && window.scrollY > 100 ? setHideNavbar(true) : setHideNavbar(false);
+      if (window !== undefined) {
+        const shouldHideNavbar = prevPositionY < window.scrollY && window.scrollY > 100;
+        setHideNavbar(shouldHideNavbar);
         prevPositionY = window.scrollY;
       }
     };
@@ -44,7 +46,12 @@ const StoreNavBar = () => {
   }, []);
 
   return (
-    <nav className="flex flex-col bg-white transition-all pt-5 duration-700 fixed top-0 w-full z-10">
+    <nav
+      className={cn(
+        "flex flex-col bg-white transition-all pt-5 duration-700 fixed w-full z-10",
+        hideNavbar ? "top-[-180px]" : "top-0"
+      )}
+    >
       <section className="w-full">
         <div className="storeContainer w-full relative flex justify-between items-center">
           <Link href={"/"} className="mr-0 xl:mr-20 lg:mr-10">

@@ -76,7 +76,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       return;
     }
 
-    let updatedData: TUpdateCategory = { id: categoryID, iconSize: [] };
+    const updatedData: TUpdateCategory = { id: categoryID, iconSize: [] };
 
     if (editCategoryData.name !== categoryName) updatedData.name = editCategoryData.name;
     if (editCategoryData.url !== categoryUrl) updatedData.url = editCategoryData.url;
@@ -168,7 +168,7 @@ const Category = ({ onReset, data, subCategories }: IProps) => {
       return;
     }
 
-    let updatedData: TUpdateCategory = {
+    const updatedData: TUpdateCategory = {
       id: selectedSubCategory.id,
       iconSize: [],
     };

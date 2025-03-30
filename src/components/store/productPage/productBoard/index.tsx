@@ -15,7 +15,12 @@ const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
   const [quantity, setQuantity] = useState(defaultQuantity > 1 ? defaultQuantity : 1);
 
   const handleQuantityChange = (isReducing: boolean) => {
-    isReducing ? (quantity === 1 ? quantity : setQuantity(quantity - 1)) : setQuantity(quantity + 1);
+    setQuantity((prev) => {
+      if (isReducing) {
+        return prev > 1 ? prev - 1 : 1;
+      }
+      return prev + 1;
+    });
   };
 
   const cartItemData: TCartItem = {

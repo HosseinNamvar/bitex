@@ -47,7 +47,10 @@ const ShoppingCart = ({ isVisible, quantity, handleOnClose }: TProps) => {
         const response = await getCartProducts(productsIDs);
         if (response.res) {
           const finalResult = convertDBtoCartItems(response.res);
-          finalResult ? setCartItems(finalResult) : "";
+
+          if (!finalResult) return;
+
+          setCartItems(finalResult);
         }
       }
     };

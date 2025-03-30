@@ -26,9 +26,11 @@ const NavBarShopping = () => {
 
   const handleCartVisibility = (visibility: boolean) => {
     dispatch(toggleCart(visibility));
-    visibility
-      ? document.documentElement.classList.add("noScroll")
-      : document.documentElement.classList.remove("noScroll");
+    if (visibility) {
+      document.documentElement.classList.add("noScroll");
+    } else {
+      document.documentElement.classList.remove("noScroll");
+    }
   };
 
   return (

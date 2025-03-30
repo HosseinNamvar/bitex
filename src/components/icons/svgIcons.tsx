@@ -12,7 +12,7 @@ type TSvgProperties = {
   svgData: JSX.Element;
   fill?: string;
   stroke?: string;
-  style?: Object;
+  style?: string;
 };
 
 const createIcon = ({ width, svgData, viewBox, fill }: TSvgProperties) => {
