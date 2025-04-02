@@ -1,5 +1,4 @@
 "use client";
-// import styles from "./list.module.scss";
 
 import Link from "next/link";
 import Image from "next/image";
