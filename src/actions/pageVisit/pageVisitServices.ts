@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { TAddPageVisit } from "@/types/common";
 import { PageType } from "@prisma/client";
+import { TRAFFIC_LIST_PAGE_SIZE } from "@/shared/constants/admin/trafficView";
 
 const ValidatePageVisit = z.object({
   pageType: z.enum(["MAIN", "LIST", "PRODUCT"]),
@@ -26,8 +27,7 @@ export type TTrafficListItem = {
 export const addVisit = async (data: TAddPageVisit) => {
   if (process.env.NODE_ENV !== "production") return { error: "Invalid ENV!" };
 
-  if (!ValidatePageVisit.safeParse(data).success)
-    return { error: "Invalid Data!" };
+  if (!ValidatePageVisit.safeParse(data).success) return { error: "Invalid Data!" };
 
   try {
     const result = await db.pageVisit.create({
@@ -46,27 +46,32 @@ export const addVisit = async (data: TAddPageVisit) => {
   }
 };
 
-export const getTrafficReport = async () => {
+export const getTrafficReport = async (skip: number = 0) => {
   try {
-    const result: TTrafficListItem[] = await db.pageVisit.findMany({
-      include: {
-        product: {
-          select: {
-            name: true,
-            category: {
-              select: {
-                name: true,
+    const [list, totalCount] = await Promise.all([
+      db.pageVisit.findMany({
+        skip: skip,
+        take: TRAFFIC_LIST_PAGE_SIZE,
+        include: {
+          product: {
+            select: {
+              name: true,
+              category: {
+                select: {
+                  name: true,
+                },
               },
             },
           },
         },
-      },
-      orderBy: {
-        id: "desc",
-      },
-    });
-    if (!result) return { error: "Can not read Data!" };
-    return { res: result };
+        orderBy: {
+          id: "desc",
+        },
+      }),
+      db.pageVisit.count(),
+    ]);
+    if (!list) return { error: "Can not read Data!" };
+    return { res: { list, totalCount } };
   } catch (error) {
     return { error: JSON.stringify(error) };
   }
