@@ -9,7 +9,7 @@ import { BlogCardData, CollectionsData, TodayDeals, TopProducts } from "@/data/h
 import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
 import HomeBlogCard from "@/components/store/home/blogCard";
-import HCompanyLogo from "@/components/store/home/companyLogo";
+import { CompanyLogoList } from "@/components/store/home/companyLogo";
 
 export const metadata: Metadata = {
   title: "BITEX - Homepage",
@@ -130,16 +130,7 @@ export default function Home() {
         </div>
         <div className="w-full mt-24 mb-12 md:mb-32 flex flex-col">
           <h2 className="text-2xl font-medium text-gray-700 text-center mb-10">Selected Brands</h2>
-          <div className="flex justify-between items-center md:flex-row md:gap-0 flex-col gap-8">
-            <HCompanyLogo width={104} bgPositionX={0} url="/list/photography/scanners/epson" />
-            <HCompanyLogo width={50} bgPositionX={-105} url="/" />
-            <HCompanyLogo width={50} bgPositionX={-156} url="/" />
-            <HCompanyLogo width={44} bgPositionX={-207} url="/list/smartphones/apple-iphone" />
-            <HCompanyLogo width={47} bgPositionX={-252} url="/list/smartphones/xiaomi" />
-            <HCompanyLogo width={54} bgPositionX={-300} url="/" />
-            <HCompanyLogo width={55} bgPositionX={-355} url="/" />
-            <HCompanyLogo width={98} bgPositionX={-411} url="/list/pc-laptops/laptops/asus" />
-          </div>
+          <CompanyLogoList />
         </div>
       </div>
     </div>

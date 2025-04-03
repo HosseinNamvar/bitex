@@ -1,19 +1,12 @@
-import Link from "next/link";
+import { COMPANIES_LOGOS } from "@/shared/constants/store/homePage/compayLogos";
+import CompanyLogo from "./CompanyLogo";
 
-type TProps = {
-  width: number;
-  bgPositionX: number;
-  url: string;
-};
-
-const HCompanyLogo = ({ bgPositionX, url, width }: TProps) => {
+export const CompanyLogoList = () => {
   return (
-    <Link
-      className="bg-[url('/icons/companiesIcons.png')] h-14 bg-no-repeat bg-[position-y:center] opacity-80 transition-opacity duration-300 hover:opacity-100"
-      style={{ width: width, backgroundPositionX: bgPositionX }}
-      href={url}
-    />
+    <div className="flex justify-between items-center md:flex-row md:gap-0 flex-col gap-8">
+      {COMPANIES_LOGOS.map((companyLogo, idx) => (
+        <CompanyLogo key={idx} {...companyLogo} />
+      ))}
+    </div>
   );
 };
-
-export default HCompanyLogo;
