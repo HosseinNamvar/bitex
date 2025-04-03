@@ -2,13 +2,13 @@
 import { TAddCategory } from "@/actions/category/category";
 import Input from "@/components/UI/input";
 
-interface IProps {
+type TProps = {
   errorMsg: string;
   data: TAddCategory;
   onChange: (data: TAddCategory) => void;
-}
+};
 
-const AddCategory = ({ data, errorMsg, onChange }: IProps) => {
+const AddCategory = ({ data, errorMsg, onChange }: TProps) => {
   return (
     <div className="grid grid-cols-7 gap-y-3 items-center my-3 mx-4">
       <span className="col-span-3">Category Name:</span>

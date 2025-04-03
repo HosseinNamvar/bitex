@@ -2,26 +2,24 @@ import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
 import { TCartItem } from "@/types/shoppingCart";
 import { loadState, saveState } from "./storeLocalStorage";
 
-export interface ICartState {
+export type TCartState = {
   items: TCartItem[];
   isVisible: boolean;
-}
+};
 
 type QuantityChange = {
   productId: string;
   amount: number;
 };
 
-const initialState: ICartState = { isVisible: false, items: [] };
+const initialState: TCartState = { isVisible: false, items: [] };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    add: (state: ICartState, action: PayloadAction<TCartItem>) => {
-      const isAvailable = state.items.findIndex(
-        (item) => item.productId === action.payload.productId
-      );
+    add: (state: TCartState, action: PayloadAction<TCartItem>) => {
+      const isAvailable = state.items.findIndex((item) => item.productId === action.payload.productId);
       if (isAvailable > -1) {
         state.items[isAvailable].quantity += action.payload.quantity;
       } else {
@@ -29,22 +27,15 @@ const cartSlice = createSlice({
       }
       state.isVisible = true;
     },
-    toggleCart: (state: ICartState, action: PayloadAction<boolean>) => {
+    toggleCart: (state: TCartState, action: PayloadAction<boolean>) => {
       state.isVisible = action.payload.valueOf();
     },
-    remove: (state: ICartState, action: PayloadAction<string>) => {
-      state.items = state.items.filter(
-        (item) => item.productId !== action.payload
-      );
+    remove: (state: TCartState, action: PayloadAction<string>) => {
+      state.items = state.items.filter((item) => item.productId !== action.payload);
     },
-    modifyQuantity: (
-      state: ICartState,
-      action: PayloadAction<QuantityChange>
-    ) => {
+    modifyQuantity: (state: TCartState, action: PayloadAction<QuantityChange>) => {
       state.items.map((item) =>
-        item.productId === action.payload.productId
-          ? (item.quantity += action.payload.amount)
-          : ""
+        item.productId === action.payload.productId ? (item.quantity += action.payload.amount) : ""
       );
     },
   },

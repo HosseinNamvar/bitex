@@ -1,5 +1,4 @@
 "use client";
-// import "styles from" "./categoryRow.module.scss";
 
 import { useState } from "react";
 
@@ -16,11 +15,11 @@ import {
 import AddCategory from "../addCategory";
 import CategoryOptions from "../categoryOptions";
 
-interface IProps {
+type TProps = {
   data: TGetAllCategories;
   subCategories: TGetAllCategories[];
   onReset: () => void;
-}
+};
 
 const initialCategory: TAddCategory = {
   parentID: null,
@@ -42,7 +41,7 @@ let selectedSubCategory: TEditSubCat = {
   url: "",
 };
 
-const Category = ({ onReset, data, subCategories }: IProps) => {
+const Category = ({ onReset, data, subCategories }: TProps) => {
   const { id: categoryID, name: categoryName, url: categoryUrl } = data;
 
   const [showOptions, setShowOptions] = useState(false);

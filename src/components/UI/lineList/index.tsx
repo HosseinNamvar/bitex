@@ -2,13 +2,13 @@
 import { cn } from "@/shared/utils/styling";
 import { TDropDown } from "@/types/uiElements";
 
-interface IProps {
+type TProps = {
   data: TDropDown[];
   selectedId: number;
   onChange: (newIndex: number) => void;
-}
+};
 
-const LineList = ({ data, selectedId, onChange }: IProps) => {
+const LineList = ({ data, selectedId, onChange }: TProps) => {
   const handleChange = (newIndex: number) => {
     onChange(newIndex);
   };

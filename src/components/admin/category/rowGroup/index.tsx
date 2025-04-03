@@ -18,11 +18,11 @@ import CategoryOptions from "./categoryOptions";
 import AddCategory from "./addCategory";
 import Category from "./category";
 
-interface IProps {
+type TProps = {
   data: TGetAllCategories;
   categories: TGetAllCategories[];
   onReset: () => void;
-}
+};
 
 const initialCategory: TAddCategory = {
   name: "",
@@ -32,7 +32,7 @@ const initialCategory: TAddCategory = {
   iconUrl: null,
 };
 
-const RowCatGroup = ({ data, categories, onReset }: IProps) => {
+const RowCatGroup = ({ data, categories, onReset }: TProps) => {
   const { id: groupId, name } = data;
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);

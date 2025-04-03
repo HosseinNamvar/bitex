@@ -8,12 +8,12 @@ import Button from "@/components/UI/button";
 import { addSingleOption, deleteOptionSet, deleteSingleOption } from "@/actions/category/categoryOptions";
 import Input from "@/components/UI/input";
 
-interface IProps {
+type TProps = {
   data: TOptionSet;
   reloadRequest: () => void;
-}
+};
 
-const OptionSet = ({ data, reloadRequest }: IProps) => {
+const OptionSet = ({ data, reloadRequest }: TProps) => {
   const { id, name, options } = data;
   const [isLoading, setIsLoading] = useState(false);
   const [nameValuePair, setNameValuePair] = useState<[string, string]>(["", ""]);
