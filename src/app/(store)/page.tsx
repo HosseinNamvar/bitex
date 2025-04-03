@@ -128,10 +128,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="w-full mt-24 mb-12 md:mb-32 flex flex-col">
-          <h2 className="text-2xl font-medium text-gray-700 text-center mb-10">Selected Brands</h2>
-          <CompanyLogoList />
-        </div>
+        <CompanyLogoList />
       </div>
     </div>
   );
