@@ -5,11 +5,11 @@ import HomeCategoryList from "@/components/store/home/categories";
 import HomeSlider from "@/components/store/home/slider";
 import TodayDealCard from "@/components/store/home/todayDealCard";
 import WideAd from "@/components/store/home/wideAd";
-import { BlogCardData, CollectionsData, TodayDeals, TopProducts } from "@/data/homepageData";
+import { CollectionsData, TodayDeals, TopProducts } from "@/data/homepageData";
 import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
-import HomeBlogCard from "@/components/store/home/blogCard";
 import { CompanyLogoList } from "@/components/store/home/companyLogo";
+import { LatestBlogPosts } from "@/components/store/home/latestBlogPosts";
 
 export const metadata: Metadata = {
   title: "BITEX - Homepage",
@@ -112,22 +112,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="w-full mt-14">
-          <div className="flex w-full justify-between items-center mb-7">
-            <h2 className="text-2xl font-medium text-gray-700">Latest Posts</h2>
-          </div>
-          <div className="flex gap-6 flex-col md:flex-row">
-            {BlogCardData.map((blog, index) => (
-              <HomeBlogCard
-                key={index}
-                imgUrl={blog.imgUrl}
-                title={blog.title}
-                shortText={blog.shortText}
-                url={blog.url}
-              />
-            ))}
-          </div>
-        </div>
+        <LatestBlogPosts />
         <CompanyLogoList />
       </div>
     </div>
