@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { TopProducts } from "../../constants";
 import ProductCard from "@/components/store/common/productCard";
+import { TopProducts } from "@/features/product/constants";
 
 export const TopSellingProductsList = () => {
   return (

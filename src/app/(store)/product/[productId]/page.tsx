@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import ProductCard from "@/components/store/common/productCard";
-import { TopProducts } from "@/data/homepageData";
 
 import ProductBoard from "@/components/store/productPage/productBoard";
 import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
@@ -15,6 +14,7 @@ import { getOneProduct } from "@/actions/product/product";
 import { TProductPageInfo } from "@/types/product";
 import Image from "next/image";
 import { SK_Box } from "@/components/UI/skeleton";
+import { TopProducts } from "@/features/product/constants";
 
 const ProductPage = () => {
   const router = useRouter();
