@@ -11,11 +11,6 @@ export type TProductCard = {
   staticWidth?: boolean;
 };
 
-export type TDealCard = TProductCard & {
-  dealDate: Date;
-  dealPrice: number;
-};
-
 export type TSlide = {
   imgUrl: string;
   url: string;

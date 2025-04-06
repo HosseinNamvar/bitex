@@ -7,7 +7,7 @@ import { getAllCategoriesJSON } from "@/actions/category/category";
 import { SK_Box } from "@/components/UI/skeleton";
 import CategoryListItem from "./catListItem";
 
-const HomeCategoryList = () => {
+export const HomeCategoryList = () => {
   const [categories, setCategories] = useState<TGroupJSON[]>([]);
   useEffect(() => {
     const getCategoriesDB = async () => {
@@ -45,5 +45,3 @@ const Skeletons = () => {
   }
   return skeletons;
 };
-
-export default HomeCategoryList;

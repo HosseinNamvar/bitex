@@ -1,4 +1,4 @@
-import { TWideCard } from "../types/wideCard";
+import { TWideCard } from "../types";
 
 export const threeSaleCards: TWideCard[] = [
   {

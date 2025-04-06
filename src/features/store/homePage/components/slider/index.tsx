@@ -7,7 +7,7 @@ import { ArrowIcon } from "@/components/icons/svgIcons";
 import { useEffect, useState } from "react";
 import { cn } from "@/shared/utils/styling";
 
-const HomeSlider = () => {
+export const HomeSlider = () => {
   const [activeSlideNum, setActiveSlideNum] = useState(0);
   const touchPos = {
     start: 0,
@@ -163,5 +163,3 @@ const HomeSlider = () => {
     </div>
   );
 };
-
-export default HomeSlider;

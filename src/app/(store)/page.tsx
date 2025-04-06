@@ -1,16 +1,15 @@
-import Link from "next/link";
+import {
+  CollectionCards,
+  CompanyLogoList,
+  HomeCategoryList,
+  HomeSlider,
+  LatestBlogPosts,
+  TodayDealCards,
+  TopSellingProductsList,
+  WideCardRow,
+} from "@/features/store/homePage/components";
+import { threeSaleCards, twoSaleCards } from "@/features/store/homePage/constants";
 import { Metadata } from "next";
-
-import { CollectionsData, TodayDeals, TopProducts } from "@/data/homepageData";
-import ProductCard from "@/components/store/common/productCard";
-import { threeSaleCards, twoSaleCards } from "@/features/store/homePage/constants/wideCards";
-import HomeCategoryList from "@/features/store/homePage/components/categories";
-import HomeSlider from "@/features/store/homePage/components/slider";
-import { WideCardRow } from "@/features/store/homePage/components/wideCardRow";
-import TodayDealCard from "@/features/store/homePage/components/todayDealCard";
-import CollectionCard from "@/features/store/homePage/components/collectionCard";
-import { LatestBlogPosts } from "@/features/store/homePage/components/latestBlogPosts";
-import { CompanyLogoList } from "@/features/store/homePage/components/companyLogo";
 
 export const metadata: Metadata = {
   title: "BITEX - Homepage",
@@ -25,62 +24,10 @@ export default function Home() {
           <HomeSlider />
         </div>
         <WideCardRow cards={threeSaleCards} />
-        <div className="w-full mt-14">
-          <div className="flex w-full justify-between items-center mb-7">
-            <h2 className="text-2xl font-medium text-gray-700">Today’s Deals</h2>
-            <Link
-              href={""}
-              className="font-medium bg-[position:right_center] hover:pr-5 pr-6 text-gray-700 bg-[url('/icons/arrowIcon02.svg')] bg-no-repeat bg-right-center transition-all duration-300 ease-out"
-            >
-              view all
-            </Link>
-          </div>
-          <div className="flex justify-between gap-3.5 overflow-x-scroll pb-7 2xl:pb-0 2xl:overflow-x-hidden">
-            {TodayDeals.map((deal, index) => (
-              <TodayDealCard
-                productName={deal.name}
-                oldPrice={deal.price}
-                newPrice={deal.dealPrice}
-                image={deal.imgUrl}
-                spec={deal.specs}
-                dealEndTime={deal.dealDate}
-                url={deal.url}
-                key={index}
-              />
-            ))}
-          </div>
-        </div>
+        <TodayDealCards />
         <WideCardRow cards={twoSaleCards} />
-        <div className="w-full mt-14">
-          <div className="flex w-full justify-between items-center mb-7">
-            <h2 className="text-2xl font-medium text-gray-700">Collections</h2>
-          </div>
-          <div className="flex justify-between gap-3.5 overflow-x-scroll 2xl:overflow-x-hidden">
-            {CollectionsData.map((collection, index) => (
-              <CollectionCard collection={collection} key={index} />
-            ))}
-          </div>
-        </div>
-        <div className="w-full mt-14">
-          <div className="flex w-full justify-between items-center mb-7">
-            <h2 className="text-2xl font-medium text-gray-700">Top Selling Products</h2>
-            <Link href={"/"}>view all</Link>
-          </div>
-          <div className="flex justify-between gap-3.5 overflow-x-scroll pb-7 2xl:pb-2 2xl:overflow-x-visible">
-            {TopProducts.map((product, index) => (
-              <ProductCard
-                name={product.name}
-                imgUrl={product.imgUrl}
-                price={product.price}
-                specs={product.specs}
-                url={product.url}
-                dealPrice={product.dealPrice}
-                key={index}
-                staticWidth
-              />
-            ))}
-          </div>
-        </div>
+        <CollectionCards />
+        <TopSellingProductsList />
         <LatestBlogPosts />
         <CompanyLogoList />
       </div>
