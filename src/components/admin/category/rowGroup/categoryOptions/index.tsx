@@ -12,12 +12,12 @@ import AddSpecGroup from "./addSpecGroup";
 import SpecGroup from "./specGroup";
 import { cn } from "@/shared/utils/styling";
 
-interface IProps {
+type TProps = {
   categoryName: string;
   categoryID: string;
-}
+};
 
-const CategoryOptions = ({ categoryName, categoryID }: IProps) => {
+const CategoryOptions = ({ categoryName, categoryID }: TProps) => {
   const [isOption, setIsOption] = useState(true);
   const [optionSetList, setOptionSetList] = useState<TOptionSet[]>([]);
   const [specGroupList, setSpecGroupList] = useState<TSpecGroup[]>([]);

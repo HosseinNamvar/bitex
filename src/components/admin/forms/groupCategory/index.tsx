@@ -3,13 +3,13 @@
 import { TGetAllCategories } from "@/actions/category/category";
 import Input from "@/components/UI/input";
 
-interface IProps {
+type TProps = {
   errorMsg: string;
   data: TGetAllCategories;
   onChange: (data: TGetAllCategories) => void;
-}
+};
 
-const GroupCategory = ({ errorMsg, data, onChange }: IProps) => {
+const GroupCategory = ({ errorMsg, data, onChange }: TProps) => {
   const iconSize: number[] = data.iconSize ? [...data.iconSize] : [];
 
   return (

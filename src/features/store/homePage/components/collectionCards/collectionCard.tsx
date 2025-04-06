@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { TCollectionCard } from "@/types/collections";
+import { TCollectionCard } from "../../types";
 
-interface IProps {
+type TProps = {
   collection: TCollectionCard;
-}
+};
 
-const CollectionCard = ({ collection }: IProps) => {
+const CollectionCard = ({ collection }: TProps) => {
   return (
     <div className="min-w-[324px] h-[250px] flex relative rounded-xl bg-white overflow-hidden mb-5">
       <div className="flex-grow-2 ml-[30px]">

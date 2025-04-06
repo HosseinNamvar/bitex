@@ -3,14 +3,14 @@
 import ShoppingCart from "../../common/shoppingCart";
 import { ShoppingIconOutline } from "@/components/icons/svgIcons";
 import { useDispatch, useSelector } from "react-redux";
-import { ICartState, RootState } from "@/store/shoppingCart";
+import { TCartState, RootState } from "@/store/shoppingCart";
 import { toggleCart } from "@/store/shoppingCart";
 import { useEffect, useState } from "react";
 import { cn } from "@/shared/utils/styling";
 
 const NavBarShopping = () => {
   const dispatch = useDispatch();
-  const [cartData, setCartData] = useState<ICartState>();
+  const [cartData, setCartData] = useState<TCartState>();
   const localCartData = useSelector((state: RootState) => state.cart);
   let cartItemQuantity = 0;
 

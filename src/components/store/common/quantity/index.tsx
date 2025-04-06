@@ -1,14 +1,13 @@
 "use client";
 import { MinusIcon, PlusIcon } from "@/components/icons/svgIcons";
-// import "styles from" "./quantity.module.scss";
 
-interface IProps {
+type TProps = {
   quantity: number;
   iconWidth?: number;
   onChange: (isReducing: boolean) => void;
-}
+};
 
-const Quantity = ({ onChange, quantity, iconWidth = 12 }: IProps) => {
+const Quantity = ({ onChange, quantity, iconWidth = 12 }: TProps) => {
   return (
     <div className={"flex items-center"}>
       <button

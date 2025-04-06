@@ -6,12 +6,12 @@ import { TSingleSpec, TSpecGroup } from "@/types/common";
 import { addSingleSpec, deleteSingleSpec, deleteSpecGroup } from "@/actions/category/categoryOptions";
 import Input from "@/components/UI/input";
 
-interface IProps {
+type TProps = {
   data: TSpecGroup;
   reloadRequest: () => void;
-}
+};
 
-const SpecGroup = ({ data, reloadRequest }: IProps) => {
+const SpecGroup = ({ data, reloadRequest }: TProps) => {
   const { id, title, specs } = data;
   const [isLoading, setIsLoading] = useState(false);
   const [specToAdd, setSpecToAdd] = useState("");

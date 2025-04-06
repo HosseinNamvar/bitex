@@ -1,17 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/shared/utils/styling";
+import { TWideCard } from "../../types";
 
-type TProps = {
-  imgUrl: string;
-  linkText?: string;
-  url: string;
-  title: string;
-  isLightBG?: boolean;
-  smallTitle: string;
-};
-
-const WideAd = ({ imgUrl, linkText = "Show Deals", smallTitle, title, url, isLightBG = false }: TProps) => {
+export const WideCard = ({ imgUrl, linkText = "Show Deals", smallTitle, title, url, isLightBG = false }: TWideCard) => {
   return (
     <div className={cn("relative h-[200px] flex-grow pl-7", isLightBG ? "text-gray-900" : "text-gray-100")}>
       <span className="relative z-5 text-sm mt-8 block">{smallTitle}</span>
@@ -29,5 +21,3 @@ const WideAd = ({ imgUrl, linkText = "Show Deals", smallTitle, title, url, isLig
     </div>
   );
 };
-
-export default WideAd;

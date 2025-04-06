@@ -23,12 +23,12 @@ const brandListFirstItem: TDropDown = {
   value: "",
 };
 
-interface IProps {
+type TProps = {
   formValues: TAddProductFormValues;
   onChange: (props: TAddProductFormValues) => void;
-}
+};
 
-const ProductForm = ({ formValues: props, onChange }: IProps) => {
+const ProductForm = ({ formValues: props, onChange }: TProps) => {
   const [categoryList, setCategoryList] = useState<TDropDown[]>([categoryListFirstItem]);
   const [brandList, setBrandList] = useState<TDropDown[]>([brandListFirstItem]);
   const [selectedCategoryListIndex, setSelectedCategoryListIndex] = useState(0);

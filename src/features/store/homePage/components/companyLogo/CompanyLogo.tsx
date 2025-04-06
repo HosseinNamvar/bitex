@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-interface IProps {
+type TProps = {
   width: number;
   bgPositionX: number;
   url: string;
-}
+};
 
-const HCompanyLogo = ({ bgPositionX, url, width }: IProps) => {
+const CompanyLogo = ({ bgPositionX, url, width }: TProps) => {
   return (
     <Link
       className="bg-[url('/icons/companiesIcons.png')] h-14 bg-no-repeat bg-[position-y:center] opacity-80 transition-opacity duration-300 hover:opacity-100"
@@ -16,4 +16,4 @@ const HCompanyLogo = ({ bgPositionX, url, width }: IProps) => {
   );
 };
 
-export default HCompanyLogo;
+export default CompanyLogo;

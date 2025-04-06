@@ -7,12 +7,12 @@ import { addSpecGroup } from "@/actions/category/categoryOptions";
 import { TSpecGroup } from "@/types/common";
 import Input from "@/components/UI/input";
 
-interface IProps {
+type TProps = {
   categorySpecGroupID: string;
   reloadRequest: () => void;
-}
+};
 
-const AddSpecGroup = ({ categorySpecGroupID, reloadRequest }: IProps) => {
+const AddSpecGroup = ({ categorySpecGroupID, reloadRequest }: TProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState("");
 
