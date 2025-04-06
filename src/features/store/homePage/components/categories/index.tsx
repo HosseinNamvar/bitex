@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-import { TGroupJSON } from "@/types/categories";
 import { getAllCategoriesJSON } from "@/actions/category/category";
 import { SK_Box } from "@/components/UI/skeleton";
+import { TGroupJSON } from "@/types/categories";
+
 import CategoryListItem from "./catListItem";
 
 export const HomeCategoryList = () => {

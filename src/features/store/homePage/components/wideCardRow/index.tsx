@@ -1,4 +1,5 @@
 import { TWideCard } from "../../types";
+
 import { WideCard } from "./WideCard";
 
 type TProps = {

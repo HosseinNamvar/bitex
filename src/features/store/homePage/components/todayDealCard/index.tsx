@@ -1,6 +1,8 @@
 import Link from "next/link";
-import TodayDealCard from "./TodayDealCard";
+
 import { TodayDeals } from "@/features/product/constants";
+
+import TodayDealCard from "./TodayDealCard";
 
 export const TodayDealCards = () => {
   return (

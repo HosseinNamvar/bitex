@@ -1,20 +1,18 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-
-import ProductCard from "@/components/store/common/productCard";
-
-import ProductBoard from "@/components/store/productPage/productBoard";
-import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
-import Gallery from "@/components/store/productPage/gallery";
+import { useEffect, useState } from "react";
 
 import { getOneProduct } from "@/actions/product/product";
-import { TProductPageInfo } from "@/types/product";
-import Image from "next/image";
+import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
+import ProductCard from "@/components/store/common/productCard";
+import Gallery from "@/components/store/productPage/gallery";
+import ProductBoard from "@/components/store/productPage/productBoard";
 import { SK_Box } from "@/components/UI/skeleton";
 import { TopProducts } from "@/features/product/constants";
+import { TProductPageInfo } from "@/types/product";
 
 const ProductPage = () => {
   const router = useRouter();

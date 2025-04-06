@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
-import Button from "@/components/UI/button";
+
 import { TGetAllCategories, addCategory } from "@/actions/category/category";
+import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
+
 import GroupCategory from "../../forms/groupCategory";
 
 type TProps = {

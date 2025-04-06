@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { TBlogCard } from "@/types/common";
 
 const HomeBlogCard = ({ title, imgUrl, shortText, url }: TBlogCard) => {

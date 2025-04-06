@@ -1,14 +1,19 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-
-import NavBarProfile from "./navProfile";
-import NavBarFavorite from "./navFavorite";
-import NavBarShopping from "./navShopping";
-import NavBarCategory from "./navCategory";
 import { useEffect, useState } from "react";
-import AddVisit from "../common/addVisit";
+
 import { cn } from "@/shared/utils/styling";
+
+import AddVisit from "../common/addVisit";
+
+import NavBarCategory from "./navCategory";
+import NavBarFavorite from "./navFavorite";
+import NavBarProfile from "./navProfile";
+import NavBarShopping from "./navShopping";
+
+
+
 
 const NAVBAR_ITEMS = [
   { name: "Computer", link: "/list/pc-laptops/computer" },

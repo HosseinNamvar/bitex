@@ -1,5 +1,7 @@
 "use server";
+import { ProductSpec } from "@prisma/client";
 import { z } from "zod";
+
 import { db } from "@/lib/db";
 import {
   TAddProductFormValues,
@@ -9,7 +11,6 @@ import {
   TProductPageInfo,
   TSpecification,
 } from "@/types/product";
-import { ProductSpec } from "@prisma/client";
 
 const ValidateAddProduct = z.object({
   name: z.string().min(3),

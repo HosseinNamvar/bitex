@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import Button from "@/components/UI/button";
-import Popup from "@/components/UI/popup";
 import {
   addCategory,
   deleteCategory,
@@ -12,6 +10,9 @@ import {
   TGetAllCategories,
   TUpdateCategory,
 } from "@/actions/category/category";
+import Button from "@/components/UI/button";
+import Popup from "@/components/UI/popup";
+
 import AddCategory from "../addCategory";
 import CategoryOptions from "../categoryOptions";
 

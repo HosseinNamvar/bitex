@@ -1,8 +1,9 @@
 "use server";
 import { z } from "zod";
+
 import { db } from "@/lib/db";
-import { TFilters, TListItem, TProductPath } from "@/types/product";
 import { TListSort } from "@/types/list";
+import { TFilters, TListItem, TProductPath } from "@/types/product";
 
 const ValidateSort = z.object({
   sortName: z.enum(["id", "price", "name"]),

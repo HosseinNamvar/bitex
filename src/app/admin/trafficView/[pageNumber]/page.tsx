@@ -1,16 +1,16 @@
 "use client";
 
-import Button from "@/components/UI/button";
+import { useParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 import { TTrafficListItem, deleteTraffic, getTrafficReport } from "@/actions/pageVisit/pageVisitServices";
-import { useCallback, useEffect, useState } from "react";
-import { getFullTimeString } from "@/shared/utils/formatting/time";
+import Button from "@/components/UI/button";
 import { SK_Box } from "@/components/UI/skeleton";
-import { useParams } from "next/navigation";
-import { TRAFFIC_LIST_PAGE_SIZE } from "@/shared/constants/admin/trafficView";
 import { Pagination } from "@/components/UI/table/pagination";
-import { calculateTablePagination } from "@/shared/utils/tablesCalculation";
+import { TRAFFIC_LIST_PAGE_SIZE } from "@/shared/constants/admin/trafficView";
+import { getFullTimeString } from "@/shared/utils/formatting/time";
 import { cn } from "@/shared/utils/styling";
+import { calculateTablePagination } from "@/shared/utils/tablesCalculation";
 
 const TrafficView = () => {
   const [trafficList, setTrafficList] = useState<TTrafficListItem[]>([]);

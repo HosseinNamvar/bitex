@@ -1,6 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+
 import { cn } from "@/shared/utils/styling";
+
 import { TWideCard } from "../../types";
 
 export const WideCard = ({ imgUrl, linkText = "Show Deals", smallTitle, title, url, isLightBG = false }: TWideCard) => {

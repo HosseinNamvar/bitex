@@ -1,23 +1,22 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
+import { getList } from "@/actions/list/listServices";
 import ProductCard from "@/components/store/common/productCard";
+import Filters from "@/components/store/listPage/filters";
+import NoItem from "@/components/store/listPage/noItem";
+import Button from "@/components/UI/button";
 import DropDownList from "@/components/UI/dropDown";
 import LineList from "@/components/UI/lineList";
-
-import { sortDropdownData } from "@/data/uiElementsData";
-import { TBrand, TFilterBrands, TFilters, TListItem, TProductPath } from "@/types/product";
-import Button from "@/components/UI/button";
-import { getList } from "@/actions/list/listServices";
-import { TListSort, TPageStatus } from "@/types/list";
 import { SK_Box } from "@/components/UI/skeleton";
-import NoItem from "@/components/store/listPage/noItem";
-import Filters from "@/components/store/listPage/filters";
+import { sortDropdownData } from "@/data/uiElementsData";
 import { cn } from "@/shared/utils/styling";
+import { TListSort, TPageStatus } from "@/types/list";
+import { TBrand, TFilterBrands, TFilters, TListItem, TProductPath } from "@/types/product";
 
 const defaultFilters: TFilters = {
   stockStatus: "all",

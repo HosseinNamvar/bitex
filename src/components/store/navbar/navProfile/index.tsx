@@ -1,10 +1,11 @@
 "use-client";
 
 import { useRef } from "react";
+
 import { ProfileIcon } from "@/components/icons/svgIcons";
+import Button from "@/components/UI/button";
 import { useToggleMenu } from "@/hooks/useToggleMenu";
 import { cn } from "@/shared/utils/styling";
-import Button from "@/components/UI/button";
 
 const NavBarProfile = () => {
   const menuRef = useRef<HTMLDivElement>(null);

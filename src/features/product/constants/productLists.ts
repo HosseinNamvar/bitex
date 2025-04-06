@@ -1,4 +1,5 @@
 import { TProductCard } from "@/types/common";
+
 import { TDealCard } from "../types";
 
 export const TodayDeals: TDealCard[] = [

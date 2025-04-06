@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Button from "@/components/UI/button";
-import Popup from "@/components/UI/popup";
+
 
 import {
   addCategory,
@@ -12,11 +11,13 @@ import {
   TAddCategory,
   TUpdateCategory,
 } from "@/actions/category/category";
-
 import GroupCategory from "@/components/admin/forms/groupCategory";
-import CategoryOptions from "./categoryOptions";
+import Button from "@/components/UI/button";
+import Popup from "@/components/UI/popup";
+
 import AddCategory from "./addCategory";
 import Category from "./category";
+import CategoryOptions from "./categoryOptions";
 
 type TProps = {
   data: TGetAllCategories;

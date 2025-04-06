@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { TProductCard } from "@/types/common";
 import { cn } from "@/shared/utils/styling";
+import { TProductCard } from "@/types/common";
 
 const ProductCard = ({
   name,
