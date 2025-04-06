@@ -1,2 +1,2 @@
 export * from "./wideCards";
-export * from "./productLists";
+export * from "./collections";
