@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { Metadata } from "next";
 
-import HomeCategoryList from "@/components/store/home/categories";
-import HomeSlider from "@/components/store/home/slider";
-import TodayDealCard from "@/components/store/home/todayDealCard";
 import { CollectionsData, TodayDeals, TopProducts } from "@/data/homepageData";
-import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
-import { CompanyLogoList } from "@/components/store/home/companyLogo";
-import { LatestBlogPosts } from "@/components/store/home/latestBlogPosts";
-import { WideCardRow } from "@/components/store/home/wideCardRow";
 import { threeSaleCards, twoSaleCards } from "@/features/store/homePage/constants/wideCards";
+import HomeCategoryList from "@/features/store/homePage/components/categories";
+import HomeSlider from "@/features/store/homePage/components/slider";
+import { WideCardRow } from "@/features/store/homePage/components/wideCardRow";
+import TodayDealCard from "@/features/store/homePage/components/todayDealCard";
+import CollectionCard from "@/features/store/homePage/components/collectionCard";
+import { LatestBlogPosts } from "@/features/store/homePage/components/latestBlogPosts";
+import { CompanyLogoList } from "@/features/store/homePage/components/companyLogo";
 
 export const metadata: Metadata = {
   title: "BITEX - Homepage",
