@@ -4,12 +4,13 @@ import { Metadata } from "next";
 import HomeCategoryList from "@/components/store/home/categories";
 import HomeSlider from "@/components/store/home/slider";
 import TodayDealCard from "@/components/store/home/todayDealCard";
-import WideAd from "@/components/store/home/wideAd";
 import { CollectionsData, TodayDeals, TopProducts } from "@/data/homepageData";
 import CollectionCard from "@/components/store/home/collectionCard";
 import ProductCard from "@/components/store/common/productCard";
 import { CompanyLogoList } from "@/components/store/home/companyLogo";
 import { LatestBlogPosts } from "@/components/store/home/latestBlogPosts";
+import { WideCardRow } from "@/components/store/home/wideCardRow";
+import { threeSaleCards, twoSaleCards } from "@/features/store/homePage/constants/wideCards";
 
 export const metadata: Metadata = {
   title: "BITEX - Homepage",
@@ -23,26 +24,7 @@ export default function Home() {
           <HomeCategoryList />
           <HomeSlider />
         </div>
-        <div className="w-full mt-15 flex flex-col gap-4 md:flex-row">
-          <WideAd
-            imgUrl="/images/images/wideAd1.jpg"
-            smallTitle="Smart Watches"
-            title="Save Up to 99€"
-            url="/list/watches"
-          />
-          <WideAd
-            imgUrl="/images/images/wideAd2.jpg"
-            smallTitle="Laptops"
-            title="Save Up to 99€"
-            url="/list/pc-laptops/laptops"
-          />
-          <WideAd
-            imgUrl="/images/images/wideAd3.jpg"
-            smallTitle="DJI Products"
-            title="Save Up to 199€"
-            url="/list/photography/drones"
-          />
-        </div>
+        <WideCardRow cards={threeSaleCards} />
         <div className="w-full mt-14">
           <div className="flex w-full justify-between items-center mb-7">
             <h2 className="text-2xl font-medium text-gray-700">Today’s Deals</h2>
@@ -68,20 +50,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="w-full mt-15 flex gap-4 flex-col md:flex-row">
-          <WideAd
-            imgUrl="/images/images/lensAd.jpg"
-            smallTitle="Smart Watches"
-            title="Save Up to 99€"
-            url="/list/photography/cameras/lenses"
-          />
-          <WideAd
-            imgUrl="/images/images/djiAd.jpg"
-            smallTitle="Laptops"
-            title="Save Up to 99€"
-            url="/list/photography/drones"
-          />
-        </div>
+        <WideCardRow cards={twoSaleCards} />
         <div className="w-full mt-14">
           <div className="flex w-full justify-between items-center mb-7">
             <h2 className="text-2xl font-medium text-gray-700">Collections</h2>
