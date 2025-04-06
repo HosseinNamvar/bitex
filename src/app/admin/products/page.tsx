@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
+import { addProduct, getAllProducts } from "@/actions/product/product";
+import ProductForm from "@/components/admin/product/productForm";
+import ProductListItem from "@/components/admin/product/productListItem";
 import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
-import ProductForm from "@/components/admin/product/productForm";
 import { TAddProductFormValues, TProductListItem } from "@/types/product";
-import { addProduct, getAllProducts } from "@/actions/product/product";
-import ProductListItem from "@/components/admin/product/productListItem";
 
 const initialForm: TAddProductFormValues = {
   name: "",

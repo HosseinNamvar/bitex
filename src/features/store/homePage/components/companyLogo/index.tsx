@@ -1,4 +1,5 @@
 import { COMPANIES_LOGOS } from "@/shared/constants/store/homePage/compayLogos";
+
 import CompanyLogo from "./CompanyLogo";
 
 export const CompanyLogoList = () => {

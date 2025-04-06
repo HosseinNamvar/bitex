@@ -1,10 +1,10 @@
 "use client";
-import { deleteProduct } from "@/actions/product/product";
+import { useState } from "react";
 
+import { deleteProduct } from "@/actions/product/product";
 import Button from "@/components/UI/button";
 import Popup from "@/components/UI/popup";
 import { TProductListItem } from "@/types/product";
-import { useState } from "react";
 
 type TProps = {
   data: TProductListItem;

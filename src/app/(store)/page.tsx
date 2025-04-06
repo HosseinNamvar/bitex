@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import {
   CollectionCards,
   CompanyLogoList,
@@ -9,7 +11,6 @@ import {
   WideCardRow,
 } from "@/features/store/homePage/components";
 import { threeSaleCards, twoSaleCards } from "@/features/store/homePage/constants";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "BITEX - Homepage",

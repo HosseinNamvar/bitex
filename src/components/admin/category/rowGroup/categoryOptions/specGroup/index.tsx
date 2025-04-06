@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Button from "@/components/UI/button";
-import { TSingleSpec, TSpecGroup } from "@/types/common";
+
 import { addSingleSpec, deleteSingleSpec, deleteSpecGroup } from "@/actions/category/categoryOptions";
+import Button from "@/components/UI/button";
 import Input from "@/components/UI/input";
+import { TSingleSpec, TSpecGroup } from "@/types/common";
 
 type TProps = {
   data: TSpecGroup;

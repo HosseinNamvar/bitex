@@ -1,11 +1,15 @@
 "use client";
 import Image from "next/image";
-import { TCartItemData } from "@/types/shoppingCart";
-import { DeleteIcon } from "@/components/icons/svgIcons";
-import { useDispatch } from "react-redux";
-import { modifyQuantity, remove } from "@/store/shoppingCart";
-import Quantity from "../../../quantity";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+
+import { DeleteIcon } from "@/components/icons/svgIcons";
+import { modifyQuantity, remove } from "@/store/shoppingCart";
+import { TCartItemData } from "@/types/shoppingCart";
+
+
+import Quantity from "../../../quantity";
+
 
 type TProps = {
   data: TCartItemData;

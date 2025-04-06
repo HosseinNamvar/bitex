@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { TProductBoard } from "@/types/product";
 
-import AddToCartButton from "../addToCartButton";
 import { StarIcon, HeartIcon } from "@/components/icons/svgIcons";
+import { TProductBoard } from "@/types/product";
 import { TCartItem } from "@/types/shoppingCart";
+
 import Quantity from "../../common/quantity";
+import AddToCartButton from "../addToCartButton";
 
 const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
   const { name, id, isAvailable, specialFeatures, price, shortDesc, dealPrice, defaultQuantity } = boardData;

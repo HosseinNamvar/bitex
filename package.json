@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -31,6 +32,8 @@
     "clsx": "^2.1.1",
     "eslint": "^8",
     "eslint-config-next": "^14.2.26",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-import": "^2.31.0",
     "postcss": "^8.5.3",
     "prisma": "^5.9.1",
     "tailwindcss": "^4.0.14",

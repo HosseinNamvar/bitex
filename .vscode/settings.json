@@ -1,3 +1,6 @@
 {
-  "cSpell.words": ["asus", "BITEX"]
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.formatOnSave": true
 }

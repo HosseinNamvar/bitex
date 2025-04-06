@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import Button from "@/components/UI/button";
 import { addOptionSet } from "@/actions/category/categoryOptions";
-import { TOptionSet } from "@/types/common";
+import Button from "@/components/UI/button";
 import Input from "@/components/UI/input";
+import { TOptionSet } from "@/types/common";
 
 type TProps = {
   categoryOptionId: string;

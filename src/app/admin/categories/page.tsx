@@ -1,9 +1,11 @@
 "use client";
 
-import CatGroupRow from "@/components/admin/category/rowGroup";
+import { useEffect, useState } from "react";
+
 import { TGetAllCategories, getAllCategories } from "@/actions/category/category";
 import AddCategoryGroup from "@/components/admin/category/addCategoryGroup";
-import { useEffect, useState } from "react";
+import CatGroupRow from "@/components/admin/category/rowGroup";
+
 
 const AdminCategories = () => {
   const [allCategories, setAllCategories] = useState<TGetAllCategories[]>([]);

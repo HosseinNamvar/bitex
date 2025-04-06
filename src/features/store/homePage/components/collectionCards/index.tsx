@@ -1,4 +1,5 @@
 import { CollectionsData } from "../../constants";
+
 import CollectionCard from "./collectionCard";
 
 export const CollectionCards = () => {

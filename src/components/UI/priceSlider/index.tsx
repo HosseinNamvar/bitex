@@ -1,5 +1,6 @@
 "use client";
 import { TPageStatus } from "@/types/list";
+
 import { SK_Box } from "../skeleton";
 
 type TValue = [number, number];

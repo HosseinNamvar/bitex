@@ -1,4 +1,5 @@
 import { BlogCardData } from "@/data/homepageData";
+
 import HomeBlogCard from "./BlogCard";
 
 export const LatestBlogPosts = () => {

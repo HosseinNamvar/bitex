@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useToggleMenu } from "@/hooks/useToggleMenu";
-import { ListIcon } from "@/components/icons/svgIcons";
+import { useEffect, useRef, useState } from "react";
+
 import { getAllCategoriesJSON } from "@/actions/category/category";
-import { TGroupJSON } from "@/types/categories";
+import { ListIcon } from "@/components/icons/svgIcons";
 import Button from "@/components/UI/button";
+import { useToggleMenu } from "@/hooks/useToggleMenu";
 import { cn } from "@/shared/utils/styling";
+import { TGroupJSON } from "@/types/categories";
 
 type TProps = {
   isNavbarVisible: boolean;

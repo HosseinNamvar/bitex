@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { TOptionSet, TSingleOption } from "@/types/common";
-import Button from "@/components/UI/button";
 
-// -------------- ACTIONS --------------
 import { addSingleOption, deleteOptionSet, deleteSingleOption } from "@/actions/category/categoryOptions";
+import Button from "@/components/UI/button";
 import Input from "@/components/UI/input";
+import { TOptionSet, TSingleOption } from "@/types/common";
 
 type TProps = {
   data: TOptionSet;

@@ -1,6 +1,8 @@
 import { useRouter } from "next/navigation";
-import Button from "../button";
+
 import { cn } from "@/shared/utils/styling";
+
+import Button from "../button";
 
 type TProps = {
   currentPage: number;

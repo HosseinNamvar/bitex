@@ -1,6 +1,8 @@
 "use server";
 
+import { OptionSetType } from "@prisma/client";
 import { z } from "zod";
+
 import { db } from "@/lib/db";
 import {
   TOptionSet,
@@ -8,7 +10,6 @@ import {
   TSingleSpec,
   TSpecGroup,
 } from "@/types/common";
-import { OptionSetType } from "@prisma/client";
 
 const AddOptionSet = z.object({
   name: z.string().min(3),

@@ -1,8 +1,9 @@
 "use client";
-import Button from "@/components/UI/button";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
+
+import Button from "@/components/UI/button";
 
 const Login = () => {
   const router = useRouter();

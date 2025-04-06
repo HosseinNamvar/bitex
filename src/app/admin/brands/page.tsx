@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import Button from "@/components/UI/button";
 import { addBrand, deleteBrand, getAllBrands, updateBrand } from "@/actions/brands/brands";
-import { TBrand } from "@/types/product";
-import Popup from "@/components/UI/popup";
+import Button from "@/components/UI/button";
 import Input from "@/components/UI/input";
+import Popup from "@/components/UI/popup";
+import { TBrand } from "@/types/product";
 
 let selectedBrandID = "";
 const Brand = () => {

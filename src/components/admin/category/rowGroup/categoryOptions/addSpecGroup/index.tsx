@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import Button from "@/components/UI/button";
 import { addSpecGroup } from "@/actions/category/categoryOptions";
-import { TSpecGroup } from "@/types/common";
+import Button from "@/components/UI/button";
 import Input from "@/components/UI/input";
+import { TSpecGroup } from "@/types/common";
 
 type TProps = {
   categorySpecGroupID: string;
