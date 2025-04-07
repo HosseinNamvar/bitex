@@ -12,8 +12,8 @@ import NoItem from "@/components/store/listPage/noItem";
 import Button from "@/components/UI/button";
 import DropDownList from "@/components/UI/dropDown";
 import LineList from "@/components/UI/lineList";
-import { SK_Box } from "@/components/UI/skeleton";
 import { sortDropdownData } from "@/data/uiElementsData";
+import { ProductListSkeleton } from "@/features/store/productList/components";
 import { DEFAULT_FILTERS, SORT_DATA } from "@/features/store/productList/constants";
 import { TFilterBrands, TFilters, TListItem } from "@/features/store/productList/types";
 import { getFiltersFromProductList } from "@/features/store/productList/utils";
@@ -151,8 +151,16 @@ const ListPage = () => {
   const currentPageStatus: TPageStatus = getPageStatus();
 
   const pageStatusJSX = {
-    pageLoading: <div className="flex flex-wrap gap-4 mt-7 ml-2 mb-[400px]">{SKL_Product().map((skl) => skl)}</div>,
-    filterLoading: <div className="flex flex-wrap gap-4 mt-7 ml-2 mb-[400px]">{SKL_Product().map((skl) => skl)}</div>,
+    pageLoading: (
+      <div className="flex flex-wrap gap-4 mt-7 ml-2 mb-[400px]">
+        <ProductListSkeleton />
+      </div>
+    ),
+    filterLoading: (
+      <div className="flex flex-wrap gap-4 mt-7 ml-2 mb-[400px]">
+        <ProductListSkeleton />
+      </div>
+    ),
     filledProductList: (
       <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-2 mb-14">
         {productList.map((product) => (
@@ -257,19 +265,3 @@ const ListPage = () => {
 };
 
 export default ListPage;
-
-const SKL_Product = (): React.ReactNode[] => {
-  return Array.from({ length: 6 }, (_, idx) => (
-    <div className="flex flex-col gap-3 w-[240px]" key={idx}>
-      <SK_Box width="100%" height="160px" />
-      <SK_Box width="70%" height="26px" />
-      <div className="flex flex-col gap-2">
-        <SK_Box width="40%" height="12px" />
-        <SK_Box width="40%" height="12px" />
-
-        <SK_Box width="40%" height="12px" />
-      </div>
-      <SK_Box width="60%" height="20px" />
-    </div>
-  ));
-};
