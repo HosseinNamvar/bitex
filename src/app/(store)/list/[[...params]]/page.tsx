@@ -51,21 +51,20 @@ const ListPage = () => {
       if (isFilterApplied) {
         setFilters(appliedFilters);
         setProductList(response.products);
-        setIsListLoading(false);
       } else {
         const filtersFromDB = getFiltersFromProductList(response.products);
         setFilters(filtersFromDB);
         setSubCategories(response.subCategories);
         setProductList(response.products);
-
-        setIsListLoading(false);
       }
+
+      setIsListLoading(false);
     };
 
     getProductsList();
   }, [router, pathName, sortIndex, appliedFilters, isFilterApplied]);
 
-  if (!params || params.length <= 0) router.push("/");
+  if (!params || !params.length) router.push("/");
 
   const handleSortChange = (newIndex: number) => {
     setSortIndex(newIndex);
@@ -260,21 +259,17 @@ const ListPage = () => {
 export default ListPage;
 
 const SKL_Product = (): React.ReactNode[] => {
-  const nodes: React.ReactNode[] = [];
-  for (let i = 0; i < 6; i++) {
-    nodes.push(
-      <div className="flex flex-col gap-3 w-[240px]" key={i}>
-        <SK_Box width="100%" height="160px" />
-        <SK_Box width="70%" height="26px" />
-        <div className="flex flex-col gap-2">
-          <SK_Box width="40%" height="12px" />
-          <SK_Box width="40%" height="12px" />
+  return Array.from({ length: 6 }, (_, idx) => (
+    <div className="flex flex-col gap-3 w-[240px]" key={idx}>
+      <SK_Box width="100%" height="160px" />
+      <SK_Box width="70%" height="26px" />
+      <div className="flex flex-col gap-2">
+        <SK_Box width="40%" height="12px" />
+        <SK_Box width="40%" height="12px" />
 
-          <SK_Box width="40%" height="12px" />
-        </div>
-        <SK_Box width="60%" height="20px" />
+        <SK_Box width="40%" height="12px" />
       </div>
-    );
-  }
-  return nodes;
+      <SK_Box width="60%" height="20px" />
+    </div>
+  ));
 };
