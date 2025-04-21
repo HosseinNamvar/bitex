@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { ArrowIcon } from "@/components/icons/svgIcons";
-import { SlidesData } from "@/data/homepageData";
+import { SlidesData } from "@/domains/store/homePage/constants/";
 import { cn } from "@/shared/utils/styling";
 
 export const HomeSlider = () => {

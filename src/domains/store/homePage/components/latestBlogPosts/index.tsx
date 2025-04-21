@@ -1,4 +1,4 @@
-import { BlogCardData } from "@/data/homepageData";
+import { BlogCardData } from "@/domains/store/homePage/constants/";
 
 import HomeBlogCard from "./BlogCard";
 
