@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 import { ProfileIcon } from "@/components/icons/svgIcons";
 import Button from "@/components/UI/button";
-import { useToggleMenu } from "@/hooks/useToggleMenu";
+import { useToggleMenu } from "@/shared/hooks/useToggleMenu";
 import { cn } from "@/shared/utils/styling";
 
 const NavBarProfile = () => {
