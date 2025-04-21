@@ -12,13 +12,13 @@ import Filters from "@/domains/store/productList/components/filters";
 import NoItem from "@/domains/store/productList/components/noItem";
 import { DEFAULT_FILTERS, SORT_DATA, sortDropdownData } from "@/domains/store/productList/constants";
 import { TFilterBrands, TFilters, TListItem } from "@/domains/store/productList/types";
+import { TPageStatus } from "@/domains/store/productList/types/";
 import { getFiltersFromProductList } from "@/domains/store/productList/utils";
 import Button from "@/shared/components/UI/button";
 import DropDownList from "@/shared/components/UI/dropDown";
 import LineList from "@/shared/components/UI/lineList";
 import { IMAGE_BASE_URL } from "@/shared/constants/store";
 import { cn } from "@/shared/utils/styling";
-import { TPageStatus } from "@/types/list";
 import { TProductPath } from "@/types/product";
 
 const ListPage = () => {

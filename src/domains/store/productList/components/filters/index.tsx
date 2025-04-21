@@ -1,13 +1,13 @@
 "use client";
 
 import { TFilters } from "@/domains/store/productList/types";
+import { TPageStatus } from "@/domains/store/productList/types/";
 import { CloseIcon } from "@/shared/components/icons/svgIcons";
 import Button from "@/shared/components/UI/button";
 import CheckBox from "@/shared/components/UI/checkBox";
 import PriceSlider from "@/shared/components/UI/priceSlider";
 import { SK_Box } from "@/shared/components/UI/skeleton";
 import { cn } from "@/shared/utils/styling";
-import { TPageStatus } from "@/types/list";
 
 type TProps = {
   showFilters: boolean;

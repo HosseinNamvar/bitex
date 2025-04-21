@@ -24,3 +24,15 @@ export type TFilterBrands = {
   name: string;
   isSelected: boolean;
 };
+
+export type TListSort = {
+  sortName: "id" | "price" | "name";
+  sortType: "asc" | "desc";
+};
+
+export type TPageStatus =
+  | "pageLoading"
+  | "filterLoading"
+  | "filledProductList"
+  | "filterHasNoProduct"
+  | "categoryHasNoProduct";
