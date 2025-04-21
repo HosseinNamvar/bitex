@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { ArrowIcon } from "@/components/icons/svgIcons";
 import { SlidesData } from "@/domains/store/homePage/constants/";
+import { ArrowIcon } from "@/shared/components/icons/svgIcons";
 import { cn } from "@/shared/utils/styling";
 
 export const HomeSlider = () => {

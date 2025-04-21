@@ -1,7 +1,7 @@
 "use client";
 
-import { CloseIcon } from "@/components/icons/svgIcons";
 import { TFilters } from "@/domains/store/productList/types";
+import { CloseIcon } from "@/shared/components/icons/svgIcons";
 import Button from "@/shared/components/UI/button";
 import CheckBox from "@/shared/components/UI/checkBox";
 import PriceSlider from "@/shared/components/UI/priceSlider";

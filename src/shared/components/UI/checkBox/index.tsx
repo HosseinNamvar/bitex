@@ -1,5 +1,5 @@
 "use client";
-import { CheckIcon } from "@/components/icons/svgIcons";
+import { CheckIcon } from "@/shared/components/icons/svgIcons";
 import { cn } from "@/shared/utils/styling";
 
 type TProps = {

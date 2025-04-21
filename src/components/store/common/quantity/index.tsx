@@ -1,5 +1,5 @@
 "use client";
-import { MinusIcon, PlusIcon } from "@/components/icons/svgIcons";
+import { MinusIcon, PlusIcon } from "@/shared/components/icons/svgIcons";
 
 type TProps = {
   quantity: number;

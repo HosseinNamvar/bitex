@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { ClockIcon } from "@/components/icons/svgIcons";
+import { ClockIcon } from "@/shared/components/icons/svgIcons";
 
 type TProps = {
   productName: string;

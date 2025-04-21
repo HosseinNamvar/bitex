@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import { ArrowIcon } from "@/components/icons/svgIcons";
+import { ArrowIcon } from "@/shared/components/icons/svgIcons";
 import { useToggleMenu } from "@/shared/hooks/useToggleMenu";
 import { cn } from "@/shared/utils/styling";
 import { TDropDown } from "@/types/uiElements";

@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import { ProfileIcon } from "@/components/icons/svgIcons";
+import { ProfileIcon } from "@/shared/components/icons/svgIcons";
 import Button from "@/shared/components/UI/button";
 import { useToggleMenu } from "@/shared/hooks/useToggleMenu";
 import { cn } from "@/shared/utils/styling";

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { LinkedinIcon } from "@/components/icons/svgIcons";
+import { LinkedinIcon } from "@/shared/components/icons/svgIcons";
 
 const Warning = () => {
   return (

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "@/components/icons/svgIcons";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "@/shared/components/icons/svgIcons";
 import Button from "@/shared/components/UI/button";
 
 const CATEGORIES = [

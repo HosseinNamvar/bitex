@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import { getAllCategoriesJSON } from "@/actions/category/category";
-import { ListIcon } from "@/components/icons/svgIcons";
+import { ListIcon } from "@/shared/components/icons/svgIcons";
 import Button from "@/shared/components/UI/button";
 import { useToggleMenu } from "@/shared/hooks/useToggleMenu";
 import { cn } from "@/shared/utils/styling";

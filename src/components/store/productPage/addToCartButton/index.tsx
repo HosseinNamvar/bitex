@@ -2,7 +2,7 @@
 
 import { useDispatch } from "react-redux";
 
-import { ShoppingIconFill } from "@/components/icons/svgIcons";
+import { ShoppingIconFill } from "@/shared/components/icons/svgIcons";
 import { add } from "@/store/shoppingCart";
 import { TCartItem } from "@/types/shoppingCart";
 

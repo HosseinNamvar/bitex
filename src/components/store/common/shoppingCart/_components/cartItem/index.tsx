@@ -3,13 +3,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
-import { DeleteIcon } from "@/components/icons/svgIcons";
+import { DeleteIcon } from "@/shared/components/icons/svgIcons";
 import { modifyQuantity, remove } from "@/store/shoppingCart";
 import { TCartItemData } from "@/types/shoppingCart";
 
-
 import Quantity from "../../../quantity";
-
 
 type TProps = {
   data: TCartItemData;

@@ -1,5 +1,5 @@
 "use client";
-import { CloseIcon } from "@/components/icons/svgIcons";
+import { CloseIcon } from "@/shared/components/icons/svgIcons";
 
 import Button from "../button";
 

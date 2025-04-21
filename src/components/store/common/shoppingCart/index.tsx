@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { getCartProducts } from "@/actions/product/product";
-import { CloseIcon, ShoppingIconEmpty } from "@/components/icons/svgIcons";
+import { CloseIcon, ShoppingIconEmpty } from "@/shared/components/icons/svgIcons";
 import Button from "@/shared/components/UI/button";
 import { cn } from "@/shared/utils/styling";
 import { RootState } from "@/store/shoppingCart";

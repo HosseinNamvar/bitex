@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { CloseIcon } from "@/components/icons/svgIcons";
+import { CloseIcon } from "@/shared/components/icons/svgIcons";
 import { SK_Box } from "@/shared/components/UI/skeleton";
 import { cn } from "@/shared/utils/styling";
 

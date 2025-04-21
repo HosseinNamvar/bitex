@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-
-import { StarIcon, HeartIcon } from "@/components/icons/svgIcons";
+import { StarIcon, HeartIcon } from "@/shared/components/icons/svgIcons";
 import { TProductBoard } from "@/types/product";
 import { TCartItem } from "@/types/shoppingCart";
 
