@@ -3,12 +3,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import ShoppingCart from "@/domains/store/shoppingCard/components/shoppingCart";
 import { ShoppingIconOutline } from "@/shared/components/icons/svgIcons";
 import { cn } from "@/shared/utils/styling";
 import { TCartState, RootState } from "@/store/shoppingCart";
 import { toggleCart } from "@/store/shoppingCart";
-
-import ShoppingCart from "../../common/shoppingCart";
 
 const NavBarShopping = () => {
   const dispatch = useDispatch();

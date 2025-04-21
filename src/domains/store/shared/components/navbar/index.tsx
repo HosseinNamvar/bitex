@@ -5,15 +5,12 @@ import { useEffect, useState } from "react";
 
 import { cn } from "@/shared/utils/styling";
 
-import AddVisit from "../common/addVisit";
+import AddVisit from "../addVisit";
 
 import NavBarCategory from "./navCategory";
 import NavBarFavorite from "./navFavorite";
 import NavBarProfile from "./navProfile";
 import NavBarShopping from "./navShopping";
-
-
-
 
 const NAVBAR_ITEMS = [
   { name: "Computer", link: "/list/pc-laptops/computer" },

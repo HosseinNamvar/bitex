@@ -6,9 +6,9 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { getOneProduct } from "@/actions/product/product";
-import ProductCard from "@/components/store/common/productCard";
-import Gallery from "@/components/store/productPage/gallery";
-import ProductBoard from "@/components/store/productPage/productBoard";
+import Gallery from "@/domains/product/components/gallery";
+import ProductBoard from "@/domains/product/components/productBoard";
+import ProductCard from "@/domains/product/components/productCard";
 import { TopProducts } from "@/domains/product/constants";
 import { LikeIcon, MinusIcon } from "@/shared/components/icons/svgIcons";
 import { SK_Box } from "@/shared/components/UI/skeleton";

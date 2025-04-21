@@ -6,10 +6,10 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { getList } from "@/actions/list/listServices";
-import ProductCard from "@/components/store/common/productCard";
-import Filters from "@/components/store/listPage/filters";
-import NoItem from "@/components/store/listPage/noItem";
+import ProductCard from "@/domains/product/components/productCard";
 import { ProductListSkeleton } from "@/domains/store/productList/components";
+import Filters from "@/domains/store/productList/components/filters";
+import NoItem from "@/domains/store/productList/components/noItem";
 import { DEFAULT_FILTERS, SORT_DATA, sortDropdownData } from "@/domains/store/productList/constants";
 import { TFilterBrands, TFilters, TListItem } from "@/domains/store/productList/types";
 import { getFiltersFromProductList } from "@/domains/store/productList/utils";
