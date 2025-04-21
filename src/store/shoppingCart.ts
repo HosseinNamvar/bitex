@@ -1,6 +1,6 @@
 import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
 
-import { TCartItem } from "@/types/shoppingCart";
+import { TCartItem } from "@/shared/types/shoppingCart";
 
 import { loadState, saveState } from "./storeLocalStorage";
 

@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 import { addProduct, getAllProducts } from "@/actions/product/product";
-import ProductForm from "@/components/admin/product/productForm";
-import ProductListItem from "@/components/admin/product/productListItem";
-import Button from "@/components/UI/button";
-import Popup from "@/components/UI/popup";
-import { TAddProductFormValues, TProductListItem } from "@/types/product";
+import ProductForm from "@/domains/admin/components/product/productForm";
+import ProductListItem from "@/domains/admin/components/product/productListItem";
+import Button from "@/shared/components/UI/button";
+import Popup from "@/shared/components/UI/popup";
+import { TAddProductFormValues, TProductListItem } from "@/shared/types/product";
 
 const initialForm: TAddProductFormValues = {
   name: "",

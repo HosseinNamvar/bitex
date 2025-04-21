@@ -2,9 +2,8 @@ import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import AdminSidebar from "@/components/admin/sideBar";
-import { authOptions } from "@/lib/authOptions";
-
+import AdminSidebar from "@/domains/admin/components/sideBar";
+import { authOptions } from "@/shared/lib/authOptions";
 
 export const metadata: Metadata = {
   title: "Admin",

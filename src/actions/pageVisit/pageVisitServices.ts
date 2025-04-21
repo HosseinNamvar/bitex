@@ -2,9 +2,9 @@
 import { PageType } from "@prisma/client";
 import { z } from "zod";
 
-import { db } from "@/lib/db";
 import { TRAFFIC_LIST_PAGE_SIZE } from "@/shared/constants/admin/trafficView";
-import { TAddPageVisit } from "@/types/common";
+import { db } from "@/shared/lib/db";
+import { TAddPageVisit } from "@/shared/types/common";
 
 const ValidatePageVisit = z.object({
   pageType: z.enum(["MAIN", "LIST", "PRODUCT"]),

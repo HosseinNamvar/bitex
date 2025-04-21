@@ -1,11 +1,11 @@
 "use client";
 import { Provider } from "react-redux";
 
-import Warning from "@/components/store/common/warning";
-import StoreNavBar from "@/components/store/navbar";
+import StoreNavBar from "@/domains/store/shared/components/navbar";
+import Warning from "@/domains/store/shared/components/warning";
 import { shoppingCartStore } from "@/store/shoppingCart";
 
-import StoreFooter from "./../../components/store/footer/index";
+import StoreFooter from "../../domains/store/shared/components/footer/index";
 
 const StoreLayout = ({ children }: { children: React.ReactNode }) => {
   return (

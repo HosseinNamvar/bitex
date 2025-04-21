@@ -1,8 +1,8 @@
 "use server";
 import { z } from "zod";
 
-import { db } from "@/lib/db";
-import { TCategory, TGroupJSON } from "@/types/categories";
+import { db } from "@/shared/lib/db";
+import { TCategory, TGroupJSON } from "@/shared/types/categories";
 
 //eslint-disable-next-line
 const GetAllCategories = z.object({

@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 
 import { addBrand, deleteBrand, getAllBrands, updateBrand } from "@/actions/brands/brands";
-import Button from "@/components/UI/button";
-import Input from "@/components/UI/input";
-import Popup from "@/components/UI/popup";
-import { TBrand } from "@/types/product";
+import Button from "@/shared/components/UI/button";
+import Input from "@/shared/components/UI/input";
+import Popup from "@/shared/components/UI/popup";
+import { TBrand } from "@/shared/types";
 
 let selectedBrandID = "";
 const Brand = () => {

@@ -1,8 +1,8 @@
 "use server";
 import { z } from "zod";
 
-import { db } from "@/lib/db";
-import { TBrand } from "@/types/product";
+import { db } from "@/shared/lib/db";
+import { TBrand } from "@/shared/types";
 
 const ValidateUpdateBrand = z.object({
   id: z.string().min(6),
@@ -53,8 +53,7 @@ export const deleteBrand = async (brandID: string) => {
 };
 
 export const updateBrand = async (data: TBrand) => {
-  if (!ValidateUpdateBrand.safeParse(data).success)
-    return { error: "Invalid Data!" };
+  if (!ValidateUpdateBrand.safeParse(data).success) return { error: "Invalid Data!" };
 
   try {
     const result = await db.brand.update({
