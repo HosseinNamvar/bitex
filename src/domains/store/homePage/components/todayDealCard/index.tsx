@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { TodayDeals } from "@/features/product/constants";
+import { TodayDeals } from "@/domains/product/constants";
 
 import TodayDealCard from "./TodayDealCard";
 

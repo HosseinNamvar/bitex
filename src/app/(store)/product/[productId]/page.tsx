@@ -11,7 +11,7 @@ import ProductCard from "@/components/store/common/productCard";
 import Gallery from "@/components/store/productPage/gallery";
 import ProductBoard from "@/components/store/productPage/productBoard";
 import { SK_Box } from "@/components/UI/skeleton";
-import { TopProducts } from "@/features/product/constants";
+import { TopProducts } from "@/domains/product/constants";
 import { TProductPageInfo } from "@/types/product";
 
 const ProductPage = () => {

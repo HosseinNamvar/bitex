@@ -9,9 +9,10 @@ import { getCategorySpecs } from "@/actions/category/specifications";
 import Button from "@/components/UI/button";
 import DropDownList from "@/components/UI/dropDown";
 import Input from "@/components/UI/input";
+import { TBrand } from "@/shared/types";
 import { cn } from "@/shared/utils/styling";
 import { TGroupJSON } from "@/types/categories";
-import { TAddProductFormValues, TBrand } from "@/types/product";
+import { TAddProductFormValues } from "@/types/product";
 import { TDropDown } from "@/types/uiElements";
 
 const categoryListFirstItem: TDropDown = {
