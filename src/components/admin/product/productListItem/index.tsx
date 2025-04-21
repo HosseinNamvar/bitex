@@ -2,8 +2,8 @@
 import { useState } from "react";
 
 import { deleteProduct } from "@/actions/product/product";
-import Button from "@/components/UI/button";
-import Popup from "@/components/UI/popup";
+import Button from "@/shared/components/UI/button";
+import Popup from "@/shared/components/UI/popup";
 import { TProductListItem } from "@/types/product";
 
 type TProps = {

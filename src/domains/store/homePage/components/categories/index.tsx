@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { getAllCategoriesJSON } from "@/actions/category/category";
-import { SK_Box } from "@/components/UI/skeleton";
+import { SK_Box } from "@/shared/components/UI/skeleton";
 import { TGroupJSON } from "@/types/categories";
 
 import CategoryListItem from "./catListItem";

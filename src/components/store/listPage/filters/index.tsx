@@ -1,11 +1,11 @@
 "use client";
 
 import { CloseIcon } from "@/components/icons/svgIcons";
-import Button from "@/components/UI/button";
-import CheckBox from "@/components/UI/checkBox";
-import PriceSlider from "@/components/UI/priceSlider";
-import { SK_Box } from "@/components/UI/skeleton";
 import { TFilters } from "@/domains/store/productList/types";
+import Button from "@/shared/components/UI/button";
+import CheckBox from "@/shared/components/UI/checkBox";
+import PriceSlider from "@/shared/components/UI/priceSlider";
+import { SK_Box } from "@/shared/components/UI/skeleton";
 import { cn } from "@/shared/utils/styling";
 import { TPageStatus } from "@/types/list";
 

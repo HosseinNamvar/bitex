@@ -1,4 +1,4 @@
-import { SK_Box } from "@/components/UI/skeleton";
+import { SK_Box } from "@/shared/components/UI/skeleton";
 
 export const ProductListSkeleton = (): React.ReactNode[] => {
   return Array.from({ length: 6 }, (_, idx) => (

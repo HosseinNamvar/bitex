@@ -10,8 +10,8 @@ import { LikeIcon, MinusIcon } from "@/components/icons/svgIcons";
 import ProductCard from "@/components/store/common/productCard";
 import Gallery from "@/components/store/productPage/gallery";
 import ProductBoard from "@/components/store/productPage/productBoard";
-import { SK_Box } from "@/components/UI/skeleton";
 import { TopProducts } from "@/domains/product/constants";
+import { SK_Box } from "@/shared/components/UI/skeleton";
 import { TProductPageInfo } from "@/types/product";
 
 const ProductPage = () => {

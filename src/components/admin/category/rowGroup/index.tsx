@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-
 import {
   addCategory,
   updateCategory,
@@ -12,8 +11,8 @@ import {
   TUpdateCategory,
 } from "@/actions/category/category";
 import GroupCategory from "@/components/admin/forms/groupCategory";
-import Button from "@/components/UI/button";
-import Popup from "@/components/UI/popup";
+import Button from "@/shared/components/UI/button";
+import Popup from "@/shared/components/UI/popup";
 
 import AddCategory from "./addCategory";
 import Category from "./category";

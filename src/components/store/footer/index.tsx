@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "@/components/icons/svgIcons";
-import Button from "@/components/UI/button";
+import Button from "@/shared/components/UI/button";
 
 const CATEGORIES = [
   "Computer & Laptop",

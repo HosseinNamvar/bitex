@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { addSingleOption, deleteOptionSet, deleteSingleOption } from "@/actions/category/categoryOptions";
-import Button from "@/components/UI/button";
-import Input from "@/components/UI/input";
+import Button from "@/shared/components/UI/button";
+import Input from "@/shared/components/UI/input";
 import { TOptionSet, TSingleOption } from "@/types/common";
 
 type TProps = {

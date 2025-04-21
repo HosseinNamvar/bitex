@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { addSingleSpec, deleteSingleSpec, deleteSpecGroup } from "@/actions/category/categoryOptions";
-import Button from "@/components/UI/button";
-import Input from "@/components/UI/input";
+import Button from "@/shared/components/UI/button";
+import Input from "@/shared/components/UI/input";
 import { TSingleSpec, TSpecGroup } from "@/types/common";
 
 type TProps = {

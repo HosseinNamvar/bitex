@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { addProduct, getAllProducts } from "@/actions/product/product";
 import ProductForm from "@/components/admin/product/productForm";
 import ProductListItem from "@/components/admin/product/productListItem";
-import Button from "@/components/UI/button";
-import Popup from "@/components/UI/popup";
+import Button from "@/shared/components/UI/button";
+import Popup from "@/shared/components/UI/popup";
 import { TAddProductFormValues, TProductListItem } from "@/types/product";
 
 const initialForm: TAddProductFormValues = {

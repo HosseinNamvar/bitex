@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { getAllCategoriesJSON } from "@/actions/category/category";
 import { ListIcon } from "@/components/icons/svgIcons";
-import Button from "@/components/UI/button";
+import Button from "@/shared/components/UI/button";
 import { useToggleMenu } from "@/shared/hooks/useToggleMenu";
 import { cn } from "@/shared/utils/styling";
 import { TGroupJSON } from "@/types/categories";

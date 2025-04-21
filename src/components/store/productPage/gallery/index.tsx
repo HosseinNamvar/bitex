@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { CloseIcon } from "@/components/icons/svgIcons";
-import { SK_Box } from "@/components/UI/skeleton";
+import { SK_Box } from "@/shared/components/UI/skeleton";
 import { cn } from "@/shared/utils/styling";
 
 type TProps = {

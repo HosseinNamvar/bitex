@@ -1,7 +1,7 @@
 "use client";
 
 import { TGetAllCategories } from "@/actions/category/category";
-import Input from "@/components/UI/input";
+import Input from "@/shared/components/UI/input";
 
 type TProps = {
   errorMsg: string;
