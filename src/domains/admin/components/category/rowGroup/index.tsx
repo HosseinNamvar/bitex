@@ -10,7 +10,7 @@ import {
   TAddCategory,
   TUpdateCategory,
 } from "@/actions/category/category";
-import GroupCategory from "@/components/admin/forms/groupCategory";
+import GroupCategory from "@/domains/admin/components/forms/groupCategory";
 import Button from "@/shared/components/UI/button";
 import Popup from "@/shared/components/UI/popup";
 
