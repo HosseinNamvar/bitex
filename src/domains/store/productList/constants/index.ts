@@ -1,4 +1,5 @@
 import { TListSort } from "@/types/list";
+import { TDropDown } from "@/types/uiElements";
 
 import { TFilters } from "../types";
 
@@ -15,4 +16,27 @@ export const SORT_DATA: TListSort[] = [
   { sortName: "price", sortType: "desc" },
   { sortName: "price", sortType: "asc" },
   { sortName: "name", sortType: "asc" },
+];
+
+export const sortDropdownData: TDropDown[] = [
+  {
+    text: "Newest",
+    value: "0",
+  },
+  {
+    text: "Oldest",
+    value: "1",
+  },
+  {
+    text: "Most Expensive",
+    value: "2",
+  },
+  {
+    text: "Cheapest",
+    value: "3",
+  },
+  {
+    text: "Name",
+    value: "4",
+  },
 ];
