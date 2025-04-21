@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { TGroupJSON } from "@/shared/types/categories";
 import { cn } from "@/shared/utils/styling";
-import { TGroupJSON } from "@/types/categories";
 
 type TProps = {
   categoryData: TGroupJSON;

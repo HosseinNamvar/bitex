@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { addVisit } from "@/actions/pageVisit/pageVisitServices";
-import { TAddPageVisit } from "@/types/common";
+import { TAddPageVisit } from "@/shared/types/common";
 
 const AddVisit = () => {
   const pathName = usePathname();

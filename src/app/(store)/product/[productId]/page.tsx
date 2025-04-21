@@ -12,7 +12,7 @@ import ProductCard from "@/domains/product/components/productCard";
 import { TopProducts } from "@/domains/product/constants";
 import { LikeIcon, MinusIcon } from "@/shared/components/icons/svgIcons";
 import { SK_Box } from "@/shared/components/UI/skeleton";
-import { TProductPageInfo } from "@/types/product";
+import { TProductPageInfo } from "@/shared/types/product";
 
 const ProductPage = () => {
   const router = useRouter();

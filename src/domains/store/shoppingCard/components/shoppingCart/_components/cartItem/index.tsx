@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 import { DeleteIcon } from "@/shared/components/icons/svgIcons";
+import { TCartItemData } from "@/shared/types/shoppingCart";
 import { modifyQuantity, remove } from "@/store/shoppingCart";
-import { TCartItemData } from "@/types/shoppingCart";
 
 import Quantity from "../../../quantity";
 

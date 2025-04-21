@@ -10,10 +10,10 @@ import Button from "@/shared/components/UI/button";
 import DropDownList from "@/shared/components/UI/dropDown";
 import Input from "@/shared/components/UI/input";
 import { TBrand } from "@/shared/types";
+import { TGroupJSON } from "@/shared/types/categories";
+import { TAddProductFormValues } from "@/shared/types/product";
+import { TDropDown } from "@/shared/types/uiElements";
 import { cn } from "@/shared/utils/styling";
-import { TGroupJSON } from "@/types/categories";
-import { TAddProductFormValues } from "@/types/product";
-import { TDropDown } from "@/types/uiElements";
 
 const categoryListFirstItem: TDropDown = {
   text: "Select A Category....",

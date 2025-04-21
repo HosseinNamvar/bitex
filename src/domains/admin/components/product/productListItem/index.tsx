@@ -4,7 +4,7 @@ import { useState } from "react";
 import { deleteProduct } from "@/actions/product/product";
 import Button from "@/shared/components/UI/button";
 import Popup from "@/shared/components/UI/popup";
-import { TProductListItem } from "@/types/product";
+import { TProductListItem } from "@/shared/types/product";
 
 type TProps = {
   data: TProductListItem;

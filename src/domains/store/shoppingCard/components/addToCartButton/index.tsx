@@ -3,8 +3,8 @@
 import { useDispatch } from "react-redux";
 
 import { ShoppingIconFill } from "@/shared/components/icons/svgIcons";
+import { TCartItem } from "@/shared/types/shoppingCart";
 import { add } from "@/store/shoppingCart";
-import { TCartItem } from "@/types/shoppingCart";
 
 type TProps = {
   disabled: boolean;

@@ -1,4 +1,4 @@
-import { TProductCard } from "@/types/common";
+import { TProductCard } from "@/shared/types/common";
 
 import { TDealCard } from "../types";
 

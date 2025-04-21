@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 import { getCartProducts } from "@/actions/product/product";
 import { CloseIcon, ShoppingIconEmpty } from "@/shared/components/icons/svgIcons";
 import Button from "@/shared/components/UI/button";
+import { TCartListItemDB } from "@/shared/types/product";
+import { TCartItemData } from "@/shared/types/shoppingCart";
 import { cn } from "@/shared/utils/styling";
 import { RootState } from "@/store/shoppingCart";
-import { TCartListItemDB } from "@/types/product";
-import { TCartItemData } from "@/types/shoppingCart";
 
 import CartItem from "./_components/cartItem";
 

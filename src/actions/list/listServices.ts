@@ -4,7 +4,7 @@ import { z } from "zod";
 import { TFilters, TListItem } from "@/domains/store/productList/types";
 import { TListSort } from "@/domains/store/productList/types/";
 import { db } from "@/shared/lib/db";
-import { TProductPath } from "@/types/product";
+import { TProductPath } from "@/shared/types/product";
 
 const ValidateSort = z.object({
   sortName: z.enum(["id", "price", "name"]),

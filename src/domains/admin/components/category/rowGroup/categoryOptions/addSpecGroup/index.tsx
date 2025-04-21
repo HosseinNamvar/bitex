@@ -5,7 +5,7 @@ import { useState } from "react";
 import { addSpecGroup } from "@/actions/category/categoryOptions";
 import Button from "@/shared/components/UI/button";
 import Input from "@/shared/components/UI/input";
-import { TSpecGroup } from "@/types/common";
+import { TSpecGroup } from "@/shared/types/common";
 
 type TProps = {
   categorySpecGroupID: string;

@@ -18,8 +18,8 @@ import Button from "@/shared/components/UI/button";
 import DropDownList from "@/shared/components/UI/dropDown";
 import LineList from "@/shared/components/UI/lineList";
 import { IMAGE_BASE_URL } from "@/shared/constants/store";
+import { TProductPath } from "@/shared/types/product";
 import { cn } from "@/shared/utils/styling";
-import { TProductPath } from "@/types/product";
 
 const ListPage = () => {
   const router = useRouter();

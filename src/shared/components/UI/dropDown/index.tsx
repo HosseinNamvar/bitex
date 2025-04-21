@@ -4,8 +4,8 @@ import { useRef } from "react";
 
 import { ArrowIcon } from "@/shared/components/icons/svgIcons";
 import { useToggleMenu } from "@/shared/hooks/useToggleMenu";
+import { TDropDown } from "@/shared/types/uiElements";
 import { cn } from "@/shared/utils/styling";
-import { TDropDown } from "@/types/uiElements";
 
 type TProps = {
   data: TDropDown[];

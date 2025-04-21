@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 import { getOptionSetByCatID, getSpecGroupByCatID } from "@/actions/category/categoryOptions";
+import { TOptionSet, TSpecGroup } from "@/shared/types/common";
 import { cn } from "@/shared/utils/styling";
-import { TOptionSet, TSpecGroup } from "@/types/common";
 
 import AddOption from "./AddOption";
 import AddSpecGroup from "./addSpecGroup";

@@ -7,8 +7,8 @@ import { getAllCategoriesJSON } from "@/actions/category/category";
 import { ListIcon } from "@/shared/components/icons/svgIcons";
 import Button from "@/shared/components/UI/button";
 import { useToggleMenu } from "@/shared/hooks/useToggleMenu";
+import { TGroupJSON } from "@/shared/types/categories";
 import { cn } from "@/shared/utils/styling";
-import { TGroupJSON } from "@/types/categories";
 
 type TProps = {
   isNavbarVisible: boolean;

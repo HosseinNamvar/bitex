@@ -6,8 +6,8 @@ import { useState } from "react";
 import AddToCartButton from "@/domains/store/shoppingCard/components/addToCartButton";
 import Quantity from "@/domains/store/shoppingCard/components/quantity";
 import { StarIcon, HeartIcon } from "@/shared/components/icons/svgIcons";
-import { TProductBoard } from "@/types/product";
-import { TCartItem } from "@/types/shoppingCart";
+import { TProductBoard } from "@/shared/types/product";
+import { TCartItem } from "@/shared/types/shoppingCart";
 
 const ProductBoard = ({ boardData }: { boardData: TProductBoard }) => {
   const { name, id, isAvailable, specialFeatures, price, shortDesc, dealPrice, defaultQuantity } = boardData;

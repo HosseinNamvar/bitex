@@ -1,6 +1,6 @@
 "use client";
+import { TDropDown } from "@/shared/types/uiElements";
 import { cn } from "@/shared/utils/styling";
-import { TDropDown } from "@/types/uiElements";
 
 type TProps = {
   data: TDropDown[];

@@ -1,4 +1,4 @@
-import { TSlide, TBlogCard } from "@/types/common";
+import { TSlide, TBlogCard } from "@/shared/types/common";
 
 export const SlidesData: TSlide[] = [
   {
