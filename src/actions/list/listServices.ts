@@ -2,7 +2,7 @@
 import { z } from "zod";
 
 import { TFilters, TListItem } from "@/domains/store/productList/types";
-import { db } from "@/lib/db";
+import { db } from "@/shared/lib/db";
 import { TListSort } from "@/types/list";
 import { TProductPath } from "@/types/product";
 

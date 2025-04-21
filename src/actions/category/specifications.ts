@@ -1,7 +1,7 @@
 "use server";
 import { SpecGroup } from "@prisma/client";
 
-import { db } from "@/lib/db";
+import { db } from "@/shared/lib/db";
 
 export const getCategorySpecs = async (categoryID: string) => {
   if (!categoryID || categoryID === "") return { error: "Invalid Category ID" };
@@ -38,9 +38,7 @@ export const getCategorySpecs = async (categoryID: string) => {
       const result = await getSpecsAndParentID(catIdToSearch);
       if (!result) return false;
       if (result.Category_SpecGroup.length > 0) {
-        result.Category_SpecGroup.forEach((specGroup) =>
-          specifications.unshift(specGroup.specGroup)
-        );
+        result.Category_SpecGroup.forEach((specGroup) => specifications.unshift(specGroup.specGroup));
       }
       if (!result.parentID) return false;
       catIdToSearch = result.parentID;

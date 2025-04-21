@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 
-import { db } from "@/lib/db";
+import { db } from "@/shared/lib/db";
 import { TCategory, TGroupJSON } from "@/types/categories";
 
 //eslint-disable-next-line

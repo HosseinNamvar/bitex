@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 
-import { db } from "@/lib/db";
+import { db } from "@/shared/lib/db";
 import { TBrand } from "@/shared/types";
 
 const ValidateUpdateBrand = z.object({

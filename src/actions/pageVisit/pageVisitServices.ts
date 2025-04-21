@@ -2,7 +2,7 @@
 import { PageType } from "@prisma/client";
 import { z } from "zod";
 
-import { db } from "@/lib/db";
+import { db } from "@/shared/lib/db";
 import { TRAFFIC_LIST_PAGE_SIZE } from "@/shared/constants/admin/trafficView";
 import { TAddPageVisit } from "@/types/common";
 
