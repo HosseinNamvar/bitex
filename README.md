@@ -1,12 +1,12 @@
 # BITEX E-Commerce
 
-## Full Stack E-Commerce Website (+ Dashboard) with Next.js 15: React, Typescript, Tailwindcss, Prisma, MongoDB, NextAuth, Redux
+## Full Stack E-Commerce Website (+ Dashboard) with Next.js 16: React, Typescript, Tailwindcss, Prisma, MongoDB, NextAuth, Redux
 
 ![Fullstack E-Commerce Website](https://res.cloudinary.com/drokemaoa/image/upload/v1709638892/bitexPoster.png)
 
 ## Overview
 
-Bitex is a full-stack E-Commerce project developed with Next.js 15, featuring a range of technologies including React, Typescript, Tailwindcss, Prisma, MongoDB, NextAuth, and Redux.
+Bitex is a full-stack E-Commerce project developed with Next.js 16, featuring a range of technologies including React, Typescript, Tailwindcss, Prisma, MongoDB, NextAuth, and Redux.
 
 ⚠️ `Note:` This project is a personal endeavor created for portfolio purposes and is not associated with any real business or project.
 
