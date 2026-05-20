@@ -12,6 +12,18 @@ Bitex is a full-stack E-Commerce project developed with Next.js 16, featuring a 
 
 ---
 
+## 📦 Monorepo
+
+This repository is now structured as a **Turborepo monorepo** managed with `pnpm` workspaces. The Next.js storefront lives in `apps/store`, and shared code is published under `packages/*`.
+
+The previous single-package, MongoDB-based codebase is preserved on the `legacy/mongo-monolith` branch:
+
+```shell
+git checkout legacy/mongo-monolith
+```
+
+---
+
 ## 🔗 Live Version
 
 [https://bitex.namvar.dev](https://bitex.namvar.dev) ⤴️
@@ -86,11 +98,15 @@ git clone https://github.com/HosseinNamvar/bitex.git
 
 ### 📥 Install packages
 
+From the repository root (pnpm workspaces):
+
 ```shell
-npm i
+pnpm install
 ```
 
 ### 🛠️ Setup .env file
+
+Create `apps/store/.env` with:
 
 ```js
 DATABASE_URL=
@@ -101,12 +117,13 @@ CLOUDINARY_URL= //Hosting address for products images
 #### ⬆️ Setup Prisma
 
 ```shell
-npx prisma db push
-
+pnpm --filter bitex-store exec prisma db push
 ```
 
 #### 🚀 Start the app
 
+From the repo root (runs through Turborepo):
+
 ```shell
-npm run dev
+pnpm dev
 ```
